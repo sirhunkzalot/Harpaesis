@@ -3,49 +3,56 @@ using System.Collections.Generic;
 using GridAndPathfinding;
 using UnityEngine;
 
-public class MatchMousePosition : MonoBehaviour
+/**
+ * @author Matthew Sommer
+ * class GridCursor handles all logic concerning the 3D grid cursor*/
+public class GridCursor : MonoBehaviour
 {
-    GridManager grid;
+    public GridManager grid;
     public LayerMask layermask;
     Camera cam;
-    bool going;
+    bool sceneStarted;
 
     private void Awake()
     {
-        grid = FindObjectOfType<GridManager>();
         cam = Camera.main;
-        going = true;
+        sceneStarted = true;
     }
 
     void FixedUpdate()
     {
+        MoveCursor();
+    }
+
+    /**
+     * MoveCursor moves the 3D Grid cursor along the surface of the grid according
+     * to the mouse position*/
+    private void MoveCursor()
+    {
         Ray _ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit _hit;
 
-        if (Physics.Raycast(_ray, out _hit, 100))
+        if (Physics.Raycast(_ray, out _hit, 100, layermask))
         {
-            Debug.DrawLine(_ray.origin, _hit.point);
 
-           /* bool correctNode = false;
-            Node _node = grid.NodeFromWorldPoint(_hit.point);
+            /* bool correctNode = false;
+             Node _node = grid.NodeFromWorldPoint(_hit.point);
 
-            /*while (correctNode == false)
-            {
+             /*while (correctNode == false)
+             {
 
 
-                correctNode = _node.bounds.Contains(_hit.point);
-            }*/
+                 correctNode = _node.bounds.Contains(_hit.point);
+             }*/
 
-            
-
-            
             transform.position = grid.NodePositionFromWorldPoint(_hit.point);
         }
     }
 
     private void OnDrawGizmos()
     {
-        if (going)
+#if UNITY_EDITOR
+        if (sceneStarted)
         {
             /*Ray _ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit _hit;
@@ -57,5 +64,6 @@ public class MatchMousePosition : MonoBehaviour
 
             //Gizmos.DrawSphere(cam.ScreenToWorldPoint(Input.mousePosition), .15f);
         }
+#endif
     }
 }

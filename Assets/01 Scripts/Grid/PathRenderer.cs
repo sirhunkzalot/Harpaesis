@@ -38,12 +38,11 @@ public class PathRenderer : MonoBehaviour
     {
         Vector3[] _newPath = new Vector3[_originalPath.Length + 1];
 
-        _newPath[0] = _startPosition;
+        _newPath[0] = _startPosition + Vector3.up * .25f;
 
         for (int i = 1; i < _newPath.Length; i++)
         {
-            _newPath[i] = _originalPath[i - 1];
-            _newPath[i].y += .25f;
+            _newPath[i] = _originalPath[i - 1] + Vector3.up * .25f;
         }
 
         return _newPath;
