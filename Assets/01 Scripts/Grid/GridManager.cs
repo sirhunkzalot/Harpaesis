@@ -20,12 +20,23 @@ namespace GridAndPathfinding
         public bool displayGridGizmos;
         public bool diagonalMovement;
 
-        float nodeRadius;
+        [HideInInspector] public float nodeRadius;
         int gridSizeX, gridSizeY;
         public int MaxSize { get { return gridSizeX * gridSizeY; } }
 
+        public static GridManager instance;
+
         private void Awake()
         {
+            #region Singleton
+            if (instance != null)
+            {
+                Destroy(gameObject);
+            }
+
+            instance = this;
+            #endregion
+
             nodeRadius = nodeSize / 2;
             gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeSize);
             gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeSize);

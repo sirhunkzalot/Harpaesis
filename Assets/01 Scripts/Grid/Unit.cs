@@ -6,47 +6,30 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public float speed;
-    Vector3[] previewPath;
-    Vector3[] path;
-    int targetIndex;
-
-    public Transform selector;
-    public Vector3 lastSelectorPosition;
-
-    public Vector3 nodePosition;
-    public Vector3 myLastNodePosition;
+    protected Vector3[] previewPath;
+    protected Vector3[] path;
+    protected int targetIndex;
 
     public int maxAP = 8;
     public int currentAP = 8;
 
 
-    GridManager grid;
+    protected GridManager grid;
 
 
     private void Start()
     {
-        grid = FindObjectOfType<GridManager>();
-        //PathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+        grid = GridManager.instance;
+        Init();
     }
 
     private void Update()
     {
-        nodePosition = grid.NodeFromWorldPoint(transform.position).worldPosition;
-
-        if (selector.position != lastSelectorPosition || nodePosition != myLastNodePosition)
-        {
-            PathRequestManager.RequestPath(new PathRequest(transform.position, selector.position, PreviewPath));
-            lastSelectorPosition = selector.position;
-            myLastNodePosition = nodePosition;
-        }
-
-        if(Input.GetMouseButtonDown(0) && previewPath != null && path == null)
-        {
-            path = previewPath;
-            StopCoroutine(FollowPath());
-            StartCoroutine(FollowPath());
-        }
+        Tick();
     }
+
+    protected virtual void Init() { }
+    protected virtual void Tick() { }
 
     public void PreviewPath(PathResult _result)
     {
@@ -67,7 +50,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    IEnumerator FollowPath()
+    protected IEnumerator FollowPath()
     {
         Vector3 _currentWaypoint = path[0];
 
@@ -89,7 +72,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void ClearPath()
+    protected void ClearPath()
     {
         targetIndex = 0;
         path = null;
@@ -97,7 +80,7 @@ public class Unit : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        /*if(path != null)
+        /*if(path != null)4
         {
             for (int i = targetIndex; i < path.Length; i++)
             {

@@ -8,6 +8,10 @@ using UnityEngine;
  * class GridCamera handles the movement and rotation of the primary camera*/
 public class GridCamera : MonoBehaviour
 {
+    float currentZoom;
+    public float zoomSpeed = 3f;
+    public float zoomAcceleration = 10f;
+    public float zoomMin, zoomMax;
 
     Vector3 targetPosition;
     Vector3 targetEulers;
@@ -20,21 +24,30 @@ public class GridCamera : MonoBehaviour
 
     public Transform testTarget;
 
+    Camera cam;
+
     // Raycast Data
     Vector3 lastHitPoint;
     Vector3 LastOffset { get { return transform.position - lastHitPoint; } }
     public LayerMask mask;
 
+    float delta, fixedDelta;
+
+
     private void Awake()
     {
         targetEulers = transform.eulerAngles;
         targetPosition = transform.position;
+        cam = Camera.main;
+        currentZoom = cam.orthographicSize;
 
         HandleForwardRaycast();
     }
 
     void Update()
     {
+        delta = Time.deltaTime;
+
         if (testJump)
         {
             testJump = false;
@@ -42,9 +55,19 @@ public class GridCamera : MonoBehaviour
             JumpToPosition(testTarget.position);
         }
 
+        HandleCameraZoom();
         HandleCameraMovement();
         HandleCameraRotation();
         HandleForwardRaycast();
+    }
+
+    private void HandleCameraZoom()
+    {
+        currentZoom -= Input.GetAxisRaw("Mouse ScrollWheel") * zoomSpeed;
+
+        currentZoom = Mathf.Clamp(currentZoom, zoomMin, zoomMax);
+
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, currentZoom, delta * zoomAcceleration);
     }
 
     /* HandleCameraMovement updates the camera's position via input*/
@@ -73,7 +96,7 @@ public class GridCamera : MonoBehaviour
             targetEulers.y += 90;
         }
 
-        print(Quaternion.Angle(transform.rotation, Quaternion.Euler(targetEulers)));
+        //print(Quaternion.Angle(transform.rotation, Quaternion.Euler(targetEulers)));
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetEulers), Time.deltaTime * rotationSpeed);
     }
 
