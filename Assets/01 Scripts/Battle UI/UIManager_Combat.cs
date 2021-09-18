@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager_Combat : MonoBehaviour
 {
-    public static UIManager instance;
+    TurnManager turnManager;
+
+    public static UIManager_Combat instance;
 
     private void Awake()
     {
@@ -12,6 +14,11 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
+    }
+
+    private void Start()
+    {
+        turnManager = TurnManager.instance;
     }
 
     public void Button_Move()
@@ -31,6 +38,6 @@ public class UIManager : MonoBehaviour
 
     public void Button_EndTurn()
     {
-        print("End Turn");
+        turnManager.NextTurn();
     }
 }

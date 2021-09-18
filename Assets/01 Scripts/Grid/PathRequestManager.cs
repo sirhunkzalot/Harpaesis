@@ -63,14 +63,14 @@ namespace GridAndPathfinding
         public Vector3 pathStart;
         public Vector3 pathEnd;
         public Action<PathResult> callback;
-        public int availibleAP;
+        public Unit unit;
 
-        public PathRequest(Vector3 _start, Vector3 _end, Action<PathResult> _callback, int _availibleAP = -1)
+        public PathRequest(Vector3 _start, Vector3 _end, Action<PathResult> _callback, Unit _unit)
         {
             pathStart = _start;
             pathEnd = _end;
             callback = _callback;
-            availibleAP = _availibleAP;
+            unit = _unit;
         }
     }
 
@@ -79,15 +79,15 @@ namespace GridAndPathfinding
         public Vector3[] path;
         public bool success;
         public Action<PathResult> callback;
-        public int usedAP;
+        public Unit unit;
 
 
-        public PathResult(Vector3[] _path, bool _success, Action<PathResult> _callback, int _usedAP)
+        public PathResult(Vector3[] _path, bool _success, Action<PathResult> _callback, Unit _unit)
         {
             path = _path;
             success = _success;
             callback = _callback;
-            usedAP = _usedAP;
+            unit = _unit;
         }
     }
 }

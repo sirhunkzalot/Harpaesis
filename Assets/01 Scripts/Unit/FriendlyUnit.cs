@@ -18,16 +18,15 @@ public class FriendlyUnit : Unit
 
         if (selector.position != lastSelectorPosition || nodePosition != myLastNodePosition)
         {
-            PathRequestManager.RequestPath(new PathRequest(transform.position, selector.position, PreviewPath));
+            PathRequestManager.RequestPath(new PathRequest(transform.position, selector.position, PreviewPath, this));
             lastSelectorPosition = selector.position;
             myLastNodePosition = nodePosition;
         }
 
-        if (Input.GetMouseButtonDown(0) && previewPath != null && path == null)
+        if (Input.GetMouseButtonDown(0) && previewPath != null && !hasPath)
         {
-            path = previewPath;
-            StopCoroutine(FollowPath());
-            StartCoroutine(FollowPath());
+            hasPath = true;
+            motor.Move(previewPath);
         }
     }
 }

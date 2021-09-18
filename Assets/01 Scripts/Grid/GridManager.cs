@@ -26,16 +26,10 @@ namespace GridAndPathfinding
 
         public static GridManager instance;
 
+
         private void Awake()
         {
-            #region Singleton
-            if (instance != null)
-            {
-                Destroy(gameObject);
-            }
-
             instance = this;
-            #endregion
 
             nodeRadius = nodeSize / 2;
             gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeSize);

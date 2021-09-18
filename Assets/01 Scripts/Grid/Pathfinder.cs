@@ -18,12 +18,11 @@ namespace GridAndPathfinding
         {
             Vector3[] _waypoints = new Vector3[0];
             bool _pathSuccess = false;
-            int _usedAP = 0;
 
             Node _startNode = grid.NodeFromWorldPoint(_request.pathStart);
             Node _targetNode = grid.NodeFromWorldPoint(_request.pathEnd);
 
-            if(_startNode.walkable && _targetNode.walkable)
+            if (_startNode.walkable && _targetNode.walkable)
             {
                 Heap<Node> _openSet = new Heap<Node>(grid.MaxSize);
                 HashSet<Node> _closedSet = new HashSet<Node>();
@@ -52,9 +51,8 @@ namespace GridAndPathfinding
                         int _newMovementCostToNeighbor = _currentNode.gCost + GetDistance(_currentNode, _neighbor) + _neighbor.movementPenalty;
 
                         bool _v = _newMovementCostToNeighbor < _neighbor.gCost || !_openSet.Contains(_neighbor);
-                        bool _pathIsWithinAPCap = _request.availibleAP != -1 && _neighbor.PathAPScore <= _request.availibleAP;
 
-                        if (_v/* && _pathIsWithinAPCap*/)
+                        if (_v)
                         {
                             _neighbor.gCost = _newMovementCostToNeighbor;
                             _neighbor.hCost = GetDistance(_neighbor, _targetNode);
@@ -75,17 +73,15 @@ namespace GridAndPathfinding
 
             if (_pathSuccess)
             {
-                _waypoints = RetracePath(_startNode, _targetNode, out _usedAP);
+                _waypoints = RetracePath(_startNode, _targetNode);
             }
 
-            _callback(new PathResult(_waypoints, _pathSuccess, _request.callback, _usedAP));
+            _callback(new PathResult(_waypoints, _pathSuccess, _request.callback, _request.unit));
         }
 
         // RetracePath aggregates a path by starting at the end node and following the parent nodes back until it reaches the original node.
-        Vector3[] RetracePath(Node _startNode, Node _endNode, out int _usedAP)
+        Vector3[] RetracePath(Node _startNode, Node _endNode)
         {
-            _usedAP = 0;
-
             List<Node> _path = new List<Node>();
             Node _currentNode = _endNode;
 
@@ -94,15 +90,12 @@ namespace GridAndPathfinding
                 _path.Add(_currentNode);
                 _currentNode = _currentNode.parent;
             }
-            //Vector3[] _waypoints = SimplifyPath(_path);
-            //Array.Reverse(_waypoints);
 
             List<Vector3> _waypoints = new List<Vector3>();
 
             for (int i = 0; i < _path.Count; i++)
             {
                 _waypoints.Add(_path[i].worldPosition);
-                _usedAP += _path[i].apCost;
             }
             _waypoints.Reverse();
 
