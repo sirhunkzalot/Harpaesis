@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * @author Matthew Sommer
+ * class UnitMotor handles all movement logic for each individual unit */
 public class UnitMotor : MonoBehaviour
 {
     public float speed = 1.5f;

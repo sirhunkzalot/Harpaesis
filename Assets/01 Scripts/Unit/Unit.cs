@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using GridAndPathfinding;
 using UnityEngine;
 
+/**
+ * @author Matthew Sommer
+ * class Unit manages the generic basic data of each Unit, as well as connects the other
+ * unit scripts together */
 [RequireComponent(typeof(UnitMotor))]
-public class Unit : MonoBehaviour
+public abstract class Unit : MonoBehaviour
 {
     public UnitData unitData;
     protected UnitMotor motor;
@@ -35,15 +39,6 @@ public class Unit : MonoBehaviour
 
     protected virtual void Init() { }
     protected virtual void Tick() { }
-
-    public void PreviewPath(PathResult _result)
-    {
-        if (_result.success)
-        {
-            previewPath = _result.path;
-            PathRenderer.instance.Activate(_result);
-        }
-    }
 
     public void TakeDamage(int _damageAmount)
     {

@@ -1,34 +1,62 @@
-using System.Collections;
-using System.Collections.Generic;
 using GridAndPathfinding;
 using UnityEngine;
 
+/**
+ * @author Matthew Sommer
+ * class PathRenderer manages the logic required to display paths to the player */
 public class PathRenderer : MonoBehaviour
 {
     public LineRenderer reachablePath;
     public LineRenderer unreachablePath;
+    public LineRenderer actualPath;
 
     public Vector3 pathOffset;
 
     public Vector3[] path;
     public Unit unit;
 
+    public bool renderActualPath;
+
     public static PathRenderer instance;
     private void Awake()
     {
         instance = this;
-        Deactivate();
+        DeactivateAllPaths();
     }
 
     private void Update()
     {
-        if(unit != null && reachablePath.positionCount > 0)
+        if(unit != null)
         {
-            reachablePath.SetPosition(0, unit.transform.position + pathOffset);
+            if(!renderActualPath && reachablePath.positionCount > 0)
+            {
+                reachablePath.SetPosition(0, unit.transform.position + pathOffset);
+            }
+            else if(renderActualPath && actualPath.positionCount > 0)
+            {
+                actualPath.SetPosition(0, unit.transform.position + pathOffset);
+
+                if(Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1)) < .15f)
+                {
+                    if(actualPath.positionCount == 2)
+                    {
+                        DeactivateAllPaths();
+                        return;
+                    }
+
+                    for (int i = 1; i < actualPath.positionCount - 1; i++)
+                    {
+                        actualPath.SetPosition(i, actualPath.GetPosition(i + 1));
+                    }
+
+                    actualPath.positionCount--;
+                }
+            }
         }
+
     }
 
-    public void Activate(PathResult _result)
+    public void PathPreview(PathResult _result)
     {
         reachablePath.gameObject.SetActive(true);
         unreachablePath.gameObject.SetActive(true);
@@ -75,9 +103,27 @@ public class PathRenderer : MonoBehaviour
         }
     }
 
-    void Deactivate()
+    public void SwapToActualPath()
+    {
+        actualPath.gameObject.SetActive(true);
+        actualPath.positionCount = reachablePath.positionCount;
+
+        Vector3[] _actualPositions = new Vector3[reachablePath.positionCount];
+        reachablePath.GetPositions(_actualPositions);
+        actualPath.SetPositions(_actualPositions);
+
+        reachablePath.gameObject.SetActive(false);
+        unreachablePath.gameObject.SetActive(false);
+
+        renderActualPath = true;
+    }
+
+    void DeactivateAllPaths()
     {
         reachablePath.gameObject.SetActive(false);
         unreachablePath.gameObject.SetActive(false);
+        actualPath.gameObject.SetActive(false);
+
+        renderActualPath = false;
     }
 }

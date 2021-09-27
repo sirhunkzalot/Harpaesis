@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace GridAndPathfinding
 {
+    /**
+     * @author Matthew Sommer
+     * class GridManager sets up the logic that generates and enables other scripts
+     * to utilize grid logic */
+
     [RequireComponent(typeof(Pathfinder))]
     [RequireComponent(typeof(PathRequestManager))]
     public class GridManager : MonoBehaviour

@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * @author Matthew Sommer
+ * class TurnManager handles all turn logic and enables other components to take action based
+ * on whether it is a player's or enemy's turn */
 public class TurnManager : MonoBehaviour
 {
-    int turnCounter;
+    int turnCounter = -1;
     public Turn activeTurn;
 
     public List<Unit> units = new List<Unit>();
@@ -26,6 +30,7 @@ public class TurnManager : MonoBehaviour
         }
 
         BuildTurnOrder();
+        NextTurn();
     }
 
     void BuildTurnOrder()
@@ -92,8 +97,11 @@ public class TurnManager : MonoBehaviour
     }
 }
 
+/**
+ * @author Matthew Sommer
+ * struct Turn stores data about each individual turn */
 [System.Serializable]
-public class Turn
+public struct Turn
 {
     public Unit unit;
     public UnitData unitData;

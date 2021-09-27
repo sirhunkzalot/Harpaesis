@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using GridAndPathfinding;
 using UnityEngine;
 
+/**
+ * @author Matthew Sommer
+ * class EnemyUnit handles the logic that pertains to every enemy unit */
 public class EnemyUnit : Unit
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

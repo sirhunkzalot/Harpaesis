@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace GridAndPathfinding
 {
+    /**
+     * @author Matthew Sommer
+     * class Pathfinder generates paths from one node to another based on received requests*/
     public class Pathfinder : MonoBehaviour
     {
         GridManager grid;

@@ -6,6 +6,10 @@ using UnityEngine;
 
 namespace GridAndPathfinding
 {
+    /**
+     * @author Matthew Sommer
+     * class PathRequestManager manages requests for paths to be created and calls on the 
+     * Pathfinder class to generate said paths */
     public class PathRequestManager : MonoBehaviour
     {
         Queue<PathResult> results = new Queue<PathResult>();
