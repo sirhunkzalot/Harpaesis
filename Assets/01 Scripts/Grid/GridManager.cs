@@ -80,42 +80,7 @@ namespace GridAndPathfinding
             }
         }
 
-        /*public List<Node> GetListOfReachableNodes(Vector3 _unitPosition, int _availibleAP)
-        {
-            List<Node> _nodes = new List<Node>();
-
-            GridPosition _gridPosition = GridPositionFromWorldPoint(_unitPosition);
-
-            int _xMin = Mathf.Clamp(_gridPosition.x - _availibleAP, 0, gridSizeX - 1);
-            int _xMax = Mathf.Clamp(_gridPosition.x + _availibleAP, 0, gridSizeX - 1);
-
-            int _yMin = Mathf.Clamp(_gridPosition.y - _availibleAP, 0, gridSizeY - 1);
-            int _yMax = Mathf.Clamp(_gridPosition.y + _availibleAP, 0, gridSizeY - 1);
-
-            List<GridPosition> _possiblePositions = new List<GridPosition>();
-
-            for (int x = _xMin; x <= _xMax; x++)
-            {
-                for (int y = _yMin; y <= _yMax; y++)
-                {
-                    _possiblePositions.Add(new GridPosition(x, y));
-                }
-            }
-
-            for (int i = 0; i < _possiblePositions.Count; i++)
-            {
-                _nodes.Add(grid[_possiblePositions[i].x, _possiblePositions[i].y]);
-            }
-
-            for (int i = 0; i < length; i++)
-            {
-
-            }
-
-
-            return _nodes;
-        }
-        */
+       
         public List<Node> GetNeighbors(Node _node)
         {
             List<Node> _neighbors = new List<Node>();
@@ -124,10 +89,22 @@ namespace GridAndPathfinding
             {
                 for (int y = -1; y <= 1; y++)
                 {
+                    bool _isDiagonal = Mathf.Abs(x) + Mathf.Abs(y) > 1;
+
                     // Skips Current Node and Diagonal Nodes if told to skip them
-                    if(x == 0 && y == 0 || !diagonalMovement && Mathf.Abs(x) + Mathf.Abs(y) > 1)
+                    if (x == 0 && y == 0 || !diagonalMovement && _isDiagonal)
                     {
                         continue;
+                    }
+                    else if (_isDiagonal)
+                    {
+                        int _x = _node.gridX;
+                        int _y = _node.gridY;
+
+                        if(!grid[_x + x, _y].walkable && !grid[_x, _y + y].walkable)
+                        {
+                            continue;
+                        }
                     }
 
                     // Gets Node
