@@ -24,7 +24,7 @@ public class GridCamera : MonoBehaviour
 
     // Raycast Data
     Vector3 lastHitPoint;
-    Vector3 LastOffset { get { return transform.position - lastHitPoint; } }
+    Vector3 lastOffset;
     public LayerMask mask;
 
     float delta, fixedDelta;
@@ -112,6 +112,7 @@ public class GridCamera : MonoBehaviour
         if (Physics.Raycast(_ray, out _hit, 100, mask))
         {
             lastHitPoint = _hit.point;
+            lastOffset = transform.position - _hit.point;
         }
     }
 
@@ -130,6 +131,6 @@ public class GridCamera : MonoBehaviour
     {
         HandleForwardRaycast();
 
-        targetPosition = _worldPosition + LastOffset;
+        targetPosition = _worldPosition + lastOffset;
     }
 }

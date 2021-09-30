@@ -20,6 +20,8 @@ namespace GridAndPathfinding
         LayerMask walkableMask;
         Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
+        public Vector3 gridCenter;
+
         Node[,] grid;
 
         public bool displayGridGizmos;
@@ -119,10 +121,56 @@ namespace GridAndPathfinding
             return _neighbors;
         }
 
+        /**
+         * @author Matthew Sommer
+         * List<Node> GetNeighborsRaw returns a list containing the given node and all of its neighbors
+         * @param _node: the Node to search around
+         * @return _neighbors the given node and the 8 nodes surrounding it */
+        public List<Node> GetNeighborsRaw(Node _node)
+        {
+            List<Node> _neighbors = new List<Node>();
+
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    // Gets Node
+                    int _checkX = _node.gridX + x;
+                    int _checkY = _node.gridY + y;
+
+                    if (_checkX >= 0 && _checkX < gridSizeX && _checkY >= 0 && _checkY < gridSizeY)
+                    {
+                        _neighbors.Add(grid[_checkX, _checkY]);
+                    }
+                }
+            }
+
+            return _neighbors;
+        }
+
         // Needs Checks
         public Node RetrieveNode(int _x, int _y)
         {
             return grid[_x, _y];
+        }
+
+        public Node GetClosestNode(Vector3 _worldPosition, List<Node> _nodes)
+        {
+            Node _closestNode = null;
+            float _distance = float.MaxValue;
+
+            foreach (Node _node in _nodes)
+            {
+                float _newDis = (_node.worldPosition - _worldPosition).sqrMagnitude;
+
+                if (_newDis < _distance)
+                {
+                    _distance = _newDis;
+                    _closestNode = _node;
+                }
+            }
+
+            return _closestNode;
         }
 
         public Node NodeFromWorldPoint(Vector3 _worldPosition)
@@ -138,25 +186,14 @@ namespace GridAndPathfinding
 
         public Vector3 NodePositionFromWorldPoint(Vector3 _worldPosition)
         {
-            float _percentX = Mathf.Clamp01((_worldPosition.x + (gridWorldSize.x / 2)) / gridWorldSize.x);
-            float _percentY = Mathf.Clamp01((_worldPosition.z + (gridWorldSize.y / 2)) / gridWorldSize.y);
+            // Gets a rough estimate of the node's position
+            Node _node = NodeFromWorldPoint(_worldPosition);
 
-            int _x = Mathf.RoundToInt((gridSizeX - 1) * _percentX);
-            int _y = Mathf.RoundToInt((gridSizeY - 1) * _percentY);
+            // Gets the node and it's neighbors
+            List<Node> _neighbors = GetNeighborsRaw(_node);
 
-            return grid[_x, _y].worldPosition;
+            return GetClosestNode(_worldPosition, _neighbors).worldPosition;
         }
-
-        /*GridPosition GridPositionFromWorldPoint(Vector3 _worldPosition)
-        {
-            float _percentX = Mathf.Clamp01((_worldPosition.x + (gridWorldSize.x / 2)) / gridWorldSize.x);
-            float _percentY = Mathf.Clamp01((_worldPosition.z + (gridWorldSize.y / 2)) / gridWorldSize.y);
-
-            int _x = Mathf.RoundToInt((gridSizeX - 1) * _percentX);
-            int _y = Mathf.RoundToInt((gridSizeY - 1) * _percentY);
-
-            return new GridPosition(_x, _y);
-        }*/
 
         private void OnDrawGizmos()
         {
@@ -185,16 +222,4 @@ namespace GridAndPathfinding
         public LayerMask terrainMask;
         public int terrainPenalty;
     }
-
-    /*struct GridPosition
-    {
-        public int x;
-        public int y;
-
-        public GridPosition(int _x, int _y)
-        {
-            x = _x;
-            y = _y;
-        }
-    }*/
 }
