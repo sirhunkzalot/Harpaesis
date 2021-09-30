@@ -40,7 +40,7 @@ public class GridCursor : MonoBehaviour
     }
 
 
-    /** MoveCursor moves the 3D Grid cursor along the surface of the grid according 
+    /* MoveCursor moves the 3D Grid cursor along the surface of the grid according 
      * to the mouse position */
     private void MoveCursor()
     {

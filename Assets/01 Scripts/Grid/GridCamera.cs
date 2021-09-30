@@ -23,17 +23,17 @@ public class GridCamera : MonoBehaviour
     Camera cam;
 
     // Raycast Data
-    Vector3 lastHitPoint;
     Vector3 lastOffset;
     public LayerMask mask;
 
     float delta, fixedDelta;
 
+    #region Singleton
     public static GridCamera instance;
 
     private void Awake()
     {
-        #region Singleton
+
         if (instance == null)
         {
             instance = this;
@@ -42,8 +42,9 @@ public class GridCamera : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        #endregion
+
     }
+    #endregion
 
     private void Start()
     {
@@ -55,7 +56,7 @@ public class GridCamera : MonoBehaviour
         HandleForwardRaycast();
     }
 
-    void Update()
+    void LateUpdate()
     {
         delta = Time.deltaTime;
 
@@ -65,6 +66,7 @@ public class GridCamera : MonoBehaviour
         HandleForwardRaycast();
     }
 
+    /* HandleCameraZoom manages the size of the orthographic camera based on the scroll wheel */
     private void HandleCameraZoom()
     {
         currentZoom -= Input.GetAxisRaw("Mouse ScrollWheel") * zoomSpeed;
@@ -100,10 +102,10 @@ public class GridCamera : MonoBehaviour
             targetEulers.y += 90;
         }
 
-        //print(Quaternion.Angle(transform.rotation, Quaternion.Euler(targetEulers)));
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetEulers), Time.deltaTime * rotationSpeed);
     }
 
+    /* HandleForwardRaycast sends a ray from the camera to the ground and sets the last offset */
     private void HandleForwardRaycast()
     {
         Ray _ray = new Ray(transform.position, transform.forward);
@@ -111,26 +113,13 @@ public class GridCamera : MonoBehaviour
 
         if (Physics.Raycast(_ray, out _hit, 100, mask))
         {
-            lastHitPoint = _hit.point;
             lastOffset = transform.position - _hit.point;
         }
     }
 
-    private void HandleSpeculativeForwardRaycast(Vector3 _origin)
-    {
-        Ray _ray = new Ray(_origin, transform.forward);
-        RaycastHit _hit;
-
-        if (Physics.Raycast(_ray, out _hit, 100, mask))
-        {
-            lastHitPoint = _hit.point;
-        }
-    }
-
+    /* JumpToPosition moves the camera to keep its current vertical offset while centering on the world position*/
     public void JumpToPosition(Vector3 _worldPosition)
     {
-        HandleForwardRaycast();
-
         targetPosition = _worldPosition + lastOffset;
     }
 }

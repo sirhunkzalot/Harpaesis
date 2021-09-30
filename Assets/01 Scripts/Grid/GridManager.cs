@@ -49,6 +49,7 @@ namespace GridAndPathfinding
             CreateGrid();
         }
 
+        /* CreateGrid generates a series of nodes based on the settings given */
         void CreateGrid()
         {
             grid = new Node[gridSizeX, gridSizeY];
@@ -81,6 +82,9 @@ namespace GridAndPathfinding
             }
         }
        
+        /* GetNeighbors finds all of the nodes surrounding the given node
+         * @param _node is the node to search around
+         * @return a list of the viable surrounding nodes for pathfinding */
         public List<Node> GetNeighbors(Node _node)
         {
             List<Node> _neighbors = new List<Node>();
@@ -121,11 +125,9 @@ namespace GridAndPathfinding
             return _neighbors;
         }
 
-        /**
-         * @author Matthew Sommer
-         * List<Node> GetNeighborsRaw returns a list containing the given node and all of its neighbors
-         * @param _node: the Node to search around
-         * @return _neighbors the given node and the 8 nodes surrounding it */
+        /* GetNeighborsRaw returns a list containing the given node and all of its neighbors
+         * @param _node is the node to search around
+         * @return a list of nodes containing the given node and the 8 nodes surrounding it */
         public List<Node> GetNeighborsRaw(Node _node)
         {
             List<Node> _neighbors = new List<Node>();
@@ -148,12 +150,24 @@ namespace GridAndPathfinding
             return _neighbors;
         }
 
-        // Needs Checks
+        /* RetrieveNode retrieves a node from the grid based on its x and y position within the grid
+         * @param _x is the x position of the requested node
+         * @param _yis the y position of the requested node
+         * @return the node at the given grid position or returns null if node doesn't exist*/
         public Node RetrieveNode(int _x, int _y)
         {
-            return grid[_x, _y];
+            if (_x >= 0 && _x < gridSizeX && _y >= 0 && _y < gridSizeY)
+            {
+                return grid[_x, _y];
+            }
+
+            return null;
         }
 
+        /* GetClosestNode finds the closest node to the given position amongst a list of nodes
+         * @param _worldPosition is the position to find the closest node to
+         * @param _nodes is the list of nodes to check
+         * @return the closest node to the given position from the given list of nodes */
         public Node GetClosestNode(Vector3 _worldPosition, List<Node> _nodes)
         {
             Node _closestNode = null;
@@ -173,6 +187,9 @@ namespace GridAndPathfinding
             return _closestNode;
         }
 
+        /* NodeFromWorldPoint uses a world position to roughly get the closest node
+         * @param Vector3 _worldPosition is the world position to find a node with
+         * @return the node that is near given world position */
         public Node NodeFromWorldPoint(Vector3 _worldPosition)
         {
             float _percentX = Mathf.Clamp01((_worldPosition.x + (gridWorldSize.x / 2)) / gridWorldSize.x);
@@ -184,6 +201,9 @@ namespace GridAndPathfinding
             return grid[_x, _y];
         }
 
+        /* NodePositionFromWorldPoint accurately gets the world position of the nearest node to the given point
+         * @param Vector3 _worldPosition is the world position to find a node with
+         * @return the world position of the node closest to the given world position */
         public Vector3 NodePositionFromWorldPoint(Vector3 _worldPosition)
         {
             // Gets a rough estimate of the node's position
