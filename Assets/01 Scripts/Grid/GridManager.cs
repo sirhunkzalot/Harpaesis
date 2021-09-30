@@ -31,7 +31,6 @@ namespace GridAndPathfinding
 
         public static GridManager instance;
 
-
         private void Awake()
         {
             instance = this;

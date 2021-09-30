@@ -20,10 +20,6 @@ public class GridCamera : MonoBehaviour
     public float accelerationSpeed = 10f;
     public float rotationSpeed = 10;
 
-    public bool testJump;
-
-    public Transform testTarget;
-
     Camera cam;
 
     // Raycast Data
@@ -33,8 +29,23 @@ public class GridCamera : MonoBehaviour
 
     float delta, fixedDelta;
 
+    public static GridCamera instance;
 
     private void Awake()
+    {
+        #region Singleton
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        #endregion
+    }
+
+    private void Start()
     {
         targetEulers = transform.eulerAngles;
         targetPosition = transform.position;
@@ -47,13 +58,6 @@ public class GridCamera : MonoBehaviour
     void Update()
     {
         delta = Time.deltaTime;
-
-        if (testJump)
-        {
-            testJump = false;
-
-            JumpToPosition(testTarget.position);
-        }
 
         HandleCameraZoom();
         HandleCameraMovement();

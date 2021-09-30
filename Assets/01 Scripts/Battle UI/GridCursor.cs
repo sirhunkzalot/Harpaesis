@@ -26,7 +26,10 @@ public class GridCursor : MonoBehaviour
             Destroy(gameObject);
         }
         #endregion
+    }
 
+    private void Start()
+    {
         grid = GridManager.instance;
         cam = Camera.main;
     }
