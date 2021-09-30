@@ -9,13 +9,18 @@ using UnityEngine;
  * such as ability to search for a player's input */
 public class FriendlyUnit : Unit
 {
-    public Transform selector;
-    public Vector3 lastSelectorPosition;
+    Transform selector;
+    Vector3 lastSelectorPosition;
 
     Waypoint[] previewPath;
 
     public enum FriendlyState { Inactive, Active, PreviewMove, Moving }
     public FriendlyState currentState = FriendlyState.Inactive;
+
+    protected override void Init()
+    {
+        selector = GridCursor.instance.transform;
+    }
 
     protected override void Tick()
     {
