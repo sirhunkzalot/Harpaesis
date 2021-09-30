@@ -79,7 +79,6 @@ namespace GridAndPathfinding
                 }
             }
         }
-
        
         public List<Node> GetNeighbors(Node _node)
         {
@@ -119,6 +118,12 @@ namespace GridAndPathfinding
             }
 
             return _neighbors;
+        }
+
+        // Needs Checks
+        public Node RetrieveNode(int _x, int _y)
+        {
+            return grid[_x, _y];
         }
 
         public Node NodeFromWorldPoint(Vector3 _worldPosition)

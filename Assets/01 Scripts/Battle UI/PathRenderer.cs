@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GridAndPathfinding;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class PathRenderer : MonoBehaviour
 
     public Vector3 pathOffset;
 
-    public Vector3[] path;
+    public Waypoint[] path;
     public Unit unit;
 
     public bool renderActualPath;
@@ -53,7 +54,6 @@ public class PathRenderer : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void PathPreview(PathResult _result)
@@ -63,43 +63,50 @@ public class PathRenderer : MonoBehaviour
 
         unit = _result.unit;
 
-        Vector3[] _newPath = new Vector3[_result.path.Length + 1];
-        _newPath[0] = unit.transform.position + pathOffset;
+        Waypoint[] _newPath = new Waypoint[_result.path.Length + 1];
+        _newPath[0] = new Waypoint(unit.transform.position + pathOffset, 0);
         _result.path.CopyTo(_newPath, 1);
 
         path = _newPath;
 
-
-        int _reachableSpaces = Mathf.Min(path.Length, unit.turnData.ap + 1);
-        int _unreachableSpaces = Mathf.Max(0, path.Length - _reachableSpaces) + 1;
-
+        int _usedAP = 0;
 
         // Sets the positions for all of the reachableSpaces in the path
-        reachablePath.positionCount = _reachableSpaces;
-        if (reachablePath.positionCount > 0)
+        List<Vector3> _reachablePositions = new List<Vector3>();
+        int i = 0;
+
+        do
         {
-            Vector3[] _reachablePositions = new Vector3[_reachableSpaces];
+            _reachablePositions.Add(path[i].position + pathOffset);
+            _usedAP += path[i].apCost;
 
-            for (int i = 0; i < _reachableSpaces; i++)
-            {
-                _reachablePositions[i] = path[i] + pathOffset;
-            }
+        } while (++i < path.Length && _usedAP < unit.turnData.ap);
 
-            reachablePath.SetPositions(_reachablePositions);
-        }
-        
+        reachablePath.positionCount = _reachablePositions.Count;
+        reachablePath.SetPositions(_reachablePositions.ToArray());
+
         // Sets the positions for all of the unreachableSpaces in the path
-        unreachablePath.positionCount = _unreachableSpaces;
-        if(unreachablePath.positionCount > 0)
+        
+        if(i < path.Length)
         {
-            Vector3[] _unreachablePositions = new Vector3[_unreachableSpaces + 1];
 
-            for (int i = 0; i < _unreachableSpaces; i++)
+            List<Vector3> _unreachablePositions = new List<Vector3>();
+
+            i--;
+
+            while (i < path.Length)
             {
-                _unreachablePositions[i] = path[i + reachablePath.positionCount - 1] + pathOffset;
+                _unreachablePositions.Add(path[i].position + pathOffset);
+
+                i++;
             }
 
-            unreachablePath.SetPositions(_unreachablePositions);
+            unreachablePath.positionCount = _unreachablePositions.Count;
+            unreachablePath.SetPositions(_unreachablePositions.ToArray());
+        }
+        else
+        {
+            unreachablePath.gameObject.SetActive(false);
         }
     }
 

@@ -12,6 +12,8 @@ public class FriendlyUnit : Unit
     public Transform selector;
     public Vector3 lastSelectorPosition;
 
+    Waypoint[] previewPath;
+
     public enum FriendlyState { Inactive, Active, PreviewMove, Moving }
     public FriendlyState currentState = FriendlyState.Inactive;
 

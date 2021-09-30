@@ -582,6 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   targetIndex: 0
+  path: []
 --- !u!1 &164437984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2084,6 +2085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   targetIndex: 0
+  path: []
 --- !u!4 &864405370
 Transform:
   m_ObjectHideFlags: 0
@@ -4272,6 +4274,7 @@ GameObject:
   - component: {fileID: 1905321714}
   - component: {fileID: 1905321715}
   - component: {fileID: 1905321716}
+  - component: {fileID: 1905321717}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -4366,6 +4369,18 @@ MonoBehaviour:
     ap: 0
   units: []
   turnOrder: []
+--- !u!114 &1905321717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905321711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15645fe4440f76b4cbdf2408b8c177ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1910512223
 GameObject:
   m_ObjectHideFlags: 0

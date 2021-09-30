@@ -80,13 +80,13 @@ namespace GridAndPathfinding
 
     public struct PathResult
     {
-        public Vector3[] path;
+        public Waypoint[] path;
         public bool success;
         public Action<PathResult> callback;
         public Unit unit;
 
 
-        public PathResult(Vector3[] _path, bool _success, Action<PathResult> _callback, Unit _unit)
+        public PathResult(Waypoint[] _path, bool _success, Action<PathResult> _callback, Unit _unit)
         {
             path = _path;
             success = _success;
