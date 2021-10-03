@@ -20,6 +20,8 @@ namespace GridAndPathfinding
         LayerMask walkableMask;
         Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
+        public Vector3 gridCenter;
+
         Node[,] grid;
 
         public bool displayGridGizmos;
@@ -30,7 +32,6 @@ namespace GridAndPathfinding
         public int MaxSize { get { return gridSizeX * gridSizeY; } }
 
         public static GridManager instance;
-
 
         private void Awake()
         {
@@ -48,6 +49,7 @@ namespace GridAndPathfinding
             CreateGrid();
         }
 
+        /* CreateGrid generates a series of nodes based on the settings given */
         void CreateGrid()
         {
             grid = new Node[gridSizeX, gridSizeY];
@@ -79,43 +81,10 @@ namespace GridAndPathfinding
                 }
             }
         }
-
-        /*public List<Node> GetListOfReachableNodes(Vector3 _unitPosition, int _availibleAP)
-        {
-            List<Node> _nodes = new List<Node>();
-
-            GridPosition _gridPosition = GridPositionFromWorldPoint(_unitPosition);
-
-            int _xMin = Mathf.Clamp(_gridPosition.x - _availibleAP, 0, gridSizeX - 1);
-            int _xMax = Mathf.Clamp(_gridPosition.x + _availibleAP, 0, gridSizeX - 1);
-
-            int _yMin = Mathf.Clamp(_gridPosition.y - _availibleAP, 0, gridSizeY - 1);
-            int _yMax = Mathf.Clamp(_gridPosition.y + _availibleAP, 0, gridSizeY - 1);
-
-            List<GridPosition> _possiblePositions = new List<GridPosition>();
-
-            for (int x = _xMin; x <= _xMax; x++)
-            {
-                for (int y = _yMin; y <= _yMax; y++)
-                {
-                    _possiblePositions.Add(new GridPosition(x, y));
-                }
-            }
-
-            for (int i = 0; i < _possiblePositions.Count; i++)
-            {
-                _nodes.Add(grid[_possiblePositions[i].x, _possiblePositions[i].y]);
-            }
-
-            for (int i = 0; i < length; i++)
-            {
-
-            }
-
-
-            return _nodes;
-        }
-        */
+       
+        /* GetNeighbors finds all of the nodes surrounding the given node
+         * @param _node is the node to search around
+         * @return a list of the viable surrounding nodes for pathfinding */
         public List<Node> GetNeighbors(Node _node)
         {
             List<Node> _neighbors = new List<Node>();
@@ -124,10 +93,22 @@ namespace GridAndPathfinding
             {
                 for (int y = -1; y <= 1; y++)
                 {
+                    bool _isDiagonal = Mathf.Abs(x) + Mathf.Abs(y) > 1;
+
                     // Skips Current Node and Diagonal Nodes if told to skip them
-                    if(x == 0 && y == 0 || !diagonalMovement && Mathf.Abs(x) + Mathf.Abs(y) > 1)
+                    if (x == 0 && y == 0 || !diagonalMovement && _isDiagonal)
                     {
                         continue;
+                    }
+                    else if (_isDiagonal)
+                    {
+                        int _x = _node.gridX;
+                        int _y = _node.gridY;
+
+                        if(!grid[_x + x, _y].walkable && !grid[_x, _y + y].walkable)
+                        {
+                            continue;
+                        }
                     }
 
                     // Gets Node
@@ -144,6 +125,71 @@ namespace GridAndPathfinding
             return _neighbors;
         }
 
+        /* GetNeighborsRaw returns a list containing the given node and all of its neighbors
+         * @param _node is the node to search around
+         * @return a list of nodes containing the given node and the 8 nodes surrounding it */
+        public List<Node> GetNeighborsRaw(Node _node)
+        {
+            List<Node> _neighbors = new List<Node>();
+
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    // Gets Node
+                    int _checkX = _node.gridX + x;
+                    int _checkY = _node.gridY + y;
+
+                    if (_checkX >= 0 && _checkX < gridSizeX && _checkY >= 0 && _checkY < gridSizeY)
+                    {
+                        _neighbors.Add(grid[_checkX, _checkY]);
+                    }
+                }
+            }
+
+            return _neighbors;
+        }
+
+        /* RetrieveNode retrieves a node from the grid based on its x and y position within the grid
+         * @param _x is the x position of the requested node
+         * @param _yis the y position of the requested node
+         * @return the node at the given grid position or returns null if node doesn't exist*/
+        public Node RetrieveNode(int _x, int _y)
+        {
+            if (_x >= 0 && _x < gridSizeX && _y >= 0 && _y < gridSizeY)
+            {
+                return grid[_x, _y];
+            }
+
+            return null;
+        }
+
+        /* GetClosestNode finds the closest node to the given position amongst a list of nodes
+         * @param _worldPosition is the position to find the closest node to
+         * @param _nodes is the list of nodes to check
+         * @return the closest node to the given position from the given list of nodes */
+        public Node GetClosestNode(Vector3 _worldPosition, List<Node> _nodes)
+        {
+            Node _closestNode = null;
+            float _distance = float.MaxValue;
+
+            foreach (Node _node in _nodes)
+            {
+                float _newDis = (_node.worldPosition - _worldPosition).sqrMagnitude;
+
+                if (_newDis < _distance)
+                {
+                    _distance = _newDis;
+                    _closestNode = _node;
+                }
+            }
+
+            return _closestNode;
+        }
+
+        /* NodeFromWorldPoint uses a world position to roughly get the closest node
+         * @param Vector3 _worldPosition is the world position to find a node with
+         * @return the node that is near given world position */
         public Node NodeFromWorldPoint(Vector3 _worldPosition)
         {
             float _percentX = Mathf.Clamp01((_worldPosition.x + (gridWorldSize.x / 2)) / gridWorldSize.x);
@@ -155,27 +201,19 @@ namespace GridAndPathfinding
             return grid[_x, _y];
         }
 
+        /* NodePositionFromWorldPoint accurately gets the world position of the nearest node to the given point
+         * @param Vector3 _worldPosition is the world position to find a node with
+         * @return the world position of the node closest to the given world position */
         public Vector3 NodePositionFromWorldPoint(Vector3 _worldPosition)
         {
-            float _percentX = Mathf.Clamp01((_worldPosition.x + (gridWorldSize.x / 2)) / gridWorldSize.x);
-            float _percentY = Mathf.Clamp01((_worldPosition.z + (gridWorldSize.y / 2)) / gridWorldSize.y);
+            // Gets a rough estimate of the node's position
+            Node _node = NodeFromWorldPoint(_worldPosition);
 
-            int _x = Mathf.RoundToInt((gridSizeX - 1) * _percentX);
-            int _y = Mathf.RoundToInt((gridSizeY - 1) * _percentY);
+            // Gets the node and it's neighbors
+            List<Node> _neighbors = GetNeighborsRaw(_node);
 
-            return grid[_x, _y].worldPosition;
+            return GetClosestNode(_worldPosition, _neighbors).worldPosition;
         }
-
-        /*GridPosition GridPositionFromWorldPoint(Vector3 _worldPosition)
-        {
-            float _percentX = Mathf.Clamp01((_worldPosition.x + (gridWorldSize.x / 2)) / gridWorldSize.x);
-            float _percentY = Mathf.Clamp01((_worldPosition.z + (gridWorldSize.y / 2)) / gridWorldSize.y);
-
-            int _x = Mathf.RoundToInt((gridSizeX - 1) * _percentX);
-            int _y = Mathf.RoundToInt((gridSizeY - 1) * _percentY);
-
-            return new GridPosition(_x, _y);
-        }*/
 
         private void OnDrawGizmos()
         {
@@ -204,16 +242,4 @@ namespace GridAndPathfinding
         public LayerMask terrainMask;
         public int terrainPenalty;
     }
-
-    /*struct GridPosition
-    {
-        public int x;
-        public int y;
-
-        public GridPosition(int _x, int _y)
-        {
-            x = _x;
-            y = _y;
-        }
-    }*/
 }

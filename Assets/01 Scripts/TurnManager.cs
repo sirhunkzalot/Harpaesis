@@ -78,6 +78,7 @@ public class TurnManager : MonoBehaviour
         }
 
         activeTurn = turnOrder[turnCounter];
+        GridCamera.instance.JumpToPosition(activeTurn.unit.transform.position);
 
         HandleTurn();
     }

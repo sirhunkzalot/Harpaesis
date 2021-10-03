@@ -13,7 +13,6 @@ public abstract class Unit : MonoBehaviour
     public UnitData unitData;
     protected UnitMotor motor;
 
-    protected Vector3[] previewPath;
     public bool hasPath;
 
     public int currentHP;

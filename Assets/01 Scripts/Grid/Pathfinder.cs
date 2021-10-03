@@ -7,7 +7,7 @@ namespace GridAndPathfinding
 {
     /**
      * @author Matthew Sommer
-     * class Pathfinder generates paths from one node to another based on received requests*/
+     * class Pathfinder generates paths from one node to another based on received requests */
     public class Pathfinder : MonoBehaviour
     {
         GridManager grid;
@@ -19,7 +19,7 @@ namespace GridAndPathfinding
 
         public void FindPath(PathRequest _request, Action<PathResult> _callback)
         {
-            Vector3[] _waypoints = new Vector3[0];
+            Waypoint[] _waypoints = new Waypoint[0];
             bool _pathSuccess = false;
 
             Node _startNode = grid.NodeFromWorldPoint(_request.pathStart);
@@ -53,9 +53,9 @@ namespace GridAndPathfinding
 
                         int _newMovementCostToNeighbor = _currentNode.gCost + GetDistance(_currentNode, _neighbor) + _neighbor.movementPenalty;
 
-                        bool _v = _newMovementCostToNeighbor < _neighbor.gCost || !_openSet.Contains(_neighbor);
+                        bool _isValidAndHasSmallerGCost = _newMovementCostToNeighbor < _neighbor.gCost || !_openSet.Contains(_neighbor);
 
-                        if (_v)
+                        if (_isValidAndHasSmallerGCost)
                         {
                             _neighbor.gCost = _newMovementCostToNeighbor;
                             _neighbor.hCost = GetDistance(_neighbor, _targetNode);
@@ -83,23 +83,46 @@ namespace GridAndPathfinding
         }
 
         // RetracePath aggregates a path by starting at the end node and following the parent nodes back until it reaches the original node.
-        Vector3[] RetracePath(Node _startNode, Node _endNode)
+        Waypoint[] RetracePath(Node _startNode, Node _endNode)
         {
-            List<Node> _path = new List<Node>();
+            List<Waypoint> _waypoints = new List<Waypoint>();
             Node _currentNode = _endNode;
 
             while (_currentNode != _startNode)
             {
-                _path.Add(_currentNode);
+                _waypoints.Add(new Waypoint(_currentNode.worldPosition));
+
+                Vector2 _currentGridPosition = new Vector2(_currentNode.gridX, _currentNode.gridY);
+                Vector2 _parentGridPosition = new Vector2(_currentNode.parent.gridX, _currentNode.parent.gridY);
+
+
+                bool _isDiagonalToParent = Mathf.Abs(_currentGridPosition.x - _parentGridPosition.x) + Mathf.Abs(_currentGridPosition.y - _parentGridPosition.y) > 1;
+
+                if (_isDiagonalToParent)
+                {
+                    Vector2 _direction = _parentGridPosition - _currentGridPosition;
+
+                    Node _node1 = grid.RetrieveNode((int)_currentGridPosition.x + (int)_direction.x, (int)_currentGridPosition.y);
+                    Node _node2 = grid.RetrieveNode((int)_currentGridPosition.x, (int)_currentGridPosition.y + (int)_direction.y);
+
+                    if (_node1.walkable && !_node2.walkable)
+                    {
+                        _waypoints.Add(new Waypoint(_node1.worldPosition, 0));
+                    }
+                    else if (_node2.walkable && !_node1.walkable)
+                    {
+                        _waypoints.Add(new Waypoint(_node2.worldPosition, 0));
+                    }
+                    else if (!_node1.walkable && !_node2.walkable)
+                    {
+                        throw new Exception("Node Error: Neither diagonal node is walkable. Either it was" +
+                            " incorrectly determined to be a diagonal movement, or another error was created.");
+                    }
+                }
+
                 _currentNode = _currentNode.parent;
             }
 
-            List<Vector3> _waypoints = new List<Vector3>();
-
-            for (int i = 0; i < _path.Count; i++)
-            {
-                _waypoints.Add(_path[i].worldPosition);
-            }
             _waypoints.Reverse();
 
             return _waypoints.ToArray();

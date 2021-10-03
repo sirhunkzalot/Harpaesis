@@ -8,12 +8,29 @@ using UnityEngine;
  * class GridCursor handles all logic concerning the 3D grid cursor*/
 public class GridCursor : MonoBehaviour
 {
-    public GridManager grid;
+    GridManager grid;
     public LayerMask layermask;
     Camera cam;
 
+    public static GridCursor instance;
+
     private void Awake()
     {
+        #region Singleton
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        #endregion
+    }
+
+    private void Start()
+    {
+        grid = GridManager.instance;
         cam = Camera.main;
     }
 
@@ -23,7 +40,7 @@ public class GridCursor : MonoBehaviour
     }
 
 
-    /** MoveCursor moves the 3D Grid cursor along the surface of the grid according 
+    /* MoveCursor moves the 3D Grid cursor along the surface of the grid according 
      * to the mouse position */
     private void MoveCursor()
     {
