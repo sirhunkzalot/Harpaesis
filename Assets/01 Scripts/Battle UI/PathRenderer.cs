@@ -125,7 +125,7 @@ public class PathRenderer : MonoBehaviour
 
     public void SwapToActualPath()
     {
-        if(reachablePath.positionCount > 0 && reachablePath.gameObject.activeInHierarchy)
+        if(reachablePath.positionCount > 1 && reachablePath.gameObject.activeInHierarchy)
         {
             actualPath.gameObject.SetActive(true);
             actualPath.positionCount = reachablePath.positionCount;

@@ -29,24 +29,27 @@ public class UnitMotor : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        Waypoint _currentWaypoint = path[0];
-
-        while (unit.turnData.ap > 0)
+        if (path.Length > 1)
         {
-            if (transform.position == _currentWaypoint.position)
-            {
-                unit.turnData.ap -= _currentWaypoint.apCost;
-                targetIndex++;
-                if (targetIndex >= path.Length)
-                {
-                    ClearPath();
-                    yield break;
-                }
-                _currentWaypoint = path[targetIndex];
-            }
+            Waypoint _currentWaypoint = path[0];
 
-            transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint.position, Time.deltaTime * speed);
-            yield return null;
+            while (unit.turnData.ap > 0)
+            {
+                if (transform.position == _currentWaypoint.position)
+                {
+                    unit.turnData.ap -= _currentWaypoint.apCost;
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        ClearPath();
+                        yield break;
+                    }
+                    _currentWaypoint = path[targetIndex];
+                }
+
+                transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint.position, Time.deltaTime * speed);
+                yield return null;
+            }
         }
 
         ClearPath();
