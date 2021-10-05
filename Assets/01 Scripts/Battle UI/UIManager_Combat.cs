@@ -9,6 +9,8 @@ public class UIManager_Combat : MonoBehaviour
 {
     TurnManager turnManager;
 
+    bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
+
     public static UIManager_Combat instance;
 
     private void Awake()
@@ -26,7 +28,7 @@ public class UIManager_Combat : MonoBehaviour
 
     public void Button_Move()
     {
-        if (turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit))
+        if (IsFriendlyTurn)
         {
             FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
             _unit.MoveAction();
@@ -45,7 +47,7 @@ public class UIManager_Combat : MonoBehaviour
 
     public void Button_EndTurn()
     {
-        if (turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit))
+        if (IsFriendlyTurn)
         {
             turnManager.NextTurn();
         }
