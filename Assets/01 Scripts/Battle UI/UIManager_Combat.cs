@@ -26,8 +26,11 @@ public class UIManager_Combat : MonoBehaviour
 
     public void Button_Move()
     {
-        FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
-        _unit.MoveAction();
+        if (turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit))
+        {
+            FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+            _unit.MoveAction();
+        }
     }
 
     public void Button_Attack()
@@ -42,6 +45,9 @@ public class UIManager_Combat : MonoBehaviour
 
     public void Button_EndTurn()
     {
-        turnManager.NextTurn();
+        if (turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit))
+        {
+            turnManager.NextTurn();
+        }
     }
 }

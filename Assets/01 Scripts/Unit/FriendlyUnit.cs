@@ -51,7 +51,7 @@ public class FriendlyUnit : Unit
             lastSelectorPosition = selector.position;
         }
 
-        if (Input.GetMouseButtonDown(0) && previewPath != null && !hasPath)
+        if (Input.GetMouseButtonDown(0) && previewPath != null && !hasPath && TurnManager.instance.activeTurn.ap > 0)
         {
             StartMove();
         }

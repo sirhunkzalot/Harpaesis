@@ -70,20 +70,29 @@ public class PathRenderer : MonoBehaviour
         path = _newPath;
 
         int _usedAP = 0;
-
-        // Sets the positions for all of the reachableSpaces in the path
-        List<Vector3> _reachablePositions = new List<Vector3>();
         int i = 0;
 
-        do
+        // Sets the positions for all of the reachableSpaces in the path
+        if (unit.turnData.ap > 0)
         {
-            _reachablePositions.Add(path[i].position + pathOffset);
-            _usedAP += path[i].apCost;
+            List<Vector3> _reachablePositions = new List<Vector3>();
 
-        } while (++i < path.Length && _usedAP < unit.turnData.ap);
+            do
+            {
+                _reachablePositions.Add(path[i].position + pathOffset);
+                _usedAP += path[i].apCost;
 
-        reachablePath.positionCount = _reachablePositions.Count;
-        reachablePath.SetPositions(_reachablePositions.ToArray());
+            } while (++i < path.Length && _usedAP < unit.turnData.ap);
+
+            reachablePath.positionCount = _reachablePositions.Count;
+            reachablePath.SetPositions(_reachablePositions.ToArray());
+        }
+        else
+        {
+            reachablePath.gameObject.SetActive(false);
+        }
+
+
 
         // Sets the positions for all of the unreachableSpaces in the path
         
@@ -92,7 +101,11 @@ public class PathRenderer : MonoBehaviour
 
             List<Vector3> _unreachablePositions = new List<Vector3>();
 
-            i--;
+            if(i > 0)
+            {
+                i--;
+            }
+
 
             while (i < path.Length)
             {
@@ -112,17 +125,20 @@ public class PathRenderer : MonoBehaviour
 
     public void SwapToActualPath()
     {
-        actualPath.gameObject.SetActive(true);
-        actualPath.positionCount = reachablePath.positionCount;
+        if(reachablePath.positionCount > 0 && reachablePath.gameObject.activeInHierarchy)
+        {
+            actualPath.gameObject.SetActive(true);
+            actualPath.positionCount = reachablePath.positionCount;
 
-        Vector3[] _actualPositions = new Vector3[reachablePath.positionCount];
-        reachablePath.GetPositions(_actualPositions);
-        actualPath.SetPositions(_actualPositions);
+            Vector3[] _actualPositions = new Vector3[reachablePath.positionCount];
+            reachablePath.GetPositions(_actualPositions);
+            actualPath.SetPositions(_actualPositions);
+
+            renderActualPath = true;
+        }
 
         reachablePath.gameObject.SetActive(false);
         unreachablePath.gameObject.SetActive(false);
-
-        renderActualPath = true;
     }
 
     void DeactivateAllPaths()
