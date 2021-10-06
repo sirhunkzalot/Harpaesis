@@ -60,7 +60,7 @@ public class GridCamera : MonoBehaviour
     {
         delta = Time.deltaTime;
 
-        //HandleCameraZoom();
+        HandleCameraZoom();
         HandleCameraMovement();
         HandleCameraRotation();
         HandleForwardRaycast();
