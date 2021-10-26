@@ -5,8 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class UITest : MonoBehaviour
 {
+    public GameObject settings;
 
     public GameObject Items;
+
+    public void Start()
+    {
+        settings.SetActive(false);
+    }
     public void _Items()
     {
         if (Items.activeSelf)
@@ -14,6 +20,7 @@ public class UITest : MonoBehaviour
             Items.SetActive(false);
         }
         else Items.SetActive(true);
+
     }
     public void Update()
     {
@@ -27,7 +34,20 @@ public class UITest : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Main Menu idea");
+            if (settings.activeSelf)
+            {
+                settings.SetActive(false);
+            }
+            else settings.SetActive(true);
         }
+    }
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene("Main menu idea");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
