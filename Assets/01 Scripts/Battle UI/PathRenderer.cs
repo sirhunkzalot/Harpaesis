@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using GridAndPathfinding;
+using Harpaesis.GridAndPathfinding;
 using UnityEngine;
 
 /**

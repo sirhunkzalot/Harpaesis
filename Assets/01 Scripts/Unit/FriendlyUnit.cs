@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using GridAndPathfinding;
+using Harpaesis.GridAndPathfinding;
 using UnityEngine;
 
 /**
@@ -77,5 +77,26 @@ public class FriendlyUnit : Unit
     public void Moving()
     {
 
+    }
+
+    public void UseSkill(int _skillIndex)
+    {
+        switch (_skillIndex)
+        {
+            case 0:
+                unitData.primarySkill.UseSkill(this, this);
+                break;
+            case 1:
+                unitData.secondarySkill.UseSkill(this, this);
+                break;
+            case 3:
+                unitData.tertiarySkill.UseSkill(this, this);
+                break;
+            case 4:
+                unitData.specialSkill.UseSkill(this, this);
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GridAndPathfinding
+namespace Harpaesis.GridAndPathfinding
 {
     /**
      * @author Matthew Sommer

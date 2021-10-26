@@ -2,20 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Unit/New Unit Data")]
-public class UnitData : ScriptableObject
+namespace Harpaesis.Combat
 {
-    public string unitName;
-    public int healthStat;
-    public int inititiveStat;
-    public int attackStat;
-    public int defenceStat;
-    public int apStat;
-
-    private void OnValidate()
+    [CreateAssetMenu(menuName = "Unit/New Unit Data")]
+    public class UnitData : ScriptableObject
     {
+        public string unitName;
+
+        [Header("Stats")]
+        public int healthStat;
+        public int inititiveStat;
+        public int attackStat;
+        public int defenseStat;
+        public int apStat;
+
+        [Header("Skills")]
+        public Skill primarySkill;
+        public Skill secondarySkill;
+        public Skill tertiarySkill;
+        public Skill specialSkill;
+
+        private void OnValidate()
+        {
 #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(this);
+            UnityEditor.EditorUtility.SetDirty(this);
 #endif
+        }
     }
 }
