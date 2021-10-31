@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Life Drain
   apCost: 4
-  validTargets: 0
-  skillDescription: 
+  validTargets: 4
+  skillDescription: Damage converted to healing for character. Damage bypasses armor
+  rangeTemplate: {fileID: 168528501438769920, guid: 5dcf8a71c7edb53428822ced7ff1c854, type: 3}
   effects:
   - effectType: 2
     amount: 2d3
     duration: 
+    option: 1
   - effectType: 11
     amount: 100
     duration: 
-  - effectType: 20
-    amount: 100
-    duration: 
+    option: 0

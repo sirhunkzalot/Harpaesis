@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Harpaesis.Combat
@@ -9,8 +11,9 @@ namespace Harpaesis.Combat
     {
         public string skillName;
         public int apCost = 1;
-        public TargetType validTargets;
+        [EnumFlags] public TargetMask validTargets;
         [TextArea(3, 5)] public string skillDescription;
+        public GameObject targetingTemplate;
 
         [Space]
         public List<SkillEffect> effects = new List<SkillEffect>();
@@ -53,11 +56,25 @@ namespace Harpaesis.Combat
         #endregion
     }
 
-    public enum TargetType
+    [Flags]
+    public enum TargetMask
     {
-        Any,
-        Self,
-        Enemy,
-        Ally
+        Self = 1 << 0,
+        Ally = 1 << 1,
+        Enemy = 1 << 2,
+    }
+
+    public class EnumFlagsAttribute : PropertyAttribute
+    {
+        public EnumFlagsAttribute() { }
+    }
+
+    [CustomPropertyDrawer(typeof(EnumFlagsAttribute))]
+    public class EnumFlagsAttributeDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect _position, SerializedProperty _property, GUIContent _label)
+        {
+            _property.intValue = EditorGUI.MaskField(_position, _label, _property.intValue, _property.enumNames);
+        }
     }
 }

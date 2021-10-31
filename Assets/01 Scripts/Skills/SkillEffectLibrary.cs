@@ -18,6 +18,7 @@ namespace Harpaesis.Combat
         {
             int _amount = CombatUtility.TranslateFormula(_effect.amount);
             int _duration = CombatUtility.TranslateFormula(_effect.duration);
+            bool _option = _effect.option;
 
             switch (_effect.effectType)
             {
@@ -28,7 +29,7 @@ namespace Harpaesis.Combat
                     SkillEffect_HealOverTime(_user, _target, _amount, _duration);
                     break;
                 case SkillEffectType.Damage:
-                    SkillEffect_Damage(_user, _target,  _amount);
+                    SkillEffect_Damage(_user, _target,  _amount, _option);
                     break;
                 case SkillEffectType.DamageOverTime:
                     SkillEffect_DamageOverTime(_user, _target,  _amount, _duration);
@@ -80,9 +81,6 @@ namespace Harpaesis.Combat
                     break;
                 case SkillEffectType.Holy:
                     SkillEffect_Holy(_effect);
-                    break;
-                case SkillEffectType.IgnoreArmor:
-                    SkillEffect_IgnoreArmor(_effect);
                     break;
                 case SkillEffectType.OverrideTargetToSelf:
                     SkillEffect_OverrideTargetToSelf(_effect);
@@ -198,11 +196,6 @@ namespace Harpaesis.Combat
         }
 
         public static void SkillEffect_Holy(SkillEffect _effect)
-        {
-
-        }
-
-        public static void SkillEffect_IgnoreArmor(SkillEffect _effect)
         {
 
         }

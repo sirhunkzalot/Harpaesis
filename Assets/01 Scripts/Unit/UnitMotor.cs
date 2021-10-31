@@ -29,7 +29,7 @@ public class UnitMotor : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        if (path.Length > 1)
+        if (path.Length >= 1)
         {
             Waypoint _currentWaypoint = path[0];
 

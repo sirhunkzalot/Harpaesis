@@ -14,12 +14,16 @@ public class FriendlyUnit : Unit
 
     Waypoint[] previewPath;
 
-    public enum FriendlyState { Inactive, Active, PreviewMove, Moving }
+    SkillTargetingTemplate primarySkillTargetingTemplate, secondarySkillTargetingTemplate, tertiarySkillTargetingTemplate, specialSkillTargetingTemplate;
+
+    public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting, Attacking }
     public FriendlyState currentState = FriendlyState.Inactive;
 
     protected override void Init()
     {
         selector = GridCursor.instance.transform;
+
+        SetupTargetingTemplates();
     }
 
     protected override void Tick()
@@ -32,10 +36,29 @@ public class FriendlyUnit : Unit
                 PreviewMove();
                 break;
             case FriendlyState.Moving:
+                Moving();
+                break;
+            case FriendlyState.Targeting:
+                Targeting();
+                break;
+            case FriendlyState.Attacking:
                 break;
             default:
                 break;
         }
+    }
+
+    void SetupTargetingTemplates()
+    {
+        primarySkillTargetingTemplate = Instantiate(unitData.primarySkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
+        secondarySkillTargetingTemplate = Instantiate(unitData.secondarySkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
+        tertiarySkillTargetingTemplate = Instantiate(unitData.tertiarySkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
+        specialSkillTargetingTemplate = Instantiate(unitData.specialSkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
+
+        primarySkillTargetingTemplate.Disable();
+        secondarySkillTargetingTemplate.Disable();
+        tertiarySkillTargetingTemplate.Disable();
+        specialSkillTargetingTemplate.Disable();
     }
 
     public void MoveAction()
@@ -79,6 +102,38 @@ public class FriendlyUnit : Unit
 
     }
 
+    public void BeginTargeting(int _index)
+    {
+        switch (_index)
+        {
+            case 0:
+                primarySkillTargetingTemplate.SetupTargetingTemplate();
+                break;
+            case 1:
+                secondarySkillTargetingTemplate.SetupTargetingTemplate();
+                break;
+            case 3:
+                tertiarySkillTargetingTemplate.SetupTargetingTemplate();
+                break;
+            case 4:
+                specialSkillTargetingTemplate.SetupTargetingTemplate();
+                break;
+            default:
+                throw new System.Exception("Error: invalid skill index given.");
+        }
+
+        currentState = FriendlyState.Targeting;
+    }
+
+    public void Targeting()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        }
+    }
+
     public void UseSkill(int _skillIndex)
     {
         switch (_skillIndex)
@@ -96,7 +151,7 @@ public class FriendlyUnit : Unit
                 unitData.specialSkill.UseSkill(this, this);
                 break;
             default:
-                break;
+                throw new System.Exception("Error: invalid skill index given.");
         }
     }
 }

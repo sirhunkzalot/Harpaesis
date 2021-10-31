@@ -9,6 +9,7 @@ namespace Harpaesis.Combat
         public SkillEffectType effectType;
         public string amount;
         public string duration;
+        public bool option;
     }
 
     [CustomPropertyDrawer(typeof(SkillEffect))]
@@ -28,6 +29,7 @@ namespace Harpaesis.Combat
             var effect = property.FindPropertyRelative("effectType");
             var amount = property.FindPropertyRelative("amount");
             var duration = property.FindPropertyRelative("duration");
+            var option = property.FindPropertyRelative("option");
 
             effect.intValue = EditorGUI.Popup(effectRect, "Effect:", effect.intValue, effect.enumNames);
 
@@ -42,6 +44,7 @@ namespace Harpaesis.Combat
                     break;
                 case SkillEffectType.Damage:
                     amount.stringValue = EditorGUI.TextField(secondRect, "Damage Amount:", amount.stringValue);
+                    option.boolValue = EditorGUI.Toggle(thirdRect, "Ignore Armor:", option.boolValue);
                     break;
                 case SkillEffectType.DamageOverTime:
                     amount.stringValue = EditorGUI.TextField(secondRect, "Damage Amount:", amount.stringValue);
@@ -99,8 +102,6 @@ namespace Harpaesis.Combat
                     break;
                 case SkillEffectType.Holy:
                     break;
-                case SkillEffectType.IgnoreArmor:
-                    break;
                 case SkillEffectType.OverrideTargetToSelf:
                     break;
                 default:
@@ -145,7 +146,6 @@ namespace Harpaesis.Combat
 
         Silvered,
         Holy,
-        IgnoreArmor,
         OverrideTargetToSelf
     }
 }

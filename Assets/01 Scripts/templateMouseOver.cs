@@ -2,19 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class templateMouseOver : MonoBehaviour
+public class TemplateMouseOver : MonoBehaviour
 {
-    public Material red;
-    public Material green;
+    public Material unselected;
+    public Material selected;
+    public Material valid;
+
+    Renderer rend;
+    SkillTargetingTemplate parent;
+
+    public void Init(SkillTargetingTemplate _parent)
+    {
+        parent = _parent;
+        rend = GetComponent<Renderer>();
+    }
 
     public void OnMouseOver()
     {
-        GetComponent<Renderer>().material = green;
+        rend.material = valid;
     }
 
     public void OnMouseExit()
     {
-        GetComponent<Renderer>().material = red;
+        rend.material = unselected;
     }
-
 }

@@ -62,7 +62,7 @@ namespace Harpaesis.GridAndPathfinding
                 {
                     Vector3 worldPoint = _bottomLeftCorner + Vector3.right * (x * nodeSize + nodeRadius) + Vector3.forward * (y * nodeSize + nodeRadius);
 
-                    bool _walkable = !Physics.CheckSphere(worldPoint, nodeRadius * .95f, unwalkableMask);
+                    bool _walkable = WorldPointIsWalkable(worldPoint);
 
                     int _movementPenalty = 0;
 
@@ -213,6 +213,16 @@ namespace Harpaesis.GridAndPathfinding
             List<Node> _neighbors = GetNeighborsRaw(_node);
 
             return GetClosestNode(_worldPosition, _neighbors).worldPosition;
+        }
+
+        public bool WorldPointIsWalkable(Vector3 _worldPosition)
+        {
+            return !Physics.CheckSphere(_worldPosition, nodeRadius * .95f, unwalkableMask);
+        }
+
+        public bool NodeIsWalkable(Node _node)
+        {
+            return !Physics.CheckSphere(_node.worldPosition, nodeRadius * .95f, unwalkableMask);
         }
 
         private void OnDrawGizmos()

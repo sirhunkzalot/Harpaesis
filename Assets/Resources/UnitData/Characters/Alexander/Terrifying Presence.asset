@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Terrifying Presence
   apCost: 3
-  validTargets: 0
-  skillDescription: 
+  validTargets: 4
+  skillDescription: Frightened characters will flee from the caster, moving directly
+    away from them for 1d2 rounds
+  rangeTemplate: {fileID: 168528501438769920, guid: ffd80547b84eb224793bbff0a42ded95, type: 3}
   effects:
   - effectType: 6
     amount: 
     duration: 1d2
+    option: 0

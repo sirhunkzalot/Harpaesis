@@ -52,4 +52,11 @@ public class UIManager_Combat : MonoBehaviour
             turnManager.NextTurn();
         }
     }
+
+    public void Button_UseSkill(int _index)
+    {
+        FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+
+        _unit.BeginTargeting(_index);
+    }
 }
