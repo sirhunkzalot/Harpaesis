@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Harpaesis.Combat
 {
+    [System.Serializable]
     public class StatusEffect
     {
         protected Unit effectedUnit;

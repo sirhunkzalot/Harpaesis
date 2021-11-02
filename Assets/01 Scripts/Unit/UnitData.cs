@@ -17,10 +17,11 @@ namespace Harpaesis.Combat
         public int apStat;
 
         [Header("Skills")]
+        public Skill basicAttack;
         public Skill primarySkill;
         public Skill secondarySkill;
         public Skill tertiarySkill;
-        public Skill specialSkill;
+        public Skill signatureSkill;
 
         private void OnValidate()
         {

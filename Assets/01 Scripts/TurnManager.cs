@@ -87,6 +87,7 @@ public class TurnManager : MonoBehaviour
     public void HandleTurn()
     {
         bool _isFriendlyUnit = activeTurn.unit.GetType() == typeof(FriendlyUnit);
+        UIManager_Combat.instance.IsPlayerTurn(_isFriendlyUnit);
 
         if (_isFriendlyUnit)
         {

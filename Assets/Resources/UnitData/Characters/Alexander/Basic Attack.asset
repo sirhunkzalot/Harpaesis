@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Hypnosis
+  m_Name: Basic Attack
   m_EditorClassIdentifier: 
-  skillName: Hypnosis
-  apCost: 3
-  validTargets: 4
+  skillName: Crossbow Shot
+  apCost: 1
+  validTargets: 6
   targetingStyle: 0
-  skillDescription: Sleeping characters will be unable to take any action for the
-    duration of this status effect. Sleeping characters will wake upon recieving
-    damage or after 1d3 rounds
-  targetingTemplate: {fileID: 168528501438769920, guid: e33b9c973902dd34896cc85469debf3a, type: 3}
+  skillDescription: SHoot CRosS boow get Kilz
+  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
   effects:
-  - effectType: 7
-    amount: 
-    duration: 1d3
+  - effectType: 2
+    amount: 2d3
+    duration: 
     option: 0

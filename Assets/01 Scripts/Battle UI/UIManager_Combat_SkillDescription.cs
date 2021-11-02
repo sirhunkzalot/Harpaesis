@@ -12,31 +12,33 @@ public class UIManager_Combat_SkillDescription : MonoBehaviour
 
     TurnManager manager;
 
-    private void Start()
-    {
-        manager = TurnManager.instance;
-    }
-
     public void SetSkillInfo(int _skillIndex)
     {
         Skill _skill;
+        
+
+        if(manager == null)
+        {
+            manager = TurnManager.instance;
+        }
+
 
         switch (_skillIndex)
         {
             case 0:
-                _skill = manager.activeTurn.unitData.primarySkill;
+                _skill = manager.activeTurn.unitData.basicAttack;
                 break;
             case 1:
-                _skill = manager.activeTurn.unitData.secondarySkill;
+                _skill = manager.activeTurn.unitData.primarySkill;
                 break;
             case 2:
-                _skill = manager.activeTurn.unitData.tertiarySkill;
+                _skill = manager.activeTurn.unitData.secondarySkill;
                 break;
             case 3:
-                _skill = manager.activeTurn.unitData.specialSkill;
+                _skill = manager.activeTurn.unitData.tertiarySkill;
                 break;
             default:
-                _skill = manager.activeTurn.unitData.specialSkill;
+                _skill = manager.activeTurn.unitData.signatureSkill;
                 break;
         }
 

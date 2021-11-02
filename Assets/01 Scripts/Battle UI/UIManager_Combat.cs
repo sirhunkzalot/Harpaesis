@@ -8,9 +8,11 @@ using UnityEngine;
 public class UIManager_Combat : MonoBehaviour
 {
     TurnManager turnManager;
+    public GameObject[] playerTurnObjects;
 
     bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
+    #region Singleton
     public static UIManager_Combat instance;
 
     private void Awake()
@@ -20,10 +22,19 @@ public class UIManager_Combat : MonoBehaviour
             instance = this;
         }
     }
+    #endregion
 
     private void Start()
     {
         turnManager = TurnManager.instance;
+    }
+
+    public void IsPlayerTurn(bool _isPlayerTurn)
+    {
+        foreach (GameObject button in playerTurnObjects)
+        {
+            button.SetActive(_isPlayerTurn);
+        }
     }
 
     public void Button_Move()

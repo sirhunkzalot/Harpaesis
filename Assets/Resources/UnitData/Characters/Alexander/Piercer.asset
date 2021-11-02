@@ -15,6 +15,7 @@ MonoBehaviour:
   skillName: Piercer
   apCost: 5
   validTargets: 4
+  targetingStyle: 0
   skillDescription: This attack will drive the character forward 3 tiles, performing
     a standard rapier attack against every opponent within those tiles. every opponent
     within those tiles will be given a chance for bleed for 1d4 turns. Bleed deals
@@ -23,7 +24,7 @@ MonoBehaviour:
     range. If the position an enemy would be pushed into is unwalkable, the enemy
     is stopped one space short of the unwalkable tile, this character will be stopped
     one tile short of that enemy.
-  targetingTemplate: {fileID: 0}
+  targetingTemplate: {fileID: 168528501438769920, guid: 4f8575b6af9add043a259474193addf0, type: 3}
   effects:
   - effectType: 2
     amount: 1

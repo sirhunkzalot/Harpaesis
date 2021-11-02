@@ -12,11 +12,13 @@ public class GridCursor : MonoBehaviour
     public LayerMask layermask;
     Camera cam;
 
+    public Node currentNode;
+
+    #region Singleton
     public static GridCursor instance;
 
     private void Awake()
     {
-        #region Singleton
         if (instance == null)
         {
             instance = this;
@@ -25,8 +27,9 @@ public class GridCursor : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        #endregion
+
     }
+    #endregion
 
     private void Start()
     {
@@ -50,6 +53,8 @@ public class GridCursor : MonoBehaviour
         if (Physics.Raycast(_ray, out _hit, 100, layermask))
         {
             transform.position = grid.NodePositionFromWorldPoint(_hit.point);
+
+            currentNode = grid.NodeFromWorldPoint(transform.position);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Harpaesis.Combat
         public string skillName;
         public int apCost = 1;
         [EnumFlags] public TargetMask validTargets;
+        public TargetingStyle targetingStyle;
         [TextArea(3, 5)] public string skillDescription;
         public GameObject targetingTemplate;
 
@@ -54,6 +55,12 @@ namespace Harpaesis.Combat
 #endif
         }
         #endregion
+    }
+
+    public enum TargetingStyle
+    {
+        SingleTarget,
+        AOE
     }
 
     [Flags]

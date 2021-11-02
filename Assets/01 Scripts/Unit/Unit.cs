@@ -34,6 +34,7 @@ public abstract class Unit : MonoBehaviour
         grid = GridManager.instance;
         motor = GetComponent<UnitMotor>();
         motor.Init(this);
+        currentHP = unitData.healthStat;
         Init();
     }
 
@@ -45,18 +46,22 @@ public abstract class Unit : MonoBehaviour
     protected virtual void Init() { }
     protected virtual void Tick() { }
 
-    public void TakeDamage(int _damageAmount)
+    public void TakeDamage(int _damageAmount, Unit _attacker = null)
     {
         if (!isAlive || _damageAmount <= 0) return;
 
         currentHP = Mathf.Clamp(currentHP - _damageAmount, 0, unitData.healthStat);
 
-        isAlive = (currentHP == 0) ? false : isAlive;
-    }
+        if(_attacker != null)
+        {
+            Debug.Log($"{_attacker.unitData.unitName} deals {_damageAmount} damage to {unitData.unitName}!");
+        }
+        else
+        {
+            Debug.Log($"{unitData.unitName} took {_damageAmount} damage!");
+        }
 
-    public void TakeDamage(Unit _attacker, int _damageAmount)
-    {
-        TakeDamage(_damageAmount);
+        isAlive = (currentHP == 0) ? false : isAlive;
     }
 
     public void Heal(Unit _healer, int _healAmount)
@@ -69,13 +74,19 @@ public abstract class Unit : MonoBehaviour
 
     public void ApplyEffect(StatusEffect _effect)
     {
-        for (int i = 0; i < currentEffects.Count; i++)
+        if(currentEffects.Count > 0)
         {
-            if(currentEffects.GetType() == currentEffects.GetType())
+            for (int i = 0; i < currentEffects.Count; i++)
             {
-                currentEffects[i] += _effect;
+                if (currentEffects[i].GetType() == _effect.GetType())
+                {
+                    currentEffects[i] += _effect;
+                    return;
+                }
             }
         }
+
+        currentEffects.Add(_effect);
     }
 
     public void RemoveEffect(StatusEffect _effect)
