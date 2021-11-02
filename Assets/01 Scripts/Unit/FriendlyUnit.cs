@@ -15,11 +15,11 @@ public class FriendlyUnit : Unit
 
     Waypoint[] previewPath;
 
-    SkillTargetingTemplate basicAttackTargetingTemplate, primarySkillTargetingTemplate, secondarySkillTargetingTemplate,
+    TargetingTemplate basicAttackTargetingTemplate, primarySkillTargetingTemplate, secondarySkillTargetingTemplate,
         tertiarySkillTargetingTemplate, signatureSkillTargetingTemplate;
     int activeTemplateIndex;
 
-    public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting, Attacking }
+    public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting_Single, Targeting_AOE, Attacking }
     public FriendlyState currentState = FriendlyState.Inactive;
 
     protected override void Init()
@@ -41,8 +41,11 @@ public class FriendlyUnit : Unit
             case FriendlyState.Moving:
                 Moving();
                 break;
-            case FriendlyState.Targeting:
-                Targeting();
+            case FriendlyState.Targeting_Single:
+                TargetingSingleTarget();
+                break;
+            case FriendlyState.Targeting_AOE:
+                TargetingAOE();
                 break;
             case FriendlyState.Attacking:
                 break;
@@ -53,11 +56,11 @@ public class FriendlyUnit : Unit
 
     void SetupTargetingTemplates()
     {
-        basicAttackTargetingTemplate = Instantiate(unitData.basicAttack.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
-        primarySkillTargetingTemplate = Instantiate(unitData.primarySkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
-        secondarySkillTargetingTemplate = Instantiate(unitData.secondarySkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
-        tertiarySkillTargetingTemplate = Instantiate(unitData.tertiarySkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
-        signatureSkillTargetingTemplate = Instantiate(unitData.signatureSkill.targetingTemplate, transform).GetComponent<SkillTargetingTemplate>();
+        basicAttackTargetingTemplate = Instantiate(unitData.basicAttack.targetingTemplate, transform).GetComponent<TargetingTemplate>();
+        primarySkillTargetingTemplate = Instantiate(unitData.primarySkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
+        secondarySkillTargetingTemplate = Instantiate(unitData.secondarySkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
+        tertiarySkillTargetingTemplate = Instantiate(unitData.tertiarySkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
+        signatureSkillTargetingTemplate = Instantiate(unitData.signatureSkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
 
         basicAttackTargetingTemplate.Init(unitData.basicAttack);
         primarySkillTargetingTemplate.Init(unitData.primarySkill);
@@ -115,22 +118,29 @@ public class FriendlyUnit : Unit
 
     public void BeginTargeting(int _index)
     {
+        bool _isAOE = false;
+
         switch (_index)
         {
             case 0:
                 basicAttackTargetingTemplate.SetupTargetingTemplate();
+                _isAOE = unitData.basicAttack.targetingStyle == TargetingStyle.AOE;
                 break;
             case 1:
                 primarySkillTargetingTemplate.SetupTargetingTemplate();
+                _isAOE = unitData.primarySkill.targetingStyle == TargetingStyle.AOE;
                 break;
             case 2:
                 secondarySkillTargetingTemplate.SetupTargetingTemplate();
+                _isAOE = unitData.secondarySkill.targetingStyle == TargetingStyle.AOE;
                 break;
             case 3:
                 tertiarySkillTargetingTemplate.SetupTargetingTemplate();
+                _isAOE = unitData.tertiarySkill.targetingStyle == TargetingStyle.AOE;
                 break;
             case 4:
                 signatureSkillTargetingTemplate.SetupTargetingTemplate();
+                _isAOE = unitData.signatureSkill.targetingStyle == TargetingStyle.AOE;
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");
@@ -138,61 +148,110 @@ public class FriendlyUnit : Unit
 
         activeTemplateIndex = _index;
 
-        currentState = FriendlyState.Targeting;
+        if (_isAOE)
+        {
+            currentState = FriendlyState.Targeting_AOE;
+        }
+        else
+        {
+            currentState = FriendlyState.Targeting_Single;
+        }
     }
 
-    public void Targeting()
+    public void TargetingSingleTarget()
     {
         if (Input.GetMouseButtonDown(0))
         {
             switch (activeTemplateIndex)
             {
                 case 0:
-                    if (basicAttackTargetingTemplate.currentlySelected.enemyUnit != null)
+                    if (basicAttackTargetingTemplate.currentlySelected?.unit != null)
                     {
-                        UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.currentlySelected.enemyUnit);
+                        UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.currentlySelected.unit);
                     }
                     break;
+
                 case 1:
-                    if (primarySkillTargetingTemplate.currentlySelected.allyUnit != null && unitData.primarySkill.validTargets == TargetMask.Ally)
+                    if(primarySkillTargetingTemplate.currentlySelected?.unit != null)
                     {
-                        UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.currentlySelected.allyUnit);
-                    }
-                    else if (primarySkillTargetingTemplate.currentlySelected.enemyUnit != null && unitData.primarySkill.validTargets == TargetMask.Enemy)
-                    {
-                        UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.currentlySelected.enemyUnit);
+                        UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.currentlySelected.unit);
                     }
                     break;
+
                 case 2:
-                    if (secondarySkillTargetingTemplate.currentlySelected.allyUnit != null && unitData.secondarySkill.validTargets == TargetMask.Ally)
+                    if (secondarySkillTargetingTemplate.currentlySelected?.unit != null)
                     {
-                        UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.currentlySelected.allyUnit);
-                    }
-                    else if (secondarySkillTargetingTemplate.currentlySelected.enemyUnit != null && unitData.secondarySkill.validTargets == TargetMask.Enemy)
-                    {
-                        UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.currentlySelected.enemyUnit);
+                        UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.currentlySelected.unit);
                     }
                     break;
+
                 case 3:
-                    if (tertiarySkillTargetingTemplate.currentlySelected.allyUnit != null && unitData.tertiarySkill.validTargets == TargetMask.Ally)
+                    if (tertiarySkillTargetingTemplate.currentlySelected?.unit != null)
                     {
-                        UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.currentlySelected.allyUnit);
-                    }
-                    else if (tertiarySkillTargetingTemplate.currentlySelected.enemyUnit != null && unitData.tertiarySkill.validTargets == TargetMask.Enemy)
-                    {
-                        UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.currentlySelected.enemyUnit);
+                        UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.currentlySelected.unit);
                     }
                     break;
+
                 case 4:
-                    if (signatureSkillTargetingTemplate.currentlySelected.allyUnit != null && unitData.signatureSkill.validTargets == TargetMask.Ally)
+                    if (signatureSkillTargetingTemplate.currentlySelected?.unit != null)
                     {
-                        UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.currentlySelected.allyUnit);
-                    }
-                    else if (signatureSkillTargetingTemplate.currentlySelected.enemyUnit != null && unitData.signatureSkill.validTargets == TargetMask.Enemy)
-                    {
-                        UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.currentlySelected.enemyUnit);
+                        UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.currentlySelected.unit);
                     }
                     break;
+
+                default:
+                    throw new System.Exception("Error: invalid skill index given.");
+            }
+
+            EndTargeting();
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            EndTargeting();
+        }
+    }
+
+    public void TargetingAOE()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            switch (activeTemplateIndex)
+            {
+                case 0:
+                    if (basicAttackTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.allWithTargets);
+                    }
+                    break;
+
+                case 1:
+                    if (primarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.allWithTargets);
+                    }
+                    break;
+
+                case 2:
+                    if (secondarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.allWithTargets);
+                    }
+                    break;
+
+                case 3:
+                    if (tertiarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.allWithTargets);
+                    }
+                    break;
+
+                case 4:
+                    if (signatureSkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.allWithTargets);
+                    }
+                    break;
+
                 default:
                     throw new System.Exception("Error: invalid skill index given.");
             }
@@ -214,6 +273,14 @@ public class FriendlyUnit : Unit
         secondarySkillTargetingTemplate.Disable();
         tertiarySkillTargetingTemplate.Disable();
         signatureSkillTargetingTemplate.Disable();
+    }
+
+    public void UseSkill(int _skillIndex, List<TargetingTemplateNode> _nodesWithTargets)
+    {
+        foreach (TargetingTemplateNode node in _nodesWithTargets)
+        {
+            UseSkill(_skillIndex, node.unit);
+        }
     }
 
     public void UseSkill(int _skillIndex, Unit _target)

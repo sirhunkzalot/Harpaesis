@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168528501438769922}
-  - component: {fileID: -4193051647358090831}
+  - component: {fileID: 1009812084247291665}
   m_Layer: 0
   m_Name: Range Seven Template
   m_TagString: Untagged
@@ -163,7 +163,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4193051647358090831
+--- !u!114 &1009812084247291665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,9 +172,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 168528501438769920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7dac62318f14854fb53701539f28a96, type: 3}
+  m_Script: {fileID: 11500000, guid: e1c9d56e70d79ab42a39cdedc7793886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentlySelected: {fileID: 0}
+  allWithTargets: []
+  skill: {fileID: 0}
 --- !u!1001 &29371218169234512
 PrefabInstance:
   m_ObjectHideFlags: 0
