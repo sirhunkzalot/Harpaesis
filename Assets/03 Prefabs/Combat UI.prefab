@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.5104403, y: 0.81413037}
-  m_AnchoredPosition: {x: 1.6064453, y: 0.6529999}
+  m_AnchoredPosition: {x: 1.6064453, y: 0.6529846}
   m_SizeDelta: {x: 1.0484009, y: 1.5700073}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9180922615786943004
@@ -323,7 +323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.31919134, y: 0.2758061}
   m_AnchorMax: {x: 0.68438905, y: 0.943234}
-  m_AnchoredPosition: {x: 1.5181885, y: 2.7416077}
+  m_AnchoredPosition: {x: 1.5181885, y: 2.7416382}
   m_SizeDelta: {x: 3.227047, y: 8.455211}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6383358796648768954
@@ -455,7 +455,7 @@ GameObject:
   - component: {fileID: 1597763084967187962}
   - component: {fileID: 2037353803092498816}
   m_Layer: 5
-  m_Name: attack1
+  m_Name: basicAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,16 +549,16 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 8610594018090896856}
-          m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
-          m_MethodName: set_text
-          m_Mode: 5
+        - m_Target: {fileID: 152733010}
+          m_TargetAssemblyTypeName: UIManager_Combat_SkillDescription, Assembly-CSharp
+          m_MethodName: SetSkillInfo
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Attack 1
+            m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -620,7 +620,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3950980333256550227}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 809534544932006122}
+        m_TargetAssemblyTypeName: UIManager_Combat, Assembly-CSharp
+        m_MethodName: Button_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &562129125411001115
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +645,7 @@ GameObject:
   - component: {fileID: 7904145989601686144}
   - component: {fileID: 7826133968308802665}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Atacks Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1282,18 +1294,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
-    m_FontStyle: 0
+    m_FontSize: 14
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 57
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: attack
+  m_Text: Tertiary Attack
 --- !u!1 &1021511274920342983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1500,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.282, y: 0.17172332}
   m_AnchorMax: {x: 0.7197327, y: 0.30647892}
-  m_AnchoredPosition: {x: -0.30081177, y: -0.78118896}
+  m_AnchoredPosition: {x: -0.30081177, y: -0.78125}
   m_SizeDelta: {x: 1.6086013, y: -1.3276759}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5755843520422701763
@@ -2457,7 +2469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.7904929}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0.44630432}
+  m_AnchoredPosition: {x: 0, y: 0.44631958}
   m_SizeDelta: {x: -0.16, y: -0.63240004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4630660051698145193
@@ -2753,7 +2765,7 @@ GameObject:
   - component: {fileID: 2814664308160393573}
   - component: {fileID: 1583372208989070349}
   m_Layer: 5
-  m_Name: attack4
+  m_Name: tertiaryAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2861,7 +2873,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 312573040042884215}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 809534544932006122}
+        m_TargetAssemblyTypeName: UIManager_Combat, Assembly-CSharp
+        m_MethodName: Button_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1583372208989070349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2891,14 +2915,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 8610594018090896856}
-          m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
-          m_MethodName: set_text
-          m_Mode: 5
+        - m_Target: {fileID: 152733010}
+          m_TargetAssemblyTypeName: UIManager_Combat_SkillDescription, Assembly-CSharp
+          m_MethodName: SetSkillInfo
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: Attack 4
             m_BoolArgument: 1
@@ -3077,7 +3101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.4118065}
-  m_AnchoredPosition: {x: 0.27996826, y: 0.029907227}
+  m_AnchoredPosition: {x: 0.27990723, y: 0.029907227}
   m_SizeDelta: {x: 0.56, y: 0.2561798}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5780677396130040219
@@ -3178,6 +3202,7 @@ GameObject:
   - component: {fileID: 7259052460780029252}
   - component: {fileID: 4684063481695071998}
   - component: {fileID: 6182636420836728521}
+  - component: {fileID: 152733010}
   m_Layer: 5
   m_Name: attack description box
   m_TagString: Untagged
@@ -3206,7 +3231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5223749, y: 0}
   m_AnchorMax: {x: 1, y: 0.22500001}
-  m_AnchoredPosition: {x: -0.16583252, y: 5.6972656}
+  m_AnchoredPosition: {x: -0.16589355, y: 5.6972656}
   m_SizeDelta: {x: 0.39711, y: 11.33687}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4684063481695071998
@@ -3244,6 +3269,21 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &152733010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3194721184393879482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6391c1b0606d04d4783229b96eede39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillNameText: {fileID: 4030573757909455890}
+  skillDescription: {fileID: 8610594018090896856}
+  apCostText: {fileID: 798989885640341390}
 --- !u!1 &3208730873449212530
 GameObject:
   m_ObjectHideFlags: 0
@@ -3915,7 +3955,7 @@ GameObject:
   - component: {fileID: 7685871203023134209}
   - component: {fileID: 771398474705724971}
   m_Layer: 5
-  m_Name: attack3
+  m_Name: secondaryAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4023,7 +4063,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5172938293365258035}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 809534544932006122}
+        m_TargetAssemblyTypeName: UIManager_Combat, Assembly-CSharp
+        m_MethodName: Button_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &771398474705724971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4053,16 +4105,16 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 8610594018090896856}
-          m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
-          m_MethodName: set_text
-          m_Mode: 5
+        - m_Target: {fileID: 152733010}
+          m_TargetAssemblyTypeName: UIManager_Combat_SkillDescription, Assembly-CSharp
+          m_MethodName: SetSkillInfo
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 2
             m_FloatArgument: 0
-            m_StringArgument: Attack 3
+            m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -4095,7 +4147,7 @@ GameObject:
   - component: {fileID: 7221578297701710773}
   - component: {fileID: 8428333331160875180}
   m_Layer: 5
-  m_Name: attack2
+  m_Name: primaryAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4203,7 +4255,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1491154089841542380}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 809534544932006122}
+        m_TargetAssemblyTypeName: UIManager_Combat, Assembly-CSharp
+        m_MethodName: Button_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8428333331160875180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4233,16 +4297,16 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 8610594018090896856}
-          m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
-          m_MethodName: set_text
-          m_Mode: 5
+        - m_Target: {fileID: 152733010}
+          m_TargetAssemblyTypeName: UIManager_Combat_SkillDescription, Assembly-CSharp
+          m_MethodName: SetSkillInfo
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 1
             m_FloatArgument: 0
-            m_StringArgument: Attack 2
+            m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
   - eventID: 1
@@ -4364,18 +4428,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
-    m_FontStyle: 0
+    m_FontSize: 14
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 57
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: attack
+  m_Text: Secondary Attack
 --- !u!1 &3928448646243316809
 GameObject:
   m_ObjectHideFlags: 0
@@ -5401,7 +5465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7cbc77daf11b304a8e13605df618f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 0}
+  settings: {fileID: 388520024814188135}
   Items: {fileID: 4131969807598254293}
 --- !u!1 &4863641414403845490
 GameObject:
@@ -5415,7 +5479,7 @@ GameObject:
   - component: {fileID: 4639896229587442826}
   - component: {fileID: 7617854721715564248}
   m_Layer: 5
-  m_Name: Text (2)
+  m_Name: Movement/Items Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5870,7 +5934,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25300002, y: 0}
   m_AnchorMax: {x: 0.51344067, y: 0.19034067}
-  m_AnchoredPosition: {x: -2.637146, y: -12.172119}
+  m_AnchoredPosition: {x: -2.637085, y: -12.172119}
   m_SizeDelta: {x: -15.892828, y: 35.708652}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7809781016137168935
@@ -6030,7 +6094,7 @@ GameObject:
   - component: {fileID: 225729634407377076}
   - component: {fileID: 798989885640341390}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: AP usage Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6213,7 +6277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.25100002, y: 0.19034067}
-  m_AnchoredPosition: {x: -4.10437, y: -10.665039}
+  m_AnchoredPosition: {x: -4.104492, y: -10.665039}
   m_SizeDelta: {x: -5.3194466, y: 35.161827}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3639467589153731561
@@ -6731,18 +6795,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
-    m_FontStyle: 0
+    m_FontSize: 14
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 57
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: attack
+  m_Text: Basic Attack
 --- !u!1 &5990491852895352268
 GameObject:
   m_ObjectHideFlags: 0
@@ -6788,6 +6852,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d983dc05d9b4b040b17cf1732faabf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTurnObjects:
+  - {fileID: 5378093532759133044}
+  - {fileID: 5595983811901201383}
+  - {fileID: 4863641414403845490}
+  - {fileID: 562129125411001115}
 --- !u!1 &6031968983914413376
 GameObject:
   m_ObjectHideFlags: 0
@@ -7262,18 +7331,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
-    m_FontStyle: 0
+    m_FontSize: 14
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 2
+    m_MaxSize: 57
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Special Attack
+  m_Text: Signature Attack
 --- !u!1 &6302222119158108380
 GameObject:
   m_ObjectHideFlags: 0
@@ -7676,18 +7745,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
-    m_FontStyle: 0
+    m_FontSize: 14
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 57
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: attack
+  m_Text: Primary Attack
 --- !u!1 &6780463920922291024
 GameObject:
   m_ObjectHideFlags: 0
@@ -8296,7 +8365,7 @@ GameObject:
   - component: {fileID: 8768418311654720195}
   - component: {fileID: 4185265201863030425}
   m_Layer: 5
-  m_Name: Text
+  m_Name: AP usage Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9191,7 +9260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7cbc77daf11b304a8e13605df618f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 0}
+  settings: {fileID: 388520024814188135}
   Items: {fileID: 4131969807598254293}
 --- !u!1 &8863899783435052384
 GameObject:
@@ -9229,7 +9298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7576116, y: 0.892}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.463745, y: 2.8357544}
+  m_AnchoredPosition: {x: 5.463867, y: 2.8356934}
   m_SizeDelta: {x: 450.0727, y: 76.94832}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8867333296177885403
@@ -9246,7 +9315,7 @@ GameObject:
   - component: {fileID: 6093262058932111431}
   - component: {fileID: 5071244338064754238}
   m_Layer: 5
-  m_Name: BTN Special
+  m_Name: signatureAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9354,7 +9423,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1796270652503584165}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 809534544932006122}
+        m_TargetAssemblyTypeName: UIManager_Combat, Assembly-CSharp
+        m_MethodName: Button_UseSkill
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5071244338064754238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9384,14 +9465,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 8610594018090896856}
-          m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
-          m_MethodName: set_text
-          m_Mode: 5
+        - m_Target: {fileID: 152733010}
+          m_TargetAssemblyTypeName: UIManager_Combat_SkillDescription, Assembly-CSharp
+          m_MethodName: SetSkillInfo
+          m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
+            m_IntArgument: 4
             m_FloatArgument: 0
             m_StringArgument: Special attack 1
             m_BoolArgument: 1

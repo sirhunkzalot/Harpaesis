@@ -20,7 +20,7 @@ namespace Harpaesis.GridAndPathfinding
         LayerMask walkableMask;
         Dictionary<int, int> walkableRegionsDictionary = new Dictionary<int, int>();
 
-        public Vector3 gridCenter;
+        public Vector3 gridOffset;
 
         Node[,] grid;
 
@@ -105,7 +105,9 @@ namespace Harpaesis.GridAndPathfinding
                         int _x = _node.gridX;
                         int _y = _node.gridY;
 
-                        if(!grid[_x + x, _y].walkable && !grid[_x, _y + y].walkable)
+                        bool _nodeIsOutsideGrid = _x + x < 0 || _x + x >= gridWorldSize.x || _y + y < 0 || _y + y >= gridWorldSize.y;
+
+                        if(_nodeIsOutsideGrid || !grid[_x + x, _y].walkable && !grid[_x, _y + y].walkable)
                         {
                             continue;
                         }

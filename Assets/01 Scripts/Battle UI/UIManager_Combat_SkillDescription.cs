@@ -33,10 +33,10 @@ public class UIManager_Combat_SkillDescription : MonoBehaviour
                 _skill = manager.activeTurn.unitData.tertiarySkill;
                 break;
             case 3:
-                _skill = manager.activeTurn.unitData.specialSkill;
+                _skill = manager.activeTurn.unitData.signatureSkill;
                 break;
             default:
-                _skill = manager.activeTurn.unitData.specialSkill;
+                _skill = manager.activeTurn.unitData.signatureSkill;
                 break;
         }
 

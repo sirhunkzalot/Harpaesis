@@ -16,8 +16,18 @@ namespace Harpaesis.Combat
 
         public static void ResolveEffect(Unit _user, Unit _target, SkillEffect _effect)
         {
-            int _amount = CombatUtility.TranslateFormula(_effect.amount);
-            int _duration = CombatUtility.TranslateFormula(_effect.duration);
+            int _amount = 0;
+            int _duration = 0;
+
+            if(_effect.amount != "")
+            {
+                _amount = CombatUtility.TranslateFormula(_effect.amount);
+            }
+            if(_effect.duration != "")
+            {
+                _duration = CombatUtility.TranslateFormula(_effect.duration);
+            }
+
             bool _option = _effect.option;
 
             switch (_effect.effectType)
@@ -109,7 +119,7 @@ namespace Harpaesis.Combat
                 _damageToDeal -= Mathf.FloorToInt(_target.unitData.defenseStat * .75f);
             }
 
-            _target.TakeDamage(_user, _damageToDeal);
+            _target.TakeDamage(_damageToDeal, _user);
 
             if (_lifestealPercentage > 0)
             {
