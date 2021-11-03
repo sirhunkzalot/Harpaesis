@@ -12,6 +12,7 @@ namespace Harpaesis.Combat
         public bool option;
     }
 
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(SkillEffect))]
     public class SkillEffectEditor : PropertyDrawer
     {
@@ -124,7 +125,7 @@ namespace Harpaesis.Combat
             return (20 - EditorGUIUtility.singleLineHeight) + (EditorGUIUtility.singleLineHeight * 4.25f);
         }
     }
-
+#endif
     public enum SkillEffectType
     {
         Heal,

@@ -75,7 +75,7 @@ namespace Harpaesis.Combat
     {
         public EnumFlagsAttribute() { }
     }
-
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(EnumFlagsAttribute))]
     public class EnumFlagsAttributeDrawer : PropertyDrawer
     {
@@ -84,4 +84,5 @@ namespace Harpaesis.Combat
             _property.intValue = EditorGUI.MaskField(_position, _label, _property.intValue, _property.enumNames);
         }
     }
+#endif
 }

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class LevelSelect : MonoBehaviour
 {
-    public int sceneIndex = 0;
-
     public static LevelSelect instance;
 
     private void Awake()
@@ -27,32 +25,27 @@ public class LevelSelect : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            sceneIndex = 1;
-            SceneManager.LoadScene(sceneIndex);
+            SceneManager.LoadScene(1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            sceneIndex = 2;
-            SceneManager.LoadScene(sceneIndex);
+            SceneManager.LoadScene(2);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            sceneIndex = 3;
-            SceneManager.LoadScene(sceneIndex);
+            SceneManager.LoadScene(3);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            sceneIndex = 4;
-            SceneManager.LoadScene(sceneIndex);
+            SceneManager.LoadScene(4);
         }
         else if (Input.GetKeyDown(KeyCode.M))
         {
-            sceneIndex = 0;
-            SceneManager.LoadScene(sceneIndex);
+            SceneManager.LoadScene(0);
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(sceneIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
