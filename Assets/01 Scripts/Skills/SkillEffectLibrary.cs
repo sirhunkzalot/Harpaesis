@@ -134,21 +134,21 @@ namespace Harpaesis.Combat
 
         public static void SkillEffect_ApplyBleed(Unit _user, Unit _target,  int _bleedDamageAmount, int _duration)
         {
-            _target.ApplyEffect(new StatusEffect_Bleed(_target, _bleedDamageAmount, _duration));
+            _target.ApplyEffect(new StatusEffect_Bleed(_user, _target, _bleedDamageAmount, _duration));
         }
 
         public static void SkillEffect_ApplyBurn(Unit _user, Unit _target,  int _burnDamageAmount, int _duration)
         {
-            _target.ApplyEffect(new StatusEffect_Burn(_target, _burnDamageAmount, _duration));
+            _target.ApplyEffect(new StatusEffect_Burn(_user, _target, _burnDamageAmount, _duration));
         }
 
         public static void SkillEffect_ApplyFear(Unit _user, Unit _target,  int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_Fear(_user, _target, 0, _duration));
         }
         public static void SkillEffect_ApplySleep(Unit _user, Unit _target,  int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_Sleep(_user, _target, 0, _duration));
         }
 
         public static void SkillEffect_ApplyCharm(Unit _user, Unit _target,  int _duration)
@@ -158,7 +158,7 @@ namespace Harpaesis.Combat
 
         public static void SkillEffect_ApplyEntangle(Unit _user, Unit _target,  int _duration)
         {
-            _target.ApplyEffect(new StatusEffect_Root(_target, 0, _duration));
+            _target.ApplyEffect(new StatusEffect_Root(_user, _target, 0, _duration));
         }
 
         public static void SkillEffect_ApplyKnockback(Unit _user, Unit _target,  int _knockbackAmount)

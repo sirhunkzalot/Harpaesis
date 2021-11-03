@@ -1,5 +1,3 @@
-
-
 public static class StatusEffectSettings
 {
     public static int bleedDamage = 2;

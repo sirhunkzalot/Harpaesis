@@ -288,18 +288,23 @@ public class FriendlyUnit : Unit
         switch (_skillIndex)
         {
             case 0:
+                BattleLog.Log($"{unitData.unitName} uses {unitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
                 unitData.basicAttack.UseSkill(this, _target);
                 break;
             case 1:
+                BattleLog.Log($"{unitData.unitName} uses {unitData.primarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
                 unitData.primarySkill.UseSkill(this, _target);
                 break;
             case 2:
+                BattleLog.Log($"{unitData.unitName} uses {unitData.secondarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
                 unitData.secondarySkill.UseSkill(this, _target);
                 break;
             case 3:
+                BattleLog.Log($"{unitData.unitName} uses {unitData.tertiarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
                 unitData.tertiarySkill.UseSkill(this, _target);
                 break;
             case 4:
+                BattleLog.Log($"{unitData.unitName} uses {unitData.signatureSkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
                 unitData.signatureSkill.UseSkill(this, _target);
                 break;
             default:

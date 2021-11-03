@@ -72,7 +72,13 @@ public class TurnManager : MonoBehaviour
 
     public void NextTurn()
     {
-        if(++turnCounter >= turnOrder.Count)
+        if(activeTurn.unit != null)
+        {
+            activeTurn.unit.OnTurnEnd();
+        }
+
+
+        if (++turnCounter >= turnOrder.Count)
         {
             turnCounter = 0;
             BuildTurnOrder();
@@ -89,11 +95,9 @@ public class TurnManager : MonoBehaviour
         bool _isFriendlyUnit = activeTurn.unit.GetType() == typeof(FriendlyUnit);
         UIManager_Combat.instance.IsPlayerTurn(_isFriendlyUnit);
 
-        if (_isFriendlyUnit)
-        {
+        activeTurn.unit.OnTurnStart();
 
-        }
-        else
+        if (!_isFriendlyUnit)
         {
             Invoke(nameof(NextTurn), 2.5f);
         }

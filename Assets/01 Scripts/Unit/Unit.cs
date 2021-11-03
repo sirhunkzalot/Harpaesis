@@ -13,7 +13,7 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour
 {
     public UnitData unitData;
-    protected UnitMotor motor;
+    public UnitMotor motor;
 
     public bool hasPath;
 
@@ -54,14 +54,19 @@ public abstract class Unit : MonoBehaviour
 
         if(_attacker != null)
         {
-            Debug.Log($"{_attacker.unitData.unitName} deals {_damageAmount} damage to {unitData.unitName}!");
+            BattleLog.Log($"{_attacker.unitData.unitName} deals {_damageAmount} damage to {unitData.unitName}!", BattleLogType.CombatLog);
         }
         else
         {
-            Debug.Log($"{unitData.unitName} took {_damageAmount} damage!");
+            BattleLog.Log($"{unitData.unitName} took {_damageAmount} damage!", BattleLogType.CombatLog);
         }
 
         isAlive = (currentHP == 0) ? false : isAlive;
+
+        if (!isAlive)
+        {
+            HandleUnitDeath();
+        }
     }
 
     public void Heal(Unit _healer, int _healAmount)
@@ -70,6 +75,14 @@ public abstract class Unit : MonoBehaviour
         {
             currentHP = Mathf.Clamp(currentHP + _healAmount, 0, unitData.healthStat);
         }
+    }
+
+    public void HandleUnitDeath()
+    {
+        TurnManager.instance.RemoveUnit(this);
+        canMove = false;
+        canAct = false;
+        BattleLog.Log($"{unitData.unitName} has died!", BattleLogType.CombatLog);
     }
 
     public void ApplyEffect(StatusEffect _effect)
@@ -96,4 +109,38 @@ public abstract class Unit : MonoBehaviour
             currentEffects.Remove(_effect);
         }
     }
+
+    public void ForceEndTurn()
+    {
+        TurnManager.instance.NextTurn();
+    }
+
+    public void OnTurnStart()
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            currentEffects[i].OnTurnStart();
+        }
+    }
+
+    public void OnTurnEnd()
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            currentEffects[i].OnTurnEnd();
+        }
+    }
+
+    public void OnTakeStep()
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            currentEffects[i].OnTakeStep();
+        }
+    }
+
+    public void OnRoundStart() { }
+    public void OnRoundEnd() { }
+    public void OnDealDamage() { }
+    public void OnTakeDamage() { }
 }

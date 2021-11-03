@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.GridAndPathfinding;
 using UnityEngine;
 
 /**
@@ -12,7 +13,7 @@ public class UnitMotor : MonoBehaviour
     public int targetIndex = 0;
 
     Unit unit;
-    [SerializeField] Waypoint[] path;
+    [SerializeField, ReadOnly] Waypoint[] path;
 
     public void Init(Unit _unit)
     {
@@ -29,7 +30,7 @@ public class UnitMotor : MonoBehaviour
 
     IEnumerator FollowPath()
     {
-        if (path.Length >= 1)
+        if (path.Length >= 1 && unit.canMove)
         {
             Waypoint _currentWaypoint = path[0];
 
@@ -37,6 +38,7 @@ public class UnitMotor : MonoBehaviour
             {
                 if (transform.position == _currentWaypoint.position)
                 {
+                    unit.OnTakeStep();
                     unit.turnData.ap -= _currentWaypoint.apCost;
                     targetIndex++;
                     if (targetIndex >= path.Length)
@@ -55,7 +57,20 @@ public class UnitMotor : MonoBehaviour
         ClearPath();
     }
 
-    void ClearPath()
+    public void RunAway(Vector3 _fromPosition)
+    {
+        Vector3 _dir = (transform.position - _fromPosition).normalized;
+        Vector3 _targetPosition = transform.position + (_dir * 1000);
+
+        PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, Run, unit));
+    }
+
+    void Run(PathResult _result)
+    {
+        Move(_result.path);
+    }
+
+void ClearPath()
     {
         unit.hasPath = false;
         path = null;
