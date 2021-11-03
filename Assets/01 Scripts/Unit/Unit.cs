@@ -13,18 +13,18 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour
 {
     public UnitData unitData;
-    public UnitMotor motor;
+    [HideInInspector] public UnitMotor motor;
 
     public bool hasPath;
 
-    public int currentHP;
-    public bool isAlive = true;
-    public bool canMove = true;
-    public bool canAct = true;
+    [ReadOnly] public int currentHP;
+    [ReadOnly] public bool isAlive = true;
+    [ReadOnly] public bool canMove = true;
+    [ReadOnly] public bool canAct = true;
 
-    public List<StatusEffect> currentEffects = new List<StatusEffect>();
+    [ReadOnly] public List<StatusEffect> currentEffects = new List<StatusEffect>();
 
-    public Turn turnData;
+    [ReadOnly] public Turn turnData;
 
     protected GridManager grid;
 
@@ -54,11 +54,11 @@ public abstract class Unit : MonoBehaviour
 
         if(_attacker != null)
         {
-            BattleLog.Log($"{_attacker.unitData.unitName} deals {_damageAmount} damage to {unitData.unitName}!", BattleLogType.CombatLog);
+            BattleLog.Log($"{_attacker.unitData.unitName} deals {_damageAmount} damage to {unitData.unitName}!", BattleLogType.Combat);
         }
         else
         {
-            BattleLog.Log($"{unitData.unitName} took {_damageAmount} damage!", BattleLogType.CombatLog);
+            BattleLog.Log($"{unitData.unitName} took {_damageAmount} damage!", BattleLogType.Combat);
         }
 
         isAlive = (currentHP == 0) ? false : isAlive;
@@ -73,6 +73,7 @@ public abstract class Unit : MonoBehaviour
     {
         if (isAlive)
         {
+            BattleLog.Log($"{unitData.unitName} heals for {_healAmount} HP!", BattleLogType.Combat);
             currentHP = Mathf.Clamp(currentHP + _healAmount, 0, unitData.healthStat);
         }
     }
@@ -82,7 +83,7 @@ public abstract class Unit : MonoBehaviour
         TurnManager.instance.RemoveUnit(this);
         canMove = false;
         canAct = false;
-        BattleLog.Log($"{unitData.unitName} has died!", BattleLogType.CombatLog);
+        BattleLog.Log($"{unitData.unitName} has died!", BattleLogType.Combat);
     }
 
     public void ApplyEffect(StatusEffect _effect)

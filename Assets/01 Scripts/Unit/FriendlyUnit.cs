@@ -20,7 +20,7 @@ public class FriendlyUnit : Unit
     int activeTemplateIndex;
 
     public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting_Single, Targeting_AOE, Attacking }
-    public FriendlyState currentState = FriendlyState.Inactive;
+    [ReadOnly] public FriendlyState currentState = FriendlyState.Inactive;
 
     protected override void Init()
     {
@@ -288,23 +288,23 @@ public class FriendlyUnit : Unit
         switch (_skillIndex)
         {
             case 0:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
+                BattleLog.Log($"{unitData.unitName} uses {unitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 unitData.basicAttack.UseSkill(this, _target);
                 break;
             case 1:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.primarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
+                BattleLog.Log($"{unitData.unitName} uses {unitData.primarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 unitData.primarySkill.UseSkill(this, _target);
                 break;
             case 2:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.secondarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
+                BattleLog.Log($"{unitData.unitName} uses {unitData.secondarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 unitData.secondarySkill.UseSkill(this, _target);
                 break;
             case 3:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.tertiarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
+                BattleLog.Log($"{unitData.unitName} uses {unitData.tertiarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 unitData.tertiarySkill.UseSkill(this, _target);
                 break;
             case 4:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.signatureSkill.skillName} on {_target.unitData.unitName}", BattleLogType.CombatLog);
+                BattleLog.Log($"{unitData.unitName} uses {unitData.signatureSkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 unitData.signatureSkill.UseSkill(this, _target);
                 break;
             default:

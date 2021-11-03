@@ -60,6 +60,13 @@ public class TurnManager : MonoBehaviour
 
     public void RemoveUnit(Unit _unit)
     {
+        for (int i = 0; i < units.Count; i++)
+        {
+            if(units[i] == _unit)
+            {
+                units.RemoveAt(i);
+            }
+        }
         for (int i = 0; i < turnOrder.Count; i++)
         {
             if (turnOrder[i].unit == _unit)
@@ -99,7 +106,7 @@ public class TurnManager : MonoBehaviour
 
         if (!_isFriendlyUnit)
         {
-            Invoke(nameof(NextTurn), 2.5f);
+            Invoke(nameof(NextTurn), 1f);
         }
     }
 }

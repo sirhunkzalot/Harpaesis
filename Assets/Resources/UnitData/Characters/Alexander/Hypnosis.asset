@@ -15,13 +15,13 @@ MonoBehaviour:
   skillName: Hypnosis
   apCost: 3
   validTargets: 4
-  targetingStyle: 0
+  targetingStyle: 1
   skillDescription: Sleeping characters will be unable to take any action for the
     duration of this status effect. Sleeping characters will wake upon recieving
     damage or after 1d3 rounds
   targetingTemplate: {fileID: 168528501438769920, guid: e33b9c973902dd34896cc85469debf3a, type: 3}
   effects:
-  - effectType: 7
-    amount: 
-    duration: 1d3
+  - effectType: 8
+    param1: 1d3
+    param2: 
     option: 0

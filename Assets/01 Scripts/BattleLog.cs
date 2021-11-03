@@ -12,6 +12,7 @@ public class BattleLog : MonoBehaviour
 
     private void Start()
     {
+        battleLogText = "";
         transform.GetChild(0).gameObject.SetActive(toggleBattleLog);
         StartCoroutine(UpdateLog());
     }
@@ -39,4 +40,4 @@ public class BattleLog : MonoBehaviour
         battleLogText += $"\n[{_logType}]: {_message}";
     }
 }
-public enum BattleLogType { CombatLog, SystemLog }
+public enum BattleLogType { Combat, System }

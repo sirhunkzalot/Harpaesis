@@ -19,11 +19,7 @@ MonoBehaviour:
   skillDescription: Damage converted to healing for character. Damage bypasses armor
   targetingTemplate: {fileID: 168528501438769920, guid: f153ee84d10a09e40b2432fbc4844dd7, type: 3}
   effects:
-  - effectType: 2
-    amount: 2d3
-    duration: 
+  - effectType: 3
+    param1: 2d3
+    param2: 100
     option: 1
-  - effectType: 11
-    amount: 100
-    duration: 
-    option: 0

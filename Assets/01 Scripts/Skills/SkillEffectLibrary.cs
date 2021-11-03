@@ -16,16 +16,16 @@ namespace Harpaesis.Combat
 
         public static void ResolveEffect(Unit _user, Unit _target, SkillEffect _effect)
         {
-            int _amount = 0;
-            int _duration = 0;
+            int _params1 = 0;
+            int _params2 = 0;
 
-            if(_effect.amount != "")
+            if(_effect.param1 != "")
             {
-                _amount = CombatUtility.TranslateFormula(_effect.amount);
+                _params1 = CombatUtility.TranslateFormula(_effect.param1);
             }
-            if(_effect.duration != "")
+            if(_effect.param2 != "")
             {
-                _duration = CombatUtility.TranslateFormula(_effect.duration);
+                _params2 = CombatUtility.TranslateFormula(_effect.param2);
             }
 
             bool _option = _effect.option;
@@ -33,58 +33,58 @@ namespace Harpaesis.Combat
             switch (_effect.effectType)
             {
                 case SkillEffectType.Heal:
-                    SkillEffect_Heal(_user, _target, _amount);
+                    SkillEffect_Heal(_user, _target, _params1);
                     break;
                 case SkillEffectType.HealOverTime:
-                    SkillEffect_HealOverTime(_user, _target, _amount, _duration);
+                    SkillEffect_HealOverTime(_user, _target, _params1, _params2);
                     break;
                 case SkillEffectType.Damage:
-                    SkillEffect_Damage(_user, _target,  _amount, _option);
+                    SkillEffect_Damage(_user, _target,  _params1, _option);
                     break;
                 case SkillEffectType.DamageOverTime:
-                    SkillEffect_DamageOverTime(_user, _target,  _amount, _duration);
+                    SkillEffect_DamageOverTime(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.ApplyBleed:
-                    SkillEffect_ApplyBleed(_user, _target,  _amount, _duration);
+                    SkillEffect_ApplyBleed(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.ApplyBurn:
-                    SkillEffect_ApplyBurn(_user, _target,  _amount, _duration);
+                    SkillEffect_ApplyBurn(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.ApplyFear:
-                    SkillEffect_ApplyFear(_user, _target,  _duration);
+                    SkillEffect_ApplyFear(_user, _target, _params1);
                     break;
                 case SkillEffectType.ApplySleep:
-                    SkillEffect_ApplySleep(_user, _target,  _duration);
+                    SkillEffect_ApplySleep(_user, _target, _params1);
                     break;
                 case SkillEffectType.ApplyCharm:
-                    SkillEffect_ApplyCharm(_user, _target,  _duration);
+                    SkillEffect_ApplyCharm(_user, _target, _params1);
                     break;
                 case SkillEffectType.ApplyRoot:
-                    SkillEffect_ApplyEntangle(_user, _target,  _duration);
+                    SkillEffect_ApplyRoot(_user, _target, _params1);
                     break;
                 case SkillEffectType.ApplyKnockback:
-                    SkillEffect_ApplyKnockback(_user, _target,  _amount);
+                    SkillEffect_ApplyKnockback(_user, _target,  _params1);
                     break;
-                case SkillEffectType.Lifesteal:
-                    SkillEffect_Lifesteal(_user, _target,  _amount);
+                case SkillEffectType.DamageWithLifesteal:
+                    SkillEffect_DamageWithLifesteal(_user, _target, _params1, _params2, _option);
                     break;
                 case SkillEffectType.BuffATK:
-                    SkillEffect_BuffATK(_user, _target,  _amount, _duration);
+                    SkillEffect_BuffATK(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.BuffDEF:
-                    SkillEffect_BuffDEF(_user, _target,  _amount, _duration);
+                    SkillEffect_BuffDEF(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.BuffAP:
-                    SkillEffect_BuffAP(_user, _target,  _amount, _duration);
+                    SkillEffect_BuffAP(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.DebuffATK:
-                    SkillEffect_DebuffATK(_user, _target,  _amount, _duration);
+                    SkillEffect_DebuffATK(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.DebuffDEF:
-                    SkillEffect_DebuffDEF(_user, _target,  _amount, _duration);
+                    SkillEffect_DebuffDEF(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.DebuffAP:
-                    SkillEffect_DebuffAP(_user, _target,  _amount, _duration);
+                    SkillEffect_DebuffAP(_user, _target,  _params1, _params2);
                     break;
                 case SkillEffectType.Silvered:
                     SkillEffect_Silver(_effect);
@@ -94,6 +94,9 @@ namespace Harpaesis.Combat
                     break;
                 case SkillEffectType.OverrideTargetToSelf:
                     SkillEffect_OverrideTargetToSelf(_effect);
+                    break;
+                case SkillEffectType.ChangeAllegiance:
+                    SkillEffect_ChangeAllegiance(_user, _target, _params1);
                     break;
                 default:
                     break;
@@ -110,7 +113,19 @@ namespace Harpaesis.Combat
 
         }
 
-        public static void SkillEffect_Damage(Unit _user, Unit _target,  int _damageAmount, bool _ignoreArmor = false, float _lifestealPercentage = 0)
+        public static void SkillEffect_Damage(Unit _user, Unit _target,  int _damageAmount, bool _ignoreArmor = false)
+        {
+            int _damageToDeal = _damageAmount + _user.unitData.attackStat;
+
+            if (!_ignoreArmor)
+            {
+                _damageToDeal -= Mathf.FloorToInt(_target.unitData.defenseStat * .75f);
+            }
+
+            _target.TakeDamage(_damageToDeal, _user);
+        }
+
+        public static void SkillEffect_DamageWithLifesteal(Unit _user, Unit _target, int _damageAmount, int _lifestealPercentage, bool _ignoreArmor)
         {
             int _damageToDeal = _damageAmount + _user.unitData.attackStat;
 
@@ -121,10 +136,7 @@ namespace Harpaesis.Combat
 
             _target.TakeDamage(_damageToDeal, _user);
 
-            if (_lifestealPercentage > 0)
-            {
-                _user.Heal(_user, Mathf.CeilToInt(_damageToDeal * _lifestealPercentage));
-            }
+            _user.Heal(_user, Mathf.CeilToInt(_damageAmount * _lifestealPercentage * .01f));
         }
 
         public static void SkillEffect_DamageOverTime(Unit _user, Unit _target,  int _damageAmount, int _duration)
@@ -156,7 +168,7 @@ namespace Harpaesis.Combat
 
         }
 
-        public static void SkillEffect_ApplyEntangle(Unit _user, Unit _target,  int _duration)
+        public static void SkillEffect_ApplyRoot(Unit _user, Unit _target,  int _duration)
         {
             _target.ApplyEffect(new StatusEffect_Root(_user, _target, 0, _duration));
         }
@@ -165,39 +177,35 @@ namespace Harpaesis.Combat
         {
 
         }
-        public static void SkillEffect_Lifesteal(Unit _user, Unit _target,  int _percentage)
-        {
-
-        }
 
         public static void SkillEffect_BuffATK(Unit _user, Unit _target,  int _buffAmount, int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_BuffATK(_user, _target, _buffAmount, _duration));
         }
 
         public static void SkillEffect_BuffDEF(Unit _user, Unit _target,  int _buffAmount, int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_BuffDEF(_user, _target, _buffAmount, _duration));
         }
 
         public static void SkillEffect_BuffAP(Unit _user, Unit _target,  int _buffAmount, int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_BuffAP(_user, _target, _buffAmount, _duration));
         }
 
         public static void SkillEffect_DebuffATK(Unit _user, Unit _target,  int _debuffAmount, int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_DebuffATK(_user, _target, _debuffAmount, _duration));
         }
 
         public static void SkillEffect_DebuffDEF(Unit _user, Unit _target,  int _debuffAmount, int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_DebuffDEF(_user, _target, _debuffAmount, _duration));
         }
 
         public static void SkillEffect_DebuffAP(Unit _user, Unit _target,  int _debuffAmount, int _duration)
         {
-
+            _target.ApplyEffect(new StatusEffect_DebuffAP(_user, _target, _debuffAmount, _duration));
         }
 
         public static void SkillEffect_Silver(SkillEffect _effect)
@@ -213,6 +221,11 @@ namespace Harpaesis.Combat
         public static void SkillEffect_OverrideTargetToSelf(SkillEffect _effect)
         {
 
+        }
+
+        public static void SkillEffect_ChangeAllegiance(Unit _user, Unit _target, int _duration)
+        {
+            _target.ApplyEffect(new StatusEffect_ChangeAllegiance(_user, _target, 0, _duration));
         }
     }
 }

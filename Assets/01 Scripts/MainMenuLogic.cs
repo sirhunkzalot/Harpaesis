@@ -5,20 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuLogic : MonoBehaviour
 {
-    public GameObject Level1;
-    public GameObject Level2;
-    public void Start()
+    public void LoadLevel(int _buildIndex)
     {
-        Level1.SetActive(false);
-        Level2.SetActive(false);
-    }
-    public void PlayLevel1()
-    {
-        SceneManager.LoadScene("Test Map1");
-    }
-    public void PlayLevel2()
-    {
-        SceneManager.LoadScene("Test Map 2");
+        SceneManager.LoadScene(_buildIndex);
     }
     public void QuitGame()
     {

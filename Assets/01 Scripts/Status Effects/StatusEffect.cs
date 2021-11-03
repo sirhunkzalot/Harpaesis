@@ -44,7 +44,6 @@ namespace Harpaesis.Combat
                 "Operations between status effects of different types is not valid.");
         }
     }
-
     public class StatusEffect_DamageOverTime : StatusEffect
     {
         public StatusEffect_DamageOverTime(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
@@ -67,14 +66,13 @@ namespace Harpaesis.Combat
             effectedUnit.TakeDamage(amount);
         }
     }
-
     public class StatusEffect_Bleed : StatusEffect_DamageOverTime
     {
         public StatusEffect_Bleed(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
 
         protected override void OnEffectApplied()
         {
-            BattleLog.Log($"{effectedUnit.unitData.unitName} is bleeding!", BattleLogType.CombatLog);
+            BattleLog.Log($"{effectedUnit.unitData.unitName} is bleeding!", BattleLogType.Combat);
         }
 
         public override void OnTakeStep()
@@ -87,7 +85,6 @@ namespace Harpaesis.Combat
             effectedUnit.TakeDamage(StatusEffectSettings.bleedDamage);
         }
     }
-
     public class StatusEffect_Burn : StatusEffect_DamageOverTime
     {
         public StatusEffect_Burn(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
@@ -96,7 +93,7 @@ namespace Harpaesis.Combat
 
         protected override void OnEffectApplied()
         {
-            BattleLog.Log($"{effectedUnit.unitData.unitName} has been burned!", BattleLogType.CombatLog);
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has been burned!", BattleLogType.Combat);
         }
 
         public override void OnTurnStart()
@@ -117,14 +114,13 @@ namespace Harpaesis.Combat
             effectedUnit.TakeDamage(StatusEffectSettings.burnDamage);
         }
     }
-
     public class StatusEffect_Fear : StatusEffect
     {
         public StatusEffect_Fear(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
 
         protected override void OnEffectApplied()
         {
-            BattleLog.Log($"{effectedUnit.unitData.unitName} has been feared!", BattleLogType.CombatLog);
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has been feared!", BattleLogType.Combat);
         }
 
         public override void OnTurnStart()
@@ -147,7 +143,7 @@ namespace Harpaesis.Combat
 
         protected override void OnEffectApplied()
         {
-            BattleLog.Log($"{effectedUnit.unitData.unitName} has been put to sleep!", BattleLogType.CombatLog);
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has been put to sleep!", BattleLogType.Combat);
             effectedUnit.canMove = false;
         }
 
@@ -166,12 +162,12 @@ namespace Harpaesis.Combat
 
             // Reimplement next sprint when enemies actually have turns:
             //effectedUnit.ForceEndTurn();
-            BattleLog.Log($"{effectedUnit.unitData.unitName} is asleep.", BattleLogType.CombatLog);
+            BattleLog.Log($"{effectedUnit.unitData.unitName} is asleep.", BattleLogType.Combat);
         }
 
         void WakeUp()
         {
-            BattleLog.Log($"{effectedUnit.unitData.unitName} has woken up!", BattleLogType.CombatLog);
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has woken up!", BattleLogType.Combat);
             effectedUnit.canAct = true;
             effectedUnit.canMove = true;
             RemoveEffect();
@@ -184,7 +180,7 @@ namespace Harpaesis.Combat
         protected override void OnEffectApplied()
         {
             effectedUnit.canMove = false;
-            BattleLog.Log($"{effectedUnit.unitData.unitName} has been rooted", BattleLogType.CombatLog);
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has been rooted!", BattleLogType.Combat);
         }
 
         public override void OnTurnEnd()
@@ -198,6 +194,175 @@ namespace Harpaesis.Combat
         void EndEntanglement()
         {
             effectedUnit.canMove = true;
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has escaped the etanglement!", BattleLogType.Combat);
+            RemoveEffect();
+        }
+    }
+    public class StatusEffect_BuffATK : StatusEffect
+    {
+        public StatusEffect_BuffATK(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has been temporarily raised by {amount}.", BattleLogType.Combat);
+            BattleLog.Log($"BuffATK is not yet implemented", BattleLogType.System);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has returned to normal.", BattleLogType.Combat);
+            RemoveEffect();
+        }
+    }
+    public class StatusEffect_BuffDEF : StatusEffect
+    {
+        public StatusEffect_BuffDEF(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has been temporarily raised by {amount}.", BattleLogType.Combat);
+            BattleLog.Log($"BuffDEF is not yet implemented", BattleLogType.System);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has returned to normal.", BattleLogType.Combat);
+            RemoveEffect();
+        }
+    }
+    public class StatusEffect_BuffAP : StatusEffect
+    {
+        public StatusEffect_BuffAP(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has been temporarily raised by {amount}.", BattleLogType.Combat);
+            BattleLog.Log($"BuffAP is not yet implemented", BattleLogType.System);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has returned to normal.", BattleLogType.Combat);
+            RemoveEffect();
+        }
+    }
+    public class StatusEffect_DebuffATK : StatusEffect
+    {
+        public StatusEffect_DebuffATK(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has been temporarily lowered by {amount}.", BattleLogType.Combat);
+            BattleLog.Log($"DebuffATK is not yet implemented", BattleLogType.System);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has returned to normal.", BattleLogType.Combat);
+            RemoveEffect();
+        }
+    }
+    public class StatusEffect_DebuffDEF : StatusEffect
+    {
+        public StatusEffect_DebuffDEF(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has been temporarily lowered by {amount}.", BattleLogType.Combat);
+            BattleLog.Log($"DebuffDEF is not yet implemented", BattleLogType.System);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has returned to normal.", BattleLogType.Combat);
+            RemoveEffect();
+        }
+    }
+    public class StatusEffect_DebuffAP : StatusEffect
+    {
+        public StatusEffect_DebuffAP(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has been temporarily lowered by {amount}.", BattleLogType.Combat);
+            BattleLog.Log($"DebuffAP is not yet implemented", BattleLogType.System);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has returned to normal.", BattleLogType.Combat);
+            RemoveEffect();
+        }
+    }
+    public class StatusEffect_ChangeAllegiance : StatusEffect
+    {
+        public StatusEffect_ChangeAllegiance(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has flipped sides!", BattleLogType.Combat);
+            BattleLog.Log($"Change Allegiance is not yet implemented", BattleLogType.System);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} has returned to fight for it's side!", BattleLogType.Combat);
             RemoveEffect();
         }
     }
