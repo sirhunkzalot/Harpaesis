@@ -16,6 +16,8 @@ namespace Harpaesis.Combat
 
         [ReadOnly] public Skill skill;
 
+        [ReadOnly] public bool isActive;
+
         public void Init(Skill _skill)
         {
             grid = GridManager.instance;
@@ -51,6 +53,8 @@ namespace Harpaesis.Combat
                     node.gameObject.SetActive(false);
                 }
             }
+
+            isActive = true;
         }
 
         public void Disable()
@@ -59,6 +63,7 @@ namespace Harpaesis.Combat
             {
                 node.Disable();
             }
+            isActive = false;
         }
 
         private bool LinecastToWorldPosition(Vector3 _worldPosition)

@@ -61,7 +61,9 @@ namespace Harpaesis.Combat
             rend.material = (IsValidTarget()) ? valid : unselected;
         }
 
-        private void OnTriggerEnter(Collider other)
+
+
+        private void OnTriggerStay(Collider other)
         {
             if (unit == null && other.GetComponent<Unit>() != null)
             {
@@ -74,10 +76,12 @@ namespace Harpaesis.Combat
         private void OnTriggerExit(Collider other)
         {
             unit = null;
+            Enable();
         }
 
         public void Enable()
         {
+
             if (isAOE)
             {
                 if (IsValidTarget())

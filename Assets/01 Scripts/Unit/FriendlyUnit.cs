@@ -19,12 +19,16 @@ public class FriendlyUnit : Unit
         tertiarySkillTargetingTemplate, signatureSkillTargetingTemplate;
     int activeTemplateIndex;
 
+    RotateTemplates templateParent; 
+
     public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting_Single, Targeting_AOE, Attacking }
     [ReadOnly] public FriendlyState currentState = FriendlyState.Inactive;
 
     protected override void Init()
     {
         gridCursor = GridCursor.instance;
+        templateParent = GetComponentInChildren<RotateTemplates>();
+        templateParent.Init(this);
 
         SetupTargetingTemplates();
     }
@@ -56,11 +60,17 @@ public class FriendlyUnit : Unit
 
     void SetupTargetingTemplates()
     {
-        basicAttackTargetingTemplate = Instantiate(unitData.basicAttack.targetingTemplate, transform).GetComponent<TargetingTemplate>();
-        primarySkillTargetingTemplate = Instantiate(unitData.primarySkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
-        secondarySkillTargetingTemplate = Instantiate(unitData.secondarySkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
-        tertiarySkillTargetingTemplate = Instantiate(unitData.tertiarySkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
-        signatureSkillTargetingTemplate = Instantiate(unitData.signatureSkill.targetingTemplate, transform).GetComponent<TargetingTemplate>();
+        basicAttackTargetingTemplate = Instantiate(unitData.basicAttack.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        primarySkillTargetingTemplate = Instantiate(unitData.primarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        secondarySkillTargetingTemplate = Instantiate(unitData.secondarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        tertiarySkillTargetingTemplate = Instantiate(unitData.tertiarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        signatureSkillTargetingTemplate = Instantiate(unitData.signatureSkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+
+        templateParent.InitTemplate(basicAttackTargetingTemplate);
+        templateParent.InitTemplate(primarySkillTargetingTemplate);
+        templateParent.InitTemplate(secondarySkillTargetingTemplate);
+        templateParent.InitTemplate(tertiarySkillTargetingTemplate);
+        templateParent.InitTemplate(signatureSkillTargetingTemplate);
 
         basicAttackTargetingTemplate.Init(unitData.basicAttack);
         primarySkillTargetingTemplate.Init(unitData.primarySkill);
