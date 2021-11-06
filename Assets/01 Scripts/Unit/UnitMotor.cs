@@ -60,6 +60,7 @@ public class UnitMotor : MonoBehaviour
             }
         }
 
+        grid.NodeFromWorldPoint(transform.position).hasUnit = true;
         ClearPath();
     }
 
