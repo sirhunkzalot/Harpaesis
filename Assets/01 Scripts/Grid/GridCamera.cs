@@ -20,6 +20,8 @@ public class GridCamera : MonoBehaviour
     public float accelerationSpeed = 10f;
     public float rotationSpeed = 10;
 
+    public Unit followUnit;
+
     Camera cam;
 
     // Raycast Data
@@ -61,9 +63,20 @@ public class GridCamera : MonoBehaviour
         delta = Time.deltaTime;
 
         HandleCameraZoom();
-        HandleCameraMovement();
-        HandleCameraRotation();
         HandleForwardRaycast();
+
+        if (followUnit == null)
+        {
+            HandleCameraInput();
+            HandleCameraMovement();
+            HandleCameraRotation();
+        }
+        else
+        {
+            FollowUnit();
+            HandleCameraMovement();
+        }
+
     }
 
     /* HandleCameraZoom manages the size of the orthographic camera based on the scroll wheel */
@@ -76,8 +89,7 @@ public class GridCamera : MonoBehaviour
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, currentZoom, delta * zoomAcceleration);
     }
 
-    /* HandleCameraMovement updates the camera's position via input*/
-    private void HandleCameraMovement()
+    private void HandleCameraInput()
     {
         Vector3 _vertical = Input.GetAxisRaw("Vertical") * transform.up;
         Vector3 _horizontal = Input.GetAxisRaw("Horizontal") * transform.right;
@@ -85,7 +97,11 @@ public class GridCamera : MonoBehaviour
         Vector3 _moveDir = (_vertical + _horizontal).normalized;
 
         targetPosition += _moveDir * movementSpeed;
+    }
 
+    /* HandleCameraMovement updates the camera's position via input*/
+    private void HandleCameraMovement()
+    {
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * accelerationSpeed);
     }
 
@@ -121,5 +137,10 @@ public class GridCamera : MonoBehaviour
     public void JumpToPosition(Vector3 _worldPosition)
     {
         targetPosition = _worldPosition + lastOffset;
+    }
+
+    void FollowUnit()
+    {
+        JumpToPosition(followUnit.transform.position);
     }
 }

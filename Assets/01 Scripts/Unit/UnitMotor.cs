@@ -60,7 +60,7 @@ public class UnitMotor : MonoBehaviour
         ClearPath();
     }
 
-    IEnumerator ForceMovement(Vector3 _targetPosition)
+    IEnumerator ForceMovement(Vector3 _targetPosition, Node _node)
     {
         do
         {
@@ -69,6 +69,7 @@ public class UnitMotor : MonoBehaviour
         } while (Vector3.Distance(transform.position, _targetPosition) > .05f);
 
         transform.position = _targetPosition;
+
     }
 
     public void RunAway(Vector3 _fromPosition)
@@ -84,13 +85,14 @@ public class UnitMotor : MonoBehaviour
         Vector3 _dir = (transform.position - _fromPosition).normalized;
 
         Vector3 _targetNodePosition = grid.NodePositionFromWorldPoint(transform.position);
-
+        Node _desiredNode = grid.NodeFromWorldPoint(transform.position);
         for (int i = 1; i < _distance + 1; i++)
         {
             Node _node = grid.NodeFromWorldPoint(transform.position + (_dir * i));
-            if (grid.NodeIsWalkable(_node))
+            if (!_node.HasUnit() && grid.NodeIsWalkable(_node))
             {
                 _targetNodePosition = _node.worldPosition;
+                _desiredNode = _node;
             }
             else
             {
@@ -98,7 +100,7 @@ public class UnitMotor : MonoBehaviour
             }
         }
 
-        StartCoroutine(ForceMovement(_targetNodePosition));
+        StartCoroutine(ForceMovement(_targetNodePosition, _desiredNode));
     }
 
     void Run(PathResult _result)

@@ -84,6 +84,7 @@ public class TurnManager : MonoBehaviour
             activeTurn.unit.OnTurnEnd();
         }
 
+        GridCamera.instance.followUnit = null;
 
         if (++turnCounter >= turnOrder.Count)
         {
@@ -106,7 +107,8 @@ public class TurnManager : MonoBehaviour
 
         if (!_isFriendlyUnit)
         {
-            Invoke(nameof(NextTurn), 1f);
+            GridCamera.instance.followUnit = activeTurn.unit;
+            Invoke(nameof(NextTurn), 2.5f);
         }
     }
 }
