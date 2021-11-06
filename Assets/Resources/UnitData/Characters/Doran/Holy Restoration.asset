@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Leper's Arm
+  m_Name: Holy Restoration
   m_EditorClassIdentifier: 
-  skillName: Leper's Arm
-  apCost: 1
-  validTargets: 4
+  skillName: Holy Restoration
+  apCost: 3
+  validTargets: 3
   targetingStyle: 0
-  skillDescription: Lowers target's ATK value by 2d3 for 3 rounds
-  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
+  skillDescription: Heals a single ally for 2d6 points of damage
+  targetingTemplate: {fileID: 168528501438769920, guid: 5dcf8a71c7edb53428822ced7ff1c854, type: 3}
   effects:
-  - effectType: 15
-    param1: 2d3
-    param2: 3
+  - effectType: 0
+    param1: 2d6
+    param2: 
     option: 0

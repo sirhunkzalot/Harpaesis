@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Leper's Arm
+  m_Name: Basic Attack
   m_EditorClassIdentifier: 
-  skillName: Leper's Arm
+  skillName: Cleric's Staff
   apCost: 1
   validTargets: 4
   targetingStyle: 0
-  skillDescription: Lowers target's ATK value by 2d3 for 3 rounds
-  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
+  skillDescription: Doran hits a nearby enemy with his staff
+  targetingTemplate: {fileID: 168528501438769920, guid: 9ed1f172a88f6d149b4a9607dcf6e83f, type: 3}
   effects:
-  - effectType: 15
-    param1: 2d3
-    param2: 3
+  - effectType: 2
+    param1: 2d2
+    param2: 
     option: 0
