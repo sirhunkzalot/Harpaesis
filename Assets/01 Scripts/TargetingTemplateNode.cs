@@ -86,7 +86,7 @@ namespace Harpaesis.Combat
             {
                 if (IsValidTarget())
                 {
-                    parent.allWithTargets.Add(this);
+                    parent.AddToAOEList(this);
                     rend.material = validAndSelected;
                     return;
                 }

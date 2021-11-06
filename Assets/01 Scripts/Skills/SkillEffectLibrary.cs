@@ -175,7 +175,7 @@ namespace Harpaesis.Combat
 
         public static void SkillEffect_ApplyKnockback(Unit _user, Unit _target,  int _knockbackAmount)
         {
-
+            _target.motor.Knockback(_knockbackAmount, _user.transform.position);
         }
 
         public static void SkillEffect_BuffATK(Unit _user, Unit _target,  int _buffAmount, int _duration)

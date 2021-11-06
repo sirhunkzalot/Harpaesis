@@ -15,9 +15,12 @@ public class UnitMotor : MonoBehaviour
     Unit unit;
     [SerializeField, ReadOnly] Waypoint[] path;
 
+    GridManager grid;
+
     public void Init(Unit _unit)
     {
         unit = _unit;
+        grid = GridManager.instance;
     }
 
     public void Move(Waypoint[] _path)
@@ -57,12 +60,45 @@ public class UnitMotor : MonoBehaviour
         ClearPath();
     }
 
+    IEnumerator ForceMovement(Vector3 _targetPosition)
+    {
+        do
+        {
+            transform.position = Vector3.Lerp(transform.position, _targetPosition, StatusEffectSettings.knockbackSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        } while (Vector3.Distance(transform.position, _targetPosition) > .05f);
+
+        transform.position = _targetPosition;
+    }
+
     public void RunAway(Vector3 _fromPosition)
     {
         Vector3 _dir = (transform.position - _fromPosition).normalized;
         Vector3 _targetPosition = transform.position + (_dir * 1000);
 
         PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, Run, unit));
+    }
+
+    public void Knockback(int _distance, Vector3 _fromPosition)
+    {
+        Vector3 _dir = (transform.position - _fromPosition).normalized;
+
+        Vector3 _targetNodePosition = grid.NodePositionFromWorldPoint(transform.position);
+
+        for (int i = 1; i < _distance + 1; i++)
+        {
+            Node _node = grid.NodeFromWorldPoint(transform.position + (_dir * i));
+            if (grid.NodeIsWalkable(_node))
+            {
+                _targetNodePosition = _node.worldPosition;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        StartCoroutine(ForceMovement(_targetNodePosition));
     }
 
     void Run(PathResult _result)

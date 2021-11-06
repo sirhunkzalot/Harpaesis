@@ -57,6 +57,27 @@ namespace Harpaesis.Combat
             isActive = true;
         }
 
+        public void AddToAOEList(TargetingTemplateNode _node)
+        {
+            if (allWithTargets.Count > 0)
+            {
+                float _newDis = Vector3.Distance(_node.transform.position, transform.position);
+
+                for (int i = 0; i < allWithTargets.Count; i++)
+                {
+                    float _oldDis = Vector3.Distance(allWithTargets[i].transform.position, transform.position);
+
+                    if (_newDis > _oldDis)
+                    {
+                        allWithTargets.Insert(i, _node);
+                        return;
+                    }
+                }
+            }
+
+            allWithTargets.Add(_node);
+        }
+
         public void Disable()
         {
             foreach (TargetingTemplateNode node in templateNodes)
