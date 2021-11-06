@@ -35,6 +35,7 @@ public abstract class Unit : MonoBehaviour
         motor = GetComponent<UnitMotor>();
         motor.Init(this);
         currentHP = unitData.healthStat;
+        grid.NodeFromWorldPoint(transform.position).hasUnit = true;
         Init();
     }
 

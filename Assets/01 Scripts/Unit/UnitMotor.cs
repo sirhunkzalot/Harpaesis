@@ -35,6 +35,8 @@ public class UnitMotor : MonoBehaviour
     {
         if (path.Length >= 1 && unit.canMove)
         {
+            grid.NodeFromWorldPoint(transform.position).hasUnit = false;
+
             Waypoint _currentWaypoint = path[0];
 
             while (unit.turnData.ap > 0)
@@ -47,6 +49,7 @@ public class UnitMotor : MonoBehaviour
                     if (targetIndex >= path.Length)
                     {
                         ClearPath();
+                        grid.NodeFromWorldPoint(transform.position).hasUnit = true;
                         yield break;
                     }
                     _currentWaypoint = path[targetIndex];
@@ -89,7 +92,7 @@ public class UnitMotor : MonoBehaviour
         for (int i = 1; i < _distance + 1; i++)
         {
             Node _node = grid.NodeFromWorldPoint(transform.position + (_dir * i));
-            if (!_node.HasUnit() && grid.NodeIsWalkable(_node))
+            if (!_node.hasUnit && grid.NodeIsWalkable(_node))
             {
                 _targetNodePosition = _node.worldPosition;
                 _desiredNode = _node;
@@ -99,6 +102,10 @@ public class UnitMotor : MonoBehaviour
                 break;
             }
         }
+
+        grid.NodeFromWorldPoint(transform.position).hasUnit = false;
+        _desiredNode.hasUnit = true;
+
 
         StartCoroutine(ForceMovement(_targetNodePosition, _desiredNode));
     }

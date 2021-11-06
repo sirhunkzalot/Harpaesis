@@ -7,6 +7,7 @@ namespace Harpaesis.GridAndPathfinding
     public class Node : IHeapItem<Node>
     {
         public bool walkable;
+        public bool hasUnit;
         public Vector3 worldPosition;
         public int gridX, gridY;
         public int movementPenalty;
@@ -33,24 +34,6 @@ namespace Harpaesis.GridAndPathfinding
             apCost = _apCost;
 
             bounds = new Bounds(_worldPosition, Vector3.one * _nodeSize);
-        }
-
-        public bool HasUnit()
-        {
-            Collider[] _colliders = Physics.OverlapSphere(worldPosition + (Vector3.up * .5f), .45f);
-
-            if(_colliders.Length > 0)
-            {
-                foreach (Collider col in _colliders)
-                {
-                    Unit _u = col.GetComponent<Unit>();
-                    if (_u != null)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
         }
 
         public void UpdateNodeData(int _movementPenalty, int _apCost)

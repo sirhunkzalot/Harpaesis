@@ -46,7 +46,7 @@ namespace Harpaesis.GridAndPathfinding
 
                     foreach (Node _neighbor in grid.GetNeighbors(_currentNode))
                     {
-                        if (!_neighbor.walkable || _neighbor.HasUnit() || _closedSet.Contains(_neighbor))
+                        if (!_neighbor.walkable || _neighbor.hasUnit || _closedSet.Contains(_neighbor))
                         {
                             continue;
                         }
