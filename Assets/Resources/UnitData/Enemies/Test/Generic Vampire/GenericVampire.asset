@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 090aa9b313ca3284c9fdec6a12ab6a5a, type: 3}
-  m_Name: Generic Vampire
+  m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
+  m_Name: GenericVampire
   m_EditorClassIdentifier: 
   unitName: Generic Vampire
-  healthStat: 16
-  inititiveStat: 1
+  healthStat: 20
+  inititiveStat: 0
   attackStat: 5
-  defenseStat: 6
+  defenseStat: 5
   apStat: 5
-  basicAttack: {fileID: 0}
-  primarySkill: {fileID: 0}
-  secondarySkill: {fileID: 0}
-  tertiarySkill: {fileID: 0}
-  signatureSkill: {fileID: 0}
+  enemySkills:
+  - skill: {fileID: 0}
+    weight: 50

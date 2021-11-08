@@ -95,7 +95,7 @@ public class TurnManager : MonoBehaviour
         activeTurn = turnOrder[turnCounter];
         GridCamera.instance.JumpToPosition(activeTurn.unit.transform.position);
 
-        HandleTurn();
+        activeTurn.unit.StartTurn();
     }
 
     public void HandleTurn()
@@ -103,13 +103,7 @@ public class TurnManager : MonoBehaviour
         bool _isFriendlyUnit = activeTurn.unit.GetType() == typeof(FriendlyUnit);
         UIManager_Combat.instance.IsPlayerTurn(_isFriendlyUnit);
 
-        activeTurn.unit.OnTurnStart();
-
-        if (!_isFriendlyUnit)
-        {
-            GridCamera.instance.followUnit = activeTurn.unit;
-            Invoke(nameof(NextTurn), 2.5f);
-        }
+        activeTurn.unit.StartTurn();
     }
 }
 

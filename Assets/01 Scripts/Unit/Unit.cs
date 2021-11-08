@@ -27,15 +27,24 @@ public abstract class Unit : MonoBehaviour
     [ReadOnly] public Turn turnData;
 
     protected GridManager grid;
+    protected GridCamera gridCam;
+    protected UIManager_Combat uiCombat;
+
 
 
     private void Start()
     {
         grid = GridManager.instance;
+        gridCam = GridCamera.instance;
+        uiCombat = UIManager_Combat.instance;
+
         motor = GetComponent<UnitMotor>();
         motor.Init(this);
+
         currentHP = unitData.healthStat;
+
         grid.NodeFromWorldPoint(transform.position).hasUnit = true;
+
         Init();
     }
 
@@ -59,7 +68,7 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
-            BattleLog.Log($"{unitData.unitName} took {_damageAmount} damage!", BattleLogType.Combat);
+            BattleLog.Log($"{unitData.unitName} takes {_damageAmount} damage!", BattleLogType.Combat);
         }
 
         isAlive = (currentHP == 0) ? false : isAlive;
@@ -112,12 +121,17 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
+    public virtual void StartTurn()
+    {
+        OnTurnStart();
+    }
+
     public void ForceEndTurn()
     {
         TurnManager.instance.NextTurn();
     }
 
-    public void OnTurnStart()
+    private void OnTurnStart()
     {
         for (int i = 0; i < currentEffects.Count; i++)
         {

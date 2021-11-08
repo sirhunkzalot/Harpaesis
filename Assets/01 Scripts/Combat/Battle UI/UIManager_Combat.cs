@@ -17,10 +17,7 @@ public class UIManager_Combat : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
+        instance = this;
     }
     #endregion
 
