@@ -15,9 +15,12 @@ public class UnitMotor : MonoBehaviour
     Unit unit;
     [SerializeField, ReadOnly] Waypoint[] path;
 
+    GridManager grid;
+
     public void Init(Unit _unit)
     {
         unit = _unit;
+        grid = GridManager.instance;
     }
 
     public void Move(Waypoint[] _path)
@@ -32,6 +35,8 @@ public class UnitMotor : MonoBehaviour
     {
         if (path.Length >= 1 && unit.canMove)
         {
+            grid.NodeFromWorldPoint(transform.position).hasUnit = false;
+
             Waypoint _currentWaypoint = path[0];
 
             while (unit.turnData.ap > 0)
@@ -44,6 +49,7 @@ public class UnitMotor : MonoBehaviour
                     if (targetIndex >= path.Length)
                     {
                         ClearPath();
+                        grid.NodeFromWorldPoint(transform.position).hasUnit = true;
                         yield break;
                     }
                     _currentWaypoint = path[targetIndex];
@@ -54,7 +60,20 @@ public class UnitMotor : MonoBehaviour
             }
         }
 
+        grid.NodeFromWorldPoint(transform.position).hasUnit = true;
         ClearPath();
+    }
+
+    IEnumerator ForceMovement(Vector3 _targetPosition, Node _node)
+    {
+        do
+        {
+            transform.position = Vector3.Lerp(transform.position, _targetPosition, StatusEffectSettings.knockbackSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        } while (Vector3.Distance(transform.position, _targetPosition) > .05f);
+
+        transform.position = _targetPosition;
+
     }
 
     public void RunAway(Vector3 _fromPosition)
@@ -63,6 +82,33 @@ public class UnitMotor : MonoBehaviour
         Vector3 _targetPosition = transform.position + (_dir * 1000);
 
         PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, Run, unit));
+    }
+
+    public void Knockback(int _distance, Vector3 _fromPosition)
+    {
+        Vector3 _dir = (transform.position - _fromPosition).normalized;
+
+        Vector3 _targetNodePosition = grid.NodePositionFromWorldPoint(transform.position);
+        Node _desiredNode = grid.NodeFromWorldPoint(transform.position);
+        for (int i = 1; i < _distance + 1; i++)
+        {
+            Node _node = grid.NodeFromWorldPoint(transform.position + (_dir * i));
+            if (!_node.hasUnit && grid.NodeIsWalkable(_node))
+            {
+                _targetNodePosition = _node.worldPosition;
+                _desiredNode = _node;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        grid.NodeFromWorldPoint(transform.position).hasUnit = false;
+        _desiredNode.hasUnit = true;
+
+
+        StartCoroutine(ForceMovement(_targetNodePosition, _desiredNode));
     }
 
     void Run(PathResult _result)
