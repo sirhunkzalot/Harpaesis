@@ -29,11 +29,9 @@ public class FriendlyUnit : Unit
     protected override void Init()
     {
         friendlyUnitData = (FriendlyUnitData)unitData;
-
         gridCursor = GridCursor.instance;
         templateParent = GetComponentInChildren<RotateTemplates>();
         templateParent.Init(this);
-
         SetupTargetingTemplates();
     }
 
@@ -92,8 +90,6 @@ public class FriendlyUnit : Unit
     public override void StartTurn()
     {
         base.StartTurn();
-
-        if(uiCombat == null) { uiCombat = UIManager_Combat.instance; }
 
         uiCombat.IsPlayerTurn(true);
         gridCam.followUnit = null;

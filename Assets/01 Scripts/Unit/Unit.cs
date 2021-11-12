@@ -37,7 +37,6 @@ public abstract class Unit : MonoBehaviour
         grid = GridManager.instance;
         gridCam = GridCamera.instance;
         uiCombat = UIManager_Combat.instance;
-
         motor = GetComponent<UnitMotor>();
         motor.Init(this);
 

@@ -24,10 +24,6 @@ public class GridCamera : MonoBehaviour
 
     Camera cam;
 
-    // Raycast Data
-    Vector3 lastOffset;
-    public LayerMask mask;
-
     float delta, fixedDelta;
 
     #region Singleton
@@ -54,8 +50,6 @@ public class GridCamera : MonoBehaviour
         targetPosition = transform.position;
         cam = Camera.main;
         currentZoom = cam.orthographicSize;
-
-        HandleForwardRaycast();
     }
 
     void LateUpdate()
@@ -63,7 +57,6 @@ public class GridCamera : MonoBehaviour
         delta = Time.deltaTime;
 
         HandleCameraZoom();
-        HandleForwardRaycast();
 
         if (followUnit == null)
         {
@@ -91,8 +84,8 @@ public class GridCamera : MonoBehaviour
 
     private void HandleCameraInput()
     {
-        Vector3 _vertical = Input.GetAxisRaw("Vertical") * transform.up;
-        Vector3 _horizontal = Input.GetAxisRaw("Horizontal") * transform.right;
+        Vector3 _vertical = Input.GetAxisRaw("Vertical") * -((transform.right + transform.forward) * .5f);
+        Vector3 _horizontal = Input.GetAxisRaw("Horizontal") * -((transform.right - transform.forward) * .5f);
 
         Vector3 _moveDir = (_vertical + _horizontal).normalized;
 
@@ -121,22 +114,10 @@ public class GridCamera : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetEulers), Time.deltaTime * rotationSpeed);
     }
 
-    /* HandleForwardRaycast sends a ray from the camera to the ground and sets the last offset */
-    private void HandleForwardRaycast()
-    {
-        Ray _ray = new Ray(transform.position, transform.forward);
-        RaycastHit _hit;
-
-        if (Physics.Raycast(_ray, out _hit, 100, mask))
-        {
-            lastOffset = transform.position - _hit.point;
-        }
-    }
-
     /* JumpToPosition moves the camera to keep its current vertical offset while centering on the world position*/
     public void JumpToPosition(Vector3 _worldPosition)
     {
-        targetPosition = _worldPosition + lastOffset;
+        targetPosition = _worldPosition;
     }
 
     void FollowUnit()
