@@ -22,23 +22,24 @@ public class UIManager_Combat_SkillDescription : MonoBehaviour
             manager = TurnManager.instance;
         }
 
+        FriendlyUnitData _data = (FriendlyUnitData)manager.activeTurn.unitData;
 
         switch (_skillIndex)
         {
             case 0:
-                _skill = manager.activeTurn.unitData.basicAttack;
+                _skill = _data.basicAttack;
                 break;
             case 1:
-                _skill = manager.activeTurn.unitData.primarySkill;
+                _skill = _data.primarySkill;
                 break;
             case 2:
-                _skill = manager.activeTurn.unitData.secondarySkill;
+                _skill = _data.secondarySkill;
                 break;
             case 3:
-                _skill = manager.activeTurn.unitData.tertiarySkill;
+                _skill = _data.tertiarySkill;
                 break;
             default:
-                _skill = manager.activeTurn.unitData.signatureSkill;
+                _skill = _data.signatureSkill;
                 break;
         }
 

@@ -5,49 +5,117 @@ using UnityEngine;
 public class DissolveRaycast : MonoBehaviour
 {
     Camera cam;
-    public Transform[] units;
-    public LayerMask layermask;
 
-    GameObject[] objects;
+    GameObject[] mustViewObjects;
+
+    List<GameObject> obstacles = new List<GameObject>();
+
+    public float minimumHeight = .25f;
+    public float maximumHeight = 50;
+    public float dissolveSpeed = 5f;
+
+    public LayerMask layermask;
 
     private void Awake()
     {
         cam = GetComponent<Camera>();
+    }
 
-        objects = GameObject.FindGameObjectsWithTag("Obstacle");
+    private void Start()
+    {
+        Unit[] units = TurnManager.instance.units.ToArray();
+        mustViewObjects = new GameObject[units.Length + 1];
+        mustViewObjects[0] = GridCursor.instance.gameObject;
+
+        for (int i = 0; i < units.Length; i++)
+        {
+            mustViewObjects[i + 1] = units[i].gameObject;
+        }
+
+        GameObject[] _allObjects = GameObject.FindGameObjectsWithTag("Wall");
+
+        foreach (GameObject _g in _allObjects)
+        {
+            obstacles.Add(_g);
+        }
     }
 
     private void FixedUpdate()
     {
-        List<Vector4> _unitCentersOnScreen = new List<Vector4>();
-        foreach (Transform unit in units)
+        List<GameObject> _hitObjects = new List<GameObject>();
+
+        foreach (GameObject viewableObject in mustViewObjects)
         {
-            Vector3 _dir = unit.position - transform.position;
-            RaycastHit _hit;
+            Collider _collider = viewableObject.GetComponent<Collider>();
 
-            if(Physics.Raycast(transform.position, _dir, out _hit, 100, layermask))
+            if(_collider != null)
             {
-                Debug.DrawLine(transform.position, _hit.point);
-
-                Vector3 _viewportPoint = cam.WorldToViewportPoint(unit.position);
-                _unitCentersOnScreen.Add(new Vector4(_viewportPoint.x, _viewportPoint.y));
-            }
-        }
-
-        foreach (GameObject obj in objects)
-        {
-            Renderer _r = obj.GetComponent<Renderer>();
-
-            if(_unitCentersOnScreen.Count > 0)
-            {
-                for (int i = 0; i < _unitCentersOnScreen.Count; i++)
+                Vector3[] _targets = new Vector3[]
                 {
-                    _r.material.SetVector("Center", _unitCentersOnScreen[i]);
+                    viewableObject.transform.position,
+                    _collider.bounds.center,
+                    new Vector3(_collider.bounds.center.x + _collider.bounds.extents.x, _collider.bounds.center.y + _collider.bounds.extents.y, _collider.bounds.center.z + _collider.bounds.extents.z),
+                    new Vector3(_collider.bounds.center.x + _collider.bounds.extents.x, _collider.bounds.center.y + _collider.bounds.extents.y, _collider.bounds.center.z - _collider.bounds.extents.z),
+                    new Vector3(_collider.bounds.center.x + _collider.bounds.extents.x, _collider.bounds.center.y - _collider.bounds.extents.y, _collider.bounds.center.z + _collider.bounds.extents.z),
+                    new Vector3(_collider.bounds.center.x + _collider.bounds.extents.x, _collider.bounds.center.y - _collider.bounds.extents.y, _collider.bounds.center.z - _collider.bounds.extents.z),
+                    new Vector3(_collider.bounds.center.x - _collider.bounds.extents.x, _collider.bounds.center.y + _collider.bounds.extents.y, _collider.bounds.center.z + _collider.bounds.extents.z),
+                    new Vector3(_collider.bounds.center.x - _collider.bounds.extents.x, _collider.bounds.center.y + _collider.bounds.extents.y, _collider.bounds.center.z - _collider.bounds.extents.z),
+                    new Vector3(_collider.bounds.center.x - _collider.bounds.extents.x, _collider.bounds.center.y - _collider.bounds.extents.y, _collider.bounds.center.z + _collider.bounds.extents.z),
+                    new Vector3(_collider.bounds.center.x - _collider.bounds.extents.x, _collider.bounds.center.y - _collider.bounds.extents.y, _collider.bounds.center.z - _collider.bounds.extents.z)
+                };
+
+                foreach (Vector3 _target in _targets)
+                {
+                    Vector3 _dir = (_target - transform.position).normalized;
+                    Ray _ray = new Ray(transform.position, _dir);
+                    RaycastHit[] _hits = Physics.RaycastAll(_ray, 100, layermask);
+
+                    foreach (RaycastHit _hit in _hits)
+                    {
+                        GameObject _hitObject = _hit.collider.gameObject;
+                        if (!_hitObjects.Contains(_hitObject))
+                        {
+                            _hitObjects.Add(_hitObject);
+                        }
+                    }
+
+                    Debug.DrawLine(transform.position, _target);
                 }
             }
             else
             {
-                _r.material.SetVector("Center", Vector4.one * -1);
+                Vector3 _dir = (viewableObject.transform.position - transform.position).normalized;
+                Ray _ray = new Ray(transform.position, _dir);
+                RaycastHit[] _hits = Physics.RaycastAll(_ray, 100, layermask);
+
+                foreach (RaycastHit _hit in _hits)
+                {
+                    GameObject _hitObject = _hit.collider.gameObject;
+                    if (!_hitObjects.Contains(_hitObject))
+                    {
+                        _hitObjects.Add(_hitObject);
+                    }
+                }
+
+                Debug.DrawLine(transform.position, viewableObject.transform.position);
+            }
+        }
+
+        foreach (GameObject _go in obstacles)
+        {
+            Renderer _ren = _go.GetComponent<Renderer>();
+
+            if (_ren == null) { continue; }
+
+            Material[] _mats = _ren.materials;
+
+            float _targetHeight = (_hitObjects.Contains(_go)) ? minimumHeight : maximumHeight;
+
+
+            for (int i = 0; i < _mats.Length; i++)
+            {
+                float _height = Mathf.Lerp(_mats[i].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
+                _mats[i].SetFloat("MaxHeight", _height);
             }
         }
     }

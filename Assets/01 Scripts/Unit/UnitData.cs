@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace Harpaesis.Combat
 {
-    [CreateAssetMenu(menuName = "Unit/New Unit Data")]
-    public class UnitData : ScriptableObject
+    public abstract class UnitData : ScriptableObject
     {
         public string unitName;
 
@@ -15,13 +14,6 @@ namespace Harpaesis.Combat
         public int attackStat;
         public int defenseStat;
         public int apStat;
-
-        [Header("Skills")]
-        public Skill basicAttack;
-        public Skill primarySkill;
-        public Skill secondarySkill;
-        public Skill tertiarySkill;
-        public Skill signatureSkill;
 
         private void OnValidate()
         {

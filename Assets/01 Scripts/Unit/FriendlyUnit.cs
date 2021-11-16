@@ -10,6 +10,8 @@ using UnityEngine;
  * such as ability to search for a player's input */
 public class FriendlyUnit : Unit
 {
+    [HideInInspector] public FriendlyUnitData friendlyUnitData;
+
     GridCursor gridCursor;
     Vector3 lastSelectorPosition;
 
@@ -26,10 +28,10 @@ public class FriendlyUnit : Unit
 
     protected override void Init()
     {
+        friendlyUnitData = (FriendlyUnitData)unitData;
         gridCursor = GridCursor.instance;
         templateParent = GetComponentInChildren<RotateTemplates>();
         templateParent.Init(this);
-
         SetupTargetingTemplates();
     }
 
@@ -60,11 +62,11 @@ public class FriendlyUnit : Unit
 
     void SetupTargetingTemplates()
     {
-        basicAttackTargetingTemplate = Instantiate(unitData.basicAttack.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
-        primarySkillTargetingTemplate = Instantiate(unitData.primarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
-        secondarySkillTargetingTemplate = Instantiate(unitData.secondarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
-        tertiarySkillTargetingTemplate = Instantiate(unitData.tertiarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
-        signatureSkillTargetingTemplate = Instantiate(unitData.signatureSkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        basicAttackTargetingTemplate = Instantiate(friendlyUnitData.basicAttack.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        primarySkillTargetingTemplate = Instantiate(friendlyUnitData.primarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        secondarySkillTargetingTemplate = Instantiate(friendlyUnitData.secondarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        tertiarySkillTargetingTemplate = Instantiate(friendlyUnitData.tertiarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        signatureSkillTargetingTemplate = Instantiate(friendlyUnitData.signatureSkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
 
         templateParent.InitTemplate(basicAttackTargetingTemplate);
         templateParent.InitTemplate(primarySkillTargetingTemplate);
@@ -72,17 +74,26 @@ public class FriendlyUnit : Unit
         templateParent.InitTemplate(tertiarySkillTargetingTemplate);
         templateParent.InitTemplate(signatureSkillTargetingTemplate);
 
-        basicAttackTargetingTemplate.Init(unitData.basicAttack);
-        primarySkillTargetingTemplate.Init(unitData.primarySkill);
-        secondarySkillTargetingTemplate.Init(unitData.secondarySkill);
-        tertiarySkillTargetingTemplate.Init(unitData.tertiarySkill);
-        signatureSkillTargetingTemplate.Init(unitData.signatureSkill);
+        basicAttackTargetingTemplate.Init(friendlyUnitData.basicAttack);
+        primarySkillTargetingTemplate.Init(friendlyUnitData.primarySkill);
+        secondarySkillTargetingTemplate.Init(friendlyUnitData.secondarySkill);
+        tertiarySkillTargetingTemplate.Init(friendlyUnitData.tertiarySkill);
+        signatureSkillTargetingTemplate.Init(friendlyUnitData.signatureSkill);
 
         basicAttackTargetingTemplate.Disable();
         primarySkillTargetingTemplate.Disable();
         secondarySkillTargetingTemplate.Disable();
         tertiarySkillTargetingTemplate.Disable();
         signatureSkillTargetingTemplate.Disable();
+    }
+
+    public override void StartTurn()
+    {
+        base.StartTurn();
+
+        uiCombat.IsPlayerTurn(true);
+        gridCam.followUnit = null;
+        currentState = FriendlyState.Active;
     }
 
     public void MoveAction()
@@ -134,23 +145,23 @@ public class FriendlyUnit : Unit
         {
             case 0:
                 basicAttackTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = unitData.basicAttack.targetingStyle == TargetingStyle.AOE;
+                _isAOE = friendlyUnitData.basicAttack.targetingStyle == TargetingStyle.AOE;
                 break;
             case 1:
                 primarySkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = unitData.primarySkill.targetingStyle == TargetingStyle.AOE;
+                _isAOE = friendlyUnitData.primarySkill.targetingStyle == TargetingStyle.AOE;
                 break;
             case 2:
                 secondarySkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = unitData.secondarySkill.targetingStyle == TargetingStyle.AOE;
+                _isAOE = friendlyUnitData.secondarySkill.targetingStyle == TargetingStyle.AOE;
                 break;
             case 3:
                 tertiarySkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = unitData.tertiarySkill.targetingStyle == TargetingStyle.AOE;
+                _isAOE = friendlyUnitData.tertiarySkill.targetingStyle == TargetingStyle.AOE;
                 break;
             case 4:
                 signatureSkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = unitData.signatureSkill.targetingStyle == TargetingStyle.AOE;
+                _isAOE = friendlyUnitData.signatureSkill.targetingStyle == TargetingStyle.AOE;
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");
@@ -298,24 +309,24 @@ public class FriendlyUnit : Unit
         switch (_skillIndex)
         {
             case 0:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
-                unitData.basicAttack.UseSkill(this, _target);
+                BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
+                friendlyUnitData.basicAttack.UseSkill(this, _target);
                 break;
             case 1:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.primarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
-                unitData.primarySkill.UseSkill(this, _target);
+                BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.primarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
+                friendlyUnitData.primarySkill.UseSkill(this, _target);
                 break;
             case 2:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.secondarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
-                unitData.secondarySkill.UseSkill(this, _target);
+                BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.secondarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
+                friendlyUnitData.secondarySkill.UseSkill(this, _target);
                 break;
             case 3:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.tertiarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
-                unitData.tertiarySkill.UseSkill(this, _target);
+                BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.tertiarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
+                friendlyUnitData.tertiarySkill.UseSkill(this, _target);
                 break;
             case 4:
-                BattleLog.Log($"{unitData.unitName} uses {unitData.signatureSkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
-                unitData.signatureSkill.UseSkill(this, _target);
+                BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.signatureSkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
+                friendlyUnitData.signatureSkill.UseSkill(this, _target);
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");
