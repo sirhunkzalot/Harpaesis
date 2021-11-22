@@ -6,7 +6,9 @@ public class AudioSettings : MonoBehaviour
 {
     private static readonly string BackgroundPref = "BackgroundPref";
     private static readonly string SoundEffectsPref = "SoundEffectsPref";
+    private static readonly string MasterVolumePref = "MasterVolumePref";
     private float backgroundFloat, soundEffectsFloat;
+    [SerializeField] private float masterVolFloat;
     public AudioSource[] backgroundMusicAudio;
     public AudioSource[] soundEffectsAudio;
 
@@ -19,6 +21,8 @@ public class AudioSettings : MonoBehaviour
     {
         backgroundFloat = PlayerPrefs.GetFloat(BackgroundPref);
         soundEffectsFloat = PlayerPrefs.GetFloat(SoundEffectsPref);
+        masterVolFloat = PlayerPrefs.GetFloat(MasterVolumePref);
+
 
         for (int i = 0; i < backgroundMusicAudio.Length; i++)
         {
@@ -29,5 +33,8 @@ public class AudioSettings : MonoBehaviour
         {
             soundEffectsAudio[i].volume = soundEffectsFloat;
         }
+
+        //AudioListener.volume = masterVolFloat;
+
     }
 }
