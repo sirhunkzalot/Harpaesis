@@ -12,6 +12,8 @@ public class UnitMotor : MonoBehaviour
 
     public int targetIndex = 0;
 
+    public bool isMoving;
+
     Unit unit;
     [SerializeField, ReadOnly] Waypoint[] path;
 
@@ -33,6 +35,8 @@ public class UnitMotor : MonoBehaviour
 
     IEnumerator FollowPath()
     {
+        isMoving = true;
+
         if (path.Length >= 1 && unit.canMove)
         {
             grid.NodeFromWorldPoint(transform.position).hasUnit = false;
@@ -49,6 +53,7 @@ public class UnitMotor : MonoBehaviour
                     if (targetIndex >= path.Length)
                     {
                         ClearPath();
+                        isMoving = false;
                         grid.NodeFromWorldPoint(transform.position).hasUnit = true;
                         yield break;
                     }
@@ -60,6 +65,7 @@ public class UnitMotor : MonoBehaviour
             }
         }
 
+        isMoving = false;
         grid.NodeFromWorldPoint(transform.position).hasUnit = true;
         ClearPath();
     }

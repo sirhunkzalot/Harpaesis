@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Basic Attack
+  m_Name: Rapier
   m_EditorClassIdentifier: 
-  skillName: Crossbow Shot
+  skillName: Rapier
   apCost: 1
   validTargets: 4
   targetingStyle: 0
-  skillDescription: Alexander shoots his crossbow for 2d2 damage
-  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
+  skillDescription: Alexander quickly stabs at a nearby enemy with his rapier, dealing
+    2d4 damage.
+  targetingTemplate: {fileID: 168528501438769920, guid: 9ed1f172a88f6d149b4a9607dcf6e83f, type: 3}
   effects:
   - effectType: 2
-    param1: 2d2
+    param1: 2d4
     param2: 
     option: 0
