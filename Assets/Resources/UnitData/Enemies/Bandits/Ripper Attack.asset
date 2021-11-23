@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Net Launcher
+  m_Name: Ripper Attack
   m_EditorClassIdentifier: 
-  skillName: Net Launcher
+  skillName: Ripper's Blade
   apCost: 2
-  validTargets: 3
+  validTargets: 4
   targetingStyle: 0
-  skillDescription: Upon successful attack, will entangle an enemy. Entanglement
-    renders the recipient unable to take the MOVE action for 1d3 turns.
-  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
+  skillDescription: 
+  targetingTemplate: {fileID: 168528501438769920, guid: 9ed1f172a88f6d149b4a9607dcf6e83f, type: 3}
   effects:
-  - effectType: 10
-    param1: 1d3
+  - effectType: 2
+    param1: 2d3
     param2: 
     option: 0

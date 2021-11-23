@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Net Launcher
+  m_Name: Regenerate
   m_EditorClassIdentifier: 
-  skillName: Net Launcher
-  apCost: 2
-  validTargets: 3
+  skillName: Regenerate
+  apCost: 0
+  validTargets: 1
   targetingStyle: 0
-  skillDescription: Upon successful attack, will entangle an enemy. Entanglement
-    renders the recipient unable to take the MOVE action for 1d3 turns.
-  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
+  skillDescription: 
+  targetingTemplate: {fileID: 0}
   effects:
-  - effectType: 10
-    param1: 1d3
+  - effectType: 0
+    param1: 1d4
     param2: 
     option: 0

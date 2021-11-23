@@ -10,17 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
-  m_Name: Swearwolf
+  m_Name: Werewolf Alpha
   m_EditorClassIdentifier: 
-  unitName: Swearwolf
-  healthStat: 5
-  inititiveStat: 5
-  attackStat: 5
-  defenseStat: 5
+  unitName: Werewolf Alpha
+  healthStat: 64
+  inititiveStat: 4
+  attackStat: 14
+  defenseStat: 12
   apStat: 5
   enemySkills:
-  - skill: {fileID: 0}
-    rangeEstimate: 0
-    shortRangeWeight: 0
+  - skill: {fileID: 11400000, guid: a4748f328523d7543b364778500e4d07, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 65
     mediumRangeWeight: 0
+    longRangeWeight: 0
+  - skill: {fileID: 11400000, guid: 52934c0448b23e74eb4cbbf5748ffd9f, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 35
+    mediumRangeWeight: 50
     longRangeWeight: 0
