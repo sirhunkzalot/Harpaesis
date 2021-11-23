@@ -72,7 +72,7 @@ public class AudioManagerTest1 : MonoBehaviour
             soundEffectsAudio[i].volume = soundEffectsSlider.value;
         }
 
-        //AudioListener.volume = masterVolFloat;
+        AudioListener.volume = masterVolFloat;
     }
 }
 
