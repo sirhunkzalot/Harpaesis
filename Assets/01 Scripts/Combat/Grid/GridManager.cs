@@ -130,7 +130,7 @@ namespace Harpaesis.GridAndPathfinding
         /* GetNeighborsRaw returns a list containing the given node and all of its neighbors
          * @param _node is the node to search around
          * @return a list of nodes containing the given node and the 8 nodes surrounding it */
-        public List<Node> GetNeighborsRaw(Node _node)
+        public List<Node> GetNeighborsRaw(Node _node, bool _unoccupiedNeighborsOnly = false)
         {
             List<Node> _neighbors = new List<Node>();
 
@@ -144,7 +144,12 @@ namespace Harpaesis.GridAndPathfinding
 
                     if (_checkX >= 0 && _checkX < gridSizeX && _checkY >= 0 && _checkY < gridSizeY)
                     {
-                        _neighbors.Add(grid[_checkX, _checkY]);
+                        Node _newNode = grid[_checkX, _checkY];
+
+                        if (!(_unoccupiedNeighborsOnly && _newNode.hasUnit))
+                        {
+                            _neighbors.Add(_newNode);
+                        }
                     }
                 }
             }
@@ -212,7 +217,7 @@ namespace Harpaesis.GridAndPathfinding
             Node _node = NodeFromWorldPoint(_worldPosition);
 
             // Gets the node and it's neighbors
-            List<Node> _neighbors = GetNeighborsRaw(_node);
+            List<Node> _neighbors = GetNeighborsRaw(_node, true);
 
             return GetClosestNode(_worldPosition, _neighbors).worldPosition;
         }

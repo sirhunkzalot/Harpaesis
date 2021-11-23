@@ -78,12 +78,14 @@ namespace Harpaesis.GridAndPathfinding
         }
     }
 
-    public struct PathResult
+    [System.Serializable]
+    public class PathResult
     {
         public Waypoint[] path;
         public bool success;
         public Action<PathResult> callback;
         public Unit unit;
+        public int pathLength;
 
 
         public PathResult(Waypoint[] _path, bool _success, Action<PathResult> _callback, Unit _unit)
@@ -92,6 +94,7 @@ namespace Harpaesis.GridAndPathfinding
             success = _success;
             callback = _callback;
             unit = _unit;
+            pathLength = _path.Length;
         }
     }
 }

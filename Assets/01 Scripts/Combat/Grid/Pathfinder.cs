@@ -162,5 +162,17 @@ namespace Harpaesis.GridAndPathfinding
                 return (14 * _dstX) + 10 * (_dstY - _dstX);
             }
         }
+
+        public static PathResult ReversePath(PathResult _result)
+        {
+            Waypoint[] _newPath = new Waypoint[_result.path.Length];
+
+            for (int i = 0; i < _newPath.Length; i++)
+            {
+                _newPath[i] = _result.path[_newPath.Length - (1 + i)];
+            }
+
+            return new PathResult(_newPath, _result.success, _result.callback, _result.unit);
+        }
     }
 }

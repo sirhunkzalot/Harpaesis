@@ -19,5 +19,13 @@ MonoBehaviour:
   defenseStat: 5
   apStat: 5
   enemySkills:
-  - skill: {fileID: 0}
-    weight: 50
+  - skill: {fileID: 11400000, guid: 520f5df41e4c45f48816a5d042244518, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 100
+    mediumRangeWeight: 40
+    longRangeWeight: 0
+  - skill: {fileID: 11400000, guid: fd704212b87a300489982889d0ef2916, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 0
+    mediumRangeWeight: 60
+    longRangeWeight: 100
