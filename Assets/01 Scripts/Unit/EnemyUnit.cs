@@ -89,7 +89,6 @@ public class EnemyUnit : Unit
             }
         }
 
-
         if (_validMoves.Count == 0)
         {
             if(results.pathLength == 0)
@@ -97,6 +96,8 @@ public class EnemyUnit : Unit
                 EndTurn();
                 return;
             }
+
+
             ExecuteTurn(new EnemyMove(results.path[results.path.Length - 1].position, enemyUnitData.apStat - 1, null));
         }
         else if(_validMoves.Count == 1)
@@ -112,12 +113,16 @@ public class EnemyUnit : Unit
             {
                 int _dis = Mathf.RoundToInt(Vector3.Distance(_validMoves[i].movePosition, currentTarget.transform.position));
 
-
-               _maxWeight += (_dis <= _shortRange) ? _validMoves[i].skillToUse.shortRangeWeight :
+                int _weightToAdd = (_dis <= _shortRange) ? _validMoves[i].skillToUse.shortRangeWeight :
                     (_dis <= _mediumRange) ? _validMoves[i].skillToUse.mediumRangeWeight : _validMoves[i].skillToUse.longRangeWeight;
+
+                if(_weightToAdd == 0) { continue; }
+
+                _maxWeight += _weightToAdd;
 
                 if(i == 0)
                 {
+                    print("Max Weight:" + _maxWeight);
                     _weightRanges.Add(_validMoves[i], new Vector2(1, _maxWeight));
                 }
                 else
@@ -130,13 +135,17 @@ public class EnemyUnit : Unit
 
             foreach (KeyValuePair<EnemyMove,Vector2> _moveWeightRanges in _weightRanges)
             {
-                if(_chosenValue >= _moveWeightRanges.Value.x && _chosenValue <= _moveWeightRanges.Value.y)
+                Debug.Log($"{_chosenValue} is the chosen value. \nIs it between {_moveWeightRanges.Value.x} and {_moveWeightRanges.Value.y}?");
+
+                if (_chosenValue >= _moveWeightRanges.Value.x && _chosenValue <= _moveWeightRanges.Value.y)
                 {
                     StartCoroutine(ExecuteTurn(_moveWeightRanges.Key));
                     return;
                 }
             }
         }
+
+        Debug.Log("Something went wrong!");
     }
 
     public IEnumerator ExecuteTurn(EnemyMove _move)
