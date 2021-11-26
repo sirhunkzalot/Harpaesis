@@ -14,13 +14,26 @@ public class EnemyUnit : Unit
     [SerializeField, ReadOnly] PathResult results = null;
     [SerializeField, ReadOnly] Unit currentTarget;
 
-    FriendlyUnit[] friendlyUnits;
+    List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
 
     public LayerMask viewObstructionMask;
 
     protected override void Init()
     {
         enemyUnitData = (EnemyUnitData)unitData;
+        FriendlyUnit[] _friendlyUnits = FindObjectsOfType<FriendlyUnit>();
+
+        foreach (FriendlyUnit _unit in _friendlyUnits)
+        {
+            if (_unit.isAlive)
+            {
+                friendlyUnits.Add(_unit);
+            }
+            else
+            {
+                Debug.LogError($"Unit {_unit} is already dead.");
+            }
+        }
     }
 
     public override void StartTurn()
@@ -31,24 +44,130 @@ public class EnemyUnit : Unit
         gridCam.followUnit = this;
         results = null;
 
-        friendlyUnits = FindObjectsOfType<FriendlyUnit>();
-        GetUnitDistances();
+        // Purges Dead Units from targeting list
+        for (int i = friendlyUnits.Count - 1; i >= 0; i--)
+        {
+            if (!friendlyUnits[i].isAlive)
+            {
+                friendlyUnits.RemoveAt(i);
+            }
+        }
+
+        HandleTargeting();
+    }
+
+    void HandleTargeting()
+    {
+        switch (enemyUnitData.enemyTargetingStyle)
+        {
+            case EnemyTargetingStyle.Closest:
+                for (int i = 0; i < friendlyUnits.Count; i++)
+                {
+                    Vector3 _dir = (transform.position - friendlyUnits[i].transform.position).normalized;
+                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
+                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, friendlyUnits[i]));
+                }
+                break;
+            case EnemyTargetingStyle.Furthest:
+                for (int i = 0; i < friendlyUnits.Count; i++)
+                {
+                    Vector3 _dir = (transform.position - friendlyUnits[i].transform.position).normalized;
+                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
+                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetFurthestFriendlyUnit, friendlyUnits[i]));
+                }
+                break;
+            case EnemyTargetingStyle.HighestHP:
+                GetUnitWithMostHealth();
+                break;
+            case EnemyTargetingStyle.LowestHP:
+                GetUnitWithLeastHealth();
+                break;
+        }
+
         Invoke(nameof(PlanTurn), 1f);
     }
 
-    void GetUnitDistances()
+    public void GetUnitWithMostHealth()
     {
-        foreach (FriendlyUnit unit in friendlyUnits)
+        int _unitIndex = 0;
+        int _unitHP = friendlyUnits[_unitIndex].currentHP;
+
+        for (int i = 1; i < friendlyUnits.Count; i++)
         {
-            Vector3 _dir = (transform.position - unit.transform.position).normalized;
-            Vector3 _targetPosition = grid.NodePositionFromWorldPoint(unit.transform.position);
-            PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, unit));
+            // If new unit has more health that the previous unit
+            if (friendlyUnits[i].currentHP > _unitHP)
+            {
+                _unitHP = friendlyUnits[i].currentHP;
+                _unitIndex = i;
+            }
+            // If HP is equal, defaults to closer Unit
+            else if (friendlyUnits[i].currentHP == _unitHP)
+            {
+                float _oldDis = Vector3.Distance(friendlyUnits[_unitIndex].transform.position, transform.position);
+                float _newDis = Vector3.Distance(friendlyUnits[i].transform.position, transform.position);
+
+                if (_newDis < _oldDis)
+                {
+                    _unitHP = friendlyUnits[i].currentHP;
+                    _unitIndex = i;
+                }
+            }
         }
+
+        currentTarget = friendlyUnits[_unitIndex];
+        PathRequestManager.RequestPath(new PathRequest(transform.position, currentTarget.transform.position, HandlePathResults, this));
+    }
+
+    public void GetUnitWithLeastHealth()
+    {
+        int _unitIndex = 0;
+        int _unitHP = friendlyUnits[_unitIndex].currentHP;
+
+        for (int i = 1; i < friendlyUnits.Count; i++)
+        {
+            // If new unit has less health that the previous unit
+            if (friendlyUnits[i].currentHP < _unitHP)
+            {
+                _unitHP = friendlyUnits[i].currentHP;
+                _unitIndex = i;
+            }
+            // If HP is equal, defaults to closer Unit
+            else if(friendlyUnits[i].currentHP == _unitHP)
+            {
+                float _oldDis =  Vector3.Distance(friendlyUnits[_unitIndex].transform.position, transform.position);
+                float _newDis = Vector3.Distance(friendlyUnits[i].transform.position, transform.position);
+
+                if(_newDis < _oldDis)
+                {
+                    _unitHP = friendlyUnits[i].currentHP;
+                    _unitIndex = i;
+                }
+            }
+        }
+
+        currentTarget = friendlyUnits[_unitIndex];
+        PathRequestManager.RequestPath(new PathRequest(transform.position, currentTarget.transform.position, HandlePathResults, this));
     }
 
     public void HandlePathResults(PathResult _result)
     {
-        if(results == null || _result.pathLength < results.pathLength)
+        results = _result;
+        Invoke(nameof(PlanTurn), 1f);
+    }
+
+
+    public void GetClosestFriendlyUnit(PathResult _result)
+    {
+        if (results == null || _result.pathLength < results.pathLength)
+        {
+            results = _result;
+            currentTarget = results.unit;
+        }
+    }
+
+    public void GetFurthestFriendlyUnit(PathResult _result)
+    {
+        if (results == null || _result.pathLength > results.pathLength)
         {
             results = _result;
             currentTarget = results.unit;
@@ -97,7 +216,7 @@ public class EnemyUnit : Unit
                 return;
             }
 
-
+            print("No Options");
             ExecuteTurn(new EnemyMove(results.path[results.path.Length - 1].position, enemyUnitData.apStat - 1, null));
         }
         else if(_validMoves.Count == 1)

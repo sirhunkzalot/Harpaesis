@@ -7,6 +7,7 @@ namespace Harpaesis.Combat
     [CreateAssetMenu(menuName = "Unit/New Enemy Unit")]
     public class EnemyUnitData : UnitData
     {
+        public EnemyTargetingStyle enemyTargetingStyle = EnemyTargetingStyle.Closest;
         public EnemySkill[] enemySkills;
     }
 
@@ -16,8 +17,16 @@ namespace Harpaesis.Combat
         public Skill skill;
         public int rangeEstimate;
 
-        [Range(0,100)] public int shortRangeWeight;
+        [Range(0, 100)] public int shortRangeWeight;
         [Range(0, 100)] public int mediumRangeWeight;
         [Range(0, 100)] public int longRangeWeight;
+    }
+
+    public enum EnemyTargetingStyle
+    {
+        Closest,
+        Furthest,
+        HighestHP,
+        LowestHP
     }
 }

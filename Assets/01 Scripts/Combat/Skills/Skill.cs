@@ -22,6 +22,7 @@ namespace Harpaesis.Combat
         // Applies effects and costs of the skill
         public void UseSkill(Unit _user, Unit _target)
         {
+            BattleLog.Log($"{_user} uses {skillName} on {_target}!", BattleLogType.Combat);
             if (effects.Count > 0)
             {
                 for (int i = 0; i < effects.Count; i++)
