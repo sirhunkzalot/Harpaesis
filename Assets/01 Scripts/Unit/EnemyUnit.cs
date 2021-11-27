@@ -40,7 +40,7 @@ public class EnemyUnit : Unit
     {
         base.StartTurn();
 
-        uiCombat.IsPlayerTurn(false);
+        uiCombat.ShowPlayerUI(false);
         gridCam.followUnit = this;
         results = null;
 
@@ -63,7 +63,6 @@ public class EnemyUnit : Unit
             case EnemyTargetingStyle.Closest:
                 for (int i = 0; i < friendlyUnits.Count; i++)
                 {
-                    Vector3 _dir = (transform.position - friendlyUnits[i].transform.position).normalized;
                     Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
                     PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, friendlyUnits[i]));
                 }
@@ -71,7 +70,6 @@ public class EnemyUnit : Unit
             case EnemyTargetingStyle.Furthest:
                 for (int i = 0; i < friendlyUnits.Count; i++)
                 {
-                    Vector3 _dir = (transform.position - friendlyUnits[i].transform.position).normalized;
                     Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
                     PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetFurthestFriendlyUnit, friendlyUnits[i]));
                 }
@@ -115,7 +113,8 @@ public class EnemyUnit : Unit
         }
 
         currentTarget = friendlyUnits[_unitIndex];
-        PathRequestManager.RequestPath(new PathRequest(transform.position, currentTarget.transform.position, HandlePathResults, this));
+        Vector3 _targetPosition = grid.NodePositionFromWorldPoint(currentTarget.transform.position);
+        PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
     }
 
     public void GetUnitWithLeastHealth()
@@ -146,13 +145,24 @@ public class EnemyUnit : Unit
         }
 
         currentTarget = friendlyUnits[_unitIndex];
-        PathRequestManager.RequestPath(new PathRequest(transform.position, currentTarget.transform.position, HandlePathResults, this));
+        Vector3 _targetPosition = grid.NodePositionFromWorldPoint(currentTarget.transform.position);
+        PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
     }
 
     public void HandlePathResults(PathResult _result)
     {
-        results = _result;
-        Invoke(nameof(PlanTurn), 1f);
+        if (_result.success)
+        {
+            results = _result;
+        }
+        else
+        {
+            for (int i = 0; i < friendlyUnits.Count; i++)
+            {
+                Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
+                PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, friendlyUnits[i]));
+            }
+        }
     }
 
 
@@ -180,7 +190,7 @@ public class EnemyUnit : Unit
 
         Dictionary<int,Vector3> _validPositionsWithVision = new Dictionary<int, Vector3>();
 
-        for (int i = 0; i < results.pathLength; i++)
+        for (int i = 0; i < Mathf.Min(enemyUnitData.apStat, results.path.Length); i++)
         {
             if(!Physics.Linecast(results.path[i].position + Vector3.up, currentTarget.transform.position + Vector3.up, viewObstructionMask))
             {
@@ -199,7 +209,7 @@ public class EnemyUnit : Unit
             for (int i = 0; i < enemyUnitData.enemySkills.Length; i++)
             {
                 EnemySkill _skill = enemyUnitData.enemySkills[i];
-                bool _canUseMoveAtPoint = (_skill.rangeEstimate <= _distanceFromTarget) && (_skill.skill.apCost <= _apAtPoint);
+                bool _canUseMoveAtPoint = (_skill.rangeEstimate >= _distanceFromTarget) && (_skill.skill.apCost <= _apAtPoint);
 
                 if (_canUseMoveAtPoint)
                 {
@@ -216,12 +226,13 @@ public class EnemyUnit : Unit
                 return;
             }
 
-            print("No Options");
-            ExecuteTurn(new EnemyMove(results.path[results.path.Length - 1].position, enemyUnitData.apStat - 1, null));
+            StartCoroutine(MoveOnlyTurn());
+            return;
         }
         else if(_validMoves.Count == 1)
         {
-            ExecuteTurn(_validMoves[0]);
+            StartCoroutine(ExecuteTurn(_validMoves[0]));
+            return;
         }
         else
         {
@@ -235,13 +246,10 @@ public class EnemyUnit : Unit
                 int _weightToAdd = (_dis <= _shortRange) ? _validMoves[i].skillToUse.shortRangeWeight :
                     (_dis <= _mediumRange) ? _validMoves[i].skillToUse.mediumRangeWeight : _validMoves[i].skillToUse.longRangeWeight;
 
-                if(_weightToAdd == 0) { continue; }
-
                 _maxWeight += _weightToAdd;
 
-                if(i == 0)
+                if(_weightRanges.Count == 0)
                 {
-                    print("Max Weight:" + _maxWeight);
                     _weightRanges.Add(_validMoves[i], new Vector2(1, _maxWeight));
                 }
                 else
@@ -254,8 +262,6 @@ public class EnemyUnit : Unit
 
             foreach (KeyValuePair<EnemyMove,Vector2> _moveWeightRanges in _weightRanges)
             {
-                Debug.Log($"{_chosenValue} is the chosen value. \nIs it between {_moveWeightRanges.Value.x} and {_moveWeightRanges.Value.y}?");
-
                 if (_chosenValue >= _moveWeightRanges.Value.x && _chosenValue <= _moveWeightRanges.Value.y)
                 {
                     StartCoroutine(ExecuteTurn(_moveWeightRanges.Key));
@@ -264,14 +270,14 @@ public class EnemyUnit : Unit
             }
         }
 
-        Debug.Log("Something went wrong!");
+        StartCoroutine(MoveOnlyTurn());
     }
 
     public IEnumerator ExecuteTurn(EnemyMove _move)
     {
         if(_move.movePosition != transform.position)
         {
-            Waypoint[] _waypoints = new Waypoint[_move.pathPositionIndex];
+            Waypoint[] _waypoints = new Waypoint[_move.pathPositionIndex + 1];
 
             for (int i = 0; i < _waypoints.Length; i++)
             {
@@ -291,7 +297,18 @@ public class EnemyUnit : Unit
             _move.skillToUse.skill.UseSkill(this, currentTarget);
         }
 
-        EndTurn();
+        Invoke(nameof(EndTurn), .5f);
+    }
+
+    public IEnumerator MoveOnlyTurn()
+    {
+        motor.Move(results.path);
+        do
+        {
+            yield return new WaitForEndOfFrame();
+        } while (motor.isMoving);
+
+        Invoke(nameof(EndTurn), .5f);
     }
 
     void EndTurn()

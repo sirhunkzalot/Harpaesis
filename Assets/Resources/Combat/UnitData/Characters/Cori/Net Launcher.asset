@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Net Launcher
   apCost: 2
-  validTargets: 3
+  validTargets: 4
   targetingStyle: 0
   skillDescription: Upon successful attack, will entangle an enemy. Entanglement
     renders the recipient unable to take the MOVE action for 1d3 turns.
   targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
   effects:
-  - effectType: 10
+  - effectType: 2
     param1: 1d3
     param2: 
     option: 0

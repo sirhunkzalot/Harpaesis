@@ -101,7 +101,7 @@ public class TurnManager : MonoBehaviour
     public void HandleTurn()
     {
         bool _isFriendlyUnit = activeTurn.unit.GetType() == typeof(FriendlyUnit);
-        UIManager_Combat.instance.IsPlayerTurn(_isFriendlyUnit);
+        UIManager_Combat.instance.ShowPlayerUI(_isFriendlyUnit);
 
         activeTurn.unit.StartTurn();
     }
@@ -115,12 +115,14 @@ public struct Turn
 {
     public Unit unit;
     public UnitData unitData;
+    public bool hasAttacked;
     public int ap;
 
     public Turn(Unit _unit)
     {
         unit = _unit;
         unitData = unit.unitData;
+        hasAttacked = false;
         ap = unit.unitData.apStat;
 
         unit.turnData = this;

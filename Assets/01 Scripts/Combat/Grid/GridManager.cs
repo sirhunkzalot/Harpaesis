@@ -211,13 +211,13 @@ namespace Harpaesis.GridAndPathfinding
         /* NodePositionFromWorldPoint accurately gets the world position of the nearest node to the given point
          * @param Vector3 _worldPosition is the world position to find a node with
          * @return the world position of the node closest to the given world position */
-        public Vector3 NodePositionFromWorldPoint(Vector3 _worldPosition)
+        public Vector3 NodePositionFromWorldPoint(Vector3 _worldPosition, bool _unoccupiedPositionsOnly = true)
         {
             // Gets a rough estimate of the node's position
             Node _node = NodeFromWorldPoint(_worldPosition);
 
             // Gets the node and it's neighbors
-            List<Node> _neighbors = GetNeighborsRaw(_node, true);
+            List<Node> _neighbors = GetNeighborsRaw(_node, _unoccupiedPositionsOnly);
 
             return GetClosestNode(_worldPosition, _neighbors).worldPosition;
         }

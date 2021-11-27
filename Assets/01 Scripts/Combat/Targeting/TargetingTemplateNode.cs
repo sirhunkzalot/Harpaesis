@@ -33,35 +33,7 @@ namespace Harpaesis.Combat
         bool IsValidTarget()
         {
             return (unit != null) && ((targetMask.HasFlag(TargetMask.Ally) && !isEnemyUnit) || (targetMask.HasFlag(TargetMask.Enemy) && isEnemyUnit));
-
-            /* if (targetMask == TargetMask.Self)
-            {
-                return true;
-            }*/
         }
-
-        public void OnMouseOver()
-        {
-            if (isAOE) return;
-
-            parent.currentlySelected = this;
-
-            rend.material = (IsValidTarget()) ? validAndSelected : selected;
-        }
-
-        public void OnMouseExit()
-        {
-            if (isAOE) return;
-
-            if(parent.currentlySelected == this)
-            {
-                parent.currentlySelected = null;
-            }
-
-            rend.material = (IsValidTarget()) ? valid : unselected;
-        }
-
-
 
         private void OnTriggerStay(Collider other)
         {
@@ -71,17 +43,40 @@ namespace Harpaesis.Combat
                 isEnemyUnit = (unit.GetType() == typeof(EnemyUnit));
                 Enable();
             }
+            else if (other.GetComponent<GridCursor>() != null)
+            {
+                if (isAOE) return;
+                print("OnExit");
+                parent.currentlySelected = this;
+
+                rend.material = (IsValidTarget()) ? validAndSelected : selected;
+            }
+
+            print(other.GetComponent<GridCursor>());
         }
 
         private void OnTriggerExit(Collider other)
         {
-            unit = null;
-            Enable();
+            if (other.GetComponent<Unit>() != null)
+            {
+                unit = null;
+                Enable();
+            }
+            else if (other.GetComponent<GridCursor>() != null)
+            {
+                if (isAOE) return;
+
+                if (parent.currentlySelected == this)
+                {
+                    parent.currentlySelected = null;
+                }
+
+                rend.material = (IsValidTarget()) ? valid : unselected;
+            }
         }
 
         public void Enable()
         {
-
             if (isAOE)
             {
                 if (IsValidTarget())

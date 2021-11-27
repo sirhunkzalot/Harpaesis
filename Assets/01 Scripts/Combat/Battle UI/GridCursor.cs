@@ -52,7 +52,7 @@ public class GridCursor : MonoBehaviour
 
         if (Physics.Raycast(_ray, out _hit, 100, layermask))
         {
-            transform.position = grid.NodePositionFromWorldPoint(_hit.point);
+            transform.position = grid.NodePositionFromWorldPoint(_hit.point, false);
 
             currentNode = grid.NodeFromWorldPoint(transform.position);
         }

@@ -21,7 +21,8 @@ public class FriendlyUnit : Unit
         tertiarySkillTargetingTemplate, signatureSkillTargetingTemplate;
     int activeTemplateIndex;
 
-    RotateTemplates templateParent; 
+    RotateTemplates templateParent;
+    ActiveUnitIcon activeUnitIcon;
 
     public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting_Single, Targeting_AOE, Attacking }
     [ReadOnly] public FriendlyState currentState = FriendlyState.Inactive;
@@ -30,8 +31,13 @@ public class FriendlyUnit : Unit
     {
         friendlyUnitData = (FriendlyUnitData)unitData;
         gridCursor = GridCursor.instance;
+
         templateParent = GetComponentInChildren<RotateTemplates>();
         templateParent.Init(this);
+
+        activeUnitIcon = GetComponentInChildren<ActiveUnitIcon>();
+        activeUnitIcon.Init();
+
         SetupTargetingTemplates();
     }
 
@@ -91,8 +97,13 @@ public class FriendlyUnit : Unit
     {
         base.StartTurn();
 
-        uiCombat.IsPlayerTurn(true);
+        uiCombat.ShowPlayerUI(true);
+
+        gridCam.JumpToPosition(transform.position);
         gridCam.followUnit = null;
+
+        activeUnitIcon.SetChildActive(true);
+
         currentState = FriendlyState.Active;
     }
 
@@ -129,12 +140,20 @@ public class FriendlyUnit : Unit
         currentState = FriendlyState.Moving;
         hasPath = true;
         motor.Move(previewPath);
+        uiCombat.ShowPlayerUI(false);
+        gridCam.followUnit = this;
         PathRenderer.instance.SwapToActualPath();
     }
 
     public void Moving()
     {
-
+        if (!motor.isMoving)
+        {
+            currentState = FriendlyState.Active;
+            uiCombat.ShowPlayerUI(true);
+            gridCam.followUnit = null;
+            return;
+        }
     }
 
     public void BeginTargeting(int _index)
@@ -302,6 +321,8 @@ public class FriendlyUnit : Unit
         {
             UseSkill(_skillIndex, node.unit);
         }
+
+        turnData.hasAttacked = true;
     }
 
     public void UseSkill(int _skillIndex, Unit _target)
@@ -331,5 +352,10 @@ public class FriendlyUnit : Unit
             default:
                 throw new System.Exception("Error: invalid skill index given.");
         }
+    }
+
+    public void EndTurn()
+    {
+        activeUnitIcon.SetChildActive(false);
     }
 }

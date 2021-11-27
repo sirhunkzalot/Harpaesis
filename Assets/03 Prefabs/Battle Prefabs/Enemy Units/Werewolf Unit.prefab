@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a3547686a185e4792c91762a9b20db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitData: {fileID: 11400000, guid: a6fe3d51ec5123642847b525096a7e47, type: 2}
+  unitData: {fileID: 11400000, guid: e0c39eca49a19d14099cf77e21349915, type: 2}
   motor: {fileID: 0}
   hasPath: 0
   currentHP: 0
@@ -167,8 +167,18 @@ MonoBehaviour:
   turnData:
     unit: {fileID: 0}
     unitData: {fileID: 0}
+    hasAttacked: 0
     ap: 0
   enemyUnitData: {fileID: 0}
+  results:
+    path: []
+    success: 0
+    unit: {fileID: 0}
+    pathLength: 0
+  currentTarget: {fileID: 0}
+  viewObstructionMask:
+    serializedVersion: 2
+    m_Bits: 2097152
 --- !u!114 &5205872326945359676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,4 +193,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   targetIndex: 0
+  isMoving: 0
   path: []

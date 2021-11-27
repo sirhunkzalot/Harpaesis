@@ -9,10 +9,14 @@ public class RotateTemplates : MonoBehaviour
     int templateIndex;
 
     FriendlyUnit unit;
+    GridCursor cursor;
+    Transform cam;
 
     public void Init(FriendlyUnit _unit)
     {
         unit = _unit;
+        cursor = GridCursor.instance;
+        cam = Camera.main.transform;
     }
 
     public void InitTemplate(TargetingTemplate _template)
@@ -24,24 +28,20 @@ public class RotateTemplates : MonoBehaviour
     {
         if (unit.currentState == FriendlyUnit.FriendlyState.Targeting_AOE || unit.currentState == FriendlyUnit.FriendlyState.Targeting_Single)
         {
-            Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit _hit;
+            Vector3 _dir = (cursor.transform.position - transform.position).normalized;
+            float _angle = Vector3.Angle(_dir, transform.forward);
 
-            if(Physics.Raycast(_ray, out _hit))
+            if (_angle >= 90)
             {
-                Vector3 _dir = (_hit.point - transform.position).normalized;
-                float _angle = Vector3.Angle(_dir, transform.forward);
-                if (_angle >= 45)
-                {
-                    transform.Rotate(Vector3.up, 90);
-                    ReloadTemplates();
+                    
+                transform.Rotate(Vector3.up, 90);
+                ReloadTemplates();
 
-                }
-                else if (_angle <= -45)
-                {
-                    transform.Rotate(Vector3.up, -90);
-                    ReloadTemplates();
-                }
+            }
+            else if (_angle <= -90)
+            {
+                transform.Rotate(Vector3.up, -90);
+                ReloadTemplates();
             }
         }
     }

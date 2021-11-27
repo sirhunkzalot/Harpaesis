@@ -26,11 +26,11 @@ public class UIManager_Combat : MonoBehaviour
         turnManager = TurnManager.instance;
     }
 
-    public void IsPlayerTurn(bool _isPlayerTurn)
+    public void ShowPlayerUI(bool _showUI)
     {
         foreach (GameObject button in playerTurnObjects)
         {
-            button.SetActive(_isPlayerTurn);
+            button.SetActive(_showUI);
         }
     }
 
@@ -43,11 +43,6 @@ public class UIManager_Combat : MonoBehaviour
         }
     }
 
-    public void Button_Attack()
-    {
-        print("Attack");
-    }
-
     public void Button_UseItem()
     {
         print("UseItem");
@@ -57,6 +52,7 @@ public class UIManager_Combat : MonoBehaviour
     {
         if (IsFriendlyTurn)
         {
+            ((FriendlyUnit)turnManager.activeTurn.unit).EndTurn();
             turnManager.NextTurn();
         }
     }

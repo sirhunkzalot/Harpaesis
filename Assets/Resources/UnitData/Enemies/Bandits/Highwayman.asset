@@ -18,14 +18,15 @@ MonoBehaviour:
   attackStat: 12
   defenseStat: 8
   apStat: 5
+  enemyTargetingStyle: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: d8aa5f8e7ae8afb449ac1959d672bd91, type: 2}
     rangeEstimate: 0
     shortRangeWeight: 100
     mediumRangeWeight: 75
-    longRangeWeight: 0
+    longRangeWeight: 1
   - skill: {fileID: 11400000, guid: 221e191003922ff47accb6e7da577bcf, type: 2}
     rangeEstimate: 0
-    shortRangeWeight: 0
+    shortRangeWeight: 1
     mediumRangeWeight: 25
-    longRangeWeight: 0
+    longRangeWeight: 1

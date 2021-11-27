@@ -17,9 +17,9 @@ namespace Harpaesis.Combat
         public Skill skill;
         public int rangeEstimate;
 
-        [Range(0, 100)] public int shortRangeWeight;
-        [Range(0, 100)] public int mediumRangeWeight;
-        [Range(0, 100)] public int longRangeWeight;
+        [Range(1, 100)] public int shortRangeWeight;
+        [Range(1, 100)] public int mediumRangeWeight;
+        [Range(1, 100)] public int longRangeWeight;
     }
 
     public enum EnemyTargetingStyle
