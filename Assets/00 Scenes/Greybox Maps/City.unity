@@ -1001,6 +1001,8 @@ GameObject:
   - component: {fileID: 279855213}
   - component: {fileID: 279855212}
   - component: {fileID: 279855211}
+  - component: {fileID: 279855216}
+  - component: {fileID: 279855215}
   m_Layer: 0
   m_Name: Highwayman (1)
   m_TagString: Untagged
@@ -1086,6 +1088,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &279855215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279855210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a3547686a185e4792c91762a9b20db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitData: {fileID: 11400000, guid: efaa70bbecaba8843807024a597be18a, type: 2}
+  motor: {fileID: 0}
+  hasPath: 0
+  currentHP: 0
+  isAlive: 1
+  canMove: 1
+  canAct: 1
+  currentEffects: []
+  turnData:
+    unit: {fileID: 0}
+    unitData: {fileID: 0}
+    ap: 0
+  enemyUnitData: {fileID: 0}
+  results:
+    path: []
+    success: 0
+    unit: {fileID: 0}
+    pathLength: 0
+  currentTarget: {fileID: 0}
+  viewObstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &279855216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279855210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f0189fef840164a96a3f2be1ccf595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.5
+  targetIndex: 0
+  isMoving: 0
+  path: []
 --- !u!1 &280090151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2221,8 @@ GameObject:
   - component: {fileID: 596642230}
   - component: {fileID: 596642229}
   - component: {fileID: 596642228}
+  - component: {fileID: 596642233}
+  - component: {fileID: 596642232}
   m_Layer: 0
   m_Name: Highwayman
   m_TagString: Untagged
@@ -2254,6 +2308,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &596642232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596642227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a3547686a185e4792c91762a9b20db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitData: {fileID: 11400000, guid: efaa70bbecaba8843807024a597be18a, type: 2}
+  motor: {fileID: 0}
+  hasPath: 0
+  currentHP: 0
+  isAlive: 1
+  canMove: 1
+  canAct: 1
+  currentEffects: []
+  turnData:
+    unit: {fileID: 0}
+    unitData: {fileID: 0}
+    ap: 0
+  enemyUnitData: {fileID: 0}
+  results:
+    path: []
+    success: 0
+    unit: {fileID: 0}
+    pathLength: 0
+  currentTarget: {fileID: 0}
+  viewObstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &596642233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596642227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f0189fef840164a96a3f2be1ccf595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.5
+  targetIndex: 0
+  isMoving: 0
+  path: []
 --- !u!1 &598882007
 GameObject:
   m_ObjectHideFlags: 0
@@ -3462,6 +3566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ripper Unit (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5205872326945359678, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
+      propertyPath: unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: bb43d7e20d7b7ba4487b4782209f2104, type: 2}
     - target: {fileID: 5205872326945359679, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3520,6 +3628,8 @@ GameObject:
   - component: {fileID: 941123928}
   - component: {fileID: 941123927}
   - component: {fileID: 941123926}
+  - component: {fileID: 941123931}
+  - component: {fileID: 941123930}
   m_Layer: 0
   m_Name: Highwayman (3)
   m_TagString: Untagged
@@ -3605,6 +3715,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &941123930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941123925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a3547686a185e4792c91762a9b20db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitData: {fileID: 11400000, guid: efaa70bbecaba8843807024a597be18a, type: 2}
+  motor: {fileID: 0}
+  hasPath: 0
+  currentHP: 0
+  isAlive: 1
+  canMove: 1
+  canAct: 1
+  currentEffects: []
+  turnData:
+    unit: {fileID: 0}
+    unitData: {fileID: 0}
+    ap: 0
+  enemyUnitData: {fileID: 0}
+  results:
+    path: []
+    success: 0
+    unit: {fileID: 0}
+    pathLength: 0
+  currentTarget: {fileID: 0}
+  viewObstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &941123931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941123925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f0189fef840164a96a3f2be1ccf595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.5
+  targetIndex: 0
+  isMoving: 0
+  path: []
 --- !u!1001 &944680975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4100,6 +4260,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ripper Unit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5205872326945359678, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
+      propertyPath: unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: bb43d7e20d7b7ba4487b4782209f2104, type: 2}
     - target: {fileID: 5205872326945359679, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5364,6 +5528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ripper Unit (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5205872326945359678, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
+      propertyPath: unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: bb43d7e20d7b7ba4487b4782209f2104, type: 2}
     - target: {fileID: 5205872326945359679, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -5715,6 +5883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ripper Unit (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5205872326945359678, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
+      propertyPath: unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: bb43d7e20d7b7ba4487b4782209f2104, type: 2}
     - target: {fileID: 5205872326945359679, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -5962,6 +6134,8 @@ GameObject:
   - component: {fileID: 1517030341}
   - component: {fileID: 1517030340}
   - component: {fileID: 1517030339}
+  - component: {fileID: 1517030344}
+  - component: {fileID: 1517030343}
   m_Layer: 0
   m_Name: Highwayman (2)
   m_TagString: Untagged
@@ -6047,6 +6221,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1517030343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517030338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a3547686a185e4792c91762a9b20db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitData: {fileID: 11400000, guid: efaa70bbecaba8843807024a597be18a, type: 2}
+  motor: {fileID: 0}
+  hasPath: 0
+  currentHP: 0
+  isAlive: 1
+  canMove: 1
+  canAct: 1
+  currentEffects: []
+  turnData:
+    unit: {fileID: 0}
+    unitData: {fileID: 0}
+    ap: 0
+  enemyUnitData: {fileID: 0}
+  results:
+    path: []
+    success: 0
+    unit: {fileID: 0}
+    pathLength: 0
+  currentTarget: {fileID: 0}
+  viewObstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &1517030344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517030338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02f0189fef840164a96a3f2be1ccf595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.5
+  targetIndex: 0
+  isMoving: 0
+  path: []
 --- !u!1001 &1522791072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6517,6 +6741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ripper Unit (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5205872326945359678, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
+      propertyPath: unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: bb43d7e20d7b7ba4487b4782209f2104, type: 2}
     - target: {fileID: 5205872326945359679, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7548,6 +7776,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ripper Unit
       objectReference: {fileID: 0}
+    - target: {fileID: 5205872326945359678, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
+      propertyPath: unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: bb43d7e20d7b7ba4487b4782209f2104, type: 2}
     - target: {fileID: 5205872326945359679, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
       propertyPath: m_RootOrder
       value: 6

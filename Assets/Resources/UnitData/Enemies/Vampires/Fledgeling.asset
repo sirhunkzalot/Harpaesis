@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
-  m_Name: Ripper
+  m_Name: Fledgeling
   m_EditorClassIdentifier: 
-  unitName: Ripper
-  healthStat: 22
-  inititiveStat: 4
-  attackStat: 10
-  defenseStat: 9
+  unitName: Fledgeling
+  healthStat: 27
+  inititiveStat: 3
+  attackStat: 12
+  defenseStat: 8
   apStat: 5
   enemySkills:
-  - skill: {fileID: 11400000, guid: d299f78cd5c28f743920d900aa796eb3, type: 2}
+  - skill: {fileID: 11400000, guid: 8430194a16f128945917038bbba07464, type: 2}
     rangeEstimate: 1
-    shortRangeWeight: 70
+    shortRangeWeight: 60
     mediumRangeWeight: 100
     longRangeWeight: 100
-  - skill: {fileID: 11400000, guid: 3e54cc75c3ef64e428f25b4e02543d08, type: 2}
+  - skill: {fileID: 11400000, guid: a55e5a9861f39f945889df1f7c2ece40, type: 2}
     rangeEstimate: 1
-    shortRangeWeight: 30
+    shortRangeWeight: 40
     mediumRangeWeight: 0
     longRangeWeight: 0
