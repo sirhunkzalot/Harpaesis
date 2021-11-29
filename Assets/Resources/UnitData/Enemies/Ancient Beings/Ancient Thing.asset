@@ -12,10 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
   m_Name: Ancient Thing
   m_EditorClassIdentifier: 
-  unitName: 
-  healthStat: 0
-  inititiveStat: 0
-  attackStat: 0
-  defenseStat: 0
-  apStat: 0
-  enemySkills: []
+  unitName: Ancient Thing
+  healthStat: 24
+  inititiveStat: 2
+  attackStat: 12
+  defenseStat: 10
+  apStat: 5
+  enemySkills:
+  - skill: {fileID: 11400000, guid: 71a16cb39cf6c0c4d9ba98c22711d6de, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 60
+    mediumRangeWeight: 0
+    longRangeWeight: 0
+  - skill: {fileID: 11400000, guid: d53b0ca914f08724b938fa12379ded5f, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 20
+    mediumRangeWeight: 80
+    longRangeWeight: 100
+  - skill: {fileID: 11400000, guid: 872667e45d2591a4e8d9c104280670d0, type: 2}
+    rangeEstimate: 3
+    shortRangeWeight: 20
+    mediumRangeWeight: 20
+    longRangeWeight: 0

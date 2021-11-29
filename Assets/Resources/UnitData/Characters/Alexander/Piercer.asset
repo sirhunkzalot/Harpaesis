@@ -16,14 +16,8 @@ MonoBehaviour:
   apCost: 5
   validTargets: 4
   targetingStyle: 0
-  skillDescription: This attack will drive the character forward 3 tiles, performing
-    a standard rapier attack against every opponent within those tiles. every opponent
-    within those tiles will be given a chance for bleed for 1d4 turns. Bleed deals
-    1d3 damage, bypassing armor, unless treated by a healing item or ability. This
-    attack will push enemies back in a straight line up to the distance of the attack's
-    range. If the position an enemy would be pushed into is unwalkable, the enemy
-    is stopped one space short of the unwalkable tile, this character will be stopped
-    one tile short of that enemy.
+  skillDescription: Drives forward, knocking enemies back and applying damage and
+    BLEED
   targetingTemplate: {fileID: 168528501438769920, guid: 4f8575b6af9add043a259474193addf0, type: 3}
   effects:
   - effectType: 2
