@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UITest : MonoBehaviour
 {
     public GameObject settings;
 
     public GameObject Items;
+    //true = weapon 1, false = weapon 2
+    public bool swapWeapon;
+    public Text weaponDescription;
 
     public void Start()
     {
@@ -49,5 +53,18 @@ public class UITest : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void _SwapWeapon()
+    {
+        if(swapWeapon == true)
+        {
+            swapWeapon = false;
+            weaponDescription.text = "weapon 1";
+        }
+        else
+        {
+            swapWeapon = true;
+            weaponDescription.text = "weapon 2";
+        }
     }
 }
