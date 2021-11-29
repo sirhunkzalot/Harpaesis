@@ -13,21 +13,19 @@ MonoBehaviour:
   m_Name: Werewolf
   m_EditorClassIdentifier: 
   unitName: Werewolf
-  unitIcon: {fileID: 0}
   healthStat: 35
   inititiveStat: 3
   attackStat: 12
   defenseStat: 10
   apStat: 5
-  enemyTargetingStyle: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: aceadc8225fb05d48841f8867106825e, type: 2}
     rangeEstimate: 1
     shortRangeWeight: 70
-    mediumRangeWeight: 1
-    longRangeWeight: 1
+    mediumRangeWeight: 50
+    longRangeWeight: 0
   - skill: {fileID: 11400000, guid: 83d46a024401c5041a5ad93c939f0874, type: 2}
     rangeEstimate: 5
     shortRangeWeight: 20
     mediumRangeWeight: 50
-    longRangeWeight: 1
+    longRangeWeight: 100

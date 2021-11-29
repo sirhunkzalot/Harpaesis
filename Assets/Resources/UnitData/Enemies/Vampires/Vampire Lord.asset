@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
+  m_Name: Vampire Lord
+  m_EditorClassIdentifier: 
+  unitName: Vampire Lord
+  healthStat: 35
+  inititiveStat: 7
+  attackStat: 14
+  defenseStat: 14
+  apStat: 5
+  enemySkills:
+  - skill: {fileID: 11400000, guid: 7e57fbe27dcfbf34887dc555690c4a5a, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 50
+    mediumRangeWeight: 50
+    longRangeWeight: 0
+  - skill: {fileID: 11400000, guid: 085b3fac40a84454fb70f9b01e3f2fc0, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 0
+    mediumRangeWeight: 50
+    longRangeWeight: 100
+  - skill: {fileID: 11400000, guid: ce3a4db5c9a61f9479a652a2573ca881, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 25
+    mediumRangeWeight: 0
+    longRangeWeight: 0
+  - skill: {fileID: 11400000, guid: 55dd9f4d2659e324db3415560c65488c, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 25
+    mediumRangeWeight: 0
+    longRangeWeight: 0

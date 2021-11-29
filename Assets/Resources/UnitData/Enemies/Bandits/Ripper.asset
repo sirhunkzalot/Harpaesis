@@ -13,21 +13,19 @@ MonoBehaviour:
   m_Name: Ripper
   m_EditorClassIdentifier: 
   unitName: Ripper
-  unitIcon: {fileID: 0}
-  healthStat: 27
+  healthStat: 22
   inititiveStat: 4
   attackStat: 10
   defenseStat: 9
   apStat: 5
-  enemyTargetingStyle: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: d299f78cd5c28f743920d900aa796eb3, type: 2}
     rangeEstimate: 1
     shortRangeWeight: 70
-    mediumRangeWeight: 1
-    longRangeWeight: 1
+    mediumRangeWeight: 100
+    longRangeWeight: 100
   - skill: {fileID: 11400000, guid: 3e54cc75c3ef64e428f25b4e02543d08, type: 2}
     rangeEstimate: 1
     shortRangeWeight: 30
-    mediumRangeWeight: 1
-    longRangeWeight: 1
+    mediumRangeWeight: 0
+    longRangeWeight: 0

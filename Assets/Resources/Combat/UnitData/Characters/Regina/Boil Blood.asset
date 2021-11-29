@@ -16,10 +16,9 @@ MonoBehaviour:
   apCost: 5
   validTargets: 4
   targetingStyle: 0
-  skillDescription: The target's blood begins to boil, dealing damage that bypasses
-    armor. If an enemy dies from this attack, that enemy will explode in a shower
-    of blood and bone, dealing 2d4 damage negated by defense to any character, allies
-    included, with a 3 tile radius.
+  skillDescription: Deals significant damage to a single target, bypassing all armor.
+    If this attack kills that enemy, they will explode, dealing damage to all surrounding
+    units
   targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
   effects:
   - effectType: 2

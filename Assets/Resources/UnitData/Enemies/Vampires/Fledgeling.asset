@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
+  m_Name: Fledgeling
+  m_EditorClassIdentifier: 
+  unitName: Fledgeling
+  healthStat: 27
+  inititiveStat: 3
+  attackStat: 12
+  defenseStat: 8
+  apStat: 5
+  enemySkills:
+  - skill: {fileID: 11400000, guid: 8430194a16f128945917038bbba07464, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 60
+    mediumRangeWeight: 100
+    longRangeWeight: 100
+  - skill: {fileID: 11400000, guid: a55e5a9861f39f945889df1f7c2ece40, type: 2}
+    rangeEstimate: 1
+    shortRangeWeight: 40
+    mediumRangeWeight: 0
+    longRangeWeight: 0
