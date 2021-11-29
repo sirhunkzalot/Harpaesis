@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UITest : MonoBehaviour
 {
     public GameObject settings;
 
     public GameObject Items;
+    //true = weapon 1, false = weapon 2
+    public bool swapWeapon;
+    public Text weaponDescription;
 
     public void Start()
     {
         settings.SetActive(false);
+        swapWeapon = true;
     }
     public void _Items()
     {
@@ -39,6 +44,8 @@ public class UITest : MonoBehaviour
                 settings.SetActive(false);
             }
             else settings.SetActive(true);
+
+            
         }
     }
     public void ReturnToMenu()
@@ -49,5 +56,18 @@ public class UITest : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void _SwapWeapon()
+    {
+        if (swapWeapon == true)
+        {
+            swapWeapon = false;
+            weaponDescription.text = "this is weapon 2";
+        }
+        else
+        {
+            swapWeapon = true;
+            weaponDescription.text = "this is weapon 1";
+        }
     }
 }
