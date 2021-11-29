@@ -92,6 +92,8 @@ public class TurnManager : MonoBehaviour
             BuildTurnOrder();
         }
 
+        UIManager_TurnOrder.instance.UpdateImages(turnCounter, turnOrder);
+
         activeTurn = turnOrder[turnCounter];
         GridCamera.instance.JumpToPosition(activeTurn.unit.transform.position);
 

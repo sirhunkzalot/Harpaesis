@@ -3621,7 +3621,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1180303300244932589}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -4901,7 +4901,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3540398236663878102}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -6792,7 +6792,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6636203053942556452}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -8430,7 +8430,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 6361329375553610499}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -8873,6 +8873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1296117950045594386}
+  - component: {fileID: 7592445511013300956}
   m_Layer: 5
   m_Name: Turn order
   m_TagString: Untagged
@@ -8903,6 +8904,24 @@ RectTransform:
   m_AnchoredPosition: {x: 5.463867, y: 2.8356934}
   m_SizeDelta: {x: 450.0727, y: 76.94832}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7592445511013300956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8863899783435052384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6f2d02590166745b4a76b58809520c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnImages:
+  - {fileID: 6361329375553610499}
+  - {fileID: 6636203053942556452}
+  - {fileID: 1180303300244932589}
+  - {fileID: 175226439395033610}
+  - {fileID: 3540398236663878102}
 --- !u!1 &8867333296177885403
 GameObject:
   m_ObjectHideFlags: 0
@@ -9418,7 +9437,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 175226439395033610}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

@@ -7,6 +7,7 @@ namespace Harpaesis.Combat
     public abstract class UnitData : ScriptableObject
     {
         public string unitName;
+        public Sprite unitIcon;
 
         [Header("Stats")]
         public int healthStat;
