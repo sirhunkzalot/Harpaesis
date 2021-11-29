@@ -51,8 +51,6 @@ namespace Harpaesis.Combat
 
                 rend.material = (IsValidTarget()) ? validAndSelected : selected;
             }
-
-            print(other.GetComponent<GridCursor>());
         }
 
         private void OnTriggerExit(Collider other)
