@@ -66,5 +66,7 @@ public class UITest : MonoBehaviour
             swapWeapon = true;
             weaponDescription.text = "weapon 2";
         }
+        
     }
+
 }
