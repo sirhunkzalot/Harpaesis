@@ -35,7 +35,7 @@ namespace Harpaesis.Combat
             return (unit != null) && ((targetMask.HasFlag(TargetMask.Ally) && !isEnemyUnit) || (targetMask.HasFlag(TargetMask.Enemy) && isEnemyUnit));
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (unit == null && other.GetComponent<Unit>() != null)
             {

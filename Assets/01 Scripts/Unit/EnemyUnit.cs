@@ -18,10 +18,16 @@ public class EnemyUnit : Unit
 
     public LayerMask viewObstructionMask;
 
+    // Temp
+    ColoredProgressBar healthBar;
+
     protected override void Init()
     {
         enemyUnitData = (EnemyUnitData)unitData;
         FriendlyUnit[] _friendlyUnits = FindObjectsOfType<FriendlyUnit>();
+
+        // Temp
+        healthBar = GetComponentInChildren<ColoredProgressBar>();
 
         foreach (FriendlyUnit _unit in _friendlyUnits)
         {
@@ -34,6 +40,13 @@ public class EnemyUnit : Unit
                 Debug.LogError($"Unit {_unit} is already dead.");
             }
         }
+    }
+
+    private void Update()
+    {
+        // Temp
+        float _hpPerc = ((float)currentHP / (float)enemyUnitData.healthStat) * 100;
+        healthBar.SetProgress(Mathf.RoundToInt(_hpPerc));
     }
 
     public override void StartTurn()
