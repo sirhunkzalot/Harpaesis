@@ -13,19 +13,21 @@ MonoBehaviour:
   m_Name: Highwayman
   m_EditorClassIdentifier: 
   unitName: Highwayman
+  unitIcon: {fileID: 21300000, guid: 2ba25e9818b3b2642b7e6f2917c7134a, type: 3}
   healthStat: 15
   inititiveStat: 3
   attackStat: 12
   defenseStat: 8
   apStat: 5
+  enemyTargetingStyle: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: d8aa5f8e7ae8afb449ac1959d672bd91, type: 2}
-    rangeEstimate: 0
+    rangeEstimate: 5
     shortRangeWeight: 100
     mediumRangeWeight: 75
     longRangeWeight: 50
   - skill: {fileID: 11400000, guid: 221e191003922ff47accb6e7da577bcf, type: 2}
-    rangeEstimate: 0
+    rangeEstimate: 5
     shortRangeWeight: 0
     mediumRangeWeight: 25
     longRangeWeight: 50

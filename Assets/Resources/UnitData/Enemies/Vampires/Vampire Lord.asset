@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Vampire Lord
   m_EditorClassIdentifier: 
   unitName: Vampire Lord
+  unitIcon: {fileID: 21300000, guid: 1d09ab1f9f5f3fe4fa551b752f8b2429, type: 3}
   healthStat: 35
   inititiveStat: 7
   attackStat: 14
   defenseStat: 14
   apStat: 5
+  enemyTargetingStyle: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: 7e57fbe27dcfbf34887dc555690c4a5a, type: 2}
     rangeEstimate: 1
@@ -35,7 +37,7 @@ MonoBehaviour:
     mediumRangeWeight: 0
     longRangeWeight: 0
   - skill: {fileID: 11400000, guid: 55dd9f4d2659e324db3415560c65488c, type: 2}
-    rangeEstimate: 1
+    rangeEstimate: 3
     shortRangeWeight: 25
     mediumRangeWeight: 0
     longRangeWeight: 0
