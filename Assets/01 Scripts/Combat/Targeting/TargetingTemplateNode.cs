@@ -37,7 +37,6 @@ namespace Harpaesis.Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            print(other.name);
             if (unit == null && other.GetComponent<Unit>() != null)
             {
                 unit = other.GetComponent<Unit>();
