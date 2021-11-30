@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Harpaesis.AudioSystem
 {
-    public class AudioManagerTest1 : MonoBehaviour
+    public class AudioManager : MonoBehaviour
     {
         private static readonly string FirstPlay = "FirstPlay";
         private static readonly string BackgroundPref = "BackgroundPref";
