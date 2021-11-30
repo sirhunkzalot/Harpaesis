@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Void Spider
   m_EditorClassIdentifier: 
   unitName: Void Spider
-  unitIcon: {fileID: 0}
+  unitIcon: {fileID: 21300000, guid: 82d04a3c8a463af4287cb938ab5582b5, type: 3}
   healthStat: 12
   inititiveStat: 3
   attackStat: 8
@@ -22,17 +22,17 @@ MonoBehaviour:
   enemyTargetingStyle: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: c3b89a5101853d3418a84cd3a8ec4613, type: 2}
-    rangeEstimate: 0
+    rangeEstimate: 1
     shortRangeWeight: 75
     mediumRangeWeight: 25
     longRangeWeight: 30
   - skill: {fileID: 11400000, guid: 7abc68c4109266d43bbf6612031307dd, type: 2}
-    rangeEstimate: 0
+    rangeEstimate: 3
     shortRangeWeight: 0
     mediumRangeWeight: 75
     longRangeWeight: 70
   - skill: {fileID: 11400000, guid: f568a99a2c2474640b507a11df09f8bd, type: 2}
-    rangeEstimate: 0
+    rangeEstimate: 1
     shortRangeWeight: 25
     mediumRangeWeight: 0
     longRangeWeight: 0
