@@ -27,17 +27,17 @@ public class PathRenderer : MonoBehaviour
 
     private void Update()
     {
-        if(unit != null)
+        if(unit != null && reachablePath.positionCount > 0)
         {
-            if(!renderActualPath && reachablePath.positionCount > 0)
+            if(!renderActualPath)
             {
                 reachablePath.SetPosition(0, unit.transform.position + pathOffset);
             }
-            else if(renderActualPath && actualPath.positionCount > 0)
+            else
             {
                 actualPath.SetPosition(0, unit.transform.position + pathOffset);
 
-                if(Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1)) == 0)
+                if(Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1)) <= pathOffset.y)
                 {
                     if(actualPath.positionCount == 2)
                     {
