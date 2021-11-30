@@ -37,8 +37,6 @@ public class PathRenderer : MonoBehaviour
             {
                 actualPath.SetPosition(0, unit.transform.position + pathOffset);
 
-                Debug.Log($"{Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1))}");
-
                 if (Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1)) <= .05)
                 {
                     if(actualPath.positionCount == 2)
