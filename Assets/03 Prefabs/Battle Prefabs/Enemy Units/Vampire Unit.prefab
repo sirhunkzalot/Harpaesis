@@ -167,8 +167,18 @@ MonoBehaviour:
   turnData:
     unit: {fileID: 0}
     unitData: {fileID: 0}
+    hasAttacked: 0
     ap: 0
   enemyUnitData: {fileID: 0}
+  results:
+    path: []
+    success: 0
+    unit: {fileID: 0}
+    pathLength: 0
+  currentTarget: {fileID: 0}
+  viewObstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &5205872326945359676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,4 +193,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   targetIndex: 0
+  isMoving: 0
   path: []

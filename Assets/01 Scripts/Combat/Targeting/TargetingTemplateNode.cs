@@ -35,8 +35,9 @@ namespace Harpaesis.Combat
             return (unit != null) && ((targetMask.HasFlag(TargetMask.Ally) && !isEnemyUnit) || (targetMask.HasFlag(TargetMask.Enemy) && isEnemyUnit));
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
+            print(other.name);
             if (unit == null && other.GetComponent<Unit>() != null)
             {
                 unit = other.GetComponent<Unit>();
@@ -46,7 +47,6 @@ namespace Harpaesis.Combat
             else if (other.GetComponent<GridCursor>() != null)
             {
                 if (isAOE) return;
-                print("OnExit");
                 parent.currentlySelected = this;
 
                 rend.material = (IsValidTarget()) ? validAndSelected : selected;
