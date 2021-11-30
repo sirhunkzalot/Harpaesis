@@ -61,15 +61,14 @@ public class GridCamera : MonoBehaviour
         if (followUnit == null)
         {
             HandleCameraInput();
-            HandleCameraMovement();
-            HandleCameraRotation();
         }
         else
         {
             FollowUnit();
-            HandleCameraMovement();
         }
 
+        HandleCameraMovement();
+        HandleCameraRotation();
     }
 
     /* HandleCameraZoom manages the size of the orthographic camera based on the scroll wheel */

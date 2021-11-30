@@ -37,7 +37,9 @@ public class PathRenderer : MonoBehaviour
             {
                 actualPath.SetPosition(0, unit.transform.position + pathOffset);
 
-                if(Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1)) <= pathOffset.y)
+                Debug.Log($"{Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1))}");
+
+                if (Vector3.Distance(actualPath.GetPosition(0), actualPath.GetPosition(1)) <= .05)
                 {
                     if(actualPath.positionCount == 2)
                     {
@@ -91,8 +93,6 @@ public class PathRenderer : MonoBehaviour
         {
             reachablePath.gameObject.SetActive(false);
         }
-
-
 
         // Sets the positions for all of the unreachableSpaces in the path
         
