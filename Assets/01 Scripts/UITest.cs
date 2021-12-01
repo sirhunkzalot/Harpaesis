@@ -19,6 +19,15 @@ public class UITest : MonoBehaviour
         weaponDescription.text = "Current Weapon: Weapon 1";
 
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            settings.SetActive(!settings.activeInHierarchy);
+        }
+    }
+
     public void _Items()
     {
         if (Items.activeSelf)

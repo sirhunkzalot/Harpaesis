@@ -17,7 +17,7 @@ public class LevelSelect : MonoBehaviour
         {
             LevelLoadManager.LoadMainMenu();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             LevelLoadManager.LoadLevel(1);
         }
