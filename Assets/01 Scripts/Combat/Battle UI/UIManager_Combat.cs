@@ -63,4 +63,19 @@ public class UIManager_Combat : MonoBehaviour
 
         _unit.BeginTargeting(_index);
     }
+
+    public void Button_Menu()
+    {
+        LevelLoadManager.LoadMainMenu();
+    }
+
+    public void Button_NextLevel()
+    {
+        LevelLoadManager.LoadNextLevel();
+    }
+
+    public void Button_ReplayLevel()
+    {
+        LevelLoadManager.ReloadLevel();
+    }
 }

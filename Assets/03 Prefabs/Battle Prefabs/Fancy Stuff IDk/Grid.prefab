@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3082590738374675748}
   - component: {fileID: 3082590738374675747}
   - component: {fileID: 3082590738374675746}
+  - component: {fileID: 6471569375930875028}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -106,8 +107,11 @@ MonoBehaviour:
   activeTurn:
     unit: {fileID: 0}
     unitData: {fileID: 0}
+    hasAttacked: 0
     ap: 0
   units: []
+  friendlyUnits: []
+  enemyUnits: []
   turnOrder: []
 --- !u!114 &3082590738374675746
 MonoBehaviour:
@@ -119,5 +123,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15645fe4440f76b4cbdf2408b8c177ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6471569375930875028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3082590738374675768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b69126a98ea13f47a4f0aede6876fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

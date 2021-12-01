@@ -132,6 +132,10 @@ public abstract class Unit : MonoBehaviour
 
     public void DestroyModel()
     {
+        if(TurnManager.instance.activeTurn.unit == this)
+        {
+            TurnManager.instance.NextTurn();
+        }
         DissolveRaycast.instance.RemoveGameobject(gameObject);
         grid.NodeFromWorldPoint(transform.position).hasUnit = false;
         Destroy(gameObject);

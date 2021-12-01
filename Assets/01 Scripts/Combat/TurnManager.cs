@@ -19,6 +19,7 @@ public class TurnManager : MonoBehaviour
     public List<Turn> turnOrder;
 
     public static TurnManager instance;
+
     private void Awake()
     {
         instance = this;
@@ -82,7 +83,7 @@ public class TurnManager : MonoBehaviour
                     friendlyUnits.Remove((FriendlyUnit)_unit);
                     if (friendlyUnits.Count == 0)
                     {
-                        print("Combat Lost!");
+                        UIManager_EndCombatScreen.instance.OpenLoseScreen();
                     }
                 }
                 else
@@ -90,7 +91,7 @@ public class TurnManager : MonoBehaviour
                     enemyUnits.Remove((EnemyUnit)_unit);
                     if(enemyUnits.Count == 0)
                     {
-                        print("Combat Won!");
+                        UIManager_EndCombatScreen.instance.OpenVictoryScreen();
                     }
 
                     _unit.DestroyModel();

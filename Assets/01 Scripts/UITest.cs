@@ -17,6 +17,7 @@ public class UITest : MonoBehaviour
     {
         settings.SetActive(false);
         weaponDescription.text = "Current Weapon: Weapon 1";
+
     }
     public void _Items()
     {
@@ -24,31 +25,10 @@ public class UITest : MonoBehaviour
         {
             Items.SetActive(false);
         }
-        else Items.SetActive(true);
-
-    }
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        else
         {
-            SceneManager.LoadScene("Test Map1");
+            Items.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SceneManager.LoadScene("Test Map 2");
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (settings.activeSelf)
-            {
-                settings.SetActive(false);
-            }
-            else settings.SetActive(true);
-        }
-    }
-    public void ReturnToMenu()
-    {
-        SceneManager.LoadScene("Main menu idea");
     }
 
     public void QuitGame()

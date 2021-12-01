@@ -66,12 +66,18 @@ namespace Harpaesis.AudioSystem
         {
             for (int i = 0; i < backgroundMusicAudio.Length; i++)
             {
-                backgroundMusicAudio[i].volume = backgroundSlider.value;
+                if(backgroundMusicAudio[i] != null)
+                {
+                    backgroundMusicAudio[i].volume = backgroundSlider.value;
+                }
             }
 
             for (int i = 0; i < soundEffectsAudio.Length; i++)
             {
-                soundEffectsAudio[i].volume = soundEffectsSlider.value;
+                if (soundEffectsAudio[i] != null)
+                {
+                    soundEffectsAudio[i].volume = soundEffectsSlider.value;
+                }
             }
 
             AudioListener.volume = masterVolSlider.value;

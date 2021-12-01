@@ -125,7 +125,7 @@ namespace Harpaesis.Combat
 
         public override void OnTurnStart()
         {
-            effectedUnit.motor.RunAway(inflictingUnit.transform.position);
+            //effectedUnit.motor.RunAway(inflictingUnit.transform.position);
             //effectedUnit.ForceEndTurn();
         }
 
@@ -144,7 +144,7 @@ namespace Harpaesis.Combat
         protected override void OnEffectApplied()
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has been put to sleep!", BattleLogType.Combat);
-            effectedUnit.canMove = false;
+            //effectedUnit.canMove = false;
         }
 
         public override void OnTakeDamage()

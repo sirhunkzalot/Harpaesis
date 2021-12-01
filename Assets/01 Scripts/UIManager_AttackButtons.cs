@@ -17,7 +17,7 @@ public class UIManager_AttackButtons : MonoBehaviour
 
     void Update()
     {
-        if (gameObject.activeInHierarchy)
+        if (gameObject.activeInHierarchy && turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit))
         {
             FriendlyUnit _friendlyUnit = (FriendlyUnit)turnManager.activeTurn.unit;
             basicAttack.interactable = _friendlyUnit.turnData.hasAttacked == false && _friendlyUnit.turnData.ap >= _friendlyUnit.friendlyUnitData.basicAttack.apCost;
