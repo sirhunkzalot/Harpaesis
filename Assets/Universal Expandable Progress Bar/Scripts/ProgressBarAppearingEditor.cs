@@ -1,14 +1,13 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ProgressBarAppearing))]
 [System.Serializable]
 public class ProgressBarAppearingEditor : Editor {
 
     public override void OnInspectorGUI() {
-#if UNITY_EDITOR
 
         var script = target as ProgressBarAppearing;        
         script.appearTime = EditorGUILayout.FloatField("Appearing time", script.appearTime);
@@ -33,7 +32,6 @@ public class ProgressBarAppearingEditor : Editor {
             script.toColor = EditorGUILayout.ColorField("To color", script.toColor);
         }
         EditorUtility.SetDirty(script);
-
-#endif
     }
 }
+#endif
