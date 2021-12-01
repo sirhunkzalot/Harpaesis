@@ -6,7 +6,7 @@ public class DissolveRaycast : MonoBehaviour
 {
     Camera cam;
 
-    GameObject[] mustViewObjects;
+    List<GameObject> mustViewObjects = new List<GameObject>();
 
     List<GameObject> obstacles = new List<GameObject>();
 
@@ -16,20 +16,22 @@ public class DissolveRaycast : MonoBehaviour
 
     public LayerMask layermask;
 
+    public static DissolveRaycast instance;
+
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        instance = this;
     }
 
     private void Start()
     {
         Unit[] units = TurnManager.instance.units.ToArray();
-        mustViewObjects = new GameObject[units.Length + 1];
-        mustViewObjects[0] = GridCursor.instance.gameObject;
+        mustViewObjects.Add(GridCursor.instance.gameObject);
 
         for (int i = 0; i < units.Length; i++)
         {
-            mustViewObjects[i + 1] = units[i].gameObject;
+            mustViewObjects.Add(units[i].gameObject);
         }
 
         GameObject[] _allObjects = GameObject.FindGameObjectsWithTag("Wall");
@@ -117,6 +119,14 @@ public class DissolveRaycast : MonoBehaviour
                 float _height = Mathf.Lerp(_mats[i].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
                 _mats[i].SetFloat("MaxHeight", _height);
             }
+        }
+    }
+
+    public void RemoveGameobject(GameObject _objectToRemove)
+    {
+        if (mustViewObjects.Contains(_objectToRemove))
+        {
+            mustViewObjects.Remove(_objectToRemove);
         }
     }
 }

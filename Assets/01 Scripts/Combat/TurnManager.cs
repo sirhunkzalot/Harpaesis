@@ -13,6 +13,9 @@ public class TurnManager : MonoBehaviour
     public Turn activeTurn;
 
     public List<Unit> units = new List<Unit>();
+    public List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
+    public List<EnemyUnit> enemyUnits = new List<EnemyUnit>();
+
     public List<Turn> turnOrder;
 
     public static TurnManager instance;
@@ -28,6 +31,14 @@ public class TurnManager : MonoBehaviour
         foreach (Unit _unit in _units)
         {
             units.Add(_unit);
+            if(_unit.GetType() == typeof(FriendlyUnit))
+            {
+                friendlyUnits.Add((FriendlyUnit)_unit);
+            }
+            else
+            {
+                enemyUnits.Add((EnemyUnit)_unit);
+            }
         }
 
         BuildTurnOrder();
@@ -65,6 +76,25 @@ public class TurnManager : MonoBehaviour
             if(units[i] == _unit)
             {
                 units.RemoveAt(i);
+
+                if (_unit.GetType() == typeof(FriendlyUnit))
+                {
+                    friendlyUnits.Remove((FriendlyUnit)_unit);
+                    if (friendlyUnits.Count == 0)
+                    {
+                        print("Combat Lost!");
+                    }
+                }
+                else
+                {
+                    enemyUnits.Remove((EnemyUnit)_unit);
+                    if(enemyUnits.Count == 0)
+                    {
+                        print("Combat Won!");
+                    }
+
+                    _unit.DestroyModel();
+                }
             }
         }
         for (int i = 0; i < turnOrder.Count; i++)

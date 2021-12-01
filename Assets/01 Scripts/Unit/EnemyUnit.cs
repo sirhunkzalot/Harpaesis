@@ -14,9 +14,10 @@ public class EnemyUnit : Unit
     [SerializeField, ReadOnly] PathResult results = null;
     [SerializeField, ReadOnly] Unit currentTarget;
 
-    List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
+    TurnManager turnManager;
 
     public LayerMask viewObstructionMask;
+
 
     // Temp
     ColoredProgressBar healthBar;
@@ -24,22 +25,10 @@ public class EnemyUnit : Unit
     protected override void Init()
     {
         enemyUnitData = (EnemyUnitData)unitData;
-        FriendlyUnit[] _friendlyUnits = FindObjectsOfType<FriendlyUnit>();
+        turnManager = TurnManager.instance;
 
         // Temp
         healthBar = GetComponentInChildren<ColoredProgressBar>();
-
-        foreach (FriendlyUnit _unit in _friendlyUnits)
-        {
-            if (_unit.isAlive)
-            {
-                friendlyUnits.Add(_unit);
-            }
-            else
-            {
-                Debug.LogError($"Unit {_unit} is already dead.");
-            }
-        }
     }
 
     private void Update()
@@ -57,15 +46,6 @@ public class EnemyUnit : Unit
         gridCam.followUnit = this;
         results = null;
 
-        // Purges Dead Units from targeting list
-        for (int i = friendlyUnits.Count - 1; i >= 0; i--)
-        {
-            if (!friendlyUnits[i].isAlive)
-            {
-                friendlyUnits.RemoveAt(i);
-            }
-        }
-
         HandleTargeting();
     }
 
@@ -74,17 +54,17 @@ public class EnemyUnit : Unit
         switch (enemyUnitData.enemyTargetingStyle)
         {
             case EnemyTargetingStyle.Closest:
-                for (int i = 0; i < friendlyUnits.Count; i++)
+                for (int i = 0; i < turnManager.friendlyUnits.Count; i++)
                 {
-                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
-                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, friendlyUnits[i]));
+                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(turnManager.friendlyUnits[i].transform.position);
+                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, turnManager.friendlyUnits[i]));
                 }
                 break;
             case EnemyTargetingStyle.Furthest:
-                for (int i = 0; i < friendlyUnits.Count; i++)
+                for (int i = 0; i < turnManager.friendlyUnits.Count; i++)
                 {
-                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
-                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetFurthestFriendlyUnit, friendlyUnits[i]));
+                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(turnManager.friendlyUnits[i].transform.position);
+                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetFurthestFriendlyUnit, turnManager.friendlyUnits[i]));
                 }
                 break;
             case EnemyTargetingStyle.HighestHP:
@@ -101,31 +81,31 @@ public class EnemyUnit : Unit
     public void GetUnitWithMostHealth()
     {
         int _unitIndex = 0;
-        int _unitHP = friendlyUnits[_unitIndex].currentHP;
+        int _unitHP = turnManager.friendlyUnits[_unitIndex].currentHP;
 
-        for (int i = 1; i < friendlyUnits.Count; i++)
+        for (int i = 1; i < turnManager.friendlyUnits.Count; i++)
         {
             // If new unit has more health that the previous unit
-            if (friendlyUnits[i].currentHP > _unitHP)
+            if (turnManager.friendlyUnits[i].currentHP > _unitHP)
             {
-                _unitHP = friendlyUnits[i].currentHP;
+                _unitHP = turnManager.friendlyUnits[i].currentHP;
                 _unitIndex = i;
             }
             // If HP is equal, defaults to closer Unit
-            else if (friendlyUnits[i].currentHP == _unitHP)
+            else if (turnManager.friendlyUnits[i].currentHP == _unitHP)
             {
-                float _oldDis = Vector3.Distance(friendlyUnits[_unitIndex].transform.position, transform.position);
-                float _newDis = Vector3.Distance(friendlyUnits[i].transform.position, transform.position);
+                float _oldDis = Vector3.Distance(turnManager.friendlyUnits[_unitIndex].transform.position, transform.position);
+                float _newDis = Vector3.Distance(turnManager.friendlyUnits[i].transform.position, transform.position);
 
                 if (_newDis < _oldDis)
                 {
-                    _unitHP = friendlyUnits[i].currentHP;
+                    _unitHP = turnManager.friendlyUnits[i].currentHP;
                     _unitIndex = i;
                 }
             }
         }
 
-        currentTarget = friendlyUnits[_unitIndex];
+        currentTarget = turnManager.friendlyUnits[_unitIndex];
         Vector3 _targetPosition = grid.NodePositionFromWorldPoint(currentTarget.transform.position);
         PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
     }
@@ -133,31 +113,31 @@ public class EnemyUnit : Unit
     public void GetUnitWithLeastHealth()
     {
         int _unitIndex = 0;
-        int _unitHP = friendlyUnits[_unitIndex].currentHP;
+        int _unitHP = turnManager.friendlyUnits[_unitIndex].currentHP;
 
-        for (int i = 1; i < friendlyUnits.Count; i++)
+        for (int i = 1; i < turnManager.friendlyUnits.Count; i++)
         {
             // If new unit has less health that the previous unit
-            if (friendlyUnits[i].currentHP < _unitHP)
+            if (turnManager.friendlyUnits[i].currentHP < _unitHP)
             {
-                _unitHP = friendlyUnits[i].currentHP;
+                _unitHP = turnManager.friendlyUnits[i].currentHP;
                 _unitIndex = i;
             }
             // If HP is equal, defaults to closer Unit
-            else if(friendlyUnits[i].currentHP == _unitHP)
+            else if(turnManager.friendlyUnits[i].currentHP == _unitHP)
             {
-                float _oldDis =  Vector3.Distance(friendlyUnits[_unitIndex].transform.position, transform.position);
-                float _newDis = Vector3.Distance(friendlyUnits[i].transform.position, transform.position);
+                float _oldDis =  Vector3.Distance(turnManager.friendlyUnits[_unitIndex].transform.position, transform.position);
+                float _newDis = Vector3.Distance(turnManager.friendlyUnits[i].transform.position, transform.position);
 
                 if(_newDis < _oldDis)
                 {
-                    _unitHP = friendlyUnits[i].currentHP;
+                    _unitHP = turnManager.friendlyUnits[i].currentHP;
                     _unitIndex = i;
                 }
             }
         }
 
-        currentTarget = friendlyUnits[_unitIndex];
+        currentTarget = turnManager.friendlyUnits[_unitIndex];
         Vector3 _targetPosition = grid.NodePositionFromWorldPoint(currentTarget.transform.position);
         PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
     }
@@ -170,10 +150,10 @@ public class EnemyUnit : Unit
         }
         else
         {
-            for (int i = 0; i < friendlyUnits.Count; i++)
+            for (int i = 0; i < turnManager.friendlyUnits.Count; i++)
             {
-                Vector3 _targetPosition = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position);
-                PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, friendlyUnits[i]));
+                Vector3 _targetPosition = grid.NodePositionFromWorldPoint(turnManager.friendlyUnits[i].transform.position);
+                PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, turnManager.friendlyUnits[i]));
             }
         }
     }

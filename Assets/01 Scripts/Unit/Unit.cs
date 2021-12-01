@@ -130,6 +130,13 @@ public abstract class Unit : MonoBehaviour
         TurnManager.instance.NextTurn();
     }
 
+    public void DestroyModel()
+    {
+        DissolveRaycast.instance.RemoveGameobject(gameObject);
+        grid.NodeFromWorldPoint(transform.position).hasUnit = false;
+        Destroy(gameObject);
+    }
+
     private void OnTurnStart()
     {
         for (int i = 0; i < currentEffects.Count; i++)
