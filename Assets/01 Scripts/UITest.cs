@@ -16,6 +16,7 @@ public class UITest : MonoBehaviour
     public void Start()
     {
         settings.SetActive(false);
+        weaponDescription.text = "Current Weapon: Weapon 1";
     }
     public void _Items()
     {
@@ -59,12 +60,12 @@ public class UITest : MonoBehaviour
         if(swapWeapon == true)
         {
             swapWeapon = false;
-            weaponDescription.text = "weapon 1";
+            weaponDescription.text = "Current Weapon: weapon 1";
         }
         else
         {
             swapWeapon = true;
-            weaponDescription.text = "weapon 2";
+            weaponDescription.text = "Current Weapon: weapon 2";
         }
         
     }
