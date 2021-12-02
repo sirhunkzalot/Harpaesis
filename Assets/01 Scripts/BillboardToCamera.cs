@@ -5,6 +5,7 @@ using UnityEngine;
 public class BillboardToCamera : MonoBehaviour
 {
     Transform cam;
+    public bool invert;
 
     private void Start()
     {
@@ -13,6 +14,6 @@ public class BillboardToCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.forward = -cam.forward;
+        transform.forward = (invert) ? cam.forward : -cam.forward;
     }
 }

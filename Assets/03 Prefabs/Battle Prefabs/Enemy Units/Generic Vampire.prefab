@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invert: 0
 --- !u!1 &5205872326945359666
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a3547686a185e4792c91762a9b20db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitData: {fileID: 11400000, guid: 096eb9d7467726a49a0a671fd1b22095, type: 2}
+  unitData: {fileID: 0}
   motor: {fileID: 0}
   hasPath: 0
   currentHP: 0
@@ -167,7 +168,18 @@ MonoBehaviour:
   turnData:
     unit: {fileID: 0}
     unitData: {fileID: 0}
+    hasAttacked: 0
     ap: 0
+  enemyUnitData: {fileID: 0}
+  results:
+    path: []
+    success: 0
+    unit: {fileID: 0}
+    pathLength: 0
+  currentTarget: {fileID: 0}
+  viewObstructionMask:
+    serializedVersion: 2
+    m_Bits: 2097152
 --- !u!114 &5205872326945359676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,4 +194,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   targetIndex: 0
+  isMoving: 0
   path: []

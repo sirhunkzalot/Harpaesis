@@ -30,7 +30,13 @@ public abstract class Unit : MonoBehaviour
     protected GridCamera gridCam;
     protected UIManager_Combat uiCombat;
 
-
+    private void OnValidate()
+    {
+        if (gameObject.layer != 25)
+        {
+            gameObject.layer = 25;
+        }
+    }
 
     private void Start()
     {
@@ -58,6 +64,8 @@ public abstract class Unit : MonoBehaviour
     public void TakeDamage(int _damageAmount, Unit _attacker = null)
     {
         if (!isAlive || _damageAmount <= 0) return;
+
+        GetComponentInChildren<Unit_UI>()?.DisplayDamageText(_damageAmount);
 
         currentHP = Mathf.Clamp(currentHP - _damageAmount, 0, unitData.healthStat);
 

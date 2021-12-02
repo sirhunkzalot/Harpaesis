@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invert: 0
 --- !u!1 &5205872326945359666
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,11 +239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.1915
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1.9382
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_LocalPosition.x
@@ -254,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_LocalRotation.w
@@ -274,11 +275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.2762
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.76
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8136533369486393325, guid: b96a834f1d45d5a438db2edd23083cda, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -316,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6807710592596478178, guid: b92087596106eaa41bfbcdfc8e8368f1, type: 3}
       propertyPath: m_Color.r
-      value: 0.14419556
+      value: 0.36000013
       objectReference: {fileID: 0}
     - target: {fileID: 6807710593791087824, guid: b92087596106eaa41bfbcdfc8e8368f1, type: 3}
       propertyPath: m_Pivot.x

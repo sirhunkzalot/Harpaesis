@@ -60,7 +60,7 @@ public class UnitMotor : MonoBehaviour
                     _currentWaypoint = path[targetIndex];
                 }
 
-                transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint.position, Time.deltaTime * speed);
+                transform.position = Vector3.MoveTowards(transform.position, _currentWaypoint.position, Time.deltaTime * speed * (1 + (unit.unitData.inititiveStat / 7.5f)));
                 yield return null;
             }
         }

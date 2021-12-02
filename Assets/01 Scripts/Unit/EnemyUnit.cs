@@ -12,7 +12,7 @@ public class EnemyUnit : Unit
     [HideInInspector] public EnemyUnitData enemyUnitData;
 
     [SerializeField, ReadOnly] PathResult results = null;
-    [SerializeField, ReadOnly] Unit currentTarget;
+    [SerializeField, ReadOnly] FriendlyUnit currentTarget;
 
     TurnManager turnManager;
 
@@ -78,7 +78,7 @@ public class EnemyUnit : Unit
         Invoke(nameof(PlanTurn), 1f);
     }
 
-    public void GetUnitWithMostHealth()
+    void GetUnitWithMostHealth()
     {
         int _unitIndex = 0;
         int _unitHP = turnManager.friendlyUnits[_unitIndex].currentHP;
@@ -110,7 +110,7 @@ public class EnemyUnit : Unit
         PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
     }
 
-    public void GetUnitWithLeastHealth()
+    void GetUnitWithLeastHealth()
     {
         int _unitIndex = 0;
         int _unitHP = turnManager.friendlyUnits[_unitIndex].currentHP;
@@ -142,7 +142,7 @@ public class EnemyUnit : Unit
         PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
     }
 
-    public void HandlePathResults(PathResult _result)
+    void HandlePathResults(PathResult _result)
     {
         if (_result.success)
         {
@@ -159,26 +159,78 @@ public class EnemyUnit : Unit
     }
 
 
-    public void GetClosestFriendlyUnit(PathResult _result)
+    void GetClosestFriendlyUnit(PathResult _result)
     {
-        if (results == null || _result.pathLength < results.pathLength)
+        if (_result.success)
         {
-            results = _result;
-            currentTarget = results.unit;
+            if (results == null || _result.pathLength < results.pathLength)
+            {
+                results = _result;
+                currentTarget = (FriendlyUnit)results.unit;
+            }
         }
     }
 
-    public void GetFurthestFriendlyUnit(PathResult _result)
+    void GetFurthestFriendlyUnit(PathResult _result)
     {
-        if (results == null || _result.pathLength > results.pathLength)
+        if (_result.success)
         {
-            results = _result;
-            currentTarget = results.unit;
+            if (results == null || _result.pathLength > results.pathLength)
+            {
+                results = _result;
+                currentTarget = (FriendlyUnit)results.unit;
+            }
+        }
+    }
+
+    void FindClosestEnemy()
+    {
+        for (int i = 0; i < turnManager.enemyUnits.Count; i++)
+        {
+            EnemyUnit _unit = turnManager.enemyUnits[i];
+
+            if (_unit == this) continue;
+
+            Vector3 _targetPosition = grid.NodePositionFromWorldPoint(_unit.transform.position);
+            PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestEnemyUnit, turnManager.friendlyUnits[i]));
+
+            Invoke(nameof(MoveToEnemyUnit), .5f);
+        }
+    }
+
+    void GetClosestEnemyUnit(PathResult _result)
+    {
+        if (_result.success)
+        {
+            if(results == null || _result.pathLength < results.pathLength)
+            {
+                results = _result;
+            }
+        }
+    }
+
+    void MoveToEnemyUnit()
+    {
+        if(results != null)
+        {
+            print("moving to ally");
+            MoveOnlyTurn();
+        }
+        else
+        {
+            print("idk");
+            EndTurn();
         }
     }
 
     public void PlanTurn()
     {
+        if (results == null)
+        {
+            FindClosestEnemy();
+            return;
+        }
+
         List<EnemyMove> _validMoves = new List<EnemyMove>();
 
         Dictionary<int,Vector3> _validPositionsWithVision = new Dictionary<int, Vector3>();
@@ -215,7 +267,7 @@ public class EnemyUnit : Unit
         {
             if(results.pathLength == 0)
             {
-                EndTurn();
+                FindClosestEnemy();
                 return;
             }
 
