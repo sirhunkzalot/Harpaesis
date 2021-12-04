@@ -13,7 +13,7 @@ public class UITest : MonoBehaviour
     public bool swapWeapon;
     public Text weaponDescription;
 
-    
+    public AudioSource sfx;
 
     public void Start()
     {
@@ -27,6 +27,7 @@ public class UITest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             settings.SetActive(!settings.activeInHierarchy);
+            sfx.Play();
         }
     }
 
