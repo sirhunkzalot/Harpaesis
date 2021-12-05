@@ -13,6 +13,8 @@ public class UITest : MonoBehaviour
     public bool swapWeapon;
     public Text weaponDescription;
 
+    public AudioSource sfx;
+
     public void Start()
     {
         settings.SetActive(false);
@@ -25,6 +27,7 @@ public class UITest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             settings.SetActive(!settings.activeInHierarchy);
+            sfx.Play();
         }
     }
 
@@ -57,6 +60,14 @@ public class UITest : MonoBehaviour
             weaponDescription.text = "Current Weapon: weapon 2";
         }
         
+    }
+    public void SettingsMenu()
+    {
+        if (settings.activeSelf)
+        {
+            settings.SetActive(false);
+        }
+        else settings.SetActive(true);
     }
 
 }
