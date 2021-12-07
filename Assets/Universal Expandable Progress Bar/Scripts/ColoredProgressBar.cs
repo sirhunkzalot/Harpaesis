@@ -37,23 +37,17 @@ public class ColoredProgressBar : ProgressBar {
         float progressForColor = facticalProgress / (float) max;
         progress.color = startColor * (1 - progressForColor) + finalColor * progressForColor;
 
-        text.text = beforeText + facticalProgress + afterText;
 
         if (!maxGained) {
-            if (GetProgress() == (float)max) {
-                maxGained = true;            
-                text.color = Color.Lerp(startColor, finalColor, Mathf.PingPong(Time.time*2,1));
-            } else {
-                text.color = startColor;
+            if (GetProgress() == (float)max)
+            {
+                maxGained = true;
             }
         } else {
-            if (GetProgress() < (float)max) {
-                maxGained = false;             
-                text.color = startColor;
-            } else {
-                text.color = Color.Lerp(startColor, finalColor,Mathf.PingPong(Time.time*2,1));
+            if (GetProgress() < (float)max)
+            {
+                maxGained = false;
             }
-         
         }
     }
 

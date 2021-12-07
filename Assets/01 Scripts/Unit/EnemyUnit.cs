@@ -11,12 +11,15 @@ public class EnemyUnit : Unit
 {
     [HideInInspector] public EnemyUnitData enemyUnitData;
 
-    [SerializeField, ReadOnly] PathResult results = null;
     [SerializeField, ReadOnly] FriendlyUnit currentTarget;
+
+    List<EnemyMove> validMoves = new List<EnemyMove>();
 
     TurnManager turnManager;
 
     public LayerMask viewObstructionMask;
+
+    List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
 
 
     // Temp
@@ -44,289 +47,144 @@ public class EnemyUnit : Unit
 
         uiCombat.ShowPlayerUI(false);
         gridCam.followUnit = this;
-        results = null;
+        friendlyUnits = turnManager.friendlyUnits;
+        validMoves = new List<EnemyMove>();
 
-        HandleTargeting();
+        PlanTurn();
     }
 
-    void HandleTargeting()
+    void PlanTurn()
     {
-        switch (enemyUnitData.enemyTargetingStyle)
+        for (int i = 0; i < friendlyUnits.Count; i++)
         {
-            case EnemyTargetingStyle.Closest:
-                for (int i = 0; i < turnManager.friendlyUnits.Count; i++)
-                {
-                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(turnManager.friendlyUnits[i].transform.position);
-                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, turnManager.friendlyUnits[i]));
-                }
-                break;
-            case EnemyTargetingStyle.Furthest:
-                for (int i = 0; i < turnManager.friendlyUnits.Count; i++)
-                {
-                    Vector3 _targetPosition = grid.NodePositionFromWorldPoint(turnManager.friendlyUnits[i].transform.position);
-                    PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetFurthestFriendlyUnit, turnManager.friendlyUnits[i]));
-                }
-                break;
-            case EnemyTargetingStyle.HighestHP:
-                GetUnitWithMostHealth();
-                break;
-            case EnemyTargetingStyle.LowestHP:
-                GetUnitWithLeastHealth();
-                break;
+            Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
+            Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position, false);
+
+            PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMoves, this));
+
+            CreateEnemyMoves(friendlyUnits[i], transform.position, enemyUnitData.apStat);
         }
 
-        Invoke(nameof(PlanTurn), 1f);
+        Invoke(nameof(ChooseMove), 1f);
     }
 
-    void GetUnitWithMostHealth()
+    void CreateEnemyMoves(FriendlyUnit _unit, Vector3 _position, int _apAtPosition, PathResult _results = null, int _pathPositionIndex = 0)
     {
-        int _unitIndex = 0;
-        int _unitHP = turnManager.friendlyUnits[_unitIndex].currentHP;
-
-        for (int i = 1; i < turnManager.friendlyUnits.Count; i++)
+        if (!Physics.Linecast(_position + Vector3.up, _unit.transform.position + Vector3.up, viewObstructionMask))
         {
-            // If new unit has more health that the previous unit
-            if (turnManager.friendlyUnits[i].currentHP > _unitHP)
+            foreach (EnemySkill _skill in enemyUnitData.enemySkills)
             {
-                _unitHP = turnManager.friendlyUnits[i].currentHP;
-                _unitIndex = i;
-            }
-            // If HP is equal, defaults to closer Unit
-            else if (turnManager.friendlyUnits[i].currentHP == _unitHP)
-            {
-                float _oldDis = Vector3.Distance(turnManager.friendlyUnits[_unitIndex].transform.position, transform.position);
-                float _newDis = Vector3.Distance(turnManager.friendlyUnits[i].transform.position, transform.position);
-
-                if (_newDis < _oldDis)
+                if (_skill.skill.apCost <= _apAtPosition && _skill.rangeEstimate >= Mathf.RoundToInt(Vector3.Distance(_unit.transform.position, transform.position)))
                 {
-                    _unitHP = turnManager.friendlyUnits[i].currentHP;
-                    _unitIndex = i;
+                    validMoves.Add(new EnemyMove(_position, _pathPositionIndex, _skill, _unit, _results));
                 }
             }
         }
-
-        currentTarget = turnManager.friendlyUnits[_unitIndex];
-        Vector3 _targetPosition = grid.NodePositionFromWorldPoint(currentTarget.transform.position);
-        PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
     }
 
-    void GetUnitWithLeastHealth()
+    void CreateEnemyMoves(PathResult _result)
     {
-        int _unitIndex = 0;
-        int _unitHP = turnManager.friendlyUnits[_unitIndex].currentHP;
-
-        for (int i = 1; i < turnManager.friendlyUnits.Count; i++)
+        if (_result.success == false)
         {
-            // If new unit has less health that the previous unit
-            if (turnManager.friendlyUnits[i].currentHP < _unitHP)
-            {
-                _unitHP = turnManager.friendlyUnits[i].currentHP;
-                _unitIndex = i;
-            }
-            // If HP is equal, defaults to closer Unit
-            else if(turnManager.friendlyUnits[i].currentHP == _unitHP)
-            {
-                float _oldDis =  Vector3.Distance(turnManager.friendlyUnits[_unitIndex].transform.position, transform.position);
-                float _newDis = Vector3.Distance(turnManager.friendlyUnits[i].transform.position, transform.position);
-
-                if(_newDis < _oldDis)
-                {
-                    _unitHP = turnManager.friendlyUnits[i].currentHP;
-                    _unitIndex = i;
-                }
-            }
-        }
-
-        currentTarget = turnManager.friendlyUnits[_unitIndex];
-        Vector3 _targetPosition = grid.NodePositionFromWorldPoint(currentTarget.transform.position);
-        PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, HandlePathResults, currentTarget));
-    }
-
-    void HandlePathResults(PathResult _result)
-    {
-        if (_result.success)
-        {
-            results = _result;
-        }
-        else
-        {
-            for (int i = 0; i < turnManager.friendlyUnits.Count; i++)
-            {
-                Vector3 _targetPosition = grid.NodePositionFromWorldPoint(turnManager.friendlyUnits[i].transform.position);
-                PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestFriendlyUnit, turnManager.friendlyUnits[i]));
-            }
-        }
-    }
-
-
-    void GetClosestFriendlyUnit(PathResult _result)
-    {
-        if (_result.success)
-        {
-            if (results == null || _result.pathLength < results.pathLength)
-            {
-                results = _result;
-                currentTarget = (FriendlyUnit)results.unit;
-            }
-        }
-    }
-
-    void GetFurthestFriendlyUnit(PathResult _result)
-    {
-        if (_result.success)
-        {
-            if (results == null || _result.pathLength > results.pathLength)
-            {
-                results = _result;
-                currentTarget = (FriendlyUnit)results.unit;
-            }
-        }
-    }
-
-    void FindClosestEnemy()
-    {
-        for (int i = 0; i < turnManager.enemyUnits.Count; i++)
-        {
-            EnemyUnit _unit = turnManager.enemyUnits[i];
-
-            if (_unit == this) continue;
-
-            Vector3 _targetPosition = grid.NodePositionFromWorldPoint(_unit.transform.position);
-            PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, GetClosestEnemyUnit, turnManager.friendlyUnits[i]));
-
-            Invoke(nameof(MoveToEnemyUnit), .5f);
-        }
-    }
-
-    void GetClosestEnemyUnit(PathResult _result)
-    {
-        if (_result.success)
-        {
-            if(results == null || _result.pathLength < results.pathLength)
-            {
-                results = _result;
-            }
-        }
-    }
-
-    void MoveToEnemyUnit()
-    {
-        if(results != null)
-        {
-            print("moving to ally");
-            MoveOnlyTurn();
-        }
-        else
-        {
-            print("idk");
-            EndTurn();
-        }
-    }
-
-    public void PlanTurn()
-    {
-        if (results == null)
-        {
-            FindClosestEnemy();
+            print("Failed.");
             return;
         }
 
-        List<EnemyMove> _validMoves = new List<EnemyMove>();
+        FriendlyUnit _unit = (FriendlyUnit)_result.unit;
 
-        Dictionary<int,Vector3> _validPositionsWithVision = new Dictionary<int, Vector3>();
-
-        for (int i = 0; i < Mathf.Min(enemyUnitData.apStat, results.path.Length); i++)
+        for (int i = 0; i < _result.pathLength; i++)
         {
-            if(!Physics.Linecast(results.path[i].position + Vector3.up, currentTarget.transform.position + Vector3.up, viewObstructionMask))
-            {
-                _validPositionsWithVision.Add(i, results.path[i].position);
-            }
+            int _apAtPosition = enemyUnitData.apStat - i;
+
+            CreateEnemyMoves(_unit, _result.path[i].position, _apAtPosition, _result, i);
+        }
+    }
+
+    void ChooseMove()
+    {
+        if (validMoves.Count == 0)
+        {
+            CreateMoveOnlyTurn();
+            return;
         }
 
-        int _shortRange = (canMove) ? 3 + enemyUnitData.apStat : 3;
-        int _mediumRange = (canMove) ? 5 + enemyUnitData.apStat : 5;
+        Dictionary<EnemyMove, Vector2> _moveWeights = new Dictionary<EnemyMove, Vector2>();
 
-        foreach (KeyValuePair<int, Vector3> _point in _validPositionsWithVision)
+        int _maxWeight = 0;
+
+        int _shortRange = 3;
+        int _mediumRange = 5;
+
+        for (int i = 0; i < validMoves.Count; i++)
         {
-            int _apAtPoint = enemyUnitData.apStat - _point.Key;
-            int _distanceFromTarget = Mathf.RoundToInt(Vector3.Distance(_point.Value, currentTarget.transform.position));
+            int _weight = 0;
 
-            for (int i = 0; i < enemyUnitData.enemySkills.Length; i++)
+            int _dis = Mathf.RoundToInt(Vector3.Distance(validMoves[i].movePosition, validMoves[i].target.transform.position));
+
+            if (_dis <= _shortRange)
             {
-                EnemySkill _skill = enemyUnitData.enemySkills[i];
-                bool _canUseMoveAtPoint = (_skill.rangeEstimate >= _distanceFromTarget) && (_skill.skill.apCost <= _apAtPoint);
-
-                if (_canUseMoveAtPoint)
-                {
-                    _validMoves.Add(new EnemyMove(_point.Value, _point.Key, _skill));
-                }
+                _weight += validMoves[i].skillToUse.shortRangeWeight;
             }
+            else if (_dis <= _mediumRange)
+            {
+                _weight += validMoves[i].skillToUse.mediumRangeWeight;
+            }
+            else // Defaults to Long Range
+            {
+                _weight += validMoves[i].skillToUse.longRangeWeight;
+            }
+
+            _weight += Mathf.RoundToInt((validMoves[i].skillToUse.highHPTargetWeight * .01f) * validMoves[i].target.currentHP);
+            _weight += Mathf.RoundToInt((validMoves[i].skillToUse.lowHPTargetWeight / 2) / validMoves[i].target.currentHP);
+
+            _maxWeight += _weight;
+
+            if (i == 0)
+            {
+                _moveWeights.Add(validMoves[i], new Vector2(1, _maxWeight));
+            }
+            else
+            {
+                _moveWeights.Add(validMoves[i], new Vector2(_moveWeights[validMoves[i - 1]].y + 1, _maxWeight));
+            }
+
         }
 
-        if (_validMoves.Count == 0)
+        int _chosenValue = Random.Range(1, _maxWeight + 1);
+
+        foreach (KeyValuePair<EnemyMove, Vector2> _moveWeightRanges in _moveWeights)
         {
-            if(results.pathLength == 0)
+            print($"Is {_chosenValue} is between {_moveWeightRanges.Value.x} and {_moveWeightRanges.Value.y}");
+            if (_chosenValue >= _moveWeightRanges.Value.x && _chosenValue <= _moveWeightRanges.Value.y)
             {
-                FindClosestEnemy();
+                StartCoroutine(ExecuteTurn(_moveWeightRanges.Key));
                 return;
             }
-
-            StartCoroutine(MoveOnlyTurn());
-            return;
-        }
-        else if(_validMoves.Count == 1)
-        {
-            StartCoroutine(ExecuteTurn(_validMoves[0]));
-            return;
-        }
-        else
-        {
-            int _maxWeight = 0;
-            Dictionary<EnemyMove, Vector2> _weightRanges = new Dictionary<EnemyMove, Vector2>();
-
-            for (int i = 0; i < _validMoves.Count; i++)
-            {
-                int _dis = Mathf.RoundToInt(Vector3.Distance(_validMoves[i].movePosition, currentTarget.transform.position));
-
-                int _weightToAdd = (_dis <= _shortRange) ? _validMoves[i].skillToUse.shortRangeWeight :
-                    (_dis <= _mediumRange) ? _validMoves[i].skillToUse.mediumRangeWeight : _validMoves[i].skillToUse.longRangeWeight;
-
-                _maxWeight += _weightToAdd;
-
-                if(_weightRanges.Count == 0)
-                {
-                    _weightRanges.Add(_validMoves[i], new Vector2(1, _maxWeight));
-                }
-                else
-                {
-                    _weightRanges.Add(_validMoves[i], new Vector2(_weightRanges[_validMoves[i - 1]].y + 1, _maxWeight));
-                }
-            }
-
-            int _chosenValue = Random.Range(1, _maxWeight + 1);
-
-            foreach (KeyValuePair<EnemyMove,Vector2> _moveWeightRanges in _weightRanges)
-            {
-                if (_chosenValue >= _moveWeightRanges.Value.x && _chosenValue <= _moveWeightRanges.Value.y)
-                {
-                    StartCoroutine(ExecuteTurn(_moveWeightRanges.Key));
-                    return;
-                }
-            }
         }
 
-        StartCoroutine(MoveOnlyTurn());
+        // Fallback if a move is not chosen for whatever reason
+
+        Debug.LogError($"Error: No move was selected for {enemyUnitData.unitName}. Moving Unit instead.");
+        CreateMoveOnlyTurn();
+    }
+
+    void CreateMoveOnlyTurn()
+    {
+        print("send help");
+        EndTurn();
     }
 
     public IEnumerator ExecuteTurn(EnemyMove _move)
     {
-        if(_move.movePosition != transform.position)
+        print(_move.result);
+
+        if(_move.result != null && _move.movePosition != transform.position)
         {
             Waypoint[] _waypoints = new Waypoint[_move.pathPositionIndex + 1];
 
             for (int i = 0; i < _waypoints.Length; i++)
             {
-                _waypoints[i] = results.path[i];
+                _waypoints[i] = _move.result.path[i];
             }
 
             motor.Move(_waypoints);
@@ -339,14 +197,15 @@ public class EnemyUnit : Unit
 
         if(_move.skillToUse != null)
         {
-            _move.skillToUse.skill.UseSkill(this, currentTarget);
+            _move.skillToUse.skill.UseSkill(this, _move.target);
         }
 
         Invoke(nameof(EndTurn), .5f);
     }
 
-    public IEnumerator MoveOnlyTurn()
+    /*public IEnumerator MoveOnlyTurn()
     {
+
         motor.Move(results.path);
         do
         {
@@ -354,13 +213,13 @@ public class EnemyUnit : Unit
         } while (motor.isMoving);
 
         Invoke(nameof(EndTurn), .5f);
-    }
+    }*/
 
     void EndTurn()
     {
-        results = null;
-        currentTarget = null;
         TurnManager.instance.NextTurn();
+        print("EndTurn");
+        Debug.Break();
     }
 }
 
@@ -369,11 +228,15 @@ public struct EnemyMove
     public Vector3 movePosition;
     public int pathPositionIndex;
     public EnemySkill skillToUse;
+    public FriendlyUnit target;
+    public PathResult result;
 
-    public EnemyMove(Vector3 _movePosition, int _pathPositionIndex, EnemySkill _skillToUse)
+    public EnemyMove(Vector3 _movePosition, int _pathPositionIndex, EnemySkill _skillToUse, FriendlyUnit _target, PathResult _result)
     {
         movePosition = _movePosition;
         pathPositionIndex = _pathPositionIndex;
         skillToUse = _skillToUse;
+        target = _target;
+        result = _result;
     }
 }

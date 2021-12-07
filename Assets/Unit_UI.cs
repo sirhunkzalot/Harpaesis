@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
 public class Unit_UI : MonoBehaviour
 {
-    public Text damageText;
+    public TextMeshProUGUI damageText;
 
     private void Start()
     {

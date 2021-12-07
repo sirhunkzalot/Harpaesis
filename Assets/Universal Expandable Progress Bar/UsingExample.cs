@@ -14,13 +14,6 @@ public class UsingExample : MonoBehaviour, OnCompleteListener {
         if (Input.GetKeyDown(KeyCode.A)) {
             getProgress();
         }
-        if (Input.GetKeyDown(KeyCode.D)) {
-            vertical.SetTextSize(21)
-                .SetAfterText(" /1000 Nice text after progress count.  ")
-                .SetMax(1000)
-                .SetColor(Color.magenta)
-                .SetProgress(500, true);
-        }
         if (Input.GetKeyDown(KeyCode.Q)) {
             circularInside.addListener(this);
             Debug.Log("Listener was added on green PB");

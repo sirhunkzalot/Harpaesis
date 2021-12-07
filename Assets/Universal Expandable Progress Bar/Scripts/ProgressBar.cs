@@ -10,9 +10,6 @@ public class ProgressBar : MonoBehaviour {
     [Tooltip("Image for progress bar.")]
     [SerializeField]
     protected Image progress;
-    [Tooltip("Text with current progressbar caption.")]
-    [SerializeField]
-    protected Text text;
 
     [Tooltip("Text that will appear before progress bar value.")]
     [SerializeField]
@@ -64,11 +61,6 @@ public class ProgressBar : MonoBehaviour {
 
     public virtual ProgressBar SetColor(Color c) {
         progress.color = c;
-        return this;
-    }
-
-    public ProgressBar SetTextSize(int size) {
-        text.fontSize = size;
         return this;
     }
 
@@ -124,9 +116,6 @@ public class ProgressBar : MonoBehaviour {
         } else {
             facticalProgress = currentProgress;
             progress.fillAmount = facticalProgress / (float)max;
-        }
-        if (text != null) {
-            text.text = beforeText + facticalProgress + afterText;
         }
     }
 
