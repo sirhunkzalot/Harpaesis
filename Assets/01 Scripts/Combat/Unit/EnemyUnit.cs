@@ -20,34 +20,22 @@ public class EnemyUnit : Unit
     public LayerMask viewObstructionMask;
 
     List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
+    List<FriendlyUnit> ignoreUnits = new List<FriendlyUnit>();
 
-
-    // Temp
-    ColoredProgressBar healthBar;
 
     protected override void Init()
     {
         enemyUnitData = (EnemyUnitData)unitData;
         turnManager = TurnManager.instance;
-
-        // Temp
-        healthBar = GetComponentInChildren<ColoredProgressBar>();
-    }
-
-    private void Update()
-    {
-        // Temp
-        float _hpPerc = ((float)currentHP / (float)enemyUnitData.healthStat) * 100;
-        healthBar.SetProgress(Mathf.RoundToInt(_hpPerc));
     }
 
     public override void StartTurn()
     {
         base.StartTurn();
-
         uiCombat.ShowPlayerUI(false);
         gridCam.followUnit = this;
         friendlyUnits = turnManager.friendlyUnits;
+        ignoreUnits = new List<FriendlyUnit>();
         validMoves = new List<EnemyMove>();
 
         PlanTurn();
@@ -58,9 +46,9 @@ public class EnemyUnit : Unit
         for (int i = 0; i < friendlyUnits.Count; i++)
         {
             Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
-            Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position, false);
+            Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position, true);
 
-            PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMoves, this));
+            PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMoves, friendlyUnits[i]));
 
             CreateEnemyMoves(friendlyUnits[i], transform.position, enemyUnitData.apStat);
         }
@@ -86,7 +74,7 @@ public class EnemyUnit : Unit
     {
         if (_result.success == false)
         {
-            print("Failed.");
+            //print("Failed.");
             return;
         }
 
@@ -95,7 +83,6 @@ public class EnemyUnit : Unit
         for (int i = 0; i < _result.pathLength; i++)
         {
             int _apAtPosition = enemyUnitData.apStat - i;
-
             CreateEnemyMoves(_unit, _result.path[i].position, _apAtPosition, _result, i);
         }
     }
@@ -154,7 +141,6 @@ public class EnemyUnit : Unit
 
         foreach (KeyValuePair<EnemyMove, Vector2> _moveWeightRanges in _moveWeights)
         {
-            print($"Is {_chosenValue} is between {_moveWeightRanges.Value.x} and {_moveWeightRanges.Value.y}");
             if (_chosenValue >= _moveWeightRanges.Value.x && _chosenValue <= _moveWeightRanges.Value.y)
             {
                 StartCoroutine(ExecuteTurn(_moveWeightRanges.Key));
@@ -163,21 +149,59 @@ public class EnemyUnit : Unit
         }
 
         // Fallback if a move is not chosen for whatever reason
-
         Debug.LogError($"Error: No move was selected for {enemyUnitData.unitName}. Moving Unit instead.");
         CreateMoveOnlyTurn();
     }
 
     void CreateMoveOnlyTurn()
     {
-        print("send help");
-        EndTurn();
+        float _closestDis = float.MaxValue;
+        int _closestUnitIndex = -1;
+
+        for (int i = 0; i < friendlyUnits.Count; i++)
+        {
+            if (ignoreUnits.Count == 0 && ignoreUnits.Contains(friendlyUnits[i]))
+            {
+                continue;
+            }
+
+            float _unitDis = Vector3.Distance(transform.position, friendlyUnits[i].transform.position);
+
+            if (_unitDis < _closestDis)
+            {
+                _closestUnitIndex = i;
+                _closestDis = _unitDis;
+            }
+        }
+
+        if(_closestUnitIndex == -1)
+        {
+            Debug.LogError("Fuuuuuuuuuck");
+            EndTurn();
+            return;
+        }
+
+        Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
+        Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[_closestUnitIndex].transform.position, true);
+
+        PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, MoveOnlyPathResult, friendlyUnits[_closestUnitIndex]));
+    }
+
+    void MoveOnlyPathResult(PathResult _result)
+    {
+        if (_result.success)
+        {
+            StartCoroutine(MoveOnlyTurn(_result.path));
+        }
+        else
+        {
+            ignoreUnits.Add((FriendlyUnit)_result.unit);
+            CreateMoveOnlyTurn();
+        }
     }
 
     public IEnumerator ExecuteTurn(EnemyMove _move)
     {
-        print(_move.result);
-
         if(_move.result != null && _move.movePosition != transform.position)
         {
             Waypoint[] _waypoints = new Waypoint[_move.pathPositionIndex + 1];
@@ -203,23 +227,20 @@ public class EnemyUnit : Unit
         Invoke(nameof(EndTurn), .5f);
     }
 
-    /*public IEnumerator MoveOnlyTurn()
+    public IEnumerator MoveOnlyTurn(Waypoint[] _path)
     {
-
-        motor.Move(results.path);
+        motor.Move(_path);
         do
         {
             yield return new WaitForEndOfFrame();
         } while (motor.isMoving);
 
         Invoke(nameof(EndTurn), .5f);
-    }*/
+    }
 
     void EndTurn()
     {
         TurnManager.instance.NextTurn();
-        print("EndTurn");
-        Debug.Break();
     }
 }
 

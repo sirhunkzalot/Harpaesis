@@ -12,6 +12,14 @@ public class DebugOptions : MonoBehaviour
         {
             Debug.Break();
         }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Time.timeScale = 5f;
+        }
+        else if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            Time.timeScale = 1f;
+        }
 #endif
 
     }

@@ -25,11 +25,9 @@ namespace Harpaesis.GridAndPathfinding
             Node _startNode = grid.NodeFromWorldPoint(_request.pathStart);
             Node _targetNode = grid.NodeFromWorldPoint(_request.pathEnd);
 
-            Debug.Log("1");
 
             if (_startNode.walkable && _targetNode.walkable)
             {
-                Debug.Log("2");
                 Heap<Node> _openSet = new Heap<Node>(grid.MaxSize);
                 HashSet<Node> _closedSet = new HashSet<Node>();
 
@@ -37,13 +35,11 @@ namespace Harpaesis.GridAndPathfinding
 
                 while (_openSet.Count > 0)
                 {
-                    Debug.Log("3+");
                     Node _currentNode = _openSet.RemoveFirst();
                     _closedSet.Add(_currentNode);
 
                     if (_currentNode == _targetNode)
                     {
-                        print(4);
                         // Found Path
                         _pathSuccess = true;
                         break;
@@ -53,7 +49,7 @@ namespace Harpaesis.GridAndPathfinding
                     {
                         if (!_neighbor.walkable || _neighbor.hasUnit || _closedSet.Contains(_neighbor))
                         {
-                            print($"notwalkable: {!_neighbor.walkable}, hasUnit: {_neighbor.hasUnit}, containsNeighbor: {_closedSet.Contains(_neighbor)}");
+                            //print($"notwalkable: {!_neighbor.walkable}, hasUnit: {_neighbor.hasUnit}, containsNeighbor: {_closedSet.Contains(_neighbor)}");
                             continue;
                         }
 
@@ -63,7 +59,7 @@ namespace Harpaesis.GridAndPathfinding
 
                         if (_isValidAndHasSmallerGCost)
                         {
-                            print("5.5");
+
                             _neighbor.gCost = _newMovementCostToNeighbor;
                             _neighbor.hCost = GetDistance(_neighbor, _targetNode);
                             _neighbor.parent = _currentNode;
@@ -83,11 +79,11 @@ namespace Harpaesis.GridAndPathfinding
 
             if (_pathSuccess)
             {
-                print("Success");
+                //print("Success");
                 _waypoints = RetracePath(_startNode, _targetNode);
             }
 
-            print("callback");
+            //print("callback");
             _callback(new PathResult(_waypoints, _pathSuccess, _request.callback, _request.unit));
         }
 

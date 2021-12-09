@@ -23,10 +23,13 @@ namespace Harpaesis.Combat
 
         protected void RemoveEffect()
         {
+            OnEffectRemoved();
             effectedUnit.RemoveEffect(this);
         }
 
         protected virtual void OnEffectApplied() { }
+
+        protected virtual void OnEffectRemoved() { }
         public virtual void OnRoundStart() { }
         public virtual void OnRoundEnd() { }
         public virtual void OnTurnStart() { }
@@ -65,6 +68,11 @@ namespace Harpaesis.Combat
         {
             effectedUnit.TakeDamage(amount);
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("dot");
+        }
     }
     public class StatusEffect_Bleed : StatusEffect_DamageOverTime
     {
@@ -73,6 +81,7 @@ namespace Harpaesis.Combat
         protected override void OnEffectApplied()
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} is bleeding!", BattleLogType.Combat);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("bleed");
         }
 
         public override void OnTakeStep()
@@ -84,6 +93,11 @@ namespace Harpaesis.Combat
         {
             effectedUnit.TakeDamage(StatusEffectSettings.bleedDamage);
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("bleed");
+        }
     }
     public class StatusEffect_Burn : StatusEffect_DamageOverTime
     {
@@ -94,6 +108,7 @@ namespace Harpaesis.Combat
         protected override void OnEffectApplied()
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has been burned!", BattleLogType.Combat);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("burn");
         }
 
         public override void OnTurnStart()
@@ -113,6 +128,11 @@ namespace Harpaesis.Combat
         {
             effectedUnit.TakeDamage(StatusEffectSettings.burnDamage);
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("burn");
+        }
     }
     public class StatusEffect_Fear : StatusEffect
     {
@@ -121,6 +141,7 @@ namespace Harpaesis.Combat
         protected override void OnEffectApplied()
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has been feared!", BattleLogType.Combat);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("fear");
         }
 
         public override void OnTurnStart()
@@ -136,6 +157,10 @@ namespace Harpaesis.Combat
                 RemoveEffect();
             }
         }
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("fear");
+        }
     }
     public class StatusEffect_Sleep : StatusEffect
     {
@@ -144,7 +169,7 @@ namespace Harpaesis.Combat
         protected override void OnEffectApplied()
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has been put to sleep!", BattleLogType.Combat);
-            //effectedUnit.canMove = false;
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("sleep");
         }
 
         public override void OnTakeDamage()
@@ -172,6 +197,11 @@ namespace Harpaesis.Combat
             effectedUnit.canMove = true;
             RemoveEffect();
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("sleep");
+        }
     }
     public class StatusEffect_Root : StatusEffect
     {
@@ -181,6 +211,7 @@ namespace Harpaesis.Combat
         {
             effectedUnit.canMove = false;
             BattleLog.Log($"{effectedUnit.unitData.unitName} has been rooted!", BattleLogType.Combat);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("root");
         }
 
         public override void OnTurnEnd()
@@ -197,6 +228,11 @@ namespace Harpaesis.Combat
             BattleLog.Log($"{effectedUnit.unitData.unitName} has escaped the etanglement!", BattleLogType.Combat);
             RemoveEffect();
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("root");
+        }
     }
     public class StatusEffect_BuffATK : StatusEffect
     {
@@ -206,6 +242,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has been temporarily raised by {amount}.", BattleLogType.Combat);
             BattleLog.Log($"BuffATK is not yet implemented", BattleLogType.System);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("atkUp");
         }
 
         public override void OnTurnEnd()
@@ -220,6 +257,11 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has returned to normal.", BattleLogType.Combat);
             RemoveEffect();
+        }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("atkUp");
         }
     }
     public class StatusEffect_BuffDEF : StatusEffect
@@ -230,6 +272,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has been temporarily raised by {amount}.", BattleLogType.Combat);
             BattleLog.Log($"BuffDEF is not yet implemented", BattleLogType.System);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("defUp");
         }
 
         public override void OnTurnEnd()
@@ -245,6 +288,11 @@ namespace Harpaesis.Combat
             BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has returned to normal.", BattleLogType.Combat);
             RemoveEffect();
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("defUp");
+        }
     }
     public class StatusEffect_BuffAP : StatusEffect
     {
@@ -254,6 +302,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has been temporarily raised by {amount}.", BattleLogType.Combat);
             BattleLog.Log($"BuffAP is not yet implemented", BattleLogType.System);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("apUp");
         }
 
         public override void OnTurnEnd()
@@ -269,6 +318,11 @@ namespace Harpaesis.Combat
             BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has returned to normal.", BattleLogType.Combat);
             RemoveEffect();
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("apUp");
+        }
     }
     public class StatusEffect_DebuffATK : StatusEffect
     {
@@ -278,6 +332,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has been temporarily lowered by {amount}.", BattleLogType.Combat);
             BattleLog.Log($"DebuffATK is not yet implemented", BattleLogType.System);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("atkDown");
         }
 
         public override void OnTurnEnd()
@@ -293,6 +348,11 @@ namespace Harpaesis.Combat
             BattleLog.Log($"{effectedUnit.unitData.unitName} ATK stat has returned to normal.", BattleLogType.Combat);
             RemoveEffect();
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("atkDown");
+        }
     }
     public class StatusEffect_DebuffDEF : StatusEffect
     {
@@ -302,6 +362,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has been temporarily lowered by {amount}.", BattleLogType.Combat);
             BattleLog.Log($"DebuffDEF is not yet implemented", BattleLogType.System);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("defDown");
         }
 
         public override void OnTurnEnd()
@@ -317,6 +378,11 @@ namespace Harpaesis.Combat
             BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has returned to normal.", BattleLogType.Combat);
             RemoveEffect();
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("defDown");
+        }
     }
     public class StatusEffect_DebuffAP : StatusEffect
     {
@@ -326,6 +392,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has been temporarily lowered by {amount}.", BattleLogType.Combat);
             BattleLog.Log($"DebuffAP is not yet implemented", BattleLogType.System);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("apDown");
         }
 
         public override void OnTurnEnd()
@@ -341,6 +408,11 @@ namespace Harpaesis.Combat
             BattleLog.Log($"{effectedUnit.unitData.unitName} AP stat has returned to normal.", BattleLogType.Combat);
             RemoveEffect();
         }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("apDown");
+        }
     }
     public class StatusEffect_ChangeAllegiance : StatusEffect
     {
@@ -350,6 +422,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has flipped sides!", BattleLogType.Combat);
             BattleLog.Log($"Change Allegiance is not yet implemented", BattleLogType.System);
+            effectedUnit.unit_ui.effectsManager.ActivateEffect("changeAllegiance");
         }
 
         public override void OnTurnEnd()
@@ -364,6 +437,11 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has returned to fight for it's side!", BattleLogType.Combat);
             RemoveEffect();
+        }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect("changeAllegiance");
         }
     }
 }

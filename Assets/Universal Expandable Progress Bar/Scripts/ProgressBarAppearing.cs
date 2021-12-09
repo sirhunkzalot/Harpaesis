@@ -37,29 +37,13 @@ public class ProgressBarAppearing : MonoBehaviour {
         }
     }
 
-	void Update () {
-        CalculateSize();
+    void Update()
+    {
         CalculateFill();
         CalculateColor();
-        if (AnimationsIsOver()) {
+        if (AnimationsIsOver())
+        {
             Destroy(this);
-        }
-    }
-
-    private void CalculateSize() {
-        if (animateSize) {
-            if (animatedProgress != null && animateProg) {
-                if (animatedProgress.transform.localScale.x < targetScaleP.x) {
-                    animatedProgress.transform.localScale += targetScaleP / appearTime * Time.deltaTime;
-                } else {
-                    animateProg = false;
-                }
-            }
-            if (animatedBackground.transform.localScale.x < targetScale.x) {
-                animatedBackground.transform.localScale += targetScale / appearTime * Time.deltaTime;
-            } else {
-                animateSize = animateProg;
-            }
         }
     }
 

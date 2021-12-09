@@ -6,11 +6,15 @@ using UnityEngine;
 
 public class Unit_UI : MonoBehaviour
 {
-    public TextMeshProUGUI damageText;
+    public Unit_UI_HealthBar healthBar;
+    public Unit_UI_EffectsManager effectsManager;
+    public GameObject damageTextParent;
+    TextMeshProUGUI damageText;
 
     private void Start()
     {
-        damageText.gameObject.SetActive(false);
+        damageText = damageTextParent.GetComponentInChildren<TextMeshProUGUI>();
+        damageTextParent.SetActive(false);
     }
     public void DisplayDamageText(int _damageAmount)
     {
@@ -20,11 +24,11 @@ public class Unit_UI : MonoBehaviour
     IEnumerator DisplayDamage(int _damageAmount)
     {
         damageText.text = (_damageAmount > 0) ? $"-{_damageAmount}" : (_damageAmount == 0) ? "0" : $"+{_damageAmount}";
-        damageText.gameObject.SetActive(true);
+        damageTextParent.SetActive(true);
 
         yield return new WaitForSeconds(2f);
 
-        damageText.gameObject.SetActive(false);
+        damageTextParent.SetActive(false);
         damageText.text = "";
     }
 }

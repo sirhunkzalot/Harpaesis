@@ -18,6 +18,7 @@ public abstract class Unit : MonoBehaviour
     public bool hasPath;
 
     [ReadOnly] public int currentHP;
+    float HealthPercent { get { return (float)currentHP/(float)unitData.healthStat; } }
     [ReadOnly] public bool isAlive = true;
     [ReadOnly] public bool canMove = true;
     [ReadOnly] public bool canAct = true;
@@ -29,25 +30,20 @@ public abstract class Unit : MonoBehaviour
     protected GridManager grid;
     protected GridCamera gridCam;
     protected UIManager_Combat uiCombat;
-
-    private void OnValidate()
-    {
-        if (gameObject.layer != 25)
-        {
-            gameObject.layer = 25;
-        }
-    }
+    [HideInInspector] public Unit_UI unit_ui;
 
     private void Start()
     {
         grid = GridManager.instance;
         gridCam = GridCamera.instance;
         uiCombat = UIManager_Combat.instance;
+        unit_ui = GetComponentInChildren<Unit_UI>();
         motor = GetComponent<UnitMotor>();
         motor.Init(this);
 
         currentHP = unitData.healthStat;
 
+        transform.position = grid.NodePositionFromWorldPoint(transform.position);
         grid.NodeFromWorldPoint(transform.position).hasUnit = true;
 
         Init();
@@ -55,11 +51,15 @@ public abstract class Unit : MonoBehaviour
 
     private void Update()
     {
+        unit_ui.healthBar.Tick(HealthPercent);
         Tick();
     }
 
+    protected virtual void OnAwake() { }
     protected virtual void Init() { }
-    protected virtual void Tick() { }
+    protected virtual void Tick()
+    {
+    }
 
     public void TakeDamage(int _damageAmount, Unit _attacker = null)
     {
