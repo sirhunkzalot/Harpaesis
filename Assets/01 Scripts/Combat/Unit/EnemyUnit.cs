@@ -176,7 +176,7 @@ public class EnemyUnit : Unit
 
         if(_closestUnitIndex == -1)
         {
-            Debug.LogError("Fuuuuuuuuuck");
+            Debug.Log("No Accessible Friendly Unit");
             EndTurn();
             return;
         }

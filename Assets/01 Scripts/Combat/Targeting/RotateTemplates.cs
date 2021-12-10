@@ -33,7 +33,6 @@ public class RotateTemplates : MonoBehaviour
 
             if (_angle >= 90)
             {
-                    
                 transform.Rotate(Vector3.up, 90);
                 ReloadTemplates();
 
