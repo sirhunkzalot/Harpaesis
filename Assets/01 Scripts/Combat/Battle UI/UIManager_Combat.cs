@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 /**
@@ -9,6 +10,7 @@ public class UIManager_Combat : MonoBehaviour
 {
     TurnManager turnManager;
     public GameObject[] playerTurnObjects;
+    public Button moveButton;
 
     bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
@@ -24,6 +26,14 @@ public class UIManager_Combat : MonoBehaviour
     private void Start()
     {
         turnManager = TurnManager.instance;
+    }
+
+    private void FixedUpdate()
+    {
+        if (IsFriendlyTurn)
+        {
+            moveButton.interactable = (turnManager.activeTurn.unit.turnData.ap > 0);
+        }
     }
 
     public void ShowPlayerUI(bool _showUI)

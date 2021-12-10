@@ -6,7 +6,8 @@ using UnityEngine;
 public class Unit_UI_EffectsManager : MonoBehaviour
 {
     public GameObject bleedEffect, burnEffect, fearEffect, sleepEffect, holyEffect,
-        apUpEffect, atkUpEffect, atkDownEffect, defUpEffect, defDownEffect;
+        apUpEffect, atkUpEffect, atkDownEffect, defUpEffect, defDownEffect, entangleEffect,
+        defendEffect;
 
     private void Start()
     {
@@ -20,6 +21,8 @@ public class Unit_UI_EffectsManager : MonoBehaviour
         atkDownEffect.SetActive(false);
         defUpEffect.SetActive(false);
         defDownEffect.SetActive(false);
+        entangleEffect.SetActive(false);
+        defendEffect.SetActive(false);
     }
 
     public void ActivateEffect(string _effectName)
@@ -57,6 +60,12 @@ public class Unit_UI_EffectsManager : MonoBehaviour
                 break;
             case "defdown":
                 defDownEffect.SetActive(true);
+                break;
+            case "root":
+                entangleEffect.SetActive(true);
+                break;
+            case "defend":
+                defendEffect.SetActive(true);
                 break;
             default:
                 break;
@@ -98,6 +107,12 @@ public class Unit_UI_EffectsManager : MonoBehaviour
                 break;
             case "defDown":
                 defDownEffect.SetActive(false);
+                break;
+            case "root":
+                entangleEffect.SetActive(false);
+                break;
+            case "defend":
+                defendEffect.SetActive(false);
                 break;
             default:
                 break;
