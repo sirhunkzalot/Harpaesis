@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &980452360
+--- !u!1 &3220774962319093409
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 980452361}
-  - component: {fileID: 980452362}
-  - component: {fileID: 980452363}
+  - component: {fileID: 3220774962319093408}
+  - component: {fileID: 3220774962319093411}
+  - component: {fileID: 3220774962319093410}
   m_Layer: 25
   m_Name: Sprite
   m_TagString: Untagged
@@ -18,28 +18,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &980452361
+--- !u!4 &3220774962319093408
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980452360}
+  m_GameObject: {fileID: 3220774962319093409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1546670280648699977}
-  m_Father: {fileID: 5205872326945359679}
+  - {fileID: 732451293871438563}
+  m_Father: {fileID: 7245311650674093462}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &980452362
+--- !u!212 &3220774962319093411
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980452360}
+  m_GameObject: {fileID: 3220774962319093409}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -85,19 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &980452363
+--- !u!114 &3220774962319093410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980452360}
+  m_GameObject: {fileID: 3220774962319093409}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5205872326945359666
+--- !u!1 &7245311650674093467
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,39 +105,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5205872326945359679}
-  - component: {fileID: 5205872326945359677}
-  - component: {fileID: 5205872326945359678}
-  - component: {fileID: 5205872326945359676}
+  - component: {fileID: 7245311650674093462}
+  - component: {fileID: 7245311650674093460}
+  - component: {fileID: 7245311650674093463}
+  - component: {fileID: 7245311650674093461}
   m_Layer: 25
-  m_Name: Vampire Unit
+  m_Name: Fledgeling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5205872326945359679
+--- !u!4 &7245311650674093462
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205872326945359666}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0, z: -2.5}
+  m_GameObject: {fileID: 7245311650674093467}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.8415647, y: -4.8379893, z: -0.45076942}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 980452361}
+  - {fileID: 3220774962319093408}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5205872326945359677
+--- !u!136 &7245311650674093460
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205872326945359666}
+  m_GameObject: {fileID: 7245311650674093467}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -145,13 +145,13 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &5205872326945359678
+--- !u!114 &7245311650674093463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205872326945359666}
+  m_GameObject: {fileID: 7245311650674093467}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85a3547686a185e4792c91762a9b20db, type: 3}
@@ -176,13 +176,13 @@ MonoBehaviour:
   viewObstructionMask:
     serializedVersion: 2
     m_Bits: 2097152
---- !u!114 &5205872326945359676
+--- !u!114 &7245311650674093461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205872326945359666}
+  m_GameObject: {fileID: 7245311650674093467}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02f0189fef840164a96a3f2be1ccf595, type: 3}
@@ -192,12 +192,12 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
---- !u!1001 &4295438770382662082
+--- !u!1001 &2648299320676852584
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 980452361}
+    m_TransformParent: {fileID: 3220774962319093408}
     m_Modifications:
     - target: {fileID: 224861634029443101, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_AnchorMax.y
@@ -533,8 +533,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
---- !u!224 &1546670280648699977 stripped
+--- !u!224 &732451293871438563 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
-  m_PrefabInstance: {fileID: 4295438770382662082}
+  m_PrefabInstance: {fileID: 2648299320676852584}
   m_PrefabAsset: {fileID: 0}
