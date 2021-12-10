@@ -100,7 +100,6 @@ namespace Harpaesis.GridAndPathfinding
                 Vector2 _currentGridPosition = new Vector2(_currentNode.gridX, _currentNode.gridY);
                 Vector2 _parentGridPosition = new Vector2(_currentNode.parent.gridX, _currentNode.parent.gridY);
 
-
                 bool _isDiagonalToParent = Mathf.Abs(_currentGridPosition.x - _parentGridPosition.x) + Mathf.Abs(_currentGridPosition.y - _parentGridPosition.y) > 1;
 
                 if (_isDiagonalToParent)
@@ -110,18 +109,19 @@ namespace Harpaesis.GridAndPathfinding
                     Node _node1 = grid.RetrieveNode((int)_currentGridPosition.x + (int)_direction.x, (int)_currentGridPosition.y);
                     Node _node2 = grid.RetrieveNode((int)_currentGridPosition.x, (int)_currentGridPosition.y + (int)_direction.y);
 
-                    if (_node1.walkable && !_node2.walkable)
+                    if (_node1.walkable && !_node1.hasUnit && (!_node2.walkable || _node2.hasUnit))
                     {
                         _waypoints.Add(new Waypoint(_node1.worldPosition, 0));
                     }
-                    else if (_node2.walkable && !_node1.walkable)
+                    else if (_node2.walkable && !_node2.hasUnit && (!_node1.walkable || _node1.hasUnit))
                     {
                         _waypoints.Add(new Waypoint(_node2.worldPosition, 0));
                     }
-                    else if (!_node1.walkable && !_node2.walkable)
+                    else if ((!_node1.walkable || _node1.hasUnit) && (!_node2.walkable || _node2.hasUnit))
                     {
-                        throw new Exception("Node Error: Neither diagonal node is walkable. Either it was" +
-                            " incorrectly determined to be a diagonal movement, or another error was created.");
+                        //throw new Exception("Node Error: Neither diagonal node is walkable. Either it was" +
+                        //  " incorrectly determined to be a diagonal movement, or another error was created.");
+                        //Debug.Log("is this a problem?");
                     }
                 }
 
