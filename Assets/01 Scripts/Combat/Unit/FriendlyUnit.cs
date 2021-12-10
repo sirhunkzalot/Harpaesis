@@ -208,6 +208,7 @@ public class FriendlyUnit : Unit
                     if (basicAttackTargetingTemplate.currentlySelected?.unit != null)
                     {
                         UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.currentlySelected.unit);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -215,6 +216,7 @@ public class FriendlyUnit : Unit
                     if(primarySkillTargetingTemplate.currentlySelected?.unit != null)
                     {
                         UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.currentlySelected.unit);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -222,6 +224,7 @@ public class FriendlyUnit : Unit
                     if (secondarySkillTargetingTemplate.currentlySelected?.unit != null)
                     {
                         UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.currentlySelected.unit);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -229,6 +232,7 @@ public class FriendlyUnit : Unit
                     if (tertiarySkillTargetingTemplate.currentlySelected?.unit != null)
                     {
                         UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.currentlySelected.unit);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -236,6 +240,7 @@ public class FriendlyUnit : Unit
                     if (signatureSkillTargetingTemplate.currentlySelected?.unit != null)
                     {
                         UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.currentlySelected.unit);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -261,6 +266,7 @@ public class FriendlyUnit : Unit
                     if (basicAttackTargetingTemplate.allWithTargets.Count > 0)
                     {
                         UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -268,6 +274,7 @@ public class FriendlyUnit : Unit
                     if (primarySkillTargetingTemplate.allWithTargets.Count > 0)
                     {
                         UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -275,6 +282,7 @@ public class FriendlyUnit : Unit
                     if (secondarySkillTargetingTemplate.allWithTargets.Count > 0)
                     {
                         UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -282,6 +290,7 @@ public class FriendlyUnit : Unit
                     if (tertiarySkillTargetingTemplate.allWithTargets.Count > 0)
                     {
                         UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -289,6 +298,7 @@ public class FriendlyUnit : Unit
                     if (signatureSkillTargetingTemplate.allWithTargets.Count > 0)
                     {
                         UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
                     }
                     break;
 
@@ -321,8 +331,6 @@ public class FriendlyUnit : Unit
         {
             UseSkill(_skillIndex, node.unit);
         }
-
-        turnData.hasAttacked = true;
     }
 
     public void UseSkill(int _skillIndex, Unit _target)
