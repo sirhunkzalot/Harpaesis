@@ -15,6 +15,7 @@ namespace Harpaesis.Combat
         public TargetingStyle targetingStyle;
         [TextArea(3, 5)] public string skillDescription;
         public GameObject targetingTemplate;
+        public bool implemented = true;
 
         [Space]
         public List<SkillEffect> effects = new List<SkillEffect>();

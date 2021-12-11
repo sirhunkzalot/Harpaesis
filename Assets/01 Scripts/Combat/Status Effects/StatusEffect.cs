@@ -216,7 +216,6 @@ namespace Harpaesis.Combat
 
         protected override void OnEffectApplied()
         {
-            effectedUnit.canMove = false;
             BattleLog.Log($"{effectedUnit.unitData.unitName} has been rooted!", BattleLogType.Combat);
             effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.Root);
         }
@@ -231,7 +230,6 @@ namespace Harpaesis.Combat
 
         void EndEntanglement()
         {
-            effectedUnit.canMove = true;
             BattleLog.Log($"{effectedUnit.unitData.unitName} has escaped the etanglement!", BattleLogType.Combat);
             RemoveEffect();
         }

@@ -20,7 +20,10 @@ public class EnemyUnit : Unit
     public LayerMask viewObstructionMask;
 
     List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
-    List<FriendlyUnit> ignoreUnits = new List<FriendlyUnit>();
+    List<FriendlyUnit> ignoreFriendlyUnits = new List<FriendlyUnit>();
+
+    List<EnemyUnit> enemyUnits = new List<EnemyUnit>();
+    List<EnemyUnit> ignoreEnemyUnits = new List<EnemyUnit>();
 
 
     protected override void Init()
@@ -33,14 +36,18 @@ public class EnemyUnit : Unit
     {
         uiCombat.ShowPlayerUI(false);
         gridCam.followUnit = this;
+
         friendlyUnits = turnManager.friendlyUnits;
-        ignoreUnits = new List<FriendlyUnit>();
+        ignoreFriendlyUnits = new List<FriendlyUnit>();
+
+        enemyUnits = turnManager.enemyUnits;
+        ignoreEnemyUnits = new List<EnemyUnit>();
+
         validMoves = new List<EnemyMove>();
 
-        if (!canAct)
-        {
-            Invoke(nameof(EndTurn), 1f);
-        }
+        print("Start Turn");
+
+        canMove = !HasEffect(StatusEffectType.Root);
 
         PlanTurn();
     }
@@ -51,12 +58,14 @@ public class EnemyUnit : Unit
         {
             if (canMove)
             {
+                print("Generate moves Involving Movement");
                 Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
                 Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position, true);
 
                 PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMoves, friendlyUnits[i]));
             }
 
+            print("Generate moves without Movement");
             CreateEnemyMoves(friendlyUnits[i], transform.position, enemyUnitData.apStat);
         }
 
@@ -81,7 +90,7 @@ public class EnemyUnit : Unit
     {
         if (_result.success == false)
         {
-            //print("Failed.");
+            print("Path was not sucessful");
             return;
         }
 
@@ -89,6 +98,7 @@ public class EnemyUnit : Unit
 
         for (int i = 0; i < _result.pathLength; i++)
         {
+            print("Created move with path");
             int _apAtPosition = enemyUnitData.apStat - i;
             CreateEnemyMoves(_unit, _result.path[i].position, _apAtPosition, _result, i);
         }
@@ -98,6 +108,7 @@ public class EnemyUnit : Unit
     {
         if (validMoves.Count == 0)
         {
+            print("No Valid Moves were created");
             CreateMoveOnlyTurn();
             return;
         }
@@ -135,24 +146,30 @@ public class EnemyUnit : Unit
 
             if (i == 0)
             {
+                print($"First move was weighted between 1 and {_maxWeight}");
                 _moveWeights.Add(validMoves[i], new Vector2(1, _maxWeight));
             }
             else
             {
+                print($"Additional move was weighted between {_moveWeights[validMoves[i - 1]].y + 1} and {_maxWeight}");
                 _moveWeights.Add(validMoves[i], new Vector2(_moveWeights[validMoves[i - 1]].y + 1, _maxWeight));
             }
 
         }
 
         int _chosenValue = Random.Range(1, _maxWeight + 1);
+        print($"Chose Value of: {_chosenValue}.");
 
         foreach (KeyValuePair<EnemyMove, Vector2> _moveWeightRanges in _moveWeights)
         {
+            print($"Checking if value is between {_moveWeightRanges.Value.x} and {_moveWeightRanges.Value.y}.");
             if (_chosenValue >= _moveWeightRanges.Value.x && _chosenValue <= _moveWeightRanges.Value.y)
             {
+                print("It is.");
                 StartCoroutine(ExecuteTurn(_moveWeightRanges.Key));
                 return;
             }
+            print("It is not.");
         }
 
         // Fallback if a move is not chosen for whatever reason
@@ -162,12 +179,20 @@ public class EnemyUnit : Unit
 
     void CreateMoveOnlyTurn()
     {
+        print("Making a move only turn.");
+
+        if (!canMove)
+        {
+            print("Can't Move due to Root");
+            Invoke(nameof(EndTurn), .5f);
+        }
+
         float _closestDis = float.MaxValue;
         int _closestUnitIndex = -1;
 
         for (int i = 0; i < friendlyUnits.Count; i++)
         {
-            if (ignoreUnits.Count == 0 && ignoreUnits.Contains(friendlyUnits[i]))
+            if (ignoreFriendlyUnits.Count != 0 && ignoreFriendlyUnits.Contains(friendlyUnits[i]))
             {
                 continue;
             }
@@ -184,13 +209,14 @@ public class EnemyUnit : Unit
         if(_closestUnitIndex == -1)
         {
             Debug.Log("No Accessible Friendly Unit");
-            EndTurn();
+            Invoke(nameof(EndTurn), .5f);
             return;
         }
 
         Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
         Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[_closestUnitIndex].transform.position, true);
 
+        print("Requesting path to closest Friendly unit");
         PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, MoveOnlyPathResult, friendlyUnits[_closestUnitIndex]));
     }
 
@@ -198,19 +224,86 @@ public class EnemyUnit : Unit
     {
         if (_result.success)
         {
+            print("Found Path to closest Friendly Unit!");
             StartCoroutine(MoveOnlyTurn(_result.path));
         }
         else
         {
-            ignoreUnits.Add((FriendlyUnit)_result.unit);
-            CreateMoveOnlyTurn();
+            print("No path found to closest friendly Unit.");
+            ignoreFriendlyUnits.Add((FriendlyUnit)_result.unit);
+
+            if (ignoreFriendlyUnits.Count < friendlyUnits.Count)
+            {
+                print("Ignoring that unit and trying again");
+                CreateMoveOnlyTurn();
+            }
+            else
+            {
+                print("No path to nearest friendly unit possible. Trying to move to enemy Unit");
+                MoveToNearestEnemyUnit();
+            }
+        }
+    }
+
+    public void MoveToNearestEnemyUnit()
+    {
+        float _closestDis = float.MaxValue;
+        int _closestUnitIndex = -1;
+
+        for (int i = 0; i < enemyUnits.Count; i++)
+        {
+            if (ignoreEnemyUnits.Count != 0 && ignoreEnemyUnits.Contains(enemyUnits[i]))
+            {
+                continue;
+            }
+
+            float _unitDis = Vector3.Distance(transform.position, enemyUnits[i].transform.position);
+
+            if (_unitDis < _closestDis)
+            {
+                _closestUnitIndex = i;
+                _closestDis = _unitDis;
+            }
+        }
+
+        Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
+        Vector3 _targetPos = grid.NodePositionFromWorldPoint(enemyUnits[_closestUnitIndex].transform.position, true);
+
+        print("Requesting path to closest enemy unit");
+        PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, MoveOnlyPathResultEnemy, enemyUnits[_closestUnitIndex]));
+    }
+
+    public void MoveOnlyPathResultEnemy(PathResult _result)
+    {
+        if (_result.success)
+        {
+            print("Found Path to closest Enemy Unit!");
+            StartCoroutine(MoveOnlyTurn(_result.path));
+        }
+        else
+        {
+            print("No path found to closest enemy Unit.");
+            ignoreEnemyUnits.Add((EnemyUnit)_result.unit);
+
+            if (ignoreEnemyUnits.Count < enemyUnits.Count)
+            {
+                print("Ignoring that unit and trying again");
+                MoveToNearestEnemyUnit();
+            }
+            else
+            {
+                print("No path to any unit possible. Passing Turn.");
+                Invoke(nameof(EndTurn), .5f);
+            }
         }
     }
 
     public IEnumerator ExecuteTurn(EnemyMove _move)
     {
+        print("Executing move!");
         if(_move.result != null && _move.movePosition != transform.position)
         {
+            print("Moving");
             Waypoint[] _waypoints = new Waypoint[_move.pathPositionIndex + 1];
 
             for (int i = 0; i < _waypoints.Length; i++)
@@ -228,25 +321,30 @@ public class EnemyUnit : Unit
 
         if(_move.skillToUse != null)
         {
+            print("Using Skill!");
             _move.skillToUse.skill.UseSkill(this, _move.target);
         }
 
+        print("Ending Turn!");
         Invoke(nameof(EndTurn), .5f);
     }
 
     public IEnumerator MoveOnlyTurn(Waypoint[] _path)
     {
+        print("Moving Only!");
         motor.Move(_path);
         do
         {
             yield return new WaitForEndOfFrame();
         } while (motor.isMoving);
 
+        print("Ending Turn after only moving!");
         Invoke(nameof(EndTurn), .5f);
     }
 
     void EndTurn()
     {
+        print("Turn Ending!");
         TurnManager.instance.NextTurn();
     }
 }

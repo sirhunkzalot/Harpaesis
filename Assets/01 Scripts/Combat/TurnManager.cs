@@ -148,7 +148,7 @@ public struct Turn
         unit = _unit;
         unitData = unit.unitData;
         hasAttacked = false;
-        ap = unit.unitData.apStat;
+        ap = unit.currentApStat;
 
         unit.turnData = this;
     }

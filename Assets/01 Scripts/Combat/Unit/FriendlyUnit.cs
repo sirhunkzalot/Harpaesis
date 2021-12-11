@@ -118,7 +118,7 @@ public class FriendlyUnit : Unit
             lastSelectorPosition = gridCursor.transform.position;
         }
 
-        if (Input.GetMouseButtonDown(0) && previewPath != null && !hasPath && TurnManager.instance.activeTurn.ap > 0)
+        if (Input.GetMouseButtonDown(0) && previewPath != null && !hasPath && turnData.ap > 0)
         {
             StartMove();
         }

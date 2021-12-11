@@ -138,18 +138,25 @@ public abstract class Unit : MonoBehaviour
 
     public bool HasEffect(StatusEffectType _effect)
     {
+        int _index = GetEffectIndex(_effect);
+
+        return _index != -1;
+    }
+
+    public int GetEffectIndex(StatusEffectType _effect)
+    {
         if (currentEffects.Count > 0)
         {
-            foreach (StatusEffect _statusEffect in currentEffects)
+            for (int i = 0; i < currentEffects.Count; i++)
             {
-                if (_statusEffect.effectType == _effect)
+                if (currentEffects[i].effectType == _effect)
                 {
-                    return true;
+                    return i;
                 }
             }
         }
 
-        return false;
+        return -1;
     }
 
     public void StartUnitTurn()
@@ -162,6 +169,8 @@ public abstract class Unit : MonoBehaviour
         }
         else if (HasEffect(StatusEffectType.Fear))
         {
+            int _index = GetEffectIndex(StatusEffectType.Fear);
+            motor.RunAway(currentEffects[_index].inflictingUnit.transform.position);
             Invoke(nameof(ForceEndTurn), 1f);
         }
         else
