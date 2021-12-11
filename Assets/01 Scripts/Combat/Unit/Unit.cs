@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.GridCamera;
 using Harpaesis.Combat;
 using Harpaesis.GridAndPathfinding;
 using UnityEngine;
@@ -192,7 +193,6 @@ public abstract class Unit : MonoBehaviour
         {
             TurnManager.instance.NextTurn();
         }
-        DissolveRaycast.instance.RemoveGameobject(gameObject);
         grid.NodeFromWorldPoint(transform.position).hasUnit = false;
         Destroy(gameObject);
     }

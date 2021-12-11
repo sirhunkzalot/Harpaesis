@@ -449,6 +449,7 @@ MonoBehaviour:
   yMax: 26
   zMin: -10
   zMax: 10
+  currentView: 0
 --- !u!1 &8052742379723179649
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,9 +582,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
   minimumHeight: 0.5
   maximumHeight: 10
-  dissolveSpeed: 12
-  layermask:
-    serializedVersion: 2
-    m_Bits: 2097152
+  dissolveSpeed: 2
