@@ -35,6 +35,8 @@ namespace Harpaesis.GridAndPathfinding
 
         private void Awake()
         {
+            Application.targetFrameRate = 120;
+
             instance = this;
 
             nodeRadius = nodeSize / 2;

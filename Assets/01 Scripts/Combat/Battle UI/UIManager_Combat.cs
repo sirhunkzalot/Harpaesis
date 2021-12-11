@@ -34,7 +34,7 @@ public class UIManager_Combat : MonoBehaviour
     {
         if (IsFriendlyTurn)
         {
-            moveButton.interactable = (turnManager.activeTurn.unit.turnData.ap > 0);
+            moveButton.interactable = (turnManager.activeTurn.unit.turnData.ap > 0) && turnManager.activeTurn.unit.canMove;
             apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.currentApStat}";
         }
     }

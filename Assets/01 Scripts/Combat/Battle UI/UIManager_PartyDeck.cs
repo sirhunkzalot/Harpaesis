@@ -36,7 +36,7 @@ public class UIManager_PartyDeck : MonoBehaviour
             }
             else
             {
-                partyDeckSlots[i].image.gameObject.SetActive(false);
+                partyDeckSlots[i].parentObject.SetActive(false);
             }
         }
 
@@ -65,6 +65,7 @@ public class UIManager_PartyDeck : MonoBehaviour
 [System.Serializable]
 public class PartyDeckSlot
 {
+    public GameObject parentObject;
     public TextMeshProUGUI nameText;
     public Image image;
     public TextMeshProUGUI hpText;

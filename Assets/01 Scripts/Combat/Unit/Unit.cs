@@ -176,6 +176,8 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
+            print(HasEffect(StatusEffectType.Root));
+            canMove = !HasEffect(StatusEffectType.Root);
             StartTurn();
         }
     }
