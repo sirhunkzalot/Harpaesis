@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168528501438769922}
   - component: {fileID: 7132483224439193029}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Self Target Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   currentlySelected: {fileID: 0}
   allWithTargets: []
   skill: {fileID: 0}
+  isActive: 0
 --- !u!1001 &2569082510974418228
 PrefabInstance:
   m_ObjectHideFlags: 0

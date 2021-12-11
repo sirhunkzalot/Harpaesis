@@ -84,6 +84,9 @@ MonoBehaviour:
   isAlive: 1
   canMove: 1
   canAct: 1
+  currentAtkStat: 0
+  currentDefStat: 0
+  currentApStat: 0
   currentEffects: []
   turnData:
     unit: {fileID: 0}
@@ -345,6 +348,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -378,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.45
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -419,6 +430,30 @@ PrefabInstance:
     - target: {fileID: 4065674856214689502, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_fontSize
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465825840735828509, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465825840735828509, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465825840735828509, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465825840735828509, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465825840735828509, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4465825840735828509, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5594597755106791301, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_AnchorMax.y
@@ -543,6 +578,30 @@ PrefabInstance:
     - target: {fileID: 8556482109680265631, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_Name
       value: Unit UI (Enemy)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912435787226889895, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912435787226889895, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912435787226889895, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912435787226889895, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912435787226889895, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912435787226889895, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}

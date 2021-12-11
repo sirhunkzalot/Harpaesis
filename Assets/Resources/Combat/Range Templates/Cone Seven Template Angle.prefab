@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168528501438769922}
   - component: {fileID: 866069293575895733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone Seven Template Angle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,9 +71,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c9d56e70d79ab42a39cdedc7793886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  templateNodes: []
   currentlySelected: {fileID: 0}
   allWithTargets: []
   skill: {fileID: 0}
+  isActive: 0
 --- !u!1001 &241141896019993692
 PrefabInstance:
   m_ObjectHideFlags: 0

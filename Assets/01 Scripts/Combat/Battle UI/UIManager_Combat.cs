@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class UIManager_Combat : MonoBehaviour
     TurnManager turnManager;
     public GameObject[] playerTurnObjects;
     public Button moveButton;
+    public TextMeshProUGUI apText;
 
     bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
@@ -33,6 +35,7 @@ public class UIManager_Combat : MonoBehaviour
         if (IsFriendlyTurn)
         {
             moveButton.interactable = (turnManager.activeTurn.unit.turnData.ap > 0);
+            apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.currentApStat}";
         }
     }
 
