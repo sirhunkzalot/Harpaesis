@@ -115,11 +115,11 @@ namespace Harpaesis.Combat
 
         public static void SkillEffect_Damage(Unit _user, Unit _target,  int _damageAmount, bool _ignoreArmor = false)
         {
-            int _damageToDeal = _damageAmount + _user.unitData.attackStat;
+            int _damageToDeal = _damageAmount + _user.currentAtkStat;
 
             if (!_ignoreArmor)
             {
-                _damageToDeal -= Mathf.FloorToInt(_target.unitData.defenseStat * .75f);
+                _damageToDeal -= Mathf.FloorToInt(_target.currentDefStat * .75f);
             }
 
             _target.TakeDamage(_damageToDeal, _user);
@@ -127,11 +127,11 @@ namespace Harpaesis.Combat
 
         public static void SkillEffect_DamageWithLifesteal(Unit _user, Unit _target, int _damageAmount, int _lifestealPercentage, bool _ignoreArmor)
         {
-            int _damageToDeal = _damageAmount + _user.unitData.attackStat;
+            int _damageToDeal = _damageAmount + _user.currentAtkStat;
 
             if (!_ignoreArmor)
             {
-                _damageToDeal -= Mathf.FloorToInt(_target.unitData.defenseStat * .75f);
+                _damageToDeal -= Mathf.FloorToInt(_target.currentDefStat * .75f);
             }
 
             _target.TakeDamage(_damageToDeal, _user);

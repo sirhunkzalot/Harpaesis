@@ -25,46 +25,44 @@ public class Unit_UI_EffectsManager : MonoBehaviour
         defendEffect.SetActive(false);
     }
 
-    public void ActivateEffect(string _effectName)
+    public void ActivateEffect(StatusEffectType _effect)
     {
-        string _effectNameLowerCase = _effectName.ToLower();
-
-        switch (_effectNameLowerCase)
+        switch (_effect)
         {
-            case "bleed":
+            case StatusEffectType.Bleed:
                 bleedEffect.SetActive(true);
                 break;
-            case "burn":
+            case StatusEffectType.Burn:
                 burnEffect.SetActive(true);
                 break;
-            case "fear":
+            case StatusEffectType.Fear:
                 fearEffect.SetActive(true);
                 break;
-            case "sleep":
+            case StatusEffectType.Sleep:
                 sleepEffect.SetActive(true);
                 break;
-            case "holy":
+            case StatusEffectType.Holy:
                 holyEffect.SetActive(true);
                 break;
-            case "apup":
+            case StatusEffectType.AP_Up:
                 apUpEffect.SetActive(true);
                 break;
-            case "atkup":
+            case StatusEffectType.ATK_Up:
                 atkUpEffect.SetActive(true);
                 break;
-            case "atkdown":
+            case StatusEffectType.ATK_Down:
                 atkDownEffect.SetActive(true);
                 break;
-            case "defup":
+            case StatusEffectType.DEF_Up:
                 defUpEffect.SetActive(true);
                 break;
-            case "defdown":
+            case StatusEffectType.DEF_Down:
                 defDownEffect.SetActive(true);
                 break;
-            case "root":
+            case StatusEffectType.Root:
                 entangleEffect.SetActive(true);
                 break;
-            case "defend":
+            case StatusEffectType.Defend:
                 defendEffect.SetActive(true);
                 break;
             default:
@@ -72,46 +70,44 @@ public class Unit_UI_EffectsManager : MonoBehaviour
         }
     }
 
-    public void DeactivateEffect(string _effectName)
+    public void DeactivateEffect(StatusEffectType _effect)
     {
-        string _effectNameLowerCase = _effectName.ToLower();
-
-        switch (_effectNameLowerCase)
+        switch (_effect)
         {
-            case "bleed":
+            case StatusEffectType.Bleed:
                 bleedEffect.SetActive(false);
                 break;
-            case "burn":
+            case StatusEffectType.Burn:
                 burnEffect.SetActive(false);
                 break;
-            case "fear":
+            case StatusEffectType.Fear:
                 fearEffect.SetActive(false);
                 break;
-            case "sleep":
+            case StatusEffectType.Sleep:
                 sleepEffect.SetActive(false);
                 break;
-            case "holy":
+            case StatusEffectType.Holy:
                 holyEffect.SetActive(false);
                 break;
-            case "apUp":
+            case StatusEffectType.AP_Up:
                 apUpEffect.SetActive(false);
                 break;
-            case "atkUp":
+            case StatusEffectType.ATK_Up:
                 atkUpEffect.SetActive(false);
                 break;
-            case "atkDown":
+            case StatusEffectType.ATK_Down:
                 atkDownEffect.SetActive(false);
                 break;
-            case "defUp":
+            case StatusEffectType.DEF_Up:
                 defUpEffect.SetActive(false);
                 break;
-            case "defDown":
+            case StatusEffectType.DEF_Down:
                 defDownEffect.SetActive(false);
                 break;
-            case "root":
+            case StatusEffectType.Root:
                 entangleEffect.SetActive(false);
                 break;
-            case "defend":
+            case StatusEffectType.Defend:
                 defendEffect.SetActive(false);
                 break;
             default:

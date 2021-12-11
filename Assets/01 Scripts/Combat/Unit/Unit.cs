@@ -23,6 +23,11 @@ public abstract class Unit : MonoBehaviour
     [ReadOnly] public bool canMove = true;
     [ReadOnly] public bool canAct = true;
 
+    [Header("Adjusted Stats")]
+    [ReadOnly] public int currentAtkStat;
+    [ReadOnly] public int currentDefStat;
+    [ReadOnly] public int currentApStat;
+
     [ReadOnly] public List<StatusEffect> currentEffects = new List<StatusEffect>();
 
     [ReadOnly] public Turn turnData;
@@ -42,6 +47,9 @@ public abstract class Unit : MonoBehaviour
         motor.Init(this);
 
         currentHP = unitData.healthStat;
+        currentAtkStat = unitData.attackStat;
+        currentDefStat = unitData.defenseStat;
+        currentApStat = unitData.apStat;
 
         transform.position = grid.NodePositionFromWorldPoint(transform.position);
         grid.NodeFromWorldPoint(transform.position).hasUnit = true;
@@ -128,10 +136,41 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-    public virtual void StartTurn()
+    public bool HasEffect(StatusEffectType _effect)
+    {
+        if (currentEffects.Count > 0)
+        {
+            foreach (StatusEffect _statusEffect in currentEffects)
+            {
+                if (_statusEffect.effectType == _effect)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public void StartUnitTurn()
     {
         OnTurnStart();
+
+        if (HasEffect(StatusEffectType.Sleep))
+        {
+            Invoke(nameof(ForceEndTurn), 1f);
+        }
+        else if (HasEffect(StatusEffectType.Fear))
+        {
+            Invoke(nameof(ForceEndTurn), 1f);
+        }
+        else
+        {
+            StartTurn();
+        }
     }
+
+    public abstract void StartTurn();
 
     public void ForceEndTurn()
     {

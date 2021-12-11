@@ -95,8 +95,6 @@ public class FriendlyUnit : Unit
 
     public override void StartTurn()
     {
-        base.StartTurn();
-
         uiCombat.ShowPlayerUI(true);
 
         gridCam.JumpToPosition(transform.position);

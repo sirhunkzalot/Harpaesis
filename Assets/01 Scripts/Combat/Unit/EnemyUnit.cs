@@ -31,12 +31,16 @@ public class EnemyUnit : Unit
 
     public override void StartTurn()
     {
-        base.StartTurn();
         uiCombat.ShowPlayerUI(false);
         gridCam.followUnit = this;
         friendlyUnits = turnManager.friendlyUnits;
         ignoreUnits = new List<FriendlyUnit>();
         validMoves = new List<EnemyMove>();
+
+        if (!canAct)
+        {
+            Invoke(nameof(EndTurn), 1f);
+        }
 
         PlanTurn();
     }
@@ -45,10 +49,13 @@ public class EnemyUnit : Unit
     {
         for (int i = 0; i < friendlyUnits.Count; i++)
         {
-            Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
-            Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position, true);
+            if (canMove)
+            {
+                Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
+                Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position, true);
 
-            PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMoves, friendlyUnits[i]));
+                PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMoves, friendlyUnits[i]));
+            }
 
             CreateEnemyMoves(friendlyUnits[i], transform.position, enemyUnitData.apStat);
         }
