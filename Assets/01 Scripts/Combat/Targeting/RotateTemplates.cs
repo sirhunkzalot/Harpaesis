@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RotateTemplates : MonoBehaviour
 {
-    TargetingTemplate[] templates = new TargetingTemplate[5];
+    TargetingTemplate[] templates = new TargetingTemplate[6];
     int templateIndex;
 
     FriendlyUnit unit;

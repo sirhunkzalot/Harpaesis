@@ -17,9 +17,12 @@ public class FriendlyUnit : Unit
 
     Waypoint[] previewPath;
 
-    TargetingTemplate basicAttackTargetingTemplate, primarySkillTargetingTemplate, secondarySkillTargetingTemplate,
+    TargetingTemplate basicAttackTargetingTemplate, alternativeSkillTargetingTemplate, primarySkillTargetingTemplate, secondarySkillTargetingTemplate,
         tertiarySkillTargetingTemplate, signatureSkillTargetingTemplate;
     int activeTemplateIndex;
+
+    [ReadOnly] public bool alternativeWeapon;
+    [ReadOnly] public FriendlyUnitPassive passive;
 
     RotateTemplates templateParent;
     ActiveUnitIcon activeUnitIcon;
@@ -39,6 +42,9 @@ public class FriendlyUnit : Unit
         activeUnitIcon.Init();
 
         SetupTargetingTemplates();
+
+        passive = (FriendlyUnitPassive)unitPassive;
+        passive.OnCombatStart();
     }
 
     protected override void Tick()
@@ -69,24 +75,28 @@ public class FriendlyUnit : Unit
     void SetupTargetingTemplates()
     {
         basicAttackTargetingTemplate = Instantiate(friendlyUnitData.basicAttack.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
+        alternativeSkillTargetingTemplate = Instantiate(friendlyUnitData.alternativeAttack.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
         primarySkillTargetingTemplate = Instantiate(friendlyUnitData.primarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
         secondarySkillTargetingTemplate = Instantiate(friendlyUnitData.secondarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
         tertiarySkillTargetingTemplate = Instantiate(friendlyUnitData.tertiarySkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
         signatureSkillTargetingTemplate = Instantiate(friendlyUnitData.signatureSkill.targetingTemplate, templateParent.transform).GetComponent<TargetingTemplate>();
 
         templateParent.InitTemplate(basicAttackTargetingTemplate);
+        templateParent.InitTemplate(alternativeSkillTargetingTemplate);
         templateParent.InitTemplate(primarySkillTargetingTemplate);
         templateParent.InitTemplate(secondarySkillTargetingTemplate);
         templateParent.InitTemplate(tertiarySkillTargetingTemplate);
         templateParent.InitTemplate(signatureSkillTargetingTemplate);
 
         basicAttackTargetingTemplate.Init(friendlyUnitData.basicAttack);
+        alternativeSkillTargetingTemplate.Init(friendlyUnitData.alternativeAttack);
         primarySkillTargetingTemplate.Init(friendlyUnitData.primarySkill);
         secondarySkillTargetingTemplate.Init(friendlyUnitData.secondarySkill);
         tertiarySkillTargetingTemplate.Init(friendlyUnitData.tertiarySkill);
         signatureSkillTargetingTemplate.Init(friendlyUnitData.signatureSkill);
 
         basicAttackTargetingTemplate.Disable();
+        alternativeSkillTargetingTemplate.Disable();
         primarySkillTargetingTemplate.Disable();
         secondarySkillTargetingTemplate.Disable();
         tertiarySkillTargetingTemplate.Disable();
@@ -108,6 +118,19 @@ public class FriendlyUnit : Unit
     public void MoveAction()
     {
         currentState = FriendlyState.PreviewMove;
+    }
+
+    public void SwapWeapon()
+    {
+        alternativeWeapon = !alternativeWeapon;
+
+        passive.OnChangeWeapon();
+
+        if (basicAttackTargetingTemplate.isActive || alternativeSkillTargetingTemplate.isActive)
+        {
+            EndTargeting();
+            BeginTargeting(0);
+        }
     }
 
     public void PreviewMove()
@@ -161,8 +184,16 @@ public class FriendlyUnit : Unit
         switch (_index)
         {
             case 0:
-                basicAttackTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = friendlyUnitData.basicAttack.targetingStyle == TargetingStyle.AOE;
+                if (!alternativeWeapon)
+                {
+                    basicAttackTargetingTemplate.SetupTargetingTemplate();
+                    _isAOE = friendlyUnitData.basicAttack.targetingStyle == TargetingStyle.AOE;
+                }
+                else
+                {
+                    alternativeSkillTargetingTemplate.SetupTargetingTemplate();
+                    _isAOE = friendlyUnitData.alternativeAttack.targetingStyle == TargetingStyle.AOE;
+                }
                 break;
             case 1:
                 primarySkillTargetingTemplate.SetupTargetingTemplate();
@@ -203,10 +234,14 @@ public class FriendlyUnit : Unit
             switch (activeTemplateIndex)
             {
                 case 0:
-                    if (basicAttackTargetingTemplate.currentlySelected?.unit != null)
+                    if (!alternativeWeapon && basicAttackTargetingTemplate.currentlySelected?.unit != null)
                     {
                         UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.currentlySelected.unit);
                         turnData.hasAttacked = true;
+                    }
+                    else if(alternativeWeapon && alternativeSkillTargetingTemplate.currentlySelected?.unit != null)
+                    {
+                        UseSkill(activeTemplateIndex, alternativeSkillTargetingTemplate.currentlySelected.unit);
                     }
                     break;
 
@@ -317,6 +352,7 @@ public class FriendlyUnit : Unit
         currentState = FriendlyState.Active;
 
         basicAttackTargetingTemplate.Disable();
+        alternativeSkillTargetingTemplate.Disable();
         primarySkillTargetingTemplate.Disable();
         secondarySkillTargetingTemplate.Disable();
         tertiarySkillTargetingTemplate.Disable();
@@ -336,8 +372,16 @@ public class FriendlyUnit : Unit
         switch (_skillIndex)
         {
             case 0:
-                BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
-                friendlyUnitData.basicAttack.UseSkill(this, _target);
+                if (!alternativeWeapon)
+                {
+                    BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
+                    friendlyUnitData.basicAttack.UseSkill(this, _target);
+                }
+                else
+                {
+                    BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.alternativeAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
+                    friendlyUnitData.alternativeAttack.UseSkill(this, _target);
+                }
                 break;
             case 1:
                 BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.primarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);

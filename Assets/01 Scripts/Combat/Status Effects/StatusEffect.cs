@@ -36,8 +36,8 @@ namespace Harpaesis.Combat
         public virtual void OnRoundEnd() { }
         public virtual void OnTurnStart() { }
         public virtual void OnTurnEnd() { }
-        public virtual void OnDealDamage() { }
-        public virtual void OnTakeDamage() { }
+        public virtual void OnDealDamage(int _damageAmount, Unit _damagedUnit) { }
+        public virtual void OnTakeDamage(int _damageAmount, Unit _damagingUnit) { }
         public virtual void OnTakeStep() { }
 
         public static StatusEffect operator +(StatusEffect a, StatusEffect b)
@@ -91,7 +91,7 @@ namespace Harpaesis.Combat
 
         protected override void ApplyDamage()
         {
-            effectedUnit.TakeDamage(StatusEffectSettings.bleedDamage);
+            effectedUnit.TakeDamage(GameSettings.statusEffectSettings.bleedDamage);
         }
 
         protected override void OnEffectRemoved()
@@ -127,7 +127,7 @@ namespace Harpaesis.Combat
 
         protected override void ApplyDamage()
         {
-            effectedUnit.TakeDamage(StatusEffectSettings.burnDamage);
+            effectedUnit.TakeDamage(GameSettings.statusEffectSettings.burnDamage);
         }
 
         protected override void OnEffectRemoved()
@@ -179,7 +179,7 @@ namespace Harpaesis.Combat
             effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.Sleep);
         }
 
-        public override void OnTakeDamage()
+        public override void OnTakeDamage(int _damageAmount, Unit _damagingUnit)
         {
             WakeUp();
         }

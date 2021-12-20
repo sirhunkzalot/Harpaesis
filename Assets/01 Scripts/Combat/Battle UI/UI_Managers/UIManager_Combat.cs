@@ -61,6 +61,15 @@ public class UIManager_Combat : MonoBehaviour
         print("UseItem");
     }
 
+    public void Button_SwapWeapon()
+    {
+        if (IsFriendlyTurn)
+        {
+            FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+            _unit.SwapWeapon();
+        }
+    }
+
     public void Button_EndTurn()
     {
         if (IsFriendlyTurn)

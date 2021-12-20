@@ -72,8 +72,11 @@ namespace Harpaesis.GridCamera
 
                 for (int i = 0; i < _mats.Length; i++)
                 {
-                    float _height = Mathf.Lerp(_mats[i].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
-                    _mats[i].SetFloat("MaxHeight", _height);
+                    if (_mats[i].HasFloat("MaxHeight"))
+                    {
+                        float _height = Mathf.Lerp(_mats[i].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
+                        _mats[i].SetFloat("MaxHeight", _height);
+                    }
                 }
             }
         }

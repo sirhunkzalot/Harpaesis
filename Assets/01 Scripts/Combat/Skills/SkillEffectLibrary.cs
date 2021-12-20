@@ -123,6 +123,8 @@ namespace Harpaesis.Combat
             }
 
             _target.TakeDamage(_damageToDeal, _user);
+
+            _user.OnDealDamage(_damageToDeal, _target);
         }
 
         public static void SkillEffect_DamageWithLifesteal(Unit _user, Unit _target, int _damageAmount, int _lifestealPercentage, bool _ignoreArmor)
@@ -135,6 +137,8 @@ namespace Harpaesis.Combat
             }
 
             _target.TakeDamage(_damageToDeal, _user);
+
+            _user.OnDealDamage(_damageToDeal, _target);
 
             _user.Heal(_user, Mathf.CeilToInt(_damageAmount * _lifestealPercentage * .01f));
         }

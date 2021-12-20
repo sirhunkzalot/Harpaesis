@@ -33,12 +33,14 @@ public abstract class Unit : MonoBehaviour
 
     [ReadOnly] public Turn turnData;
 
+    protected UnitPassive unitPassive;
+
     protected GridManager grid;
     protected GridCamera gridCam;
     protected UIManager_Combat uiCombat;
     [HideInInspector] public Unit_UI unit_ui;
 
-    private void Start()
+    public void Start()
     {
         grid = GridManager.instance;
         gridCam = GridCamera.instance;
@@ -52,6 +54,8 @@ public abstract class Unit : MonoBehaviour
         currentDefStat = unitData.defenseStat;
         currentApStat = unitData.apStat;
 
+        AssignPassive();
+        
         transform.position = grid.NodePositionFromWorldPoint(transform.position);
         grid.NodeFromWorldPoint(transform.position).hasUnit = true;
 
@@ -74,7 +78,7 @@ public abstract class Unit : MonoBehaviour
     {
         if (!isAlive || _damageAmount <= 0) return;
 
-        GetComponentInChildren<Unit_UI>()?.DisplayDamageText(_damageAmount);
+        unit_ui.DisplayDamageText(-_damageAmount);
 
         currentHP = Mathf.Clamp(currentHP - _damageAmount, 0, unitData.healthStat);
 
@@ -99,8 +103,11 @@ public abstract class Unit : MonoBehaviour
     {
         if (isAlive)
         {
-            BattleLog.Log($"{unitData.unitName} heals for {_healAmount} HP!", BattleLogType.Combat);
+            unit_ui.DisplayDamageText(_healAmount);
+
             currentHP = Mathf.Clamp(currentHP + _healAmount, 0, unitData.healthStat);
+
+            BattleLog.Log($"{unitData.unitName} heals for {_healAmount} HP!", BattleLogType.Combat);
         }
     }
 
@@ -160,6 +167,37 @@ public abstract class Unit : MonoBehaviour
         return -1;
     }
 
+    public void AssignPassive()
+    {
+        switch (unitData.unitPassive)
+        {
+            case UnitPassiveType.Alexander:
+                unitPassive = new AlexanderPassive(this);
+                break;
+            case UnitPassiveType.Cori:
+                unitPassive = new CoriPassive(this);
+                break;
+            case UnitPassiveType.Doran:
+                unitPassive = new DoranPassive(this);
+                break;
+            case UnitPassiveType.Joachim:
+                unitPassive = new JoachimPassive(this);
+                break;
+            case UnitPassiveType.Regina:
+                unitPassive = new ReginaPassive(this);
+                break;
+            case UnitPassiveType.Vampire:
+                unitPassive = new VampirePassive(this);
+                break;
+            case UnitPassiveType.Lycan:
+                unitPassive = new LycanPassive(this);
+                break;
+            default:
+                unitPassive = new EnemyUnitPassive(this);
+                break;
+        }
+    }
+
     public void StartUnitTurn()
     {
         OnTurnStart();
@@ -176,7 +214,6 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
-            print(HasEffect(StatusEffectType.Root));
             canMove = !HasEffect(StatusEffectType.Root);
             StartTurn();
         }
@@ -205,6 +242,8 @@ public abstract class Unit : MonoBehaviour
         {
             currentEffects[i].OnTurnStart();
         }
+
+        unitPassive.OnTurnStart();
     }
 
     public void OnTurnEnd()
@@ -213,6 +252,8 @@ public abstract class Unit : MonoBehaviour
         {
             currentEffects[i].OnTurnEnd();
         }
+
+        unitPassive.OnTurnEnd();
     }
 
     public void OnTakeStep()
@@ -225,6 +266,22 @@ public abstract class Unit : MonoBehaviour
 
     public void OnRoundStart() { }
     public void OnRoundEnd() { }
-    public void OnDealDamage() { }
-    public void OnTakeDamage() { }
+    public void OnDealDamage(int _damageAmount, Unit _damagedUnit)
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            currentEffects[i].OnDealDamage(_damageAmount, _damagedUnit);
+        }
+
+        unitPassive.OnDealDamage(_damageAmount, _damagedUnit);
+    }
+    public void OnTakeDamage(int _damageAmount, Unit _damagingUnit)
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            currentEffects[i].OnTakeDamage(_damageAmount, _damagingUnit);
+        }
+
+        unitPassive.OnTakeDamage(_damageAmount, _damagingUnit);
+    }
 }

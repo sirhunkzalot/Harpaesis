@@ -27,7 +27,14 @@ public class UIManager_Combat_SkillDescription : MonoBehaviour
         switch (_skillIndex)
         {
             case 0:
-                _skill = _data.basicAttack;
+                if (!((FriendlyUnit)manager.activeTurn.unit).alternativeWeapon)
+                {
+                    _skill = _data.basicAttack;
+                }
+                else
+                {
+                    _skill = _data.alternativeAttack;
+                }
                 break;
             case 1:
                 _skill = _data.primarySkill;

@@ -74,7 +74,7 @@ public class UnitMotor : MonoBehaviour
     {
         do
         {
-            transform.position = Vector3.Lerp(transform.position, _targetPosition, StatusEffectSettings.knockbackSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, _targetPosition, GameSettings.statusEffectSettings.knockbackSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         } while (Vector3.Distance(transform.position, _targetPosition) > .05f);
 

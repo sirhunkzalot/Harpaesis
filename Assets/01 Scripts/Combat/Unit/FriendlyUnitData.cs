@@ -7,11 +7,12 @@ namespace Harpaesis.Combat
     [CreateAssetMenu(menuName = "Unit/New Friendly Unit")]
     public class FriendlyUnitData : UnitData
     {
-        [Space]
+        [Header("Friendly Unit Data")]
         public string nickname;
 
         [Header("Skills")]
         public Skill basicAttack;
+        public Skill alternativeAttack;
         public Skill primarySkill;
         public Skill secondarySkill;
         public Skill tertiarySkill;

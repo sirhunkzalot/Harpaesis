@@ -1,6 +1,8 @@
-public static class StatusEffectSettings
+using UnityEngine;
+
+public class StatusEffectSettings : ScriptableObject
 {
-    public static int bleedDamage = 2;
-    public static int burnDamage = 6;
-    public static float knockbackSpeed =  8.5f;
+    public int bleedDamage = 2;
+    public int burnDamage = 6;
+    public float knockbackSpeed =  8.5f;
 }

@@ -13,6 +13,7 @@ public class Unit_UI : MonoBehaviour
 
     private void Start()
     {
+        GetComponent<Canvas>().worldCamera = Camera.main;
         damageText = damageTextParent.GetComponentInChildren<TextMeshProUGUI>();
         damageTextParent.SetActive(false);
     }
@@ -23,7 +24,7 @@ public class Unit_UI : MonoBehaviour
 
     IEnumerator DisplayDamage(int _damageAmount)
     {
-        damageText.text = (_damageAmount > 0) ? $"-{_damageAmount}" : (_damageAmount == 0) ? "0" : $"+{_damageAmount}";
+        damageText.text = (_damageAmount < 0) ? $"{_damageAmount}" : (_damageAmount == 0) ? "0" : $"+{_damageAmount}";
         damageTextParent.SetActive(true);
 
         yield return new WaitForSeconds(2f);

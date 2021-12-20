@@ -16,6 +16,9 @@ namespace Harpaesis.Combat
         public int defenseStat;
         public int apStat;
 
+        [Header("Passive")]
+        public UnitPassiveType unitPassive = UnitPassiveType.None;
+
         private void OnValidate()
         {
 #if UNITY_EDITOR

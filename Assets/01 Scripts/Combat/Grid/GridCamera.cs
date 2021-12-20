@@ -35,7 +35,7 @@ namespace Harpaesis.GridCamera
         HideWalls hideWalls;
         Camera cam;
 
-        public CameraView currentView = CameraView.Front;
+        CameraView currentView = CameraView.Front;
 
         float delta;
 
