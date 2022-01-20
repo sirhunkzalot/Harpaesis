@@ -4,5 +4,16 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
-    public List<Dialog> dialogs = new List<Dialog>();
+    public Dialogue[] dialogues;
+
+    public bool activateDialogOnStart = false;
+
+    private void Start()
+    {
+        if (activateDialogOnStart)
+        {
+            dialogues[0].gameObject.SetActive(true);
+            dialogues[0].StartDialog();
+        }
+    }
 }
