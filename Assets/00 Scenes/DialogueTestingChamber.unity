@@ -222,8 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734d6a639b0b55645b7eb0efd94990d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenCharacters: 0.1
-  skipLine: 0
   OnStartDialog:
     m_PersistentCalls:
       m_Calls:
@@ -451,8 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2617f1c6dc6439b4db85a856c9161f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogues:
-  - {fileID: 76004582}
+  startingDialogue: {fileID: 76004582}
   activateDialogOnStart: 1
 --- !u!4 &324584132
 Transform:
@@ -799,10 +796,6 @@ PrefabInstance:
     - target: {fileID: 8459953452110179196, guid: 625fc6cdf45d60f46b7fa1bc050d1ded, type: 3}
       propertyPath: m_Name
       value: Dialog Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 8459953452110179196, guid: 625fc6cdf45d60f46b7fa1bc050d1ded, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 625fc6cdf45d60f46b7fa1bc050d1ded, type: 3}

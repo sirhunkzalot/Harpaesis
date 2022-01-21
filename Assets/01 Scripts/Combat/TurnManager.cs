@@ -11,6 +11,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     int turnCounter = -1;
+    public bool beginCombatOnStart = true;
     public Turn activeTurn;
 
     public List<Unit> units = new List<Unit>();
@@ -33,7 +34,7 @@ public class TurnManager : MonoBehaviour
         foreach (Unit _unit in _units)
         {
             units.Add(_unit);
-            if(_unit.GetType() == typeof(FriendlyUnit))
+            if (_unit.GetType() == typeof(FriendlyUnit))
             {
                 friendlyUnits.Add((FriendlyUnit)_unit);
             }
@@ -42,6 +43,15 @@ public class TurnManager : MonoBehaviour
                 enemyUnits.Add((EnemyUnit)_unit);
             }
         }
+
+        if (beginCombatOnStart)
+        {
+            BeginCombat();
+        }
+    }
+
+    public void BeginCombat()
+    {
 
         BuildTurnOrder();
         NextTurn();

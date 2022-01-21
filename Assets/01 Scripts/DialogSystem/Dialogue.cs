@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class Dialogue : MonoBehaviour
 {
-    public float timeBetweenCharacters = .05f;
-    public bool skipLine;
+    bool skipLine;
 
     [Header("Before Dialog")]
     public UnityEvent OnStartDialog;
@@ -18,66 +17,26 @@ public class Dialogue : MonoBehaviour
     [Header("After Dialogue")]
     public UnityEvent OnFinishDialog;
 
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void StartDialog()
     {
         OnBeginDialog();
-        UIManager_Dialog.StartText(lines[0].speaker.characterName);
-        StartCoroutine(Typewriter());
+        UIManager_Dialog.instance.StartText(this);
+        
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            skipLine = true;
-        }
-    }
-
-    IEnumerator Typewriter()
-    {
-        int _lineIndex = 0;
-
-        do
-        {
-            Dialogue_Line _currentLine = lines[_lineIndex];
-            _currentLine.OnStartLine.Invoke();
-            int _characterIndex = 0;
-            string _currentString = "";
-            bool _lineFinished = false;
-
-            while (!(_lineFinished || skipLine))
-            {
-                yield return new WaitForSeconds(timeBetweenCharacters);
-
-                _currentString += _currentLine.dialog[_characterIndex++];
-                UIManager_Dialog.SetText(_currentLine.speaker.characterName, _currentString);
-                _lineFinished = (_characterIndex >= _currentLine.dialog.Length);
-            }
-
-            _currentString = _currentLine.dialog;
-            skipLine = false;
-            UIManager_Dialog.SetText(_currentLine.speaker.characterName, _currentString);
-
-            while (!skipLine)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-            skipLine = false;
-
-        } while (++_lineIndex < lines.Count);
-
-        OnEndDialog();
-    }
-
-    private void OnBeginDialog()
+    public void OnBeginDialog()
     {
         OnStartDialog.Invoke();
     }
 
-    private void OnEndDialog()
+    public void OnEndDialog()
     {
         OnFinishDialog.Invoke();
         gameObject.SetActive(false);
-        UIManager_Dialog.EndText();
     }
 }
