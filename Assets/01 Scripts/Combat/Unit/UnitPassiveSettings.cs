@@ -20,7 +20,6 @@ public class UnitPassiveSettings : ScriptableObject
     #endregion
 
 
-
     #region Enemy Passive Settings
     // Vampires
     public float vampireBaseHealPercent = .2f;

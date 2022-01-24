@@ -5,6 +5,7 @@ public class BalanceSettingsWindow : EditorWindow
 {
     static UnitPassiveSettings passiveSettings;
     static StatusEffectSettings statusEffectSettings;
+    static ItemSettings itemSettings;
 
 
     [MenuItem("Window/Balance Settings")]
@@ -35,6 +36,15 @@ public class BalanceSettingsWindow : EditorWindow
         GUILayout.Space(1);
         GUILayout.Label("Lycan Passive", EditorStyles.whiteLabel);
         passiveSettings.lycanHealPercentOfMissingHealth = EditorGUILayout.FloatField("Heal Percent of Missing Health", passiveSettings.lycanHealPercentOfMissingHealth);
+
+        GUILayout.Space(3);
+        GUILayout.Label("Item Settings:", EditorStyles.whiteLargeLabel);
+
+        GUILayout.Space(1);
+        GUILayout.Label("Health Potion", EditorStyles.whiteLabel);
+        itemSettings.potionHealAmount = EditorGUILayout.IntField("Heal Amount:", itemSettings.potionHealAmount);
+
+
     }
 
     static void LoadSettings()
@@ -58,6 +68,17 @@ public class BalanceSettingsWindow : EditorWindow
             {
                 statusEffectSettings = CreateInstance<StatusEffectSettings>();
                 AssetDatabase.CreateAsset(statusEffectSettings, "Assets/Resources/Game Settings/Status Effect Settings.asset");
+            }
+        }
+
+        if (itemSettings == null)
+        {
+            itemSettings = (ItemSettings)Resources.Load("Game Settings/Item Settings");
+
+            if (itemSettings == null)
+            {
+                itemSettings = CreateInstance<ItemSettings>();
+                AssetDatabase.CreateAsset(itemSettings, "Assets/Resources/Game Settings/Item Settings.asset");
             }
         }
     }
