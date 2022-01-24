@@ -4,39 +4,43 @@ using Harpaesis.UI;
 using UnityEngine.Events;
 using UnityEngine;
 
-public class Dialogue : MonoBehaviour
+namespace Harpaesis.Chungus
 {
-    bool skipLine;
-
-    [Header("Before Dialog")]
-    public UnityEvent OnStartDialog;
-
-    [Space]
-    public List<Dialogue_Line> lines = new List<Dialogue_Line>();
-
-    [Header("After Dialogue")]
-    public UnityEvent OnFinishDialog;
-
-    private void Awake()
+    public class Dialogue : MonoBehaviour
     {
-        gameObject.SetActive(false);
+        bool skipLine;
+
+        [Header("Before Dialog")]
+        public UnityEvent OnStartDialog;
+
+        [Space]
+        public List<Dialogue_Line> lines = new List<Dialogue_Line>();
+
+        [Header("After Dialogue")]
+        public UnityEvent OnFinishDialog;
+
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void StartDialog()
+        {
+            OnBeginDialog();
+            UIManager_Dialog.instance.StartText(this);
+
+        }
+
+        public void OnBeginDialog()
+        {
+            OnStartDialog.Invoke();
+        }
+
+        public void OnEndDialog()
+        {
+            OnFinishDialog.Invoke();
+            gameObject.SetActive(false);
+        }
     }
 
-    public void StartDialog()
-    {
-        OnBeginDialog();
-        UIManager_Dialog.instance.StartText(this);
-        
-    }
-
-    public void OnBeginDialog()
-    {
-        OnStartDialog.Invoke();
-    }
-
-    public void OnEndDialog()
-    {
-        OnFinishDialog.Invoke();
-        gameObject.SetActive(false);
-    }
 }
