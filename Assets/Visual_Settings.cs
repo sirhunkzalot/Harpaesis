@@ -8,13 +8,16 @@ public class Visual_Settings : MonoBehaviour
 {
     public Toggle fullscreenTog, vsyncTog;
 
-    public List<ResItem> resolutions = new List<ResItem>();
     private int selectedResolution;
+    Resolution[] resolutions;
 
     public TMP_Text resolutionLabel;
+    public TMP_Dropdown resolutionDropdown;
     // Start is called before the first frame update
     void Start()
     {
+
+        InitDropdown();
         fullscreenTog.isOn = Screen.fullScreen;
         
         if (QualitySettings.vSyncCount == 0)
@@ -33,32 +36,26 @@ public class Visual_Settings : MonoBehaviour
 
     }
 
-    public void ResLeft()
+    public void InitDropdown()
     {
-        selectedResolution--;
-        if(selectedResolution < 0)
+        resolutionDropdown.ClearOptions();
+        resolutions = Screen.resolutions;
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            selectedResolution = resolutions.Count - 1;
+            resolutionDropdown.options.Add(new TMP_Dropdown.OptionData($"{resolutions[i].width} x {resolutions[i].height}"));
+            
+            if(resolutions[i].ToString() == Screen.currentResolution.ToString())
+            {
+                resolutionDropdown.value = i;
+            }
         }
-
-        UpdateResLabel();
+      
+        
     }
 
-    public void ResRight()
-    {
-        selectedResolution++;
-        if(selectedResolution > resolutions.Count - 1)
-        {
-            selectedResolution = 0;
-        }
+ 
 
-        UpdateResLabel();
-    }
-
-    public void UpdateResLabel()
-    {
-        resolutionLabel.text = resolutions[selectedResolution].horizontal.ToString() + " X " + resolutions[selectedResolution].vertical.ToString();
-    }
+   
 
     public void ApplyChanges()
     {
@@ -73,13 +70,9 @@ public class Visual_Settings : MonoBehaviour
             QualitySettings.vSyncCount = 0;
         }
 
-        Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenTog.isOn);
+        Screen.SetResolution(resolutions[resolutionDropdown.value].width, resolutions[resolutionDropdown.value].height, fullscreenTog.isOn);
     }
 
 }
 
-[System.Serializable]
-public class ResItem
-{
-    public int horizontal, vertical;
-}
+
