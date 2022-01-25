@@ -1,3 +1,5 @@
+
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -120,3 +122,4 @@ public class BalanceSettingsWindow : EditorWindow
         SaveSettings();
     }
 }
+#endif

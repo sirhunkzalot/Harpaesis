@@ -30,7 +30,7 @@ public class Visual_Settings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ResLeft()
@@ -38,7 +38,7 @@ public class Visual_Settings : MonoBehaviour
         selectedResolution--;
         if(selectedResolution < 0)
         {
-            selectedResolution = 0;
+            selectedResolution = resolutions.Count - 1;
         }
 
         UpdateResLabel();
@@ -49,7 +49,7 @@ public class Visual_Settings : MonoBehaviour
         selectedResolution++;
         if(selectedResolution > resolutions.Count - 1)
         {
-            selectedResolution = resolutions.Count - 1;
+            selectedResolution = 0;
         }
 
         UpdateResLabel();
