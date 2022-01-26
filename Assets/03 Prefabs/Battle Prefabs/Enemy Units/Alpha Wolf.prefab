@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4650391613854826910}
   - component: {fileID: 4650391613854826897}
   - component: {fileID: 4650391613854826909}
+  - component: {fileID: 1404145089358843050}
   m_Layer: 25
   m_Name: Alpha Wolf
   m_TagString: Untagged
@@ -29,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.5, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6804263754005020465}
   m_Father: {fileID: 0}
@@ -53,6 +55,9 @@ MonoBehaviour:
   isAlive: 1
   canMove: 1
   canAct: 1
+  currentAtkStat: 0
+  currentDefStat: 0
+  currentApStat: 0
   currentEffects: []
   turnData:
     unit: {fileID: 0}
@@ -95,6 +100,22 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &1404145089358843050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650391613854826906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af77a8e0e1525a45a208d96e12e3e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 6432924664822003606}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColorOne: {r: 1, g: 0, b: 0, a: 1}
+  hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
 --- !u!1 &5629232329980861476
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +144,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 2, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2009344761051050123}
   m_Father: {fileID: 4650391613854826911}
@@ -170,7 +192,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aa7996df6039855409e155feb1c9f1a4, type: 3}
-  m_Color: {r: 1, g: 0.5990566, b: 0.5990566, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
