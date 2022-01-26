@@ -2,83 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PartyInventory : MonoBehaviour
+namespace Harpaesis.Inventory
 {
-    public const int MAX_INVENTORY_SIZE = 4;
-    [ReadOnly] public Item[] items = new Item[MAX_INVENTORY_SIZE];
-
-    TurnManager turnManager;
-
-    public static PartyInventory instance;
-
-    private void Awake()
+    public static class PartyInventory
     {
-        if(instance != null)
+        public const int MAX_INVENTORY_SIZE = 4;
+        public static Item[] inventory = new Item[MAX_INVENTORY_SIZE];
+
+        public static void UseItem(int _itemIndex)
         {
-            CopyInstance();
-        }
-
-        instance = this;
-    }
-
-    private void Start()
-    {
-        turnManager = TurnManager.instance;
-    }
-
-    private void CopyInstance()
-    {
-        items = instance.items;
-    }
-
-    public void UseItem(int _itemIndex)
-    {
-        if (_itemIndex < 0 || _itemIndex >= MAX_INVENTORY_SIZE || items[_itemIndex] == null)
-        {
-            throw new System.Exception("Invalid Index Given. Either no item is present there, or the index was out of range.");
-        }
-
-        if(turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit))
-        {
-            items[_itemIndex].UseItem(turnManager.activeTurn.unit);
-        }
-    }
-
-    public bool AddItem(Item _item)
-    {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if(items[i] == null)
+            if (_itemIndex < 0 || _itemIndex >= MAX_INVENTORY_SIZE || inventory[_itemIndex] == null)
             {
-                items[i] = _item;
-                return true;
+                throw new System.Exception("Invalid Index Given. Either no item is present there, or the index was out of range.");
+            }
+
+            if (TurnManager.instance.activeTurn.unit.GetType() == typeof(FriendlyUnit))
+            {
+                inventory[_itemIndex].UseItem(TurnManager.instance.activeTurn.unit);
             }
         }
 
-        return false;
-    }
-
-    public void RemoveItem(int _itemIndex)
-    {
-        if (_itemIndex < 0 || _itemIndex >= MAX_INVENTORY_SIZE || items[_itemIndex] == null)
+        public static bool AddItem(Item _item)
         {
-            throw new System.Exception("Invalid Index Given. Either no item is present there, or the index was out of range.");
-        }
-
-        items[_itemIndex] = null;
-    }
-
-    public bool RemoveItem(Item _item)
-    {
-        for (int i = 0; i < items.Length; i++)
-        {
-            if(items[i] == _item)
+            for (int i = 0; i < inventory.Length; i++)
             {
-                items[i] = null;
-                return true;
+                if (inventory[i] == null)
+                {
+                    inventory[i] = _item;
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        return false;
+        public static void RemoveItem(int _itemIndex)
+        {
+            if (_itemIndex < 0 || _itemIndex >= MAX_INVENTORY_SIZE || inventory[_itemIndex] == null)
+            {
+                throw new System.Exception("Invalid Index Given. Either no item is present there, or the index was out of range.");
+            }
+
+            inventory[_itemIndex] = null;
+        }
+
+        public static bool RemoveItem(Item _item)
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                if (inventory[i] == _item)
+                {
+                    inventory[i] = null;
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

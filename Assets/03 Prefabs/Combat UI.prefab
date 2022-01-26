@@ -1585,9 +1585,9 @@ RectTransform:
   m_Father: {fileID: 1724153755291416981}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 297.38312, y: -32}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2236598586329029764
@@ -1672,9 +1672,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7971641234815897413}
-        m_TargetAssemblyTypeName: PartyInventory, Assembly-CSharp
-        m_MethodName: UseItem
+      - m_Target: {fileID: 961138571540645161}
+        m_TargetAssemblyTypeName: Harpaesis.UI.UIManager_Inventory, Assembly-CSharp
+        m_MethodName: Button_UseItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3743,9 +3743,9 @@ RectTransform:
   m_Father: {fileID: 1724153755291416981}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120.46104, y: -32}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9083623214440098807
@@ -3830,9 +3830,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7971641234815897413}
-        m_TargetAssemblyTypeName: PartyInventory, Assembly-CSharp
-        m_MethodName: UseItem
+      - m_Target: {fileID: 961138571540645161}
+        m_TargetAssemblyTypeName: Harpaesis.UI.UIManager_Inventory, Assembly-CSharp
+        m_MethodName: Button_UseItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5396,7 +5396,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 4225793151164245778}
   m_OnClick:
     m_PersistentCalls:
@@ -5424,6 +5424,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4131969807598254293}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &5153353004560010302
 MonoBehaviour:
@@ -6396,7 +6408,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Items (Coming Soon)
+  m_Text: Items
 --- !u!1 &2288834091220920032
 GameObject:
   m_ObjectHideFlags: 0
@@ -8878,9 +8890,9 @@ RectTransform:
   m_Father: {fileID: 1724153755291416981}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 208.92207, y: -32}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5168252966527257097
@@ -8965,9 +8977,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7971641234815897413}
-        m_TargetAssemblyTypeName: PartyInventory, Assembly-CSharp
-        m_MethodName: UseItem
+      - m_Target: {fileID: 961138571540645161}
+        m_TargetAssemblyTypeName: Harpaesis.UI.UIManager_Inventory, Assembly-CSharp
+        m_MethodName: Button_UseItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10998,14 +11010,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1806748206457730159}
-  - component: {fileID: 7971641234815897413}
+  - component: {fileID: 961138571540645161}
   m_Layer: 5
   m_Name: Items popup menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1806748206457730159
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11028,7 +11040,7 @@ RectTransform:
   m_AnchoredPosition: {x: -0.11669922, y: -0.87805176}
   m_SizeDelta: {x: -0.23349953, y: -1.7561035}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7971641234815897413
+--- !u!114 &961138571540645161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11037,14 +11049,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4131969807598254293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce113eb29fdb5214284c25f3861404d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 2144b5f996821ee4ea397633f1e075c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  images:
+  - {fileID: 3540945234160583466}
+  - {fileID: 9162716556222114344}
+  - {fileID: 752138487053641319}
+  - {fileID: 4018764012025151955}
 --- !u!1 &4148798230055664879
 GameObject:
   m_ObjectHideFlags: 0
@@ -11811,9 +11823,9 @@ RectTransform:
   m_Father: {fileID: 1724153755291416981}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 32, y: -32}
   m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7372592694909349764
@@ -11898,9 +11910,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7971641234815897413}
-        m_TargetAssemblyTypeName: PartyInventory, Assembly-CSharp
-        m_MethodName: UseItem
+      - m_Target: {fileID: 961138571540645161}
+        m_TargetAssemblyTypeName: Harpaesis.UI.UIManager_Inventory, Assembly-CSharp
+        m_MethodName: Button_UseItem
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

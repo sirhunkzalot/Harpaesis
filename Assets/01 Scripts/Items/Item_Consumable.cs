@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Items/New Consumable Item")]
-public class Item_Consumable : Item
+namespace Harpaesis.Inventory
 {
-    public override void UseItem(Unit _unit)
+    [CreateAssetMenu(menuName = "Items/New Consumable Item")]
+    public class Item_Consumable : Item
     {
-        base.UseItem(_unit);
-        PartyInventory.instance.RemoveItem(this);
+        public override void UseItem(Unit _unit)
+        {
+            base.UseItem(_unit);
+            PartyInventory.RemoveItem(this);
+        }
     }
+
 }

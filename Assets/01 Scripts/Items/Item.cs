@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using Harpaesis.Combat;
 using UnityEngine;
 
-public abstract class Item : ScriptableObject
+namespace Harpaesis.Inventory
 {
-    public string itemName;
-    public Sprite itemSprite;
-    public List<SkillEffect> skillEffects = new List<SkillEffect>();
-
-    public virtual void UseItem(Unit _unit)
+    public abstract class Item : ScriptableObject
     {
-        SkillEffectLibrary.ResolveEffects(_unit, _unit, skillEffects);
+        public string itemName;
+        public Sprite itemSprite;
+        public List<SkillEffect> skillEffects = new List<SkillEffect>();
+
+        public virtual void UseItem(Unit _unit)
+        {
+            SkillEffectLibrary.ResolveEffects(_unit, _unit, skillEffects);
+        }
     }
+
 }
