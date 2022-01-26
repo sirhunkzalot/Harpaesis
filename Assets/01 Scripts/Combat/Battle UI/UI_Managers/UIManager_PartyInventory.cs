@@ -9,9 +9,11 @@ namespace Harpaesis.UI
     public class UIManager_PartyInventory : MonoBehaviour
     {
         public Image[] images = new Image[4];
+        public Item testItem;
 
         private void Start()
         {
+            PartyInventory.AddItem(testItem);
             UpdateInventoryDisplay();
         }
 
