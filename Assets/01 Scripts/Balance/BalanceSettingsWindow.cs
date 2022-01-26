@@ -46,11 +46,11 @@ public class BalanceSettingsWindow : EditorWindow
         GUILayout.Label("Health Potion", EditorStyles.whiteLabel);
         itemSettings.potionHealAmount = EditorGUILayout.IntField("Heal Amount:", itemSettings.potionHealAmount);
 
-        GUILayout.Label("Health Potion", EditorStyles.whiteLabel);
+        GUILayout.Label("ATK Potion", EditorStyles.whiteLabel);
         itemSettings.atkPotionBuffAmount = EditorGUILayout.IntField("Buff Amount:", itemSettings.atkPotionBuffAmount);
         itemSettings.atkPotionBuffDuration = EditorGUILayout.IntField("Buff Duration:", itemSettings.atkPotionBuffDuration);
 
-        GUILayout.Label("Health Potion", EditorStyles.whiteLabel);
+        GUILayout.Label("DEF Potion", EditorStyles.whiteLabel);
         itemSettings.defPotionBuffAmount = EditorGUILayout.IntField("Buff Amount:", itemSettings.defPotionBuffAmount);
         itemSettings.defPotionBuffDuration = EditorGUILayout.IntField("Buff Duration:", itemSettings.defPotionBuffDuration);
 
