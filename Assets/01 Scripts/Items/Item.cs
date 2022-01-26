@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.Combat;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "New Item")]
 public abstract class Item : ScriptableObject
 {
     public string itemName;
     public Sprite itemSprite;
-    public abstract void UseEffect(Unit _unit);
+    public List<SkillEffect> skillEffects = new List<SkillEffect>();
+
+    public virtual void UseItem(Unit _unit)
+    {
+        SkillEffectLibrary.ResolveEffects(_unit, _unit, skillEffects);
+    }
 }
