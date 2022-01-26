@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4477297515871811397}
   - component: {fileID: 4477297515871811396}
   - component: {fileID: 5270546115002527534}
+  - component: {fileID: 7930430059872858200}
   m_Layer: 25
   m_Name: Werewolf Pup
   m_TagString: Untagged
@@ -30,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.5, y: 0, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6113343891290962856}
   m_Father: {fileID: 0}
@@ -111,6 +113,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7930430059872858200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4477297515871811451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af77a8e0e1525a45a208d96e12e3e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 7154478113525479831}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColorOne: {r: 1, g: 0, b: 0, a: 1}
+  hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
 --- !u!1 &6018147654052445085
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +157,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.343, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3146897085402397371}
   m_Father: {fileID: 4477297515871811392}
@@ -186,7 +205,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: aa7996df6039855409e155feb1c9f1a4, type: 3}
-  m_Color: {r: 0.44028127, g: 0.94708747, b: 0.9622642, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

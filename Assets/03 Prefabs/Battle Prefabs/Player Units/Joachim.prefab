@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1908291970187427670}
   - component: {fileID: 1908291970187427672}
   - component: {fileID: 1908291970187427669}
+  - component: {fileID: 7817326255545499090}
   m_Layer: 25
   m_Name: Joachim
   m_TagString: Untagged
@@ -29,6 +30,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1668360236529843414}
   - {fileID: 6434443414442567027}
@@ -69,6 +71,9 @@ MonoBehaviour:
   isAlive: 1
   canMove: 1
   canAct: 1
+  currentAtkStat: 0
+  currentDefStat: 0
+  currentApStat: 0
   currentEffects: []
   turnData:
     unit: {fileID: 0}
@@ -77,6 +82,7 @@ MonoBehaviour:
     ap: 0
   unit_ui: {fileID: 0}
   friendlyUnitData: {fileID: 0}
+  alternativeWeapon: 0
   currentState: 0
 --- !u!114 &1908291970187427669
 MonoBehaviour:
@@ -94,6 +100,22 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
+--- !u!114 &7817326255545499090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908291970187427673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af77a8e0e1525a45a208d96e12e3e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 7500251472754432060}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColorOne: {r: 1, g: 0, b: 0, a: 1}
+  hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
 --- !u!1 &6543221522613531891
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +144,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4400913878458660785}
   m_Father: {fileID: 1908291970187427671}
@@ -218,6 +241,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1908291970187427671}
   m_RootOrder: 1
@@ -261,6 +285,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2473255879554122410}
   m_Father: {fileID: 1908291970187427671}

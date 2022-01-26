@@ -11,12 +11,11 @@ public class Visual_Settings : MonoBehaviour
     private int selectedResolution;
     Resolution[] resolutions;
 
-    public TMP_Text resolutionLabel;
+    public TMP_Text debugLabel;
     public TMP_Dropdown resolutionDropdown;
     // Start is called before the first frame update
     void Start()
     {
-
         InitDropdown();
         fullscreenTog.isOn = Screen.fullScreen;
         
@@ -34,6 +33,7 @@ public class Visual_Settings : MonoBehaviour
     void Update()
     {
 
+        
     }
 
     public void InitDropdown()
@@ -43,8 +43,8 @@ public class Visual_Settings : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             resolutionDropdown.options.Add(new TMP_Dropdown.OptionData($"{resolutions[i].width} x {resolutions[i].height}"));
-            
-            if(resolutions[i].ToString() == Screen.currentResolution.ToString())
+
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 resolutionDropdown.value = i;
             }
