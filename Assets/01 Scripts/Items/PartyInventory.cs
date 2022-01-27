@@ -8,6 +8,7 @@ namespace Harpaesis.Inventory
     {
         public const int MAX_INVENTORY_SIZE = 4;
         public static Item[] inventory = new Item[MAX_INVENTORY_SIZE];
+        private static int partyGold;
 
         public static void UseItem(int _itemIndex)
         {
@@ -21,7 +22,6 @@ namespace Harpaesis.Inventory
                 inventory[_itemIndex].UseItem(TurnManager.instance.activeTurn.unit);
             }
         }
-
         public static bool AddItem(Item _item)
         {
             for (int i = 0; i < inventory.Length; i++)
@@ -35,7 +35,6 @@ namespace Harpaesis.Inventory
 
             return false;
         }
-
         public static void RemoveItem(int _itemIndex)
         {
             if (_itemIndex < 0 || _itemIndex >= MAX_INVENTORY_SIZE || inventory[_itemIndex] == null)
@@ -45,7 +44,6 @@ namespace Harpaesis.Inventory
 
             inventory[_itemIndex] = null;
         }
-
         public static bool RemoveItem(Item _item)
         {
             for (int i = 0; i < inventory.Length; i++)
@@ -58,6 +56,19 @@ namespace Harpaesis.Inventory
             }
 
             return false;
+        }
+
+        public static void AddGold(int _goldToAdd)
+        {
+            partyGold += _goldToAdd;
+        }
+        public static bool HasEnoughGold(int _goldAmount)
+        {
+            return partyGold >= _goldAmount;
+        }
+        public static void RemoveGold(int _goldToRemove)
+        {
+            partyGold -= _goldToRemove;
         }
     }
 }
