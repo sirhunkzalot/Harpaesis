@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Small HP Potion
   m_EditorClassIdentifier: 
   itemName: Small HP Potion
+  itemCost: 5
+  itemDescription: I heal you.
   itemSprite: {fileID: 21300000, guid: 8461c4275f98a7c458dcd793b475c2e6, type: 3}
-  skillEffects:
+  itemShopPrefab: {fileID: 0}
+  itemEffect:
   - effectType: 0
     param1: 5
     param2: 
