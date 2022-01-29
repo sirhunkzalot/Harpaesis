@@ -32,6 +32,7 @@ public class UI_InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     }
 
+    
 
     public void OnPointerEnter(PointerEventData eventData)
     {
