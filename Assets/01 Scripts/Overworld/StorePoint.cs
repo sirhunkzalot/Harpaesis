@@ -7,9 +7,6 @@ namespace Harpaesis.Overworld
 {
     public class StorePoint : OverworldPoint
     {
-        [Header("Store Settings")]
-        [SerializeField] List<StoreItem> storeItems = new List<StoreItem>();
-
         public CinemachineVirtualCamera storeCam;
 
         public override void Interact()
@@ -20,13 +17,6 @@ namespace Harpaesis.Overworld
         private void LoadStore()
         {
             VcamManager.instance.SetCameraPriority(storeCam);
-        }
-
-        [System.Serializable]
-        struct StoreItem
-        {
-            public Item item;
-            public int itemPrice;
         }
     }
 }
