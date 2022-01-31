@@ -7,6 +7,8 @@ public class VcamManager : MonoBehaviour
 {
     CinemachineVirtualCamera[] vcams;
 
+    public CinemachineVirtualCamera primaryCamera;
+
     public static VcamManager instance;
 
     private void Awake()
@@ -27,5 +29,10 @@ public class VcamManager : MonoBehaviour
                 vcam.Priority = -10;
             }
         }
+    }
+
+    public void ReturnToPrimaryCamera()
+    {
+        SetCameraPriority(primaryCamera);
     }
 }

@@ -9,14 +9,30 @@ namespace Harpaesis.Overworld
     {
         public CinemachineVirtualCamera storeCam;
 
+        bool isInteracting;
+
         public override void Interact()
         {
-            LoadStore();
+            if (!isInteracting)
+            {
+                LoadStore();
+            }
+            else
+            {
+                UnloadStore();
+            }
+
+            isInteracting = !isInteracting;
         }
 
         private void LoadStore()
         {
             VcamManager.instance.SetCameraPriority(storeCam);
+        }
+
+        private void UnloadStore()
+        {
+            VcamManager.instance.ReturnToPrimaryCamera();
         }
     }
 }
