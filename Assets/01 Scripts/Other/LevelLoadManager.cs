@@ -10,7 +10,7 @@ public static class LevelLoadManager
 
     public static void LoadMainMenu()
     {
-        LoadLevel(0);
+        LoadLevel(1);
     }
 
     public static void ReloadLevel()
