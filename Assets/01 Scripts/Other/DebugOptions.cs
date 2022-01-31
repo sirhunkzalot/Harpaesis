@@ -12,6 +12,7 @@ public class DebugOptions : MonoBehaviour
         {
             Debug.Break();
         }
+#endif
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             Time.timeScale = 5f;
@@ -20,7 +21,6 @@ public class DebugOptions : MonoBehaviour
         {
             Time.timeScale = 1f;
         }
-#endif
 
     }
 }
