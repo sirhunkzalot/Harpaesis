@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6072168632730876301}
   - component: {fileID: 6072168632730876300}
   - component: {fileID: 1632795991437346827}
+  - component: {fileID: 7717926118229671413}
   m_Layer: 25
   m_Name: Highwayman
   m_TagString: Untagged
@@ -116,6 +117,22 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hitColorOne: {r: 1, g: 0, b: 0, a: 1}
   hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
+--- !u!114 &7717926118229671413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072168632730876294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 2245148741639598976}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
+  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1 &9169281627781063492
 GameObject:
   m_ObjectHideFlags: 0

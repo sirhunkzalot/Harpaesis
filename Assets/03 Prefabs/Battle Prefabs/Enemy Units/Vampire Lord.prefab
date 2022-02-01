@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 5259379708724140573}
   - component: {fileID: 5259379708724140578}
   - component: {fileID: 464061255013857957}
+  - component: {fileID: 3323793193387779288}
   m_Layer: 25
   m_Name: Vampire Lord
   m_TagString: Untagged
@@ -214,6 +215,22 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hitColorOne: {r: 1, g: 0, b: 0, a: 1}
   hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
+--- !u!114 &3323793193387779288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259379708724140579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 6868256620370433863}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
+  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1001 &6141965107353423079
 PrefabInstance:
   m_ObjectHideFlags: 0
