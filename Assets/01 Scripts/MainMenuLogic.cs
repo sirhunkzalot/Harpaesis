@@ -37,4 +37,9 @@ public class MainMenuLogic : MonoBehaviour
             }
         }
     }
+
+    public void PlayOverworld()
+    {
+        SceneManager.LoadScene(7);
+    }
 }
