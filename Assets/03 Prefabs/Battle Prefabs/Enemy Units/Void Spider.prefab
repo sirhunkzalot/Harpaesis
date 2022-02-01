@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 4752951056988849663}
   - component: {fileID: 4752951056988849656}
   - component: {fileID: 4247923803011174339}
+  - component: {fileID: 5447684593726143089}
   m_Layer: 25
   m_Name: Void Spider
   m_TagString: Untagged
@@ -214,6 +215,22 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hitColorOne: {r: 1, g: 0, b: 0, a: 1}
   hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
+--- !u!114 &5447684593726143089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752951056988849657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 287556397178285859}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
+  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1001 &4955464808642172746
 PrefabInstance:
   m_ObjectHideFlags: 0

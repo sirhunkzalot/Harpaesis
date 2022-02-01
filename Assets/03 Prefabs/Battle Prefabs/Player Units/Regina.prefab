@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1084939517035647658}
   - component: {fileID: 1084939517035647655}
   - component: {fileID: 4425949661864971394}
+  - component: {fileID: 2996518681743978749}
   m_Layer: 25
   m_Name: Regina
   m_TagString: Untagged
@@ -116,6 +117,22 @@ MonoBehaviour:
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   hitColorOne: {r: 1, g: 0, b: 0, a: 1}
   hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
+--- !u!114 &2996518681743978749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084939517035647659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 1991445856463036918}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
+  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1 &1991445856463036919
 GameObject:
   m_ObjectHideFlags: 0
