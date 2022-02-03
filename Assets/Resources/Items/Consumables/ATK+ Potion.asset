@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298bca4aa9e15ef41b5ffd9668727b83, type: 3}
+  m_Name: ATK+ Potion
+  m_EditorClassIdentifier: 
+  itemName: ATK+ Potion
+  itemCost: 5
+  itemDescription: Boosts the consumer's ATK by 5 for 3 turns.
+  itemSprite: {fileID: 21300000, guid: bb4f80afa90c88142adb423dfd2121ea, type: 3}
+  itemShopPrefab: {fileID: 0}
+  itemEffect:
+  - effectType: 12
+    param1: 5
+    param2: 3
+    option: 0

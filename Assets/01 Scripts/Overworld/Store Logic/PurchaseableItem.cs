@@ -15,6 +15,7 @@ namespace Harpaesis.Overworld.Store
         private void Start()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = item.item.itemSprite;
         }
 
         private void OnMouseEnter()

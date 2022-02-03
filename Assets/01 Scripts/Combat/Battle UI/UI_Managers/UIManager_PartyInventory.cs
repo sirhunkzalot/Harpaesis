@@ -16,6 +16,9 @@ namespace Harpaesis.UI
 
         private void Awake()
         {
+            instance = this;
+
+
             UpdateInventoryDisplay();
 
             transparent = Color.white;
@@ -47,7 +50,6 @@ namespace Harpaesis.UI
         public void Button_UseItem(int _index)
         {
             PartyInventory.UseItem(_index);
-            UpdateInventoryDisplay();
             UpdateInventoryDisplay();
         }
     }

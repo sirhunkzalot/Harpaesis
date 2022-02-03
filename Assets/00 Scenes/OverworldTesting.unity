@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -396,7 +396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &190060617
 Transform:
   m_ObjectHideFlags: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -948,7 +948,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 267a32caa313be14a975eacaa9448601, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d982acb5c23792343a0a9081c44dc850, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -970,7 +970,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.39, y: 0.64, z: 0.05}
+  m_Size: {x: 0.51, y: 0.64, z: 0.05}
   m_Center: {x: 0.00000047683716, y: 0, z: 0}
 --- !u!114 &275325588
 MonoBehaviour:
@@ -985,7 +985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    item: {fileID: 11400000, guid: 1f13f0784fe9ff44a983b1d951dca97b, type: 2}
+    item: {fileID: 11400000, guid: 6ca971c7fde6d0b4bb1bb862e1d32f1c, type: 2}
     itemPrice: 5
 --- !u!1 &378276399
 GameObject:
@@ -2137,7 +2137,6 @@ GameObject:
   - component: {fileID: 870775797}
   - component: {fileID: 870775796}
   - component: {fileID: 870775798}
-  - component: {fileID: 870775799}
   m_Layer: 5
   m_Name: Inventory Panel
   m_TagString: Untagged
@@ -2233,23 +2232,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &870775799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870775793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2144b5f996821ee4ea397633f1e075c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  images:
-  - {fileID: 66523485}
-  - {fileID: 257698237}
-  - {fileID: 1791386585}
-  - {fileID: 1514607229}
 --- !u!1 &896596774
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,7 +2712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1033160268
 Transform:
   m_ObjectHideFlags: 0
@@ -3459,6 +3441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1350504789}
   - component: {fileID: 1350504790}
+  - component: {fileID: 1350504791}
   m_Layer: 5
   m_Name: Store Canvas
   m_TagString: Untagged
@@ -3508,6 +3491,23 @@ MonoBehaviour:
   itemNameText: {fileID: 896596776}
   itemDescriptionText: {fileID: 119080138}
   costText: {fileID: 1223004094}
+--- !u!114 &1350504791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350504788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2144b5f996821ee4ea397633f1e075c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images:
+  - {fileID: 66523485}
+  - {fileID: 257698237}
+  - {fileID: 1791386585}
+  - {fileID: 1514607229}
 --- !u!1 &1412563883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3648,7 +3648,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 267a32caa313be14a975eacaa9448601, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bb4f80afa90c88142adb423dfd2121ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3670,7 +3670,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.39, y: 0.64, z: 0.05}
+  m_Size: {x: 0.39, y: 0.58, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1432671789
 MonoBehaviour:
@@ -3685,7 +3685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    item: {fileID: 11400000, guid: 1f13f0784fe9ff44a983b1d951dca97b, type: 2}
+    item: {fileID: 11400000, guid: cf9fdff7a7c18da44b4d93d4078431aa, type: 2}
     itemPrice: 5
 --- !u!1 &1496498223
 GameObject:
@@ -3970,7 +3970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4205,7 +4205,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 267a32caa313be14a975eacaa9448601, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e2d3676be738f24884c81277915f9c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4227,7 +4227,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.39, y: 0.64, z: 0.05}
+  m_Size: {x: 0.51, y: 0.64, z: 0.05}
   m_Center: {x: 0.00000047683716, y: 0, z: 0}
 --- !u!114 &1585421756
 MonoBehaviour:
@@ -4396,7 +4396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
