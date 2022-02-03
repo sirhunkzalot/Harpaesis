@@ -9,12 +9,17 @@ namespace Harpaesis.UI
     public class UIManager_PartyInventory : MonoBehaviour
     {
         public Image[] images = new Image[4];
-        public Item testItem;
 
-        private void Start()
+        Color transparent;
+
+        public static UIManager_PartyInventory instance;
+
+        private void Awake()
         {
-            PartyInventory.AddItem(testItem);
             UpdateInventoryDisplay();
+
+            transparent = Color.white;
+            transparent.a = 0;
         }
 
         private void OnEnable()
@@ -29,10 +34,12 @@ namespace Harpaesis.UI
                 if(PartyInventory.inventory[i] != null)
                 {
                     images[i].sprite = PartyInventory.inventory[i].itemSprite;
+                    images[i].color = Color.white;
                 }
                 else
                 {
                     images[i].sprite = null;
+                    images[i].color = transparent;
                 }
             }
         }

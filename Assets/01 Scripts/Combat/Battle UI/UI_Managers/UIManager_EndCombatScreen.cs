@@ -2,31 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager_EndCombatScreen : MonoBehaviour
+namespace Harpaesis.UI
 {
-    public GameObject victoryScreen;
-    public GameObject defeatScreen;
-
-    public static UIManager_EndCombatScreen instance;
-
-    private void Awake()
+    public class UIManager_EndCombatScreen : MonoBehaviour
     {
-        instance = this;
-    }
+        public GameObject victoryScreen;
+        public GameObject defeatScreen;
 
-    void Start()
-    {
-        victoryScreen.SetActive(false);
-        defeatScreen.SetActive(false);
-    }
+        public static UIManager_EndCombatScreen instance;
 
-    public void OpenVictoryScreen()
-    {
-        victoryScreen.SetActive(true);
-    }
+        private void Awake()
+        {
+            instance = this;
+        }
 
-    public void OpenLoseScreen()
-    {
-        defeatScreen.SetActive(true);
+        void Start()
+        {
+            victoryScreen.SetActive(false);
+            defeatScreen.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                OpenVictoryScreen();
+            }
+            else if (Input.GetKeyDown(KeyCode.C))
+            {
+                OpenLoseScreen();
+            }
+        }
+
+        public void OpenVictoryScreen()
+        {
+            victoryScreen.SetActive(true);
+        }
+
+        public void OpenLoseScreen()
+        {
+            defeatScreen.SetActive(true);
+        }
     }
 }

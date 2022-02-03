@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cinemachine;
+using Harpaesis.UI;
 using Harpaesis.Inventory;
 using UnityEngine;
 
@@ -27,12 +28,14 @@ namespace Harpaesis.Overworld
 
         private void LoadStore()
         {
-            VcamManager.instance.SetCameraPriority(storeCam);
+            VirtualCameraManager.instance.SetCameraPriority(storeCam);
+            UIManager_Store.instance.EnterStore();
         }
 
         private void UnloadStore()
         {
-            VcamManager.instance.ReturnToPrimaryCamera();
+            VirtualCameraManager.instance.ReturnToPrimaryCamera();
+            UIManager_Store.instance.LeaveStore();
         }
     }
 }

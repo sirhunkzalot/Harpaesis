@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.UI;
 using Harpaesis.Inventory;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace Harpaesis.Overworld.Store
     {
         SpriteRenderer spriteRenderer;
 
-        [SerializeField] StoreItem item;
+        public StoreItem item;
 
         private void Start()
         {
@@ -28,14 +29,19 @@ namespace Harpaesis.Overworld.Store
 
         private void OnMouseDown()
         {
-            Destroy(gameObject);
+            UIManager_Store.instance.LookAtItem(this);
         }
 
-        [System.Serializable]
-        struct StoreItem
+        public void OnBuy()
         {
-            public Item item;
-            public int itemPrice;
+            Destroy(gameObject);
         }
+    }
+
+    [System.Serializable]
+    public class StoreItem
+    {
+        public Item item;
+        public int itemPrice;
     }
 }

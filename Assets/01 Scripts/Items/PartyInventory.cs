@@ -8,7 +8,7 @@ namespace Harpaesis.Inventory
     {
         public const int MAX_INVENTORY_SIZE = 4;
         public static Item[] inventory = new Item[MAX_INVENTORY_SIZE];
-        private static int partyGold;
+        public static int partyGold = 50;
 
         public static void UseItem(int _itemIndex)
         {
@@ -57,7 +57,6 @@ namespace Harpaesis.Inventory
 
             return false;
         }
-
         public static void AddGold(int _goldToAdd)
         {
             partyGold += _goldToAdd;
@@ -65,6 +64,18 @@ namespace Harpaesis.Inventory
         public static bool HasEnoughGold(int _goldAmount)
         {
             return partyGold >= _goldAmount;
+        }
+        public static bool HasFreeInventorySpace()
+        {
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                if(inventory[i] == null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
         public static void RemoveGold(int _goldToRemove)
         {

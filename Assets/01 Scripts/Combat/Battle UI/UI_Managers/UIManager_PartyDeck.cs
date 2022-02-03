@@ -4,69 +4,72 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class UIManager_PartyDeck : MonoBehaviour
+namespace Harpaesis.UI
 {
-    public List<PartyDeckSlot> partyDeckSlots = new List<PartyDeckSlot>();
-    public FriendlyUnit[] friendlyUnits;
-
-    bool inited;
-
-    private void Start()
+    public class UIManager_PartyDeck : MonoBehaviour
     {
-        StartCoroutine(Initialize());
-    }
+        public List<PartyDeckSlot> partyDeckSlots = new List<PartyDeckSlot>();
+        public FriendlyUnit[] friendlyUnits;
 
-    private IEnumerator Initialize()
-    {
-        do
+        bool inited;
+
+        private void Start()
         {
-            yield return new WaitForEndOfFrame();
-            friendlyUnits = TurnManager.instance.friendlyUnits.ToArray();
-        } while (friendlyUnits.Length == 0);
-
-
-
-        for (int i = 0; i < partyDeckSlots.Count; i++)
-        {
-            if(i < friendlyUnits.Length && friendlyUnits[i] != null)
-            {
-                partyDeckSlots[i].nameText.text = friendlyUnits[i].friendlyUnitData.nickname;
-                partyDeckSlots[i].image.sprite = friendlyUnits[i].friendlyUnitData.unitIcon;
-                partyDeckSlots[i].hpText.text = $"{friendlyUnits[i].currentHP}/{friendlyUnits[i].friendlyUnitData.healthStat}";
-            }
-            else
-            {
-                partyDeckSlots[i].parentObject.SetActive(false);
-            }
+            StartCoroutine(Initialize());
         }
 
-        inited = true;
-    }
-
-    public void FixedUpdate()
-    {
-        if (!inited) return;
-
-        for (int i = 0; i < partyDeckSlots.Count; i++)
+        private IEnumerator Initialize()
         {
-            if (partyDeckSlots[i].image.gameObject.activeInHierarchy)
+            do
             {
-                partyDeckSlots[i].hpText.text = $"{friendlyUnits[i].currentHP}/{friendlyUnits[i].friendlyUnitData.healthStat}";
+                yield return new WaitForEndOfFrame();
+                friendlyUnits = TurnManager.instance.friendlyUnits.ToArray();
+            } while (friendlyUnits.Length == 0);
 
-                if (!friendlyUnits[i].isAlive)
+
+
+            for (int i = 0; i < partyDeckSlots.Count; i++)
+            {
+                if (i < friendlyUnits.Length && friendlyUnits[i] != null)
                 {
-                    partyDeckSlots[i].image.gameObject.SetActive(false);
+                    partyDeckSlots[i].nameText.text = friendlyUnits[i].friendlyUnitData.nickname;
+                    partyDeckSlots[i].image.sprite = friendlyUnits[i].friendlyUnitData.unitIcon;
+                    partyDeckSlots[i].hpText.text = $"{friendlyUnits[i].currentHP}/{friendlyUnits[i].friendlyUnitData.healthStat}";
+                }
+                else
+                {
+                    partyDeckSlots[i].parentObject.SetActive(false);
+                }
+            }
+
+            inited = true;
+        }
+
+        public void FixedUpdate()
+        {
+            if (!inited) return;
+
+            for (int i = 0; i < partyDeckSlots.Count; i++)
+            {
+                if (partyDeckSlots[i].image.gameObject.activeInHierarchy)
+                {
+                    partyDeckSlots[i].hpText.text = $"{friendlyUnits[i].currentHP}/{friendlyUnits[i].friendlyUnitData.healthStat}";
+
+                    if (!friendlyUnits[i].isAlive)
+                    {
+                        partyDeckSlots[i].image.gameObject.SetActive(false);
+                    }
                 }
             }
         }
     }
-}
 
-[System.Serializable]
-public class PartyDeckSlot
-{
-    public GameObject parentObject;
-    public TextMeshProUGUI nameText;
-    public Image image;
-    public TextMeshProUGUI hpText;
+    [System.Serializable]
+    public class PartyDeckSlot
+    {
+        public GameObject parentObject;
+        public TextMeshProUGUI nameText;
+        public Image image;
+        public TextMeshProUGUI hpText;
+    }
 }

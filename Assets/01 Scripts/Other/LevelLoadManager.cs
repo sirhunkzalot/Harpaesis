@@ -19,18 +19,8 @@ public static class LevelLoadManager
         LoadLevel(_levelIndex);
     }
 
-    public static void LoadNextLevel()
+    public static void LoadOverworld()
     {
-        int _currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-
-        if(_currentLevelIndex < SceneManager.sceneCountInBuildSettings - 1)
-        {
-            LoadLevel(++_currentLevelIndex);
-        }
-        else
-        {
-            LoadMainMenu();
-        }
-
+        SceneManager.LoadSceneAsync(2);
     }
 }

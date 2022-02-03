@@ -3,6 +3,8 @@ using Harpaesis.GridCamera;
 using Harpaesis.Combat;
 using System.Collections.Generic;
 using UnityEngine;
+using Harpaesis;
+using Harpaesis.UI;
 
 /**
  * @author Matthew Sommer

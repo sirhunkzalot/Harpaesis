@@ -1,103 +1,109 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Harpaesis.Overworld;
 using UnityEngine.UI;
 using UnityEngine;
 
-/**
- * @author Matthew Sommer
- * class UIManager_Combat handles basic UI logic in the combat scene */
-public class UIManager_Combat : MonoBehaviour
+namespace Harpaesis.UI
 {
-    TurnManager turnManager;
-    public GameObject[] playerTurnObjects;
-    public Button moveButton;
-    public TextMeshProUGUI apText;
 
-    bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
-
-    #region Singleton
-    public static UIManager_Combat instance;
-
-    private void Awake()
+    /**
+     * @author Matthew Sommer
+     * class UIManager_Combat handles basic UI logic in the combat scene */
+    public class UIManager_Combat : MonoBehaviour
     {
-        instance = this;
-    }
-    #endregion
+        TurnManager turnManager;
+        public GameObject[] playerTurnObjects;
+        public Button moveButton;
+        public TextMeshProUGUI apText;
 
-    private void Start()
-    {
-        turnManager = TurnManager.instance;
-    }
+        bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
-    private void FixedUpdate()
-    {
-        if (IsFriendlyTurn)
+        #region Singleton
+        public static UIManager_Combat instance;
+
+        private void Awake()
         {
-            moveButton.interactable = (turnManager.activeTurn.unit.turnData.ap > 0) && turnManager.activeTurn.unit.canMove;
-            apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.currentApStat}";
+            instance = this;
         }
-    }
+        #endregion
 
-    public void ShowPlayerUI(bool _showUI)
-    {
-        foreach (GameObject button in playerTurnObjects)
+        private void Start()
         {
-            button.SetActive(_showUI);
+            turnManager = TurnManager.instance;
         }
-    }
 
-    public void Button_Move()
-    {
-        if (IsFriendlyTurn)
+        private void FixedUpdate()
+        {
+            if (IsFriendlyTurn)
+            {
+                moveButton.interactable = turnManager.activeTurn.unit.turnData.ap > 0 && turnManager.activeTurn.unit.canMove;
+                apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.currentApStat}";
+            }
+        }
+
+        public void ShowPlayerUI(bool _showUI)
+        {
+            foreach (GameObject button in playerTurnObjects)
+            {
+                button.SetActive(_showUI);
+            }
+        }
+
+        public void Button_Move()
+        {
+            if (IsFriendlyTurn)
+            {
+                FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+                _unit.MoveAction();
+            }
+        }
+
+        public void Button_UseItem()
+        {
+            print("UseItem");
+        }
+
+        public void Button_SwapWeapon()
+        {
+            if (IsFriendlyTurn)
+            {
+                FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+                _unit.SwapWeapon();
+            }
+        }
+
+        public void Button_EndTurn()
+        {
+            if (IsFriendlyTurn)
+            {
+                ((FriendlyUnit)turnManager.activeTurn.unit).EndTurn();
+                turnManager.NextTurn();
+            }
+        }
+
+        public void Button_UseSkill(int _index)
         {
             FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
-            _unit.MoveAction();
+
+            _unit.BeginTargeting(_index);
         }
-    }
 
-    public void Button_UseItem()
-    {
-        print("UseItem");
-    }
-
-    public void Button_SwapWeapon()
-    {
-        if (IsFriendlyTurn)
+        public void Button_Menu()
         {
-            FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
-            _unit.SwapWeapon();
+            LevelLoadManager.LoadMainMenu();
         }
-    }
 
-    public void Button_EndTurn()
-    {
-        if (IsFriendlyTurn)
+        public void Button_Continue()
         {
-            ((FriendlyUnit)turnManager.activeTurn.unit).EndTurn();
-            turnManager.NextTurn();
+            OverworldData.CompleteCurrentPoint();
+            LevelLoadManager.LoadOverworld();
         }
-    }
 
-    public void Button_UseSkill(int _index)
-    {
-        FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
-
-        _unit.BeginTargeting(_index);
-    }
-
-    public void Button_Menu()
-    {
-        LevelLoadManager.LoadMainMenu();
-    }
-
-    public void Button_NextLevel()
-    {
-        LevelLoadManager.LoadNextLevel();
-    }
-
-    public void Button_ReplayLevel()
-    {
-        LevelLoadManager.ReloadLevel();
+        public void Button_ReplayLevel()
+        {
+            LevelLoadManager.ReloadLevel();
+        }
     }
 }

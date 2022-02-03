@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class VcamManager : MonoBehaviour
+public class VirtualCameraManager : MonoBehaviour
 {
     CinemachineVirtualCamera[] vcams;
 
     public CinemachineVirtualCamera primaryCamera;
 
-    public static VcamManager instance;
+    public static VirtualCameraManager instance;
 
     private void Awake()
     {
         vcams = FindObjectsOfType<CinemachineVirtualCamera>();
+        ReturnToPrimaryCamera();
 
         instance = this;
     }

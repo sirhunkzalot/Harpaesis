@@ -4,33 +4,36 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class UIManager_TurnOrder : MonoBehaviour
+namespace Harpaesis.UI
 {
-    public List<Image> turnImages = new List<Image>();
-
-    Turn[] turns;
-
-    public static UIManager_TurnOrder instance;
-
-    private void Awake()
+    public class UIManager_TurnOrder : MonoBehaviour
     {
-        instance = this;
-    }
+        public List<Image> turnImages = new List<Image>();
 
-    public void UpdateImages(int _turnIndex, List<Turn> _turns)
-    {
-        for (int i = 0; i < turnImages.Count; i++)
+        Turn[] turns;
+
+        public static UIManager_TurnOrder instance;
+
+        private void Awake()
         {
-            int _newIndex = _turnIndex + i;
+            instance = this;
+        }
 
-            while(_newIndex >= _turns.Count)
+        public void UpdateImages(int _turnIndex, List<Turn> _turns)
+        {
+            for (int i = 0; i < turnImages.Count; i++)
             {
-                _newIndex -= _turns.Count;
+                int _newIndex = _turnIndex + i;
+
+                while (_newIndex >= _turns.Count)
+                {
+                    _newIndex -= _turns.Count;
+                }
+
+                UnitData _unitData = _turns[_newIndex].unitData;
+
+                turnImages[i].sprite = _unitData.unitIcon != null ? _unitData.unitIcon : null;
             }
-
-            UnitData _unitData = _turns[_newIndex].unitData;
-
-            turnImages[i].sprite = (_unitData.unitIcon != null) ? _unitData.unitIcon : null;
         }
     }
 }
