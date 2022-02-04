@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6271369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6271371}
+  - component: {fileID: 6271370}
+  m_Layer: 0
+  m_Name: Dialogue Scene Logic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &6271370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282c7105c0a58dd44aecc4a2f6841280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &6271371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &57034244
 GameObject:
   m_ObjectHideFlags: 3
@@ -788,7 +832,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220164238}
-  m_LocalRotation: {x: -1e-45, y: 0.9302721, z: -0.3668704, w: -3e-45}
+  m_LocalRotation: {x: -0, y: 0.9302721, z: -0.3668704, w: 1e-45}
   m_LocalPosition: {x: -0.14899373, y: 4.1617994, z: 3.8543673}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -997,6 +1041,10 @@ PrefabInstance:
     - target: {fileID: 1914665704053964508, guid: 25263d698deb7a34e85db142e2db033c, type: 3}
       propertyPath: m_Name
       value: Overworld UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914665704053964508, guid: 25263d698deb7a34e85db142e2db033c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2147655038904539190, guid: 25263d698deb7a34e85db142e2db033c, type: 3}
       propertyPath: m_RootOrder
@@ -2644,7 +2692,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
-  m_LocalRotation: {x: -1e-45, y: 0.9302721, z: -0.3668704, w: -3e-45}
+  m_LocalRotation: {x: 0, y: 0.9302721, z: -0.3668704, w: 1e-45}
   m_LocalPosition: {x: -3.3300004, y: 5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
