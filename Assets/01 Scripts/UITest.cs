@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class UITest : MonoBehaviour
 {
     public GameObject settings;
-
+    public GameObject mainSetings;
+    public GameObject audioSettings;
     public GameObject Items;
 
     public AudioSource sfx;
@@ -23,6 +24,8 @@ public class UITest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             settings.SetActive(!settings.activeInHierarchy);
+            audioSettings.SetActive(false);
+            mainSetings.SetActive(true);
             sfx.Play();
         }
     }

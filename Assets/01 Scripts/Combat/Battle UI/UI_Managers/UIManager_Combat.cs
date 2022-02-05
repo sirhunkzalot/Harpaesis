@@ -17,6 +17,7 @@ namespace Harpaesis.UI
         public GameObject[] playerTurnObjects;
         public Button moveButton;
         public TextMeshProUGUI apText;
+       
 
         bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
