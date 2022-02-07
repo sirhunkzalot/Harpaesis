@@ -9,6 +9,7 @@ public class UITest : MonoBehaviour
     public GameObject settings;
     public GameObject mainSetings;
     public GameObject audioSettings;
+    public GameObject visualSettings;
     public GameObject Items;
 
     public AudioSource sfx;
@@ -25,6 +26,7 @@ public class UITest : MonoBehaviour
         {
             settings.SetActive(!settings.activeInHierarchy);
             audioSettings.SetActive(false);
+            visualSettings.SetActive(false);
             mainSetings.SetActive(true);
             sfx.Play();
         }
