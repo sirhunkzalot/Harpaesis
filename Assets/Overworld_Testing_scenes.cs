@@ -5,19 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Overworld_Testing_scenes : MonoBehaviour
 {
-    public GameObject settings;
-    public GameObject mainSetings;
-    public GameObject audioSettings;
-    public GameObject visualSettings;
+    //public GameObject settings;
+    //public GameObject mainSetings;
+    //public GameObject audioSettings;
+    //public GameObject visualSettings;
+    public GameObject tips;
 
+    public float waitTime = 5f;
     public AudioSource sfx;
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        waitTime -= Time.deltaTime;
+
+        if(waitTime <= 0)
         {
-            SceneManager.LoadScene(8);
+            tips.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
