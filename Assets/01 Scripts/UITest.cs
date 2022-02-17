@@ -11,6 +11,8 @@ public class UITest : MonoBehaviour
     public GameObject audioSettings;
     public GameObject visualSettings;
     public GameObject Items;
+    public GameObject controlsMenu;
+    public GameObject optionsMenu;
 
     public AudioSource sfx;
 
@@ -28,6 +30,8 @@ public class UITest : MonoBehaviour
             audioSettings.SetActive(false);
             visualSettings.SetActive(false);
             mainSetings.SetActive(true);
+            controlsMenu.SetActive(false);
+            optionsMenu.SetActive(false);
             sfx.Play();
         }
     }

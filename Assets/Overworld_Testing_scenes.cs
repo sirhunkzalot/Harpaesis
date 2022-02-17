@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class Overworld_Testing_scenes : MonoBehaviour
 {
-    //public GameObject settings;
-    //public GameObject mainSetings;
-    //public GameObject audioSettings;
-    //public GameObject visualSettings;
+    public GameObject settings;
+    public GameObject mainSetings;
+    public GameObject audioSettings;
+    public GameObject visualSettings;
     public GameObject tips;
+    public GameObject optionsMenu;
+    public GameObject controlsMenu;
 
     public float waitTime = 5f;
     public AudioSource sfx;
@@ -25,12 +27,13 @@ public class Overworld_Testing_scenes : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //settings.SetActive(!settings.activeInHierarchy);
-            //audioSettings.SetActive(false);
-            //visualSettings.SetActive(false);
-            //mainSetings.SetActive(true);
+            settings.SetActive(!settings.activeInHierarchy);
+            audioSettings.SetActive(false);
+            visualSettings.SetActive(false);
+            mainSetings.SetActive(true);
+            controlsMenu.SetActive(false);
+            optionsMenu.SetActive(false);
             sfx.Play();
-            returnToMenu();
         }
     }
     public void _RetrurnOverworld()
