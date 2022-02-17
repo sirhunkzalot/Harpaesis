@@ -130,6 +130,8 @@ MonoBehaviour:
   audioSettings: {fileID: 7795690851505489508}
   visualSettings: {fileID: 1804497935616211057}
   Items: {fileID: 4131969807598254293}
+  controlsMenu: {fileID: 2900644327303111806}
+  optionsMenu: {fileID: 4325603056666310651}
   sfx: {fileID: 2072003593169994838}
 --- !u!1 &111808693778006413
 GameObject:
@@ -16077,6 +16079,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Settings Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 6999726767409143657, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8699812010795843194, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16185,6 +16191,16 @@ RectTransform:
 --- !u!1 &2783067246623455797 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4818634334025552699, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+  m_PrefabInstance: {fileID: 7223855784019093774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2900644327303111806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5476766556127792496, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+  m_PrefabInstance: {fileID: 7223855784019093774}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4325603056666310651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6361311933755006709, guid: 07cd9889c447e804c920cc7485848491, type: 3}
   m_PrefabInstance: {fileID: 7223855784019093774}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7795690851505489508 stripped
