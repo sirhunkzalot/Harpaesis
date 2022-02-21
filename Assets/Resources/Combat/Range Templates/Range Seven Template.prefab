@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 0.25, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1677987231345061358}
   - {fileID: 2020058705927455542}
@@ -181,6 +182,7 @@ MonoBehaviour:
   allWithTargets: []
   skill: {fileID: 0}
   isActive: 0
+  canRotate: 0
 --- !u!1001 &29371218169234512
 PrefabInstance:
   m_ObjectHideFlags: 0

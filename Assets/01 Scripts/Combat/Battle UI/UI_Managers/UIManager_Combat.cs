@@ -15,7 +15,7 @@ namespace Harpaesis.UI
     {
         TurnManager turnManager;
         public GameObject[] playerTurnObjects;
-        public Button moveButton;
+        public Button moveButton, defendButton;
         public TextMeshProUGUI apText;
        
 
@@ -39,7 +39,9 @@ namespace Harpaesis.UI
         {
             if (IsFriendlyTurn)
             {
-                moveButton.interactable = turnManager.activeTurn.unit.turnData.ap > 0 && turnManager.activeTurn.unit.canMove;
+                int _currentAp = turnManager.activeTurn.unit.turnData.ap;
+                moveButton.interactable = _currentAp > 0 && turnManager.activeTurn.unit.canMove;
+                defendButton.interactable = _currentAp >= 2;
                 apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.currentApStat}";
             }
         }
@@ -64,6 +66,15 @@ namespace Harpaesis.UI
         public void Button_UseItem()
         {
             print("UseItem");
+        }
+
+        public void Button_Defend()
+        {
+            if (IsFriendlyTurn)
+            {
+                FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+                _unit.ApplyEffect(new Combat.StatusEffect_Defend(_unit, _unit, 0, 1));
+            }
         }
 
         public void Button_SwapWeapon()
