@@ -34,6 +34,7 @@ namespace Harpaesis.Combat
         protected virtual void OnEffectRemoved() { }
         public virtual void OnRoundStart() { }
         public virtual void OnRoundEnd() { }
+        public virtual int OnTargeted(int _damageAmount) { return _damageAmount;  }
         public virtual void OnTurnStart() { }
         public virtual void OnTurnEnd() { }
         public virtual void OnDealDamage(int _damageAmount, Unit _damagedUnit) { }
@@ -474,6 +475,43 @@ namespace Harpaesis.Combat
         protected override void OnEffectRemoved()
         {
             effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.ChangeAllegience);
+        }
+    }
+    public class StatusEffect_Defend : StatusEffect
+    {
+        public StatusEffect_Defend(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        {
+            effectType = StatusEffectType.Defend;
+        }
+
+        protected override void OnEffectApplied()
+        {
+            effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.Defend);
+        }
+
+        public override int OnTargeted(int _damageAmount)
+        {
+            float _halfDamage = Mathf.Clamp(_damageAmount / 2, 1, float.MaxValue);
+
+            return Mathf.CeilToInt(_halfDamage);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            RemoveEffect();
+        }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.Defend);
         }
     }
 

@@ -122,6 +122,8 @@ namespace Harpaesis.Combat
                 _damageToDeal -= Mathf.FloorToInt(_target.currentDefStat * .75f);
             }
 
+            _damageToDeal = _target.OnTargeted(_damageToDeal);
+
             _target.TakeDamage(_damageToDeal, _user);
 
             _user.OnDealDamage(_damageToDeal, _target);

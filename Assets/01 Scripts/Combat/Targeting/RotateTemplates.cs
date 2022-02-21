@@ -26,7 +26,7 @@ public class RotateTemplates : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (unit.currentState == FriendlyUnit.FriendlyState.Targeting_AOE || unit.currentState == FriendlyUnit.FriendlyState.Targeting_Single)
+        if ((unit.currentState == FriendlyUnit.FriendlyState.Targeting_AOE || unit.currentState == FriendlyUnit.FriendlyState.Targeting_Single) && unit.canRotateTemplates)
         {
             Vector3 _dir = (cursor.transform.position - transform.position).normalized;
             float _angle = Vector3.Angle(_dir, transform.forward);

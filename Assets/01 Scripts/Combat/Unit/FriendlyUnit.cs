@@ -23,6 +23,7 @@ public class FriendlyUnit : Unit
 
     [ReadOnly] public bool alternativeWeapon;
     [ReadOnly] public FriendlyUnitPassive passive;
+    [ReadOnly] public bool canRotateTemplates;
 
     RotateTemplates templateParent;
     ActiveUnitIcon activeUnitIcon;
@@ -188,28 +189,34 @@ public class FriendlyUnit : Unit
                 {
                     basicAttackTargetingTemplate.SetupTargetingTemplate();
                     _isAOE = friendlyUnitData.basicAttack.targetingStyle == TargetingStyle.AOE;
+                    canRotateTemplates = basicAttackTargetingTemplate.canRotate;
                 }
                 else
                 {
                     alternativeSkillTargetingTemplate.SetupTargetingTemplate();
                     _isAOE = friendlyUnitData.alternativeAttack.targetingStyle == TargetingStyle.AOE;
+                    canRotateTemplates = alternativeSkillTargetingTemplate.canRotate;
                 }
                 break;
             case 1:
                 primarySkillTargetingTemplate.SetupTargetingTemplate();
                 _isAOE = friendlyUnitData.primarySkill.targetingStyle == TargetingStyle.AOE;
+                canRotateTemplates = primarySkillTargetingTemplate.canRotate;
                 break;
             case 2:
                 secondarySkillTargetingTemplate.SetupTargetingTemplate();
                 _isAOE = friendlyUnitData.secondarySkill.targetingStyle == TargetingStyle.AOE;
+                canRotateTemplates = secondarySkillTargetingTemplate.canRotate;
                 break;
             case 3:
                 tertiarySkillTargetingTemplate.SetupTargetingTemplate();
                 _isAOE = friendlyUnitData.tertiarySkill.targetingStyle == TargetingStyle.AOE;
+                canRotateTemplates = tertiarySkillTargetingTemplate.canRotate;
                 break;
             case 4:
                 signatureSkillTargetingTemplate.SetupTargetingTemplate();
                 _isAOE = friendlyUnitData.signatureSkill.targetingStyle == TargetingStyle.AOE;
+                canRotateTemplates = signatureSkillTargetingTemplate.canRotate;
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");
@@ -242,6 +249,7 @@ public class FriendlyUnit : Unit
                     else if(alternativeWeapon && alternativeSkillTargetingTemplate.currentlySelected?.unit != null)
                     {
                         UseSkill(activeTemplateIndex, alternativeSkillTargetingTemplate.currentlySelected.unit);
+                        turnData.hasAttacked = true;
                     }
                     break;
 

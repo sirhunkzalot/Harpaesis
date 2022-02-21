@@ -18,6 +18,8 @@ namespace Harpaesis.Combat
 
         [ReadOnly] public bool isActive;
 
+        public bool canRotate = false;
+
         public void Init(Skill _skill)
         {
             grid = GridManager.instance;
