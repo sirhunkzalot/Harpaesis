@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelSelect : MonoBehaviour
-{
+{/*
     public static LevelSelect instance;
 
     private void Awake()
     {
         instance = this;
     }
-
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
@@ -41,5 +41,5 @@ public class LevelSelect : MonoBehaviour
         {
             LevelLoadManager.ReloadLevel();
         }
-    }
+    }*/
 }

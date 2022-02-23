@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Harpaesis.GridCamera
+namespace Harpaesis.Combat
 {
     public class HideWalls : MonoBehaviour
     {

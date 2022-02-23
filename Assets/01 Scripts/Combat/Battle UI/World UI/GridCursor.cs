@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.Combat;
 using Harpaesis.GridAndPathfinding;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class GridCursor : MonoBehaviour
     Camera cam;
 
     public Node currentNode;
+
+    PlayerInput_Combat input;
 
     #region Singleton
     public static GridCursor instance;
@@ -35,6 +38,7 @@ public class GridCursor : MonoBehaviour
     {
         grid = GridManager.instance;
         cam = Camera.main;
+        input = PlayerInput_Combat.instance;
     }
 
     void FixedUpdate()
@@ -47,7 +51,7 @@ public class GridCursor : MonoBehaviour
      * to the mouse position */
     private void MoveCursor()
     {
-        Ray _ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray _ray = cam.ScreenPointToRay(input.mousePosition);
         RaycastHit _hit;
 
         if (Physics.Raycast(_ray, out _hit, 100, layermask))

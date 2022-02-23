@@ -19,11 +19,11 @@ public class BattleLog : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        /*/if (Input.GetKeyDown(KeyCode.L))
         {
             toggleBattleLog = !toggleBattleLog;
             transform.GetChild(0).gameObject.SetActive(toggleBattleLog);
-        }
+        }*/
     }
 
     private IEnumerator UpdateLog()

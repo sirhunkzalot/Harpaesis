@@ -4,8 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class DebugOptions : MonoBehaviour
-{
-    public GameObject speedUpIcon;
+{/*
     void Update()
     {
 #if UNITY_EDITOR
@@ -14,16 +13,5 @@ public class DebugOptions : MonoBehaviour
             Debug.Break();
         }
 #endif
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Time.timeScale = 5f;
-            speedUpIcon.SetActive(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            Time.timeScale = 1f;
-            speedUpIcon.SetActive(false);
-        }
-
-    }
+    }*/
 }

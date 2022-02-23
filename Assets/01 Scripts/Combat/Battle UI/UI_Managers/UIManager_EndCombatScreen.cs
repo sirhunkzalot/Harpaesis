@@ -22,7 +22,7 @@ namespace Harpaesis.UI
             defeatScreen.SetActive(false);
         }
 
-        private void Update()
+        /*private void Update()
         {
             if (Input.GetKeyDown(KeyCode.V))
             {
@@ -32,7 +32,7 @@ namespace Harpaesis.UI
             {
                 OpenLoseScreen();
             }
-        }
+        }*/
 
         public void OpenVictoryScreen()
         {

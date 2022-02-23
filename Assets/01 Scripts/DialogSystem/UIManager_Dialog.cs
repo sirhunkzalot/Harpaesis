@@ -29,12 +29,9 @@ namespace Harpaesis.UI
             EndText();
         }
 
-        private void Update()
+        public void SkipLine()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                skipLine = true;
-            }
+            skipLine = true;
         }
 
         public void StartText(Dialogue _currentDialogue)

@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Harpaesis.UI;
 using Harpaesis.Inventory;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 namespace Harpaesis.Overworld.Store
 {
-    public class PurchaseableItem : MonoBehaviour
+    public class PurchaseableItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
     {
         SpriteRenderer spriteRenderer;
 
@@ -18,17 +19,17 @@ namespace Harpaesis.Overworld.Store
             spriteRenderer.sprite = item.item.itemSprite;
         }
 
-        private void OnMouseEnter()
+        public void OnPointerEnter(PointerEventData eventData)
         {
             spriteRenderer.color = Color.yellow;
         }
 
-        private void OnMouseExit()
+        public void OnPointerExit(PointerEventData eventData)
         {
             spriteRenderer.color = Color.white;
         }
 
-        private void OnMouseDown()
+        public void OnPointerDown(PointerEventData eventData)
         {
             UIManager_Store.instance.LookAtItem(this);
         }

@@ -19,9 +19,9 @@ public class MainMenuLogic : MonoBehaviour
     }
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            
+        // Matt Fix
+        /*if(Input.GetKeyDown(KeyCode.Escape))
+        {*/
             if(creditsUI.activeSelf)
             {
                 creditsUI.SetActive(false);
@@ -35,7 +35,7 @@ public class MainMenuLogic : MonoBehaviour
                 mainUI.SetActive(true);
                 uiSFX.Play();
             }
-        }
+        //}
     }
 
     public void PlayOverworld()

@@ -1,4 +1,5 @@
 using TMPro;
+using Harpaesis.Combat;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Harpaesis.UI.Tooltips
         LayoutElement layoutElement;
 
         RectTransform rectTransform;
+        PlayerInput_Combat input;
 
         public int characterWrapLimit = 80;
 
@@ -19,6 +21,11 @@ namespace Harpaesis.UI.Tooltips
         {
             layoutElement = GetComponent<LayoutElement>();
             rectTransform = GetComponent<RectTransform>();
+        }
+
+        private void Start()
+        {
+            input = PlayerInput_Combat.instance;
         }
 
         public void SetText(string _body, string _header)
@@ -52,7 +59,7 @@ namespace Harpaesis.UI.Tooltips
 
         private void Update()
         {
-            Vector2 _position = Input.mousePosition;
+            Vector2 _position = input.mousePosition;
 
             float _pivotX = _position.x / Screen.width * 1.1f;
             float _pivotY = _position.y / Screen.height * 1.1f;

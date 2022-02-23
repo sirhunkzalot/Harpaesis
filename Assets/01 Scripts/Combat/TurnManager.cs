@@ -1,5 +1,4 @@
 using System.Collections;
-using Harpaesis.GridCamera;
 using Harpaesis.Combat;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +13,7 @@ public class TurnManager : MonoBehaviour
 {
     int turnCounter = -1;
     public bool beginCombatOnStart = true;
-    public Turn activeTurn;
+    [ReadOnly] public Turn activeTurn;
 
     public List<Unit> units = new List<Unit>();
     public List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();

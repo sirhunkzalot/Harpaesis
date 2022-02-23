@@ -39,32 +39,47 @@ namespace Harpaesis.Overworld
 
         private void Update()
         {
+            transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, Time.deltaTime * moveSpeed);
+        }
+
+        public void MoveNorth()
+        {
+            if (CanInput && currentPoint.upConnection != null && currentPoint.upConnection.isUnlocked)
+            {
+                ChangeCurrentPoint(currentPoint.upConnection);
+            }
+        }
+
+        public void MoveEast()
+        {
+            if (CanInput && currentPoint.rightConnection != null && currentPoint.rightConnection.isUnlocked)
+            {
+                ChangeCurrentPoint(currentPoint.rightConnection);
+            }
+        }
+        public void MoveSouth()
+        {
+            if (CanInput && currentPoint.downConnection != null && currentPoint.downConnection.isUnlocked)
+            {
+                ChangeCurrentPoint(currentPoint.downConnection);
+            }
+        }
+
+        public void MoveWest()
+        {
+            if (CanInput && currentPoint.leftConnection != null && currentPoint.leftConnection.isUnlocked)
+            {
+                ChangeCurrentPoint(currentPoint.leftConnection);
+            }
+        }
+
+        public void Interact()
+        {
             if (CanInput)
             {
-                if (Input.GetKeyDown(KeyCode.W) && currentPoint.upConnection != null && currentPoint.upConnection.isUnlocked)
-                {
-                    ChangeCurrentPoint(currentPoint.upConnection);
-                }
-                else if (Input.GetKeyDown(KeyCode.D) && currentPoint.rightConnection != null && currentPoint.rightConnection.isUnlocked)
-                {
-                    ChangeCurrentPoint(currentPoint.rightConnection);
-                }
-                else if (Input.GetKeyDown(KeyCode.S) && currentPoint.downConnection != null && currentPoint.downConnection.isUnlocked)
-                {
-                    ChangeCurrentPoint(currentPoint.downConnection);
-                }
-                else if (Input.GetKeyDown(KeyCode.A) && currentPoint.leftConnection != null && currentPoint.leftConnection.isUnlocked)
-                {
-                    ChangeCurrentPoint(currentPoint.leftConnection);
-                }
-                else if (Input.GetKeyDown(KeyCode.E))
-                {
-                    OverworldData.SetLastPoint(currentPoint.Index);
-                    currentPoint.Interact();
-                }
+                OverworldData.SetLastPoint(currentPoint.Index);
+                currentPoint.Interact();
             }
-
-            transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, Time.deltaTime * moveSpeed);
         }
 
         private void ChangeCurrentPoint(OverworldPoint _newPoint)

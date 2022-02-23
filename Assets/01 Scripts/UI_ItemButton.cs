@@ -5,15 +5,8 @@ using UnityEngine;
 public class UI_ItemButton : MonoBehaviour
 {
     public GameObject itemMenu;
-    public void CloseMenu()
+    public void ToggleMenu()
     {
-        if (itemMenu.activeSelf)
-        {
-            itemMenu.SetActive(false);
-        }
-        else
-        {
-            itemMenu.SetActive(true);
-        }
+        itemMenu.SetActive(!itemMenu.activeSelf);
     }
 }

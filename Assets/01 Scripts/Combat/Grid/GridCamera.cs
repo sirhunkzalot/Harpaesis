@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Harpaesis.GridCamera
+namespace Harpaesis.Combat
 {
     /**
      * @author Matthew Sommer
@@ -33,6 +33,7 @@ namespace Harpaesis.GridCamera
         public float zMax;
 
         HideWalls hideWalls;
+        PlayerInput_Combat input;
         Camera cam;
 
         CameraView currentView = CameraView.Front;
@@ -64,6 +65,8 @@ namespace Harpaesis.GridCamera
             cam = GetComponentInChildren<Camera>();
             hideWalls = cam.GetComponent<HideWalls>();
             currentZoom = cam.transform.localPosition;
+
+            input = PlayerInput_Combat.instance;
         }
 
         void LateUpdate()
@@ -90,7 +93,7 @@ namespace Harpaesis.GridCamera
         /* HandleCameraZoom manages the size of the orthographic camera based on the scroll wheel */
         private void HandleCameraZoom()
         {
-            Vector3 _newZoom = currentZoom + Input.GetAxisRaw("Mouse ScrollWheel") * zoomSpeed * cam.transform.InverseTransformDirection(-cam.transform.up - cam.transform.forward - cam.transform.right);
+            Vector3 _newZoom = currentZoom + input.cameraScroll * zoomSpeed * cam.transform.InverseTransformDirection(-cam.transform.up - cam.transform.forward - cam.transform.right);
 
             
 
@@ -102,8 +105,10 @@ namespace Harpaesis.GridCamera
 
         private void HandleCameraInput()
         {
-            Vector3 _vertical = Input.GetAxisRaw("Vertical") * -((transform.right + transform.forward) * .5f);
-            Vector3 _horizontal = Input.GetAxisRaw("Horizontal") * -((transform.right - transform.forward) * .5f);
+            Vector2 _camMove = input.cameraMovement;
+
+            Vector3 _vertical = _camMove.y * -((transform.right + transform.forward) * .5f);
+            Vector3 _horizontal = _camMove.x * -((transform.right - transform.forward) * .5f);
 
             Vector3 _moveDir = (_vertical + _horizontal).normalized;
 
@@ -122,56 +127,62 @@ namespace Harpaesis.GridCamera
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, currentZoom, delta * zoomAcceleration);
         }
 
+        public void RotateLeft()
+        {
+            targetEulers.y -= 90;
+
+            switch (currentView)
+            {
+                case CameraView.Front:
+                    currentView = CameraView.Left;
+                    break;
+                case CameraView.Right:
+                    currentView = CameraView.Front;
+                    break;
+                case CameraView.Back:
+                    currentView = CameraView.Right;
+                    break;
+                case CameraView.Left:
+                    currentView = CameraView.Back;
+                    break;
+                default:
+                    throw new System.Exception("Invalid Camera View Given");
+            }
+        }
+
+        public void RotateRight()
+        {
+            targetEulers.y += 90;
+
+            switch (currentView)
+            {
+                case CameraView.Front:
+                    currentView = CameraView.Right;
+                    break;
+                case CameraView.Right:
+                    currentView = CameraView.Back;
+                    break;
+                case CameraView.Back:
+                    currentView = CameraView.Left;
+                    break;
+                case CameraView.Left:
+                    currentView = CameraView.Front;
+                    break;
+                default:
+                    throw new System.Exception("Invalid Camera View Given");
+            }
+        }
+
+
         /* HandleCameraRotation sets the targetRotation by 90 degrees via inputs and updates the Camera's rotation*/
         private void HandleCameraRotation()
         {
-            // Currently hard-coded to these keys for testing. Will make accessible later.
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                targetEulers.y -= 90;
-
-                switch (currentView)
-                {
-                    case CameraView.Front:
-                        currentView = CameraView.Left;
-                        break;
-                    case CameraView.Right:
-                        currentView = CameraView.Front;
-                        break;
-                    case CameraView.Back:
-                        currentView = CameraView.Right;
-                        break;
-                    case CameraView.Left:
-                        currentView = CameraView.Back;
-                        break;
-                    default:
-                        throw new System.Exception("Invalid Camera View Given");
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.E))
-            {
-                targetEulers.y += 90;
-
-                switch (currentView)
-                {
-                    case CameraView.Front:
-                        currentView = CameraView.Right;
-                        break;
-                    case CameraView.Right:
-                        currentView = CameraView.Back;
-                        break;
-                    case CameraView.Back:
-                        currentView = CameraView.Left;
-                        break;
-                    case CameraView.Left:
-                        currentView = CameraView.Front;
-                        break;
-                    default:
-                        throw new System.Exception("Invalid Camera View Given");
-                }
-            }
-
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetEulers), Time.deltaTime * rotationSpeed);
+        }
+
+        public void JumpToCurrentUnit()
+        {
+            JumpToPosition(TurnManager.instance.activeTurn.unit.transform.position);
         }
 
         /* JumpToPosition moves the camera to keep its current vertical offset while centering on the world position*/

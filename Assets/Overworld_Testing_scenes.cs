@@ -23,7 +23,7 @@ public class Overworld_Testing_scenes : MonoBehaviour
         {
             tips.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        /*if (Input.GetKeyDown(KeyCode.Escape)) Matt Fix
         {
             //settings.SetActive(!settings.activeInHierarchy);
             //audioSettings.SetActive(false);
@@ -31,7 +31,7 @@ public class Overworld_Testing_scenes : MonoBehaviour
             //mainSetings.SetActive(true);
             sfx.Play();
             returnToMenu();
-        }
+        }*/
     }
     public void _RetrurnOverworld()
     {

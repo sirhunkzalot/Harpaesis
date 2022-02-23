@@ -17,7 +17,17 @@ namespace Harpaesis.UI
         public GameObject[] playerTurnObjects;
         public Button moveButton;
         public TextMeshProUGUI apText;
-       
+
+        public GameObject speedUpIcon;
+
+        [Header("Pause")]
+        public GameObject settings;
+        public GameObject mainSettings;
+        public GameObject audioSettings;
+        public GameObject visualSettings;
+        public GameObject Items;
+
+        public AudioSource sfx;
 
         bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
@@ -61,9 +71,14 @@ namespace Harpaesis.UI
             }
         }
 
-        public void Button_UseItem()
+        public void Button_Items()
         {
             print("UseItem");
+        }
+
+        public void Button_Defend()
+        {
+            print("Defend");
         }
 
         public void Button_SwapWeapon()
@@ -105,6 +120,29 @@ namespace Harpaesis.UI
         public void Button_ReplayLevel()
         {
             LevelLoadManager.ReloadLevel();
+        }
+
+        public void Pause()
+        {
+            settings.SetActive(!settings.activeInHierarchy);
+            audioSettings.SetActive(false);
+            visualSettings.SetActive(false);
+            mainSettings.SetActive(true);
+            sfx.Play();
+        }
+
+        public void SpeedUp(bool _speedUp)
+        {
+            if (_speedUp)
+            {
+                Time.timeScale = 5f;
+                speedUpIcon.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1f;
+                speedUpIcon.SetActive(false);
+            }
         }
     }
 }

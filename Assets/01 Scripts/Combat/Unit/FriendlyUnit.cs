@@ -26,6 +26,7 @@ public class FriendlyUnit : Unit
 
     RotateTemplates templateParent;
     ActiveUnitIcon activeUnitIcon;
+    PlayerInput_Combat input;
 
     public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting_Single, Targeting_AOE, Attacking }
     [ReadOnly] public FriendlyState currentState = FriendlyState.Inactive;
@@ -34,6 +35,7 @@ public class FriendlyUnit : Unit
     {
         friendlyUnitData = (FriendlyUnitData)unitData;
         gridCursor = GridCursor.instance;
+        input = PlayerInput_Combat.instance;
 
         templateParent = GetComponentInChildren<RotateTemplates>();
         templateParent.Init(this);
@@ -141,7 +143,7 @@ public class FriendlyUnit : Unit
             lastSelectorPosition = gridCursor.transform.position;
         }
 
-        if (Input.GetMouseButtonDown(0) && previewPath != null && !hasPath && turnData.ap > 0)
+        if (input.mouseDownLeft && previewPath != null && !hasPath && turnData.ap > 0)
         {
             StartMove();
         }
@@ -229,7 +231,7 @@ public class FriendlyUnit : Unit
 
     public void TargetingSingleTarget()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (input.mouseDownLeft)
         {
             switch (activeTemplateIndex)
             {
@@ -283,7 +285,7 @@ public class FriendlyUnit : Unit
 
             EndTargeting();
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (input.mouseDownRight)
         {
             EndTargeting();
         }
@@ -291,7 +293,7 @@ public class FriendlyUnit : Unit
 
     public void TargetingAOE()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (input.mouseDownLeft)
         {
             switch (activeTemplateIndex)
             {
@@ -341,7 +343,7 @@ public class FriendlyUnit : Unit
 
             EndTargeting();
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (input.mouseDownRight)
         {
             EndTargeting();
         }
