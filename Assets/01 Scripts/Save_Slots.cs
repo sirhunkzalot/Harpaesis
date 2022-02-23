@@ -18,10 +18,33 @@ public class Save_Sots : MonoBehaviour
     public TMP_Text txtSaveSlotThree;
     public TMP_Text txtSaveSlotFour;
 
-    public TMP_Text saveSlotInput;
+    public TMP_InputField saveSlotInput;
+
+    public GameObject saveSlotSelectedOne;
+    public GameObject saveSlotSelectedTwo;
+    public GameObject saveSlotSelectedThree;
+    public GameObject saveSlotSelectedFour;
     // Start is called before the first frame update
 
-   
+    public void Update()
+    {
+        if (saveSlotOne == false)
+        {
+            saveSlotSelectedOne.SetActive(false);
+        }
+        if (saveSlotTwo == false)
+        {
+            saveSlotSelectedTwo.SetActive(false);
+        }
+        if (saveSlotThree == false)
+        {
+            saveSlotSelectedThree.SetActive(false);
+        }
+        if (saveSlotFour == false)
+        {
+            saveSlotSelectedFour.SetActive(false);
+        }
+    }
     public void UpdateName()
     {
         if(saveSlotOne == true)
@@ -49,81 +72,110 @@ public class Save_Sots : MonoBehaviour
    public void EnableSlotOne()
     {
         saveSlotOne = true;
-        saveSlotInput.text = txtSaveSlotOne.text;
-        print("Save Slot 1");
+        if (saveSlotOne == true)
+        {
+            saveSlotInput.text = txtSaveSlotOne.text;
+        }
+        saveSlotSelectedOne.SetActive(true);
 
         if(saveSlotTwo == true)
         {
             saveSlotTwo = false;
-        }
+            saveSlotSelectedTwo.SetActive(false);
+}
         if (saveSlotThree == true)
         {
             saveSlotThree = false;
+            saveSlotSelectedThree.SetActive(false);
         }
         if (saveSlotFour == true)
         {
             saveSlotFour = false;
+            saveSlotSelectedFour.SetActive(false);
         }
     }
     public void EnableSlotTwo()
     {
         saveSlotTwo = true;
-        saveSlotInput.text = txtSaveSlotTwo.text;
-
+        if(saveSlotTwo == true)
+        { 
+            saveSlotInput.text = txtSaveSlotTwo.text;
+        }
+        saveSlotSelectedTwo.SetActive(true);
 
         if (saveSlotOne == true)
         {
             saveSlotOne = false;
+            saveSlotSelectedOne.SetActive(false);
         }
         if (saveSlotThree == true)
         {
             saveSlotThree = false;
+            saveSlotSelectedThree.SetActive(false);
         }
         if (saveSlotFour == true)
         {
             saveSlotFour = false;
+            saveSlotSelectedFour.SetActive(false);
         }
     }
     public void EnableSlotThree()
     {
         saveSlotThree = true;
-        saveSlotInput.text = txtSaveSlotThree.text;
+        if (saveSlotThree == true)
+        {
+            saveSlotInput.text = txtSaveSlotThree.text;
+        }
+        saveSlotSelectedThree.SetActive(true);
 
 
         if (saveSlotTwo == true)
         {
             saveSlotTwo = false;
+            saveSlotSelectedTwo.SetActive(false);
         }
         if (saveSlotOne == true)
         {
             saveSlotOne = false;
+            saveSlotSelectedOne.SetActive(false);
         }
         if (saveSlotFour == true)
         {
             saveSlotFour = false;
+            saveSlotSelectedFour.SetActive(false);
         }
     }
     public void EnableSlotFour()
     {
         saveSlotFour = true;
-        saveSlotInput.text = txtSaveSlotFour.text;
-
+        if (saveSlotFour == true)
+        {
+            saveSlotInput.text = txtSaveSlotFour.text;
+        }
+        saveSlotSelectedFour.SetActive(true);
 
         if (saveSlotTwo == true)
         {
             saveSlotTwo = false;
+            saveSlotSelectedTwo.SetActive(false);
         }
         if (saveSlotThree == true)
         {
             saveSlotThree = false;
+            saveSlotSelectedThree.SetActive(false);
         }
         if (saveSlotOne == true)
         {
             saveSlotOne = false;
+            saveSlotSelectedOne.SetActive(false);
         }
     }
-    public void ApplyNameChanges()
+    public void _Back()
     {
-        saveSlotInput.text = "";
+        saveSlotOne = false;
+        saveSlotTwo = false;
+        saveSlotThree = false;
+        saveSlotFour = false;
+        
     }
 }

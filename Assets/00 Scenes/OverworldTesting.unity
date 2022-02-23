@@ -160,8 +160,11 @@ MonoBehaviour:
   tips: {fileID: 352437845}
   optionsMenu: {fileID: 1021941170}
   controlsMenu: {fileID: 1457393728}
+  loadSlots: {fileID: 296651370}
+  saveSlots: {fileID: 1027979715}
   waitTime: 5
   sfx: {fileID: 6271372}
+  saveUI: {fileID: 1027979717}
 --- !u!4 &6271371
 Transform:
   m_ObjectHideFlags: 0
@@ -1137,6 +1140,11 @@ MonoBehaviour:
   item:
     item: {fileID: 11400000, guid: 6ca971c7fde6d0b4bb1bb862e1d32f1c, type: 2}
     itemPrice: 5
+--- !u!1 &296651370 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6511872776831845483, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+  m_PrefabInstance: {fileID: 1431219116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &352437844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2987,6 +2995,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026493345}
   m_CullTransparentMesh: 1
+--- !u!1 &1027979715 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 294418526886461915, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+  m_PrefabInstance: {fileID: 1431219116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1027979717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9121162378816282532, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+  m_PrefabInstance: {fileID: 1431219116}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027979715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0270cadb93c607c428a39239bc996262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1033160267
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,9 +13,12 @@ public class UITest : MonoBehaviour
     public GameObject Items;
     public GameObject controlsMenu;
     public GameObject optionsMenu;
+    public GameObject loadSlots;
+    public GameObject saveSlots;
 
     public AudioSource sfx;
 
+    public Save_Sots saveUI;
     public void Start()
     {
         settings.SetActive(false);
@@ -32,6 +35,13 @@ public class UITest : MonoBehaviour
             mainSetings.SetActive(true);
             controlsMenu.SetActive(false);
             optionsMenu.SetActive(false);
+            saveSlots.SetActive(false);
+            loadSlots.SetActive(false);
+            saveUI.saveSlotOne = false;
+            saveUI.saveSlotTwo = false;
+            saveUI.saveSlotThree = false;
+            saveUI.saveSlotFour = false;
+
             sfx.Play();
         }
     }
