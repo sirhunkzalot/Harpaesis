@@ -12,19 +12,28 @@ public class Overworld_Testing_scenes : MonoBehaviour
     public GameObject tips;
     public GameObject optionsMenu;
     public GameObject controlsMenu;
+    public GameObject loadSlots;
+    public GameObject saveSlots;
 
     public float waitTime = 5f;
     public AudioSource sfx;
 
+    public Save_Sots saveUI;
     // Update is called once per frame
     void Update()
     {
-        waitTime -= Time.deltaTime;
+        if (waitTime >= 0)
+        {
+            waitTime -= Time.deltaTime;
+        }
 
         if(waitTime <= 0)
         {
             tips.SetActive(false);
+            waitTime = 0f;
         }
+
+       
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             settings.SetActive(!settings.activeInHierarchy);
@@ -33,6 +42,12 @@ public class Overworld_Testing_scenes : MonoBehaviour
             mainSetings.SetActive(true);
             controlsMenu.SetActive(false);
             optionsMenu.SetActive(false);
+            loadSlots.SetActive(false);
+            saveSlots.SetActive(false);
+            saveUI.saveSlotOne = false;
+            saveUI.saveSlotTwo = false;
+            saveUI.saveSlotThree = false;
+            saveUI.saveSlotFour = false;
             sfx.Play();
         }
     }
