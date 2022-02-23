@@ -82,7 +82,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064691154089284248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: ShapeModule.m_MeshRenderer
       value: 
       objectReference: {fileID: 2503436170604911649}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 175
+      objectReference: {fileID: 0}
     - target: {fileID: 7093554161795431909, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: m_RootOrder
       value: 0

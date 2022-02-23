@@ -82,7 +82,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064691154089284248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -144,11 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: simulationSpeed
-      value: 0.7
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: ShapeModule.m_Scale.y
@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: ShapeModule.m_Scale.z
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: ShapeModule.m_MeshRenderer
@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 2503436170604911649}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.75
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -172,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: ShapeModule.randomPositionAmount
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -181,6 +181,42 @@ PrefabInstance:
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0.745283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.745283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.745283
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].time
