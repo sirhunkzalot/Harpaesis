@@ -9,9 +9,20 @@ namespace Harpaesis.Overworld
     {
         OverworldController controller;
 
+        [ReadOnly] public bool cancel;
+
+        [ReadOnly] public bool pause;
+
+        public static PlayerInput_Overworld instance;
+
+        private void Awake()
+        {
+            instance = this;
+        }
+
         private void Start()
         {
-            controller = OverworldController.instance;
+            controller = GetComponent<OverworldController>();
         }
 
         public void I_MoveNorth(InputAction.CallbackContext _ctx)
@@ -48,6 +59,26 @@ namespace Harpaesis.Overworld
             if (_ctx.started)
             {
                 controller.Interact();
+            }
+        }
+
+        public void I_Cancel(InputAction.CallbackContext _ctx)
+        {
+            if (_ctx.started)
+            {
+                cancel = true;
+            }
+            else if (_ctx.canceled)
+            {
+                cancel = false;
+            }
+        }
+
+        public void I_Pause(InputAction.CallbackContext _ctx)
+        {
+            if (_ctx.started)
+            {
+                pause = !pause;
             }
         }
     }

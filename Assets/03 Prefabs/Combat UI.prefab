@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3037887082265152748}
   - component: {fileID: 5537948194947411796}
   - component: {fileID: 3417652081133705112}
-  - component: {fileID: 8233888067093121121}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -114,29 +113,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8233888067093121121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32594250655335079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7cbc77daf11b304a8e13605df618f44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 388520024814188135}
-  mainSetings: {fileID: 2783067246623455797}
-  audioSettings: {fileID: 7795690851505489508}
-  visualSettings: {fileID: 1804497935616211057}
-  Items: {fileID: 4131969807598254293}
-  controlsMenu: {fileID: 2900644327303111806}
-  optionsMenu: {fileID: 4325603056666310651}
-  loadSlots: {fileID: 4476185804041006437}
-  saveSlots: {fileID: 6941655167922563285}
-  sfx: {fileID: 2072003593169994838}
-  saveUI: {fileID: 0}
 --- !u!1 &111808693778006413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2049,7 +2025,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.075}
   m_AnchorMax: {x: 1, y: 0.93415296}
-  m_AnchoredPosition: {x: 0.92001, y: -0.93801117}
+  m_AnchoredPosition: {x: 0.9200134, y: -0.93801117}
   m_SizeDelta: {x: -1.8400421, y: -0.726799}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7566203727588251021
@@ -4263,7 +4239,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3535513417790087577}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -5291,7 +5267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.075}
   m_AnchorMax: {x: 1, y: 0.93415296}
-  m_AnchoredPosition: {x: -0.92001, y: -0.93801117}
+  m_AnchoredPosition: {x: -0.9200134, y: -0.93801117}
   m_SizeDelta: {x: -1.8400421, y: -0.726799}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5557006613392172120
@@ -6147,7 +6123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8233888067093121121}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UITest, Assembly-CSharp
         m_MethodName: SettingsMenu
         m_Mode: 1
@@ -7386,7 +7362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6201079183017534531}
   - component: {fileID: 8262891559361405843}
-  - component: {fileID: 1596471587097626248}
+  - component: {fileID: 8490836957191382331}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -7424,7 +7400,7 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!114 &1596471587097626248
+--- !u!114 &8490836957191382331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7433,16 +7409,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4087498726087749168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!1 &4131969807598254293
 GameObject:
   m_ObjectHideFlags: 0
@@ -11721,8 +11706,14 @@ MonoBehaviour:
   playerTurnObjects:
   - {fileID: 7764867660563940582}
   moveButton: {fileID: 8627656021233395897}
-  defendButton: {fileID: 4525729192849738551}
   apText: {fileID: 5958028717357376201}
+  speedUpIcon: {fileID: 4065655137079552570}
+  settings: {fileID: 388520024814188135}
+  mainSettings: {fileID: 2783067246623455797}
+  audioSettings: {fileID: 7795690851505489508}
+  visualSettings: {fileID: 1804497935616211057}
+  Items: {fileID: 4131969807598254293}
+  sfx: {fileID: 4991872273059582671}
 --- !u!114 &6902361559570827171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15892,7 +15883,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.075}
   m_AnchorMax: {x: 1, y: 0.93415296}
-  m_AnchoredPosition: {x: -0.9200363, y: -0.93801}
+  m_AnchoredPosition: {x: -0.9200363, y: -0.93801117}
   m_SizeDelta: {x: -1.8400574, y: -0.726799}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2426357074938940207
@@ -16696,7 +16687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.075}
   m_AnchorMax: {x: 1, y: 0.93415296}
-  m_AnchoredPosition: {x: 0.92001, y: -0.93801117}
+  m_AnchoredPosition: {x: 0.9200134, y: -0.93801117}
   m_SizeDelta: {x: -1.8400269, y: -0.726799}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2196912562113972627
@@ -16902,7 +16893,7 @@ PrefabInstance:
     - target: {fileID: 2221438907522834583, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 8233888067093121121}
+      objectReference: {fileID: 0}
     - target: {fileID: 2427198176433824717, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1.8369141
@@ -17181,24 +17172,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4818634334025552699, guid: 07cd9889c447e804c920cc7485848491, type: 3}
   m_PrefabInstance: {fileID: 7223855784019093774}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2900644327303111806 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5476766556127792496, guid: 07cd9889c447e804c920cc7485848491, type: 3}
-  m_PrefabInstance: {fileID: 7223855784019093774}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4325603056666310651 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6361311933755006709, guid: 07cd9889c447e804c920cc7485848491, type: 3}
-  m_PrefabInstance: {fileID: 7223855784019093774}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4476185804041006437 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6511872776831845483, guid: 07cd9889c447e804c920cc7485848491, type: 3}
-  m_PrefabInstance: {fileID: 7223855784019093774}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6941655167922563285 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 294418526886461915, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+--- !u!82 &4991872273059582671 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2379866450665765825, guid: 07cd9889c447e804c920cc7485848491, type: 3}
   m_PrefabInstance: {fileID: 7223855784019093774}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7795690851505489508 stripped

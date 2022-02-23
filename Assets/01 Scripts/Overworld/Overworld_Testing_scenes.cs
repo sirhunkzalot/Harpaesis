@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.Overworld;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Overworld_Testing_scenes : MonoBehaviour
 {
@@ -18,7 +20,15 @@ public class Overworld_Testing_scenes : MonoBehaviour
     public float waitTime = 5f;
     public AudioSource sfx;
 
-    public Save_Sots saveUI;
+    public Save_Slots saveUI;
+
+    public PlayerInput_Overworld input;
+
+    private void Start()
+    {
+        input = PlayerInput_Overworld.instance;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,7 +44,7 @@ public class Overworld_Testing_scenes : MonoBehaviour
         }
 
        
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (input.pause)
         {
             settings.SetActive(!settings.activeInHierarchy);
             audioSettings.SetActive(false);
