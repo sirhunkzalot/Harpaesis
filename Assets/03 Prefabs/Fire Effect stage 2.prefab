@@ -82,7 +82,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8064691154089284248}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 75
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3584841719352719733, guid: c297c74e9cc8e814e8a771b0093f2eb4, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].time

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 
 
-public class Save_Sots : MonoBehaviour
+public class Save_Slots : MonoBehaviour
 {
     public bool saveSlotOne;
     public bool saveSlotTwo;
