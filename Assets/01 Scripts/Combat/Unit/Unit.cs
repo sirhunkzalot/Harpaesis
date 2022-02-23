@@ -281,6 +281,17 @@ public abstract class Unit : MonoBehaviour
 
         unitPassive.OnDealDamage(_damageAmount, _damagedUnit);
     }
+    public int OnTargeted(int _damageAmount)
+    {
+        int _modifiedDamageAmount = _damageAmount;
+
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            _modifiedDamageAmount = currentEffects[i].OnTargeted(_modifiedDamageAmount);
+        }
+
+        return _modifiedDamageAmount;
+    }
     public void OnTakeDamage(int _damageAmount, Unit _damagingUnit)
     {
         for (int i = 0; i < currentEffects.Count; i++)

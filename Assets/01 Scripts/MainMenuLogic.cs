@@ -8,6 +8,7 @@ public class MainMenuLogic : MonoBehaviour
     public GameObject mainUI;
     public GameObject creditsUI;
     public GameObject levelUI;
+    public GameObject settings;
     public AudioSource uiSFX;
     public void LoadLevel(int _buildIndex)
     {
@@ -19,23 +20,22 @@ public class MainMenuLogic : MonoBehaviour
     }
     public void Update()
     {
-        // Matt Fix
-        /*if(Input.GetKeyDown(KeyCode.Escape))
-        {*/
-            if(creditsUI.activeSelf)
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            
+            if(creditsUI.activeSelf || levelUI.activeSelf || settings.activeSelf)
             {
                 creditsUI.SetActive(false);
-                mainUI.SetActive(true);
-                uiSFX.Play();
-            }
-           
-            if(levelUI.activeSelf)
-            {
+                settings.SetActive(false);
                 levelUI.SetActive(false);
                 mainUI.SetActive(true);
                 uiSFX.Play();
             }
-        //}
+           
+      
+
+           
+        }
     }
 
     public void PlayOverworld()
