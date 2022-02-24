@@ -15,10 +15,13 @@ namespace Harpaesis.Overworld
 
         readonly float offsetAmount = .05f;
 
+        protected OverworldController controller;
+
         [HideInInspector] public float Index { get { return transform.position.x + transform.position.y + transform.position.z; } }
 
         private void Start()
         {
+            controller = OverworldController.instance;
             OverworldData.OverworldPointInit(Index, new PointData(this, isUnlocked));
         }
 

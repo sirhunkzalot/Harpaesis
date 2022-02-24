@@ -14,7 +14,10 @@ namespace Harpaesis.Overworld
 
         public override void Interact()
         {
-            if (!isInteracting)
+            isInteracting = !isInteracting;
+            controller.isInteracting = isInteracting;
+
+            if (isInteracting)
             {
                 LoadStore();
             }
@@ -22,8 +25,6 @@ namespace Harpaesis.Overworld
             {
                 UnloadStore();
             }
-
-            isInteracting = !isInteracting;
         }
 
         private void LoadStore()

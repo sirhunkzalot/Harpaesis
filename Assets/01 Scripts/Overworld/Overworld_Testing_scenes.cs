@@ -46,6 +46,7 @@ public class Overworld_Testing_scenes : MonoBehaviour
        
         if (input.pause)
         {
+            input.pause = !input.pause;
             settings.SetActive(!settings.activeInHierarchy);
             audioSettings.SetActive(false);
             visualSettings.SetActive(false);

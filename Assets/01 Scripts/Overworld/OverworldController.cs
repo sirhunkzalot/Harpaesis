@@ -13,6 +13,7 @@ namespace Harpaesis.Overworld
 
         public static OverworldController instance;
 
+        [ReadOnly] public bool isInteracting;
         bool CanInput { get { return Vector3.Distance(transform.position, currentPoint.transform.position) <= 0.5f; } }
 
         private void Awake()
@@ -44,7 +45,7 @@ namespace Harpaesis.Overworld
 
         public void MoveNorth()
         {
-            if (CanInput && currentPoint.upConnection != null && currentPoint.upConnection.isUnlocked)
+            if (!isInteracting && CanInput && currentPoint.upConnection != null && currentPoint.upConnection.isUnlocked)
             {
                 ChangeCurrentPoint(currentPoint.upConnection);
             }
@@ -52,14 +53,14 @@ namespace Harpaesis.Overworld
 
         public void MoveEast()
         {
-            if (CanInput && currentPoint.rightConnection != null && currentPoint.rightConnection.isUnlocked)
+            if (!isInteracting && CanInput && currentPoint.rightConnection != null && currentPoint.rightConnection.isUnlocked)
             {
                 ChangeCurrentPoint(currentPoint.rightConnection);
             }
         }
         public void MoveSouth()
         {
-            if (CanInput && currentPoint.downConnection != null && currentPoint.downConnection.isUnlocked)
+            if (!isInteracting && CanInput && currentPoint.downConnection != null && currentPoint.downConnection.isUnlocked)
             {
                 ChangeCurrentPoint(currentPoint.downConnection);
             }
@@ -67,7 +68,7 @@ namespace Harpaesis.Overworld
 
         public void MoveWest()
         {
-            if (CanInput && currentPoint.leftConnection != null && currentPoint.leftConnection.isUnlocked)
+            if (!isInteracting && CanInput && currentPoint.leftConnection != null && currentPoint.leftConnection.isUnlocked)
             {
                 ChangeCurrentPoint(currentPoint.leftConnection);
             }
