@@ -13,6 +13,8 @@ namespace Harpaesis.Overworld
 
         [ReadOnly] public bool pause;
 
+        OverworldTestingScenes testingScenes;
+
         public static PlayerInput_Overworld instance;
 
         private void Awake()
@@ -23,32 +25,33 @@ namespace Harpaesis.Overworld
         private void Start()
         {
             controller = GetComponent<OverworldController>();
+            testingScenes = OverworldTestingScenes.instance;
         }
 
         public void I_MoveNorth(InputAction.CallbackContext _ctx)
         {
-            if (_ctx.started)
+            if (_ctx.started && !pause)
             {
                 controller.MoveNorth();
             }
         }
         public void I_MoveEast(InputAction.CallbackContext _ctx)
         {
-            if (_ctx.started)
+            if (_ctx.started && !pause)
             {
                 controller.MoveEast();
             }
         }
         public void I_MoveSouth(InputAction.CallbackContext _ctx)
         {
-            if (_ctx.started)
+            if (_ctx.started && !pause)
             {
                 controller.MoveSouth();
             }
         }
         public void I_MoveWest(InputAction.CallbackContext _ctx)
         {
-            if (_ctx.started)
+            if (_ctx.started && !pause)
             {
                 controller.MoveWest();
             }
@@ -56,7 +59,7 @@ namespace Harpaesis.Overworld
 
         public void I_Interact(InputAction.CallbackContext _ctx)
         {
-            if (_ctx.started)
+            if (_ctx.started && !pause)
             {
                 controller.Interact();
             }
@@ -79,6 +82,7 @@ namespace Harpaesis.Overworld
             if (_ctx.started)
             {
                 pause = !pause;
+                testingScenes.Pause();
             }
         }
     }

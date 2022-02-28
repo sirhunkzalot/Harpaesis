@@ -496,7 +496,7 @@ namespace Harpaesis.Combat
             return Mathf.CeilToInt(_halfDamage);
         }
 
-        public override void OnTurnEnd()
+        public override void OnTurnStart()
         {
             if (--duration <= 0)
             {

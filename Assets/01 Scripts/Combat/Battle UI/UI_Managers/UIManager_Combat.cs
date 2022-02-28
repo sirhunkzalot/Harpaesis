@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Harpaesis.Combat;
 using Harpaesis.Overworld;
 using UnityEngine.UI;
 using UnityEngine;
@@ -73,12 +74,16 @@ namespace Harpaesis.UI
 
         public void Button_Items()
         {
-            print("UseItem");
+            //print("UseItem");
         }
 
         public void Button_Defend()
         {
-            print("Defend");
+            if (IsFriendlyTurn)
+            {
+                FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+                _unit.DefendAction();
+            }
         }
 
         public void Button_SwapWeapon()

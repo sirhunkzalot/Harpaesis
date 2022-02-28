@@ -123,6 +123,11 @@ public class FriendlyUnit : Unit
         currentState = FriendlyState.PreviewMove;
     }
 
+    public void DefendAction()
+    {
+        ApplyEffect(new StatusEffect_Defend(this, this, 1, 1));
+    }
+
     public void SwapWeapon()
     {
         alternativeWeapon = !alternativeWeapon;

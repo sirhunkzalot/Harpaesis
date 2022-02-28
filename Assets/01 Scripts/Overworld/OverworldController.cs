@@ -12,6 +12,7 @@ namespace Harpaesis.Overworld
         public float moveSpeed = 5f;
 
         public static OverworldController instance;
+        PlayerInput_Overworld input;
 
         [ReadOnly] public bool isInteracting;
         bool CanInput { get { return Vector3.Distance(transform.position, currentPoint.transform.position) <= 0.5f; } }
@@ -30,6 +31,8 @@ namespace Harpaesis.Overworld
                 OverworldData.SetLastPoint(currentPoint.Index);
                 transform.position = currentPoint.transform.position;
             }
+
+            input = PlayerInput_Overworld.instance;
         }
 
         public void Init(OverworldPoint _newPoint)
@@ -40,7 +43,11 @@ namespace Harpaesis.Overworld
 
         private void Update()
         {
-            transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, Time.deltaTime * moveSpeed);
+            if (!input.pause)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, currentPoint.transform.position, Time.deltaTime * moveSpeed);
+            }
+
         }
 
         public void MoveNorth()
