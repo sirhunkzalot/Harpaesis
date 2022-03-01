@@ -296,21 +296,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'It is an era of immense trepidation in the Province of Grima. A once somnolent
-    territory, now tossed into ruin as unnatural <color="red">horrors</color="red">
-    consume the land. Inquisitors, by name of the Venator Sanguis, have sworn to
-    cleanse the province of these fiends. These hunters stem from every walk of life,
-    yet are bound by a single creed: safeguarding the populace of the Corranthian
-    Empire.'
+  m_text: 'It is an era of immense trepidation in the province of Grima. A once somnolent
+    territory, now tossed into ruin as unnatural horrors consume the land. Inquisitors,
+    by name of the <color="red">Venator Sanguis,</color="red"> have sworn to cleanse
+    the province of these fiends. These hunters stem from every walk of life, yet
+    are bound by a single creed: <color="red">safeguarding the populace</color="red">
+    of the Corranthian Empire.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
-  m_sharedMaterial: {fileID: -5883202854735614699, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a3b699474fd510c4294ae6abd9725a2f, type: 2}
+  m_sharedMaterial: {fileID: -5883202854735614699, guid: a3b699474fd510c4294ae6abd9725a2f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -966,16 +966,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 7406 P.C. Harpaesis, Grima Province, Corranthian Empire
+  m_text: 7406 P.C. Harpaesis, Grima province, Corranthian Empire
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
-  m_sharedMaterial: {fileID: -5883202854735614699, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5a9ee30f5e6f02344be347267434a297, type: 2}
+  m_sharedMaterial: {fileID: -5883202854735614699, guid: 5a9ee30f5e6f02344be347267434a297, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 1828716543
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1149,7 +1149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1553433678
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1190,23 +1190,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The birthplace of magic, the opulent, augural city of Harpaesis, is home
-    to many such terrors. Rumors of clandestine Higher Vampires among the aristocrats
-    and rapacious predators sequestered among the ductworks prevent all but the poverty-stricken
-    proletariat and the unwavering magi from tarrying within its sumptuous and macabre
-    walls. However, for those fortuitous few, the most exquisite of treasures is
-    still attainable. The strong magic lines within the city make it the ideal home
-    for the Grand Lyceum of Thaumaturgy while murmurings of the promise of eternal
-    life still buzz in the ears of those who will listen.
+  m_text: The birthplace of magic, the opulent, augural city of <color="red">Harpaesis,</color="red">
+    is home to many such terrors. Rumors of clandestine higher vampires among the
+    aristocrats and rapacious predators sequestered among the ductworks prevent all
+    but the poverty-stricken proletariat and the unwavering magi from tarrying within
+    its sumptuous and macabre walls. However, for those fortuitous few, the most
+    exquisite of treasures is still attainable. The strong magic lines within the
+    city make it the ideal home for the Grand Lyceum of Thaumaturgy while murmurings
+    of the promise of eternal life still buzz in the ears of those who will <color="red">listen.</color="red">
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
-  m_sharedMaterial: {fileID: -5883202854735614699, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e010de9a441d8ff43a12e4ca56e156e8, type: 2}
+  m_sharedMaterial: {fileID: -5883202854735614699, guid: e010de9a441d8ff43a12e4ca56e156e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1286,6 +1286,7 @@ GameObject:
   - component: {fileID: 1777749950}
   - component: {fileID: 1777749949}
   - component: {fileID: 1777749948}
+  - component: {fileID: 1777749952}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1378,6 +1379,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &1777749952
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777749947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9b76f2f7ec94c8047a8f5314c9a9da45, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1937923551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,7 +1424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937923551}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -1.1, z: -1.1}
+  m_LocalPosition: {x: -0.19, y: -1.1, z: -1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1479,7 +1500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1981683117
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1521,19 +1542,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Driven by desperation, honor, and glory, a band of Venator Sanguis travel
-    to Harpaesis in search of a suspected Higher Vampire named Virgil Indine, a powerful
-    magus and lord concealed among the labyrinthine streets. Wrought with weeks of
-    sleepless nights, the hunters have finally arrived within the city walls, intent
-    on destroying Indine and his dangerous network of thralls and magi...
+    to Harpaesis in search of a suspected Higher Vampire named <color="red">Virgil
+    Indine,</color="red"> a powerful magus and lord concealed among the labyrinthine
+    streets. Wrought with weeks of sleepless nights, the hunters have finally arrived
+    within the city walls, intent on destroying Indine and his dangerous network
+    of thralls and magi...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
-  m_sharedMaterial: {fileID: -5883202854735614699, guid: b631dbc88fa18704b952406c764bc4f2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ce7d89d9128c1a846a8e7b853eedd9d5, type: 2}
+  m_sharedMaterial: {fileID: -5883202854735614699, guid: ce7d89d9128c1a846a8e7b853eedd9d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
