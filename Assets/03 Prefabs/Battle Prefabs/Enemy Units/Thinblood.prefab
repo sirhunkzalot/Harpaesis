@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3738069504950829499}
   - component: {fileID: 8263688571996519939}
   - component: {fileID: 2147094318975354291}
+  - component: {fileID: 6454019190255461204}
   m_Layer: 25
   m_Name: Sprite
   m_TagString: Untagged
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c7518c6a78bf3e341852b2d8d3c2f79a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +99,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6454019190255461204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2963647858742112949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3133061777739016494
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,8 +123,6 @@ GameObject:
   - component: {fileID: 3133061777739016493}
   - component: {fileID: 3133061777739016495}
   - component: {fileID: 3133061777739016492}
-  - component: {fileID: 6307511985542832246}
-  - component: {fileID: 567106760225170177}
   m_Layer: 25
   m_Name: Thinblood
   m_TagString: Untagged
@@ -199,38 +210,6 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
---- !u!114 &6307511985542832246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3133061777739016494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af77a8e0e1525a45a208d96e12e3e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 8263688571996519939}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0, b: 0, a: 1}
-  hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
---- !u!114 &567106760225170177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3133061777739016494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 8263688571996519939}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
-  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1001 &479294417007442493
 PrefabInstance:
   m_ObjectHideFlags: 0

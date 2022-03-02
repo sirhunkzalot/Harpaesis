@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 4477297515871811397}
   - component: {fileID: 4477297515871811396}
   - component: {fileID: 5270546115002527534}
-  - component: {fileID: 7930430059872858200}
-  - component: {fileID: 3061164284405336671}
   m_Layer: 25
   m_Name: Werewolf Pup
   m_TagString: Untagged
@@ -114,38 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7930430059872858200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4477297515871811451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af77a8e0e1525a45a208d96e12e3e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 7154478113525479831}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0, b: 0, a: 1}
-  hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
---- !u!114 &3061164284405336671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4477297515871811451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 7154478113525479831}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
-  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1 &6018147654052445085
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +123,7 @@ GameObject:
   - component: {fileID: 6113343891290962856}
   - component: {fileID: 7154478113525479831}
   - component: {fileID: 5648842367264994475}
+  - component: {fileID: 8570615872731983980}
   m_Layer: 25
   m_Name: Sprite
   m_TagString: Untagged
@@ -200,7 +167,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c7518c6a78bf3e341852b2d8d3c2f79a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,7 +188,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aa7996df6039855409e155feb1c9f1a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a94e37986befc1e4a98a1841e08d0db1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -242,6 +209,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8570615872731983980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6018147654052445085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &380150204050858800

@@ -4629,7 +4629,7 @@ GameObject:
   - component: {fileID: 2851502093361661261}
   - component: {fileID: 7677127347194695267}
   - component: {fileID: 2002927270329212196}
-  - component: {fileID: 8141324988217889676}
+  - component: {fileID: 3614633565964982877}
   m_Layer: 5
   m_Name: basic attack
   m_TagString: Untagged
@@ -4765,7 +4765,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8141324988217889676
+--- !u!114 &3614633565964982877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4774,12 +4774,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2356112431231554335}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d08ee64d538fe243b6dd8dd923bf568, type: 3}
+  m_Script: {fileID: 11500000, guid: 6373b4be5a2845144947580489561826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipDelay: 0.5
-  headerText: 
-  bodyText: Deal physical damage to an enemy
+  slotIndex: 0
 --- !u!1 &2516401611604555613
 GameObject:
   m_ObjectHideFlags: 0
@@ -7496,7 +7495,7 @@ GameObject:
   - component: {fileID: 834383997957609836}
   - component: {fileID: 4636254128327049116}
   - component: {fileID: 9150439710294233381}
-  - component: {fileID: 1935766060851425060}
+  - component: {fileID: 899528457550125742}
   m_Layer: 5
   m_Name: tertiary attack
   m_TagString: Untagged
@@ -7633,7 +7632,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1935766060851425060
+--- !u!114 &899528457550125742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7642,12 +7641,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4209765356343490653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d08ee64d538fe243b6dd8dd923bf568, type: 3}
+  m_Script: {fileID: 11500000, guid: 6373b4be5a2845144947580489561826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipDelay: 0.5
-  headerText: 
-  bodyText: 
+  slotIndex: 3
 --- !u!1 &4221945485692526305
 GameObject:
   m_ObjectHideFlags: 0
@@ -8452,7 +8450,7 @@ GameObject:
   - component: {fileID: 7695091892754846897}
   - component: {fileID: 7214850370922745483}
   - component: {fileID: 5123401710757613692}
-  - component: {fileID: 7164602252084788206}
+  - component: {fileID: 4402685857946662231}
   m_Layer: 5
   m_Name: signature attack
   m_TagString: Untagged
@@ -8634,7 +8632,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &7164602252084788206
+--- !u!114 &4402685857946662231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8643,12 +8641,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4474435502426843000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d08ee64d538fe243b6dd8dd923bf568, type: 3}
+  m_Script: {fileID: 11500000, guid: 6373b4be5a2845144947580489561826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipDelay: 0.5
-  headerText: 
-  bodyText: 
+  slotIndex: 4
 --- !u!1 &4526277949707032482
 GameObject:
   m_ObjectHideFlags: 0
@@ -15697,7 +15694,7 @@ GameObject:
   - component: {fileID: 5298548682916944110}
   - component: {fileID: 8025454243621801851}
   - component: {fileID: 2338868015100223321}
-  - component: {fileID: 5821848478668620990}
+  - component: {fileID: 889650690722112347}
   m_Layer: 5
   m_Name: secondary attack
   m_TagString: Untagged
@@ -15834,7 +15831,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5821848478668620990
+--- !u!114 &889650690722112347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15843,12 +15840,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8794022852243107620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d08ee64d538fe243b6dd8dd923bf568, type: 3}
+  m_Script: {fileID: 11500000, guid: 6373b4be5a2845144947580489561826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipDelay: 0.5
-  headerText: 
-  bodyText: 
+  slotIndex: 2
 --- !u!1 &8830164457497635865
 GameObject:
   m_ObjectHideFlags: 0
@@ -16211,7 +16207,7 @@ GameObject:
   - component: {fileID: 723413297824060567}
   - component: {fileID: 4957871269731679586}
   - component: {fileID: 4074741502443791396}
-  - component: {fileID: 4844282143418987554}
+  - component: {fileID: 4153076929726450331}
   m_Layer: 5
   m_Name: Primary attack
   m_TagString: Untagged
@@ -16348,7 +16344,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4844282143418987554
+--- !u!114 &4153076929726450331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16357,12 +16353,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9021141237939604418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d08ee64d538fe243b6dd8dd923bf568, type: 3}
+  m_Script: {fileID: 11500000, guid: 6373b4be5a2845144947580489561826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipDelay: 0.5
-  headerText: 
-  bodyText: 
+  slotIndex: 1
 --- !u!1 &9102351984532919859
 GameObject:
   m_ObjectHideFlags: 0

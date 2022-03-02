@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 980452361}
   - component: {fileID: 980452362}
   - component: {fileID: 980452363}
+  - component: {fileID: 3160655569582204417}
   m_Layer: 25
   m_Name: Sprite
   m_TagString: Untagged
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c7518c6a78bf3e341852b2d8d3c2f79a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +99,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3160655569582204417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980452360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5205872326945359666
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,8 +123,6 @@ GameObject:
   - component: {fileID: 5205872326945359677}
   - component: {fileID: 5205872326945359678}
   - component: {fileID: 5205872326945359676}
-  - component: {fileID: 7153763603664417394}
-  - component: {fileID: 7481809026422034407}
   m_Layer: 25
   m_Name: Eldrich Unit
   m_TagString: Untagged
@@ -199,38 +210,6 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
---- !u!114 &7153763603664417394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205872326945359666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af77a8e0e1525a45a208d96e12e3e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 980452362}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0, b: 0, a: 1}
-  hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
---- !u!114 &7481809026422034407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205872326945359666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 980452362}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
-  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1001 &7553309330615910349
 PrefabInstance:
   m_ObjectHideFlags: 0

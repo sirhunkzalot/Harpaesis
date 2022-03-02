@@ -126,6 +126,15 @@ namespace Harpaesis.Combat
 
             _target.TakeDamage(_damageToDeal, _user);
 
+            if((string.Compare(_user.unitData.unitName, "Regina DeSade", true) == 0))
+            {
+                _target.paletteManager.CycleColor(ColorCode.Magic);
+            }
+            else
+            {
+                _target.paletteManager.CycleColor(ColorCode.Damage);
+            }
+
             _user.OnDealDamage(_damageToDeal, _target);
         }
 
@@ -140,9 +149,19 @@ namespace Harpaesis.Combat
 
             _target.TakeDamage(_damageToDeal, _user);
 
+            if ((string.Compare(_user.unitData.unitName, "Regina DeSade", true) == 0))
+            {
+                _target.paletteManager.CycleColor(ColorCode.Magic);
+            }
+            else
+            {
+                _target.paletteManager.CycleColor(ColorCode.Damage);
+            }
+
             _user.OnDealDamage(_damageToDeal, _target);
 
             _user.Heal(_user, Mathf.CeilToInt(_damageAmount * _lifestealPercentage * .01f));
+            _user.paletteManager.CycleColor(ColorCode.Healing);
         }
 
         public static void SkillEffect_DamageOverTime(Unit _user, Unit _target,  int _damageAmount, int _duration)

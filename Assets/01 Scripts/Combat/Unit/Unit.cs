@@ -12,7 +12,6 @@ using Harpaesis;
  * class Unit manages the generic basic data of each Unit, as well as connects the other
  * unit scripts together */
 [RequireComponent(typeof(UnitMotor))]
-[RequireComponent(typeof(DamageColorChange))]
 public abstract class Unit : MonoBehaviour
 {
     public UnitData unitData;
@@ -40,7 +39,7 @@ public abstract class Unit : MonoBehaviour
     protected GridManager grid;
     protected GridCamera gridCam;
     protected UIManager_Combat uiCombat;
-    protected DamageColorChange damageColor;
+    [HideInInspector] public ColorPaletteManager paletteManager;
     [HideInInspector] public Unit_UI unit_ui;
 
     public void Start()
@@ -48,7 +47,7 @@ public abstract class Unit : MonoBehaviour
         grid = GridManager.instance;
         gridCam = GridCamera.instance;
         uiCombat = UIManager_Combat.instance;
-        damageColor = GetComponent<DamageColorChange>();
+        paletteManager = GetComponentInChildren<ColorPaletteManager>();
         unit_ui = GetComponentInChildren<Unit_UI>();
         motor = GetComponent<UnitMotor>();
         motor.Init(this);
@@ -81,8 +80,6 @@ public abstract class Unit : MonoBehaviour
     public void TakeDamage(int _damageAmount, Unit _attacker = null)
     {
         if (!isAlive || _damageAmount <= 0) return;
-
-        damageColor.TakeDamage();
 
         unit_ui.DisplayDamageText(-_damageAmount);
 
@@ -300,7 +297,5 @@ public abstract class Unit : MonoBehaviour
         }
 
         unitPassive.OnTakeDamage(_damageAmount, _damagingUnit);
-
-        damageColor.TakeDamage();
     }
 }

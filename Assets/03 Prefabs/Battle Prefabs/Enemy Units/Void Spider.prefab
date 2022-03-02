@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 301965939297808679}
   - component: {fileID: 287556397178285859}
   - component: {fileID: 640093570112572487}
+  - component: {fileID: 5077605046182671108}
   m_Layer: 25
   m_Name: Sprite
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4573355857309098858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.377, z: 0}
+  m_LocalPosition: {x: 0, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c7518c6a78bf3e341852b2d8d3c2f79a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fb8688a3f3a93694da512f8d4d83ffaa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb574be410db4b2489a2ac35cf11aeb1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,6 +99,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948b29e98f2916a42a09d40060db7e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5077605046182671108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4573355857309098858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4752951056988849657
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,8 +123,6 @@ GameObject:
   - component: {fileID: 4752951056988849662}
   - component: {fileID: 4752951056988849663}
   - component: {fileID: 4752951056988849656}
-  - component: {fileID: 4247923803011174339}
-  - component: {fileID: 5447684593726143089}
   m_Layer: 25
   m_Name: Void Spider
   m_TagString: Untagged
@@ -199,38 +210,6 @@ MonoBehaviour:
   viewObstructionMask:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &4247923803011174339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4752951056988849657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af77a8e0e1525a45a208d96e12e3e26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 287556397178285859}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0, b: 0, a: 1}
-  hitColorTwo: {r: 0.33333334, g: 0, b: 0, a: 1}
---- !u!114 &5447684593726143089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4752951056988849657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc5c06b40a10c494b93116372762df21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr: {fileID: 287556397178285859}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  hitColorOne: {r: 1, g: 0.7894541, b: 0.0047169924, a: 1}
-  hitColorTwo: {r: 0.11471786, g: 1, b: 0.0141509175, a: 1}
 --- !u!1001 &4955464808642172746
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -404,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.89
+      value: 1.68
       objectReference: {fileID: 0}
     - target: {fileID: 3380680090032626059, guid: 1ef27139f9772294ea58fb78712a3863, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

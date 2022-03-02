@@ -93,6 +93,7 @@ namespace Harpaesis.Combat
         protected override void ApplyDamage()
         {
             effectedUnit.TakeDamage(GameSettings.statusEffectSettings.bleedDamage);
+            effectedUnit.paletteManager.CycleColor(ColorCode.Bleed);
         }
 
         protected override void OnEffectRemoved()
@@ -129,6 +130,7 @@ namespace Harpaesis.Combat
         protected override void ApplyDamage()
         {
             effectedUnit.TakeDamage(GameSettings.statusEffectSettings.burnDamage);
+            effectedUnit.paletteManager.CycleColor(ColorCode.Burn);
         }
 
         protected override void OnEffectRemoved()
