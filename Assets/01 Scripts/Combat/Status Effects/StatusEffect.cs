@@ -54,6 +54,7 @@ namespace Harpaesis.Combat
     {
         public StatusEffect_DamageOverTime(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
 
+
         public override void OnTurnStart()
         {
             ApplyDamage();
@@ -67,10 +68,7 @@ namespace Harpaesis.Combat
             }
         }
 
-        protected virtual void ApplyDamage()
-        {
-            effectedUnit.TakeDamage(amount);
-        }
+        protected virtual void ApplyDamage() { }
     }
     public class StatusEffect_Bleed : StatusEffect_DamageOverTime
     {
@@ -92,7 +90,7 @@ namespace Harpaesis.Combat
 
         protected override void ApplyDamage()
         {
-            effectedUnit.TakeDamage(GameSettings.statusEffectSettings.bleedDamage);
+            effectedUnit.TakeDamage(GameSettings.statusEffectSettings.bleedDamage, DamageType.Bleed);
             effectedUnit.paletteManager.CycleColor(ColorCode.Bleed);
         }
 
@@ -129,7 +127,7 @@ namespace Harpaesis.Combat
 
         protected override void ApplyDamage()
         {
-            effectedUnit.TakeDamage(GameSettings.statusEffectSettings.burnDamage);
+            effectedUnit.TakeDamage(GameSettings.statusEffectSettings.burnDamage, DamageType.Fire);
             effectedUnit.paletteManager.CycleColor(ColorCode.Burn);
         }
 

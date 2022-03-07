@@ -14,7 +14,11 @@ namespace Harpaesis.Combat
         public int inititiveStat;
         public int attackStat;
         public int defenseStat;
+        public int willpowerStat;
         public int apStat;
+
+        public List<DamageType> weaknesses = new List<DamageType>();
+        public List<DamageType> resistances = new List<DamageType>();
 
         [Header("Passive")]
         public UnitPassiveType unitPassive = UnitPassiveType.None;
