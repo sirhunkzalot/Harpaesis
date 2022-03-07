@@ -9,16 +9,18 @@ namespace Harpaesis.Combat
         public SkillEffectType effectType;
         public string param1;
         public string param2;
-        public bool option;
+        public DamageType damageType;
     }
 
 #if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(SkillEffect))]
     public class SkillEffectEditor : PropertyDrawer
     {
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
+
 
             var indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
@@ -30,8 +32,9 @@ namespace Harpaesis.Combat
 
             var effect = property.FindPropertyRelative("effectType");
             var param1 = property.FindPropertyRelative("param1");
+
             var param2 = property.FindPropertyRelative("param2");
-            var option = property.FindPropertyRelative("option");
+            var damageType = property.FindPropertyRelative("damageType");
 
             effect.intValue = EditorGUI.Popup(effectRect, "Effect:", effect.intValue, effect.enumNames);
 
@@ -46,12 +49,12 @@ namespace Harpaesis.Combat
                     break;
                 case SkillEffectType.Damage:
                     param1.stringValue = EditorGUI.TextField(secondRect, "Damage Amount:", param1.stringValue);
-                    option.boolValue = EditorGUI.Toggle(thirdRect, "Ignore Armor:", option.boolValue);
+                    damageType.intValue = EditorGUI.Popup(thirdRect, "Damage Type:", damageType.intValue, damageType.enumNames);
                     break;
                 case SkillEffectType.DamageWithLifesteal:
                     param1.stringValue = EditorGUI.TextField(secondRect, "Damage Amount:", param1.stringValue);
                     param2.stringValue = EditorGUI.TextField(thirdRect, "Lifesteal Percentage:", param2.stringValue);
-                    option.boolValue = EditorGUI.Toggle(fourthRect, "Ignore Armor:", option.boolValue);
+                    damageType.intValue = EditorGUI.Popup(fourthRect, "Damage Type: :", damageType.intValue, damageType.enumNames);
                     break;
                 case SkillEffectType.DamageOverTime:
                     param1.stringValue = EditorGUI.TextField(secondRect, "Damage Amount:", param1.stringValue);
@@ -102,12 +105,6 @@ namespace Harpaesis.Combat
                     param1.stringValue = EditorGUI.TextField(secondRect, "AP Debuff Amount:", param1.stringValue);
                     param2.stringValue = EditorGUI.TextField(thirdRect, "Duration in Turns:", param2.stringValue);
                     break;
-                case SkillEffectType.Silvered:
-                    break;
-                case SkillEffectType.Holy:
-                    break;
-                case SkillEffectType.OverrideTargetToSelf:
-                    break;
                 case SkillEffectType.ChangeAllegiance:
                     param1.stringValue = EditorGUI.TextField(secondRect, "Duration in Turns:", param1.stringValue);
                     break;
@@ -149,10 +146,6 @@ namespace Harpaesis.Combat
         DebuffATK,
         DebuffDEF,
         DebuffAP,
-
-        Silvered,
-        Holy,
-        OverrideTargetToSelf,
 
         ChangeAllegiance
     }

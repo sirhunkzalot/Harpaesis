@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.Combat;
 using UnityEngine;
 
 public abstract class UnitPassive
@@ -7,8 +8,8 @@ public abstract class UnitPassive
     public virtual void OnCombatStart() { }
     public virtual void OnTurnStart() { }
     public virtual void OnTurnEnd() { }
-    public virtual void OnDealDamage(int _damageAmount, Unit _damagedUnit) { }
-    public virtual void OnTakeDamage(float _damageAmount, Unit _damagingUnit) { }
+    public virtual void OnDealDamage(int _damageAmount, Unit _damagedUnit, DamageType _damageType) { }
+    public virtual void OnTakeDamage(float _damageAmount, Unit _damagingUnit, DamageType _damageType) { }
 }
 
 #region Friendly Passives
@@ -103,14 +104,14 @@ public class VampirePassive : EnemyUnitPassive
 
     public VampirePassive(Unit _unit) : base(_unit) { }
 
-    public override void OnDealDamage(int _damageAmount, Unit _damagedUnit)
+    public override void OnDealDamage(int _damageAmount, Unit _damagedUnit, DamageType _damageType)
     {
         // If unit does not have Holy Water Effect applied
-        if (!unit.HasEffect(Harpaesis.Combat.StatusEffectType.Holy))
+        if (!unit.HasEffect(StatusEffectType.Holy))
         {
             // Heals for bonus health percent if target is bleeding
             float _healAmount = _damageAmount;
-            _healAmount *= _damagedUnit.HasEffect(Harpaesis.Combat.StatusEffectType.Bleed) ?
+            _healAmount *= _damagedUnit.HasEffect(StatusEffectType.Bleed) ?
                 GameSettings.unitPassiveSettings.vampireBoostedHealPercent : GameSettings.unitPassiveSettings.vampireBaseHealPercent;
 
             unit.Heal(unit, Mathf.CeilToInt(_healAmount));
@@ -120,14 +121,12 @@ public class VampirePassive : EnemyUnitPassive
 
 public class LycanPassive : EnemyUnitPassive
 {
-
-
     public LycanPassive(Unit _unit) : base(_unit) { }
 
     public override void OnTurnEnd()
     {
         // If unit does not have Silver effect applied
-        if (!unit.HasEffect(Harpaesis.Combat.StatusEffectType.Silver))
+        if (!unit.HasEffect(StatusEffectType.Silver))
         {
             // Heals for bonus health percent if target is bleeding
             int _missingHP = unit.unitData.healthStat - unit.currentHP;
@@ -138,6 +137,89 @@ public class LycanPassive : EnemyUnitPassive
                 unit.Heal(unit, Mathf.CeilToInt(_healAmount));
             }
         }
+    }
+}
+
+public class ElderGodPassive : EnemyUnitPassive
+{
+    public ElderGodPassive(Unit _unit) : base(_unit) { }
+
+    public override void OnCombatStart()
+    {
+        unit.currentResistances = new List<DamageType>();
+        unit.currentWeaknesses = new List<DamageType>();
+    }
+
+    public override void OnTakeDamage(float _damageAmount, Unit _damagingUnit, DamageType _damageType)
+    {
+        // 
+
+        if (!unit.currentResistances.Contains(_damageType))
+        {
+            if (unit.currentResistances.Count >= 3)
+            {
+                unit.currentResistances.RemoveAt(0);
+            }
+            unit.currentResistances.Add(_damageType);
+        }
+    
+        if (unit.currentWeaknesses.Contains(_damageType))
+        {
+            unit.currentWeaknesses.Remove(_damageType);
+        }
+        else if (unit.currentWeaknesses.Count >= 3)
+        {
+            unit.currentWeaknesses.RemoveAt(0);
+        }
+
+        unit.StartCoroutine(AddNewRandomWeakness(_damageType));
+
+        base.OnTakeDamage(_damageAmount, _damagingUnit, _damageType);
+    }
+
+    IEnumerator AddNewRandomWeakness(DamageType _damageType)
+    {
+        int _index = Random.Range(0, 8);
+        DamageType _typeToReturn = DamageType.Piercing;
+        bool _typeIsNotValid;
+
+        do
+        {
+            switch (_index)
+            {
+                case 0:
+                    _typeToReturn = DamageType.Piercing;
+                    break;
+                case 1:
+                    _typeToReturn = DamageType.Bludgeoning;
+                    break;
+                case 2:
+                    _typeToReturn = DamageType.Slashing;
+                    break;
+                case 3:
+                    _typeToReturn = DamageType.Silver;
+                    break;
+                case 4:
+                    _typeToReturn = DamageType.Holy;
+                    break;
+                case 5:
+                    _typeToReturn = DamageType.Magic;
+                    break;
+                case 6:
+                    _typeToReturn = DamageType.Fire;
+                    break;
+                case 7:
+                    _typeToReturn = DamageType.Bleed;
+                    break;
+            }
+            yield return new WaitForEndOfFrame();
+
+            _typeIsNotValid = (_typeToReturn == _damageType) || (unit.currentResistances.Contains(_typeToReturn)) || (unit.currentWeaknesses.Contains(_typeToReturn));
+
+        } while (_typeIsNotValid);
+
+        unit.currentWeaknesses.Add(_typeToReturn);
+
     }
 }
 #endregion
@@ -156,5 +238,7 @@ public enum UnitPassiveType
 
     // Enemy Passives 10+
     Vampire = 10,
-    Lycan = 11
+    Lycan = 11,
+
+    ElderGod = 99
 }

@@ -28,7 +28,12 @@ public abstract class Unit : MonoBehaviour
     [Header("Adjusted Stats")]
     [ReadOnly] public int currentAtkStat;
     [ReadOnly] public int currentDefStat;
+    [ReadOnly] public int currentWilStat;
     [ReadOnly] public int currentApStat;
+
+    [ReadOnly] public List<DamageType> currentWeaknesses = new List<DamageType>();
+    [ReadOnly] public List<DamageType> currentResistances = new List<DamageType>();
+
 
     [ReadOnly] public List<StatusEffect> currentEffects = new List<StatusEffect>();
 
@@ -55,7 +60,11 @@ public abstract class Unit : MonoBehaviour
         currentHP = unitData.healthStat;
         currentAtkStat = unitData.attackStat;
         currentDefStat = unitData.defenseStat;
+        currentWilStat = unitData.willpowerStat;
         currentApStat = unitData.apStat;
+
+        currentWeaknesses =  unitData.weaknesses;
+        currentResistances = unitData.resistances;
 
         AssignPassive();
         
@@ -77,22 +86,26 @@ public abstract class Unit : MonoBehaviour
     {
     }
 
-    public void TakeDamage(int _damageAmount, Unit _attacker = null)
+    public void TakeDamage(int _damageAmount, DamageType _damageType, Unit _attacker = null)
     {
         if (!isAlive || _damageAmount <= 0) return;
 
+
+
+        if (unitData.weaknesses.Contains(_damageType))
+        {
+            _damageAmount = Mathf.FloorToInt(_damageAmount * 1.5f);
+        }
+        else if (unitData.resistances.Contains(_damageType))
+        {
+            _damageAmount = Mathf.FloorToInt(_damageAmount * .5f);
+        }
+
         unit_ui.DisplayDamageText(-_damageAmount);
 
-        currentHP = Mathf.Clamp(currentHP - _damageAmount, 0, unitData.healthStat);
+        OnTakeDamage(_damageAmount, _attacker, _damageType);
 
-        if(_attacker != null)
-        {
-            BattleLog.Log($"{_attacker.unitData.unitName} deals {_damageAmount} damage to {unitData.unitName}!", BattleLogType.Combat);
-        }
-        else
-        {
-            BattleLog.Log($"{unitData.unitName} takes {_damageAmount} damage!", BattleLogType.Combat);
-        }
+        currentHP = Mathf.Clamp(currentHP - _damageAmount, 0, unitData.healthStat);
 
         isAlive = (currentHP == 0) ? false : isAlive;
 
@@ -109,8 +122,6 @@ public abstract class Unit : MonoBehaviour
             unit_ui.DisplayDamageText(_healAmount);
 
             currentHP = Mathf.Clamp(currentHP + _healAmount, 0, unitData.healthStat);
-
-            BattleLog.Log($"{unitData.unitName} heals for {_healAmount} HP!", BattleLogType.Combat);
         }
     }
 
@@ -195,6 +206,9 @@ public abstract class Unit : MonoBehaviour
             case UnitPassiveType.Lycan:
                 unitPassive = new LycanPassive(this);
                 break;
+            case UnitPassiveType.ElderGod:
+                unitPassive = new ElderGodPassive(this);
+                break;
             default:
                 unitPassive = new EnemyUnitPassive(this);
                 break;
@@ -269,14 +283,14 @@ public abstract class Unit : MonoBehaviour
 
     public void OnRoundStart() { }
     public void OnRoundEnd() { }
-    public void OnDealDamage(int _damageAmount, Unit _damagedUnit)
+    public void OnDealDamage(int _damageAmount, Unit _damagedUnit, DamageType _damageType)
     {
         for (int i = 0; i < currentEffects.Count; i++)
         {
             currentEffects[i].OnDealDamage(_damageAmount, _damagedUnit);
         }
 
-        unitPassive.OnDealDamage(_damageAmount, _damagedUnit);
+        unitPassive.OnDealDamage(_damageAmount, _damagedUnit, _damageType);
     }
     public int OnTargeted(int _damageAmount)
     {
@@ -289,13 +303,13 @@ public abstract class Unit : MonoBehaviour
 
         return _modifiedDamageAmount;
     }
-    public void OnTakeDamage(int _damageAmount, Unit _damagingUnit)
+    public void OnTakeDamage(int _damageAmount, Unit _damagingUnit, DamageType _damageType)
     {
         for (int i = 0; i < currentEffects.Count; i++)
         {
             currentEffects[i].OnTakeDamage(_damageAmount, _damagingUnit);
         }
 
-        unitPassive.OnTakeDamage(_damageAmount, _damagingUnit);
+        unitPassive.OnTakeDamage(_damageAmount, _damagingUnit, _damageType);
     }
 }
