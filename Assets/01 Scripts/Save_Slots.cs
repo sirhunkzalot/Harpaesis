@@ -178,4 +178,10 @@ public class Save_Slots : MonoBehaviour
         saveSlotFour = false;
         
     }
+
+    public void SaveFile()
+    {
+        Game_Data data = new Game_Data();
+        Save_Load.SaveGame(saveSlotInput.text, data);
+    }
 }
