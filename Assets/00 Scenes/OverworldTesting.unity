@@ -968,7 +968,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220164238}
-  m_LocalRotation: {x: -1e-45, y: 0.9302721, z: -0.3668704, w: -3e-45}
+  m_LocalRotation: {x: -0, y: 0.9302721, z: -0.3668704, w: 1e-45}
   m_LocalPosition: {x: -0.14899373, y: 4.1617994, z: 3.8543673}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2899,7 +2899,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
-  m_LocalRotation: {x: -1e-45, y: 0.9302721, z: -0.3668704, w: -3e-45}
+  m_LocalRotation: {x: 0, y: 0.9302721, z: -0.3668704, w: 1e-45}
   m_LocalPosition: {x: -3.3300004, y: 5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3920,6 +3920,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 69c038b4-b75f-464b-a748-2644cab9d38b
     m_ActionName: Overworld/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 32a1be41-2b23-49c4-b11e-22b8de03e7da
+    m_ActionName: Combat/Party Info[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a84266a2-bbce-4c7a-ba65-faa631bb8a51
+    m_ActionName: Main Menu/Main Menu[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 76c5d435-4ee2-4c38-9ffc-4aeae80aff2b
+    m_ActionName: Preamble/Dialogue/Skip Lines of Dialogue[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Overworld
@@ -4200,6 +4212,50 @@ PrefabInstance:
     - target: {fileID: 1628331346605253639, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.8486328
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1302452536}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1302452536}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: TogglePause
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Harpaesis.Overworld.PlayerInput_Overworld, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Harpaesis.Overworld.PlayerInput_Overworld, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1694374594834785315, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1813247414271379347, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_AnchoredPosition.x
