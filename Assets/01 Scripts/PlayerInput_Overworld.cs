@@ -81,9 +81,14 @@ namespace Harpaesis.Overworld
         {
             if (_ctx.started)
             {
-                pause = !pause;
-                testingScenes.Pause();
+                TogglePause();
             }
+        }
+
+        public void TogglePause()
+        {
+            pause = !pause;
+            testingScenes.Pause();
         }
     }
 }
