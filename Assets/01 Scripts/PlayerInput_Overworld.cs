@@ -9,6 +9,8 @@ namespace Harpaesis.Overworld
     {
         OverworldController controller;
 
+        public GameObject partyInfo;
+
         [ReadOnly] public bool cancel;
 
         [ReadOnly] public bool pause;
@@ -89,6 +91,18 @@ namespace Harpaesis.Overworld
         {
             pause = !pause;
             testingScenes.Pause();
+        }
+
+        public void I_PartyInfo(InputAction.CallbackContext _ctx)
+        {
+            if (_ctx.started)
+            {
+                if (partyInfo.activeSelf)
+                {
+                    partyInfo.SetActive(false);
+                }
+                else partyInfo.SetActive(true);
+            }
         }
     }
 }

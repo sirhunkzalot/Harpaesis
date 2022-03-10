@@ -27,6 +27,7 @@ namespace Harpaesis.UI
         public GameObject audioSettings;
         public GameObject visualSettings;
         public GameObject Items;
+        public GameObject partyInfo;
 
         public AudioSource sfx;
 

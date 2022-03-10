@@ -22,11 +22,8 @@ public class MainMenuLogic : MonoBehaviour
     {
         Application.Quit();
     }
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            
+    public void ReturnToMenu()
+    { 
             if(creditsUI.activeSelf || levelUI.activeSelf || settings.activeSelf)
             {
                 creditsUI.SetActive(false);
@@ -35,11 +32,6 @@ public class MainMenuLogic : MonoBehaviour
                 mainUI.SetActive(true);
                 uiSFX.Play();
             }
-           
-      
-
-           
-        }
     }
 
     public void PlayOverworld()
