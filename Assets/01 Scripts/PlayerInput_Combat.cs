@@ -18,6 +18,8 @@ namespace Harpaesis.Combat
         UIManager_Combat uiCombat;
         GridCamera gridCamera;
 
+        
+
         public static PlayerInput_Combat instance;
 
         private void Awake()
@@ -142,7 +144,11 @@ namespace Harpaesis.Combat
         {
             if (_ctx.started)
             {
-                
+                if (uiCombat.settings.activeSelf)
+                {
+                    uiCombat.settings.SetActive(false);
+                }
+                else uiCombat.settings.SetActive(true);
             }
         }
         public void I_Affirm(InputAction.CallbackContext _ctx)
@@ -172,6 +178,18 @@ namespace Harpaesis.Combat
             if (_ctx.started)
             {
                 UIManager_Dialog.instance?.SkipLine();
+            }
+        }
+
+        public void I_PartyInfo(InputAction.CallbackContext _ctx)
+        {
+            if (_ctx.started)
+            {
+                if (uiCombat.partyInfo.activeSelf)
+                {
+                    uiCombat.partyInfo.SetActive(false);
+                }
+                else uiCombat.partyInfo.SetActive(true);
             }
         }
     }

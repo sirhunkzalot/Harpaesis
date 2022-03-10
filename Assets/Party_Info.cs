@@ -27,7 +27,17 @@ public class Party_Info : MonoBehaviour
     public TMP_Text secondarySkillDescription;
     public TMP_Text tertiarySkillDescription;
     public TMP_Text signatureSkillDescription;
+    public TMP_Text unitName;
+    public TMP_Text unitHealth;
+    public TMP_Text weaknesses;
+    public TMP_Text resistances;
 
+
+    public GameObject SelectedBackgroundOne;
+    public GameObject SelectedBackgroundTwo;
+    public GameObject SelectedBackgroundThree;
+    public GameObject SelectedBackgroundFour;
+    public GameObject SelectedBackgroundFive;
 
     private void Start()
     {
@@ -43,7 +53,7 @@ public class Party_Info : MonoBehaviour
         switch (_index)
         {
             case 0:
-                Debug.Log("Alex");
+                //Alex
                 basicAttackImage.sprite = alexData.basicAttack.skillSprite;
                 basicAttackDescription.text = alexData.basicAttack.skillDescription;
 
@@ -61,10 +71,16 @@ public class Party_Info : MonoBehaviour
 
                 signatureSkillImage.sprite = alexData.signatureSkill.skillSprite;
                 signatureSkillDescription.text = alexData.signatureSkill.skillDescription;
+
+                unitName.text = alexData.nickname;
+                unitHealth.text = alexData.healthStat.ToString();
+
+                weaknesses.text = alexData.weaknesses[0].ToString() + "\n" + "\n" + alexData.weaknesses[1].ToString();
+                resistances.text = alexData.resistances[0].ToString() + "\n" + "\n" + alexData.resistances[1].ToString();
                 break;
 
             case 1:
-                Debug.Log("Cori");
+                //cori
                 basicAttackImage.sprite = coriData.basicAttack.skillSprite;
                 basicAttackDescription.text = coriData.basicAttack.skillDescription;
 
@@ -82,10 +98,16 @@ public class Party_Info : MonoBehaviour
 
                 signatureSkillImage.sprite = coriData.signatureSkill.skillSprite;
                 signatureSkillDescription.text = coriData.signatureSkill.skillDescription;
+
+                unitName.text = coriData.nickname;
+                unitHealth.text = coriData.healthStat.ToString();
+
+                weaknesses.text = coriData.weaknesses[0].ToString() + "\n" + "\n" + coriData.weaknesses[1].ToString();
+                resistances.text = coriData.resistances[0].ToString() + "\n" + "\n" + coriData.resistances[1].ToString();
                 break;
 
             case 2:
-                Debug.Log("Joachim");
+                //joachim
                 basicAttackImage.sprite = joachimData.basicAttack.skillSprite;
                 basicAttackDescription.text = joachimData.basicAttack.skillDescription;
 
@@ -103,10 +125,16 @@ public class Party_Info : MonoBehaviour
 
                 signatureSkillImage.sprite = joachimData.signatureSkill.skillSprite;
                 signatureSkillDescription.text = joachimData.signatureSkill.skillDescription;
+
+                unitName.text = joachimData.nickname;
+                unitHealth.text = joachimData.healthStat.ToString();
+
+                weaknesses.text = joachimData.weaknesses[0].ToString() + "\n" + "\n" + joachimData.weaknesses[1].ToString();
+                resistances.text = joachimData.resistances[0].ToString() + "\n" + "\n" + joachimData.resistances[1].ToString();
                 break;
 
             case 3:
-                Debug.Log("Regina");
+                //Regina
                 basicAttackImage.sprite = reginaData.basicAttack.skillSprite;
                 basicAttackDescription.text = reginaData.basicAttack.skillDescription;
 
@@ -124,10 +152,16 @@ public class Party_Info : MonoBehaviour
 
                 signatureSkillImage.sprite = reginaData.signatureSkill.skillSprite;
                 signatureSkillDescription.text = reginaData.signatureSkill.skillDescription;
+
+                unitName.text = reginaData.nickname;
+                unitHealth.text = reginaData.healthStat.ToString();
+
+                weaknesses.text = reginaData.weaknesses[0].ToString() + "\n" + "\n" + reginaData.weaknesses[1].ToString();
+                resistances.text = reginaData.resistances[0].ToString() + "\n" + "\n" + reginaData.resistances[1].ToString();
                 break;
 
             case 4:
-                Debug.Log("Doran");
+                //Doran
                 basicAttackImage.sprite = doranData.basicAttack.skillSprite;
                 basicAttackDescription.text = doranData.basicAttack.skillDescription;
 
@@ -145,6 +179,12 @@ public class Party_Info : MonoBehaviour
 
                 signatureSkillImage.sprite = doranData.signatureSkill.skillSprite;
                 signatureSkillDescription.text = doranData.signatureSkill.skillDescription;
+
+                unitName.text = doranData.nickname;
+                unitHealth.text = doranData.healthStat.ToString();
+
+                weaknesses.text = doranData.weaknesses[0].ToString() + "\n" + "\n" + doranData.weaknesses[1].ToString();
+                resistances.text = doranData.resistances[0].ToString() + "\n" + "\n" + doranData.resistances[1].ToString();
                 break;
         }
     }
@@ -152,6 +192,47 @@ public class Party_Info : MonoBehaviour
     public void DisplayAlex()
     {
         UpdatePartyInfo(0);
+        SelectedBackgroundOne.SetActive(true);
+        SelectedBackgroundTwo.SetActive(false);
+        SelectedBackgroundThree.SetActive(false);
+        SelectedBackgroundFour.SetActive(false);
+        SelectedBackgroundFive.SetActive(false);
     }
 
+    public void DisplayCori()
+    {
+        UpdatePartyInfo(1);
+        SelectedBackgroundOne.SetActive(false);
+        SelectedBackgroundTwo.SetActive(true);
+        SelectedBackgroundThree.SetActive(false);
+        SelectedBackgroundFour.SetActive(false);
+        SelectedBackgroundFive.SetActive(false);
+    }
+    public void DisplayJoachim()
+    {
+        UpdatePartyInfo(2);
+        SelectedBackgroundOne.SetActive(false);
+        SelectedBackgroundTwo.SetActive(false);
+        SelectedBackgroundThree.SetActive(true);
+        SelectedBackgroundFour.SetActive(false);
+        SelectedBackgroundFive.SetActive(false);
+    }
+    public void DisplayRegina()
+    {
+        UpdatePartyInfo(3);
+        SelectedBackgroundOne.SetActive(false);
+        SelectedBackgroundTwo.SetActive(false);
+        SelectedBackgroundThree.SetActive(false);
+        SelectedBackgroundFour.SetActive(true);
+        SelectedBackgroundFive.SetActive(false);
+    }
+    public void DisplayDoran()
+    {
+        UpdatePartyInfo(4);
+        SelectedBackgroundOne.SetActive(false);
+        SelectedBackgroundTwo.SetActive(false);
+        SelectedBackgroundThree.SetActive(false);
+        SelectedBackgroundFour.SetActive(false);
+        SelectedBackgroundFive.SetActive(true);
+    }
 }
