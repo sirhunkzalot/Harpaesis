@@ -41,10 +41,11 @@ public class Party_Info : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            UpdatePartyInfo(i);
-        }
+        // for (int i = 0; i < 4; i++)
+        //{
+        //  UpdatePartyInfo(i);
+        //}
+        UpdatePartyInfo(0);
         
     }
     public void UpdatePartyInfo(int _index)
@@ -187,6 +188,7 @@ public class Party_Info : MonoBehaviour
                 resistances.text = doranData.resistances[0].ToString() + "\n" + "\n" + doranData.resistances[1].ToString();
                 break;
         }
+
     }
 
     public void DisplayAlex()

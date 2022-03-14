@@ -18,7 +18,6 @@ namespace Harpaesis.Combat
         UIManager_Combat uiCombat;
         GridCamera gridCamera;
 
-        
 
         public static PlayerInput_Combat instance;
 
@@ -191,6 +190,7 @@ namespace Harpaesis.Combat
                 }
                 else uiCombat.partyInfo.SetActive(true);
             }
+            
         }
     }
 }
