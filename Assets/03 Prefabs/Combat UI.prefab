@@ -4266,7 +4266,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8898124, y: 0}
   m_AnchorMax: {x: 0.9954792, y: 0.14162958}
-  m_AnchoredPosition: {x: -1, y: 3.2999878}
+  m_AnchoredPosition: {x: -1, y: 3.3000488}
   m_SizeDelta: {x: -0.506958, y: -4.385376}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6225212720831471899
@@ -9474,7 +9474,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65.55
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17167,6 +17167,14 @@ PrefabInstance:
     - target: {fileID: 2221438907522834583, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 809534544932006122}
+    - target: {fileID: 2221438907522834583, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2221438907522834583, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Harpaesis.UI.UIManager_Combat, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2427198176433824717, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_AnchoredPosition.x
