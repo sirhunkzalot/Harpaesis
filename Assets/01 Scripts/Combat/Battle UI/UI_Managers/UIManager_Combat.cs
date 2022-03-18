@@ -137,6 +137,11 @@ namespace Harpaesis.UI
             sfx.Play();
         }
 
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
+
         public void SpeedUp(bool _speedUp)
         {
             if (_speedUp)
