@@ -524,6 +524,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4440783d-a305-4c2c-8a01-d698f56c4702
     m_ActionName: Combat/Cancel[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 69c038b4-b75f-464b-a748-2644cab9d38b
+    m_ActionName: Overworld/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7209181554429058966}
+        m_TargetAssemblyTypeName: Harpaesis.Combat.PlayerInput_Combat, Assembly-CSharp
+        m_MethodName: I_PartyInfo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 32a1be41-2b23-49c4-b11e-22b8de03e7da
+    m_ActionName: Combat/Party Info[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a84266a2-bbce-4c7a-ba65-faa631bb8a51
+    m_ActionName: Main Menu/Main Menu[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 76c5d435-4ee2-4c38-9ffc-4aeae80aff2b
+    m_ActionName: Preamble/Dialogue/Skip Lines of Dialogue[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78ea8081-857d-4099-980d-1c5a40204a69
+    m_ActionName: Overworld/Party Menu[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Combat

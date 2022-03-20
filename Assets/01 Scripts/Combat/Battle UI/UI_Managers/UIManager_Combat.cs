@@ -27,6 +27,7 @@ namespace Harpaesis.UI
         public GameObject audioSettings;
         public GameObject visualSettings;
         public GameObject Items;
+        public GameObject partyInfo;
 
         public AudioSource sfx;
 
@@ -134,6 +135,11 @@ namespace Harpaesis.UI
             visualSettings.SetActive(false);
             mainSettings.SetActive(true);
             sfx.Play();
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
         }
 
         public void SpeedUp(bool _speedUp)
