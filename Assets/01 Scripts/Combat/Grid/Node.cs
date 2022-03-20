@@ -19,6 +19,8 @@ namespace Harpaesis.GridAndPathfinding
 
         public Bounds bounds;
 
+        public HazardTile hazard;
+
         public Node parent;
         int heapIndex;
 
@@ -36,13 +38,25 @@ namespace Harpaesis.GridAndPathfinding
             bounds = new Bounds(_worldPosition, Vector3.one * _nodeSize);
         }
 
-        public void UpdateNodeData(int _movementPenalty, int _apCost)
+        public void ApplyHazard(HazardTile _hazard)
         {
-            if(movementPenalty >= 0)
+            movementPenalty = 200;
+            hazard = _hazard;
+        }
+
+        public void RemoveHazard()
+        {
+            movementPenalty = 0;
+            hazard = null;
+        }
+
+        public void UpdateNodeData(int _movementPenalty, int _apCost = 1)
+        {
+            if(_movementPenalty >= 0)
             {
                 movementPenalty = _movementPenalty;
             }
-            if(apCost >= 0)
+            if(_apCost >= 0)
             {
                 apCost = _apCost;
             }

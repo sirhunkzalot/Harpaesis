@@ -48,6 +48,7 @@ namespace Harpaesis.GridAndPathfinding
                 walkableMask.value |= region.terrainMask.value;
                 walkableRegionsDictionary.Add(Mathf.RoundToInt(Mathf.Log(region.terrainMask.value, 2)), region.terrainPenalty);
             }
+
             CreateGrid();
         }
 

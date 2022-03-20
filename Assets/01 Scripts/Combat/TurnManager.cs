@@ -18,6 +18,7 @@ public class TurnManager : MonoBehaviour
     public List<Unit> units = new List<Unit>();
     public List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
     public List<EnemyUnit> enemyUnits = new List<EnemyUnit>();
+    public List<HazardTile> activeHazards = new List<HazardTile>();
 
     public List<Turn> turnOrder;
 
@@ -53,7 +54,6 @@ public class TurnManager : MonoBehaviour
 
     public void BeginCombat()
     {
-
         BuildTurnOrder();
         NextTurn();
     }
@@ -131,8 +131,7 @@ public class TurnManager : MonoBehaviour
 
         if (++turnCounter >= turnOrder.Count)
         {
-            turnCounter = 0;
-            BuildTurnOrder();
+            OnRoundEnd();
         }
 
         UIManager_TurnOrder.instance.UpdateImages(turnCounter, turnOrder);
@@ -141,6 +140,20 @@ public class TurnManager : MonoBehaviour
         GridCamera.instance.JumpToPosition(activeTurn.unit.transform.position);
 
         activeTurn.unit.StartUnitTurn();
+    }
+
+    void OnRoundEnd()
+    {
+        if(activeHazards.Count > 0)
+        {
+            for (int i = 0; i < activeHazards.Count; i++)
+            {
+                activeHazards[i].OnRoundEnd();
+            }
+        }
+
+        turnCounter = 0;
+        BuildTurnOrder();
     }
 }
 
