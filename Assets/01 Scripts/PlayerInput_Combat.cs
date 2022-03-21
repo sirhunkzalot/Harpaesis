@@ -119,7 +119,7 @@ namespace Harpaesis.Combat
         }
         public void I_CameraZoom(InputAction.CallbackContext _ctx)
         {
-            cameraScroll = _ctx.ReadValue<float>();
+            cameraScroll = _ctx.ReadValue<Vector2>().y;
         }
         public void I_CameraRotateLeft(InputAction.CallbackContext _ctx)
         {

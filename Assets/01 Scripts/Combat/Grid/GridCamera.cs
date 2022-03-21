@@ -93,9 +93,7 @@ namespace Harpaesis.Combat
         /* HandleCameraZoom manages the size of the orthographic camera based on the scroll wheel */
         private void HandleCameraZoom()
         {
-            Vector3 _newZoom = currentZoom + input.cameraScroll * zoomSpeed * cam.transform.InverseTransformDirection(-cam.transform.up - cam.transform.forward - cam.transform.right);
-
-            
+            Vector3 _newZoom = Time.deltaTime * input.cameraScroll * zoomSpeed * cam.transform.InverseTransformDirection(-cam.transform.up - cam.transform.forward - cam.transform.right) + currentZoom;
 
             if (_newZoom.y >= yMin && _newZoom.y <= yMax)
             {
