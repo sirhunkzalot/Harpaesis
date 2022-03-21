@@ -30,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2143634243}
   m_Father: {fileID: 7225386420088515189}
@@ -142,6 +143,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2143634243}
   m_RootOrder: 0
@@ -222,6 +224,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1254124474}
   m_Father: {fileID: 1122538390}
@@ -311,6 +314,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7225386420088515189}
   m_RootOrder: 1
@@ -380,6 +384,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
@@ -417,6 +422,7 @@ Transform:
   m_LocalRotation: {x: -0.14644654, y: 0.8535535, z: -0.3535534, w: -0.35355324}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7225386420088515189}
   m_Father: {fileID: 0}
@@ -438,9 +444,9 @@ MonoBehaviour:
   targetPosition: {x: -2.5786474, y: 0, z: 3.9653957}
   targetEulers: {x: -0, y: 0, z: 0}
   followUnit: {fileID: 0}
-  zoomSpeed: 10
+  zoomSpeed: 1
   zoomAcceleration: 10
-  movementSpeed: 0.35
+  movementSpeed: 25
   accelerationSpeed: 20
   rotationSpeed: 10
   xMin: -20
@@ -449,7 +455,6 @@ MonoBehaviour:
   yMax: 26
   zMin: -10
   zMax: 10
-  currentView: 0
 --- !u!1 &8052742379723179649
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +485,7 @@ Transform:
   m_LocalRotation: {x: -0.14644654, y: 0.8535535, z: -0.3535534, w: -0.35355324}
   m_LocalPosition: {x: 10, y: 15, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1122538390}
   - {fileID: 4318622437951542403}
@@ -560,6 +566,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2

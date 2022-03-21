@@ -93,7 +93,7 @@ namespace Harpaesis.Combat
         /* HandleCameraZoom manages the size of the orthographic camera based on the scroll wheel */
         private void HandleCameraZoom()
         {
-            Vector3 _newZoom = Time.deltaTime * input.cameraScroll * zoomSpeed * cam.transform.InverseTransformDirection(-cam.transform.up - cam.transform.forward - cam.transform.right) + currentZoom;
+            Vector3 _newZoom = delta * input.cameraScroll * zoomSpeed * cam.transform.InverseTransformDirection(-cam.transform.up - cam.transform.forward - cam.transform.right) + currentZoom;
 
             if (_newZoom.y >= yMin && _newZoom.y <= yMax)
             {
@@ -110,7 +110,7 @@ namespace Harpaesis.Combat
 
             Vector3 _moveDir = (_vertical + _horizontal).normalized;
 
-            Vector3 _newPosition = targetPosition + (_moveDir * movementSpeed);
+            Vector3 _newPosition = targetPosition + (delta * movementSpeed * _moveDir);
 
             _newPosition.x = Mathf.Clamp(_newPosition.x, xMin, xMax);
             _newPosition.z = Mathf.Clamp(_newPosition.z, zMin, zMax);
@@ -121,7 +121,7 @@ namespace Harpaesis.Combat
         /* HandleCameraMovement updates the camera's position via input*/
         private void HandleCameraMovement()
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * accelerationSpeed);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, delta * accelerationSpeed);
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, currentZoom, delta * zoomAcceleration);
         }
 
@@ -175,7 +175,7 @@ namespace Harpaesis.Combat
         /* HandleCameraRotation sets the targetRotation by 90 degrees via inputs and updates the Camera's rotation*/
         private void HandleCameraRotation()
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetEulers), Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(targetEulers), delta * rotationSpeed);
         }
 
         public void JumpToCurrentUnit()
