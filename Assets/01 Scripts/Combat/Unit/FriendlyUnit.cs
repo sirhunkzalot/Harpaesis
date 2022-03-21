@@ -29,7 +29,7 @@ public class FriendlyUnit : Unit
     ActiveUnitIcon activeUnitIcon;
     PlayerInput_Combat input;
 
-    public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting_Single, Targeting_AOE, Attacking }
+    public enum FriendlyState { Inactive, Active, PreviewMove, Moving, Targeting_Single, Targeting_AOE, Targeting_Projectile, Attacking }
     [ReadOnly] public FriendlyState currentState = FriendlyState.Inactive;
 
     protected override void Init()
@@ -67,6 +67,9 @@ public class FriendlyUnit : Unit
                 break;
             case FriendlyState.Targeting_AOE:
                 TargetingAOE();
+                break;
+            case FriendlyState.Targeting_Projectile:
+                TargetingProjectile();
                 break;
             case FriendlyState.Attacking:
                 break;
@@ -187,7 +190,7 @@ public class FriendlyUnit : Unit
 
     public void BeginTargeting(int _index)
     {
-        bool _isAOE = false;
+        TargetingStyle targetingStyle = TargetingStyle.SingleTarget;
 
         switch (_index)
         {
@@ -195,34 +198,34 @@ public class FriendlyUnit : Unit
                 if (!alternativeWeapon)
                 {
                     basicAttackTargetingTemplate.SetupTargetingTemplate();
-                    _isAOE = friendlyUnitData.basicAttack.targetingStyle == TargetingStyle.AOE;
+                    targetingStyle = friendlyUnitData.basicAttack.targetingStyle;
                     canRotateTemplates = basicAttackTargetingTemplate.canRotate;
                 }
                 else
                 {
                     alternativeSkillTargetingTemplate.SetupTargetingTemplate();
-                    _isAOE = friendlyUnitData.alternativeAttack.targetingStyle == TargetingStyle.AOE;
+                    targetingStyle = friendlyUnitData.alternativeAttack.targetingStyle;
                     canRotateTemplates = alternativeSkillTargetingTemplate.canRotate;
                 }
                 break;
             case 1:
                 primarySkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = friendlyUnitData.primarySkill.targetingStyle == TargetingStyle.AOE;
+                targetingStyle = friendlyUnitData.primarySkill.targetingStyle;
                 canRotateTemplates = primarySkillTargetingTemplate.canRotate;
                 break;
             case 2:
                 secondarySkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = friendlyUnitData.secondarySkill.targetingStyle == TargetingStyle.AOE;
+                targetingStyle = friendlyUnitData.secondarySkill.targetingStyle;
                 canRotateTemplates = secondarySkillTargetingTemplate.canRotate;
                 break;
             case 3:
                 tertiarySkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = friendlyUnitData.tertiarySkill.targetingStyle == TargetingStyle.AOE;
+                targetingStyle = friendlyUnitData.tertiarySkill.targetingStyle;
                 canRotateTemplates = tertiarySkillTargetingTemplate.canRotate;
                 break;
             case 4:
                 signatureSkillTargetingTemplate.SetupTargetingTemplate();
-                _isAOE = friendlyUnitData.signatureSkill.targetingStyle == TargetingStyle.AOE;
+                targetingStyle = friendlyUnitData.signatureSkill.targetingStyle;
                 canRotateTemplates = signatureSkillTargetingTemplate.canRotate;
                 break;
             default:
@@ -231,13 +234,18 @@ public class FriendlyUnit : Unit
 
         activeTemplateIndex = _index;
 
-        if (_isAOE)
+
+        switch (targetingStyle)
         {
-            currentState = FriendlyState.Targeting_AOE;
-        }
-        else
-        {
-            currentState = FriendlyState.Targeting_Single;
+            case TargetingStyle.SingleTarget:
+                currentState = FriendlyState.Targeting_Single;
+                break;
+            case TargetingStyle.AOE:
+                currentState = FriendlyState.Targeting_AOE;
+                break;
+            case TargetingStyle.Projectile:
+                currentState = FriendlyState.Targeting_Projectile;
+                break;
         }
     }
 
@@ -305,6 +313,64 @@ public class FriendlyUnit : Unit
     }
 
     public void TargetingAOE()
+    {
+        if (input.mouseDownLeft)
+        {
+            switch (activeTemplateIndex)
+            {
+                case 0:
+                    if (basicAttackTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
+                    }
+                    break;
+
+                case 1:
+                    if (primarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
+                    }
+                    break;
+
+                case 2:
+                    if (secondarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
+                    }
+                    break;
+
+                case 3:
+                    if (tertiarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
+                    }
+                    break;
+
+                case 4:
+                    if (signatureSkillTargetingTemplate.allWithTargets.Count > 0)
+                    {
+                        UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.allWithTargets);
+                        turnData.hasAttacked = true;
+                    }
+                    break;
+
+                default:
+                    throw new System.Exception("Error: invalid skill index given.");
+            }
+
+            EndTargeting();
+        }
+        else if (input.mouseDownRight)
+        {
+            EndTargeting();
+        }
+    }
+
+    public void TargetingProjectile()
     {
         if (input.mouseDownLeft)
         {

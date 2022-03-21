@@ -38,9 +38,16 @@ namespace Harpaesis.Combat
 
         public void SetupTargetingTemplate()
         {
-            if (skill.targetingStyle == TargetingStyle.AOE)
+            switch (skill.targetingStyle)
             {
-                allWithTargets = new List<TargetingTemplateNode>();
+                case TargetingStyle.AOE:
+                    allWithTargets = new List<TargetingTemplateNode>();
+                    break;
+                case TargetingStyle.Projectile:
+                    allWithTargets = new List<TargetingTemplateNode>();
+                    break;
+                default:
+                    break;
             }
 
             foreach (TargetingTemplateNode node in templateNodes)
