@@ -47,7 +47,8 @@ public abstract class Unit : MonoBehaviour
     [HideInInspector] public ColorPaletteManager paletteManager;
     [HideInInspector] public Unit_UI unit_ui;
 
-    public void Start()
+    bool inited = false;
+    public void EarlyInit()
     {
         grid = GridManager.instance;
         gridCam = GridCamera.instance;
@@ -72,10 +73,13 @@ public abstract class Unit : MonoBehaviour
         grid.NodeFromWorldPoint(transform.position).hasUnit = true;
 
         Init();
+        inited = true;
     }
 
     private void Update()
     {
+        if (!inited)
+            return;
         unit_ui.healthBar.Tick(HealthPercent);
         Tick();
     }

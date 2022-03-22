@@ -53,6 +53,10 @@ public class TurnManager : MonoBehaviour
 
     public void BeginCombat()
     {
+        foreach (Unit _unit in units)
+        {
+            _unit.EarlyInit();
+        }
 
         BuildTurnOrder();
         NextTurn();
