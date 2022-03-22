@@ -6,13 +6,13 @@ public class BillboardToCamera : MonoBehaviour
 {
     Transform cam;
 
+    private void Start()
+    {
+        cam = Camera.main.transform;
+    }
 
     private void LateUpdate()
     {
-        if (cam == null)
-        {
-            cam = Harpaesis.Combat.GridCamera.instance.transform;
-        }
         transform.forward = cam.forward;
     }
 }
