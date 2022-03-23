@@ -41,6 +41,11 @@ namespace Harpaesis.Chungus
             OnFinishDialog.Invoke();
             gameObject.SetActive(false);
         }
+
+        public void SkipLine()
+        {
+            skipLine = true;
+        }
     }
 
 }

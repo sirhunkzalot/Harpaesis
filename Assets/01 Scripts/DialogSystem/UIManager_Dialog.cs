@@ -29,6 +29,14 @@ namespace Harpaesis.UI
             EndText();
         }
 
+        public void SkipLine(UnityEngine.InputSystem.InputAction.CallbackContext _ctx)
+        {
+            if (_ctx.started)
+            {
+                skipLine = true;
+            }
+        }
+
         public void SkipLine()
         {
             skipLine = true;
