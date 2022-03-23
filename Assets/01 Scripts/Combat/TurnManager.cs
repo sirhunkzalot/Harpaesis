@@ -22,6 +22,7 @@ public class TurnManager : MonoBehaviour
 
     public List<Turn> turnOrder;
 
+
     public static TurnManager instance;
 
     private void Awake()
@@ -54,6 +55,11 @@ public class TurnManager : MonoBehaviour
 
     public void BeginCombat()
     {
+        foreach (Unit _unit in units)
+        {
+            _unit.EarlyInit();
+        }
+
         BuildTurnOrder();
         NextTurn();
     }
@@ -144,14 +150,10 @@ public class TurnManager : MonoBehaviour
 
     void OnRoundEnd()
     {
-        if(activeHazards.Count > 0)
+        for (int i = 0; i < activeHazards.Count; i++)
         {
-            for (int i = 0; i < activeHazards.Count; i++)
-            {
-                activeHazards[i].OnRoundEnd();
-            }
+            activeHazards[i].OnRoundEnd();
         }
-
         turnCounter = 0;
         BuildTurnOrder();
     }

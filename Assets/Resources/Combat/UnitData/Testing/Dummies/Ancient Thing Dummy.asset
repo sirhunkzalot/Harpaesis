@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
+  m_Name: Ancient Thing Dummy
+  m_EditorClassIdentifier: 
+  unitName: Ancient Thing
+  unitIcon: {fileID: 21300000, guid: 82d04a3c8a463af4287cb938ab5582b5, type: 3}
+  healthStat: 100
+  inititiveStat: 0
+  attackStat: 12
+  defenseStat: 10
+  willpowerStat: 10
+  apStat: 0
+  weaknesses: 
+  resistances: 000000000100000002000000
+  unitPassive: 0
+  enemySkills:
+  - skill: {fileID: 11400000, guid: 7981663dc47b8134b8c094103bc9bebd, type: 2}
+    rangeEstimate: 100
+    shortRangeWeight: 100
+    mediumRangeWeight: 100
+    longRangeWeight: 100
+    highHPTargetWeight: 100
+    lowHPTargetWeight: 100

@@ -407,6 +407,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Progress Dialogue",
+                    "type": "Button",
+                    "id": "abc9a595-8705-4a50-8c38-6f54b00b69d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -726,6 +735,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Party Info",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "859b50d9-360b-4f68-a491-544346890489",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Progress Dialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

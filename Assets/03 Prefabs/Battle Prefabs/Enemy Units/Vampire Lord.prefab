@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6868256620370433863}
   - component: {fileID: 2610778308510710463}
   - component: {fileID: 4864745561894110449}
+  - component: {fileID: 7453671926260730565}
   m_Layer: 25
   m_Name: Sprite
   m_TagString: Untagged
@@ -112,6 +113,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 2.7
+--- !u!95 &7453671926260730565
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863749957633401992}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7cc689a2609e2a9408a923eeba42db2d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5259379708724140579
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +145,7 @@ GameObject:
   - component: {fileID: 5259379708724140572}
   - component: {fileID: 5259379708724140573}
   - component: {fileID: 5259379708724140578}
+  - component: {fileID: -6189576812750548504}
   m_Layer: 25
   m_Name: Vampire Lord
   m_TagString: Untagged
@@ -215,6 +237,22 @@ MonoBehaviour:
   viewObstructionMask:
     serializedVersion: 2
     m_Bits: 2097152
+--- !u!111 &-6189576812750548504
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5259379708724140579}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 8e662cf67a23438468c6287555e96292, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 8e662cf67a23438468c6287555e96292, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &6141965107353423079
 PrefabInstance:
   m_ObjectHideFlags: 0

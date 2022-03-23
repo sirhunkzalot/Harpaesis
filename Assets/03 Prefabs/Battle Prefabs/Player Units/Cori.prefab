@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 3691675352998029870}
   - component: {fileID: 2399529733819394666}
   - component: {fileID: 8511463849801999705}
+  - component: {fileID: 6111698767842796908}
   m_Layer: 0
   m_Name: engineer_iso
   m_TagString: Untagged
@@ -157,6 +158,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 2.7
+--- !u!95 &6111698767842796908
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741255939551082940}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3027e341f3e686b458e159964364618e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4459818067530053474
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +190,7 @@ GameObject:
   - component: {fileID: 4459818067530053485}
   - component: {fileID: 4459818067530053475}
   - component: {fileID: 4459818067530053486}
+  - component: {fileID: 2773426601897801692}
   m_Layer: 25
   m_Name: Cori
   m_TagString: Untagged
@@ -261,6 +283,22 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
+--- !u!111 &2773426601897801692
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459818067530053474}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f41163a9f93adeb4282e79d5e3a1f49d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f41163a9f93adeb4282e79d5e3a1f49d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6899451746843640051
 GameObject:
   m_ObjectHideFlags: 0

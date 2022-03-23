@@ -12,6 +12,8 @@ namespace Harpaesis.Overworld
 
         bool isInteracting;
 
+        public GameObject overworldUI;
+
         public override void Interact()
         {
             isInteracting = !isInteracting;
@@ -20,10 +22,12 @@ namespace Harpaesis.Overworld
             if (isInteracting)
             {
                 LoadStore();
+                overworldUI.SetActive(false);
             }
             else
             {
                 UnloadStore();
+                overworldUI.SetActive(true);
             }
         }
 

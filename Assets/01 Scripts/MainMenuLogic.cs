@@ -16,7 +16,7 @@ public class MainMenuLogic : MonoBehaviour
     }
     public void ForrestIntro()
     {
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene(10);
     }
     public void QuitGame()
     {

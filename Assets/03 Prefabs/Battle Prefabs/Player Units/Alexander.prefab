@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 7640833268200297853}
   - component: {fileID: 2241478645357746305}
   - component: {fileID: 2863086513232455295}
+  - component: {fileID: 186430909792158098}
   m_Layer: 0
   m_Name: vampire_iso
   m_TagString: Untagged
@@ -201,6 +202,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 2.7
+--- !u!95 &186430909792158098
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7398123596416563466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7044b5698fa8996408021fffc88a20b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8205144851656784349
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +234,7 @@ GameObject:
   - component: {fileID: 8205144851656784338}
   - component: {fileID: 8205144851656784348}
   - component: {fileID: 8205144851656784337}
+  - component: {fileID: 2238265169183613612}
   m_Layer: 25
   m_Name: Alexander
   m_TagString: Untagged
@@ -305,6 +327,22 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
+--- !u!111 &2238265169183613612
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205144851656784349}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 6068c1deaf0d8754fbc370bd9313cf92, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 6068c1deaf0d8754fbc370bd9313cf92, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &3169289690862833276
 PrefabInstance:
   m_ObjectHideFlags: 0
