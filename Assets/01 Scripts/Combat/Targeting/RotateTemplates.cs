@@ -12,6 +12,9 @@ public class RotateTemplates : MonoBehaviour
     GridCursor cursor;
     Transform cam;
 
+    Vector3 lastPos;
+    bool templateUnlocked;
+
     public void Init(FriendlyUnit _unit)
     {
         unit = _unit;
@@ -22,6 +25,22 @@ public class RotateTemplates : MonoBehaviour
     public void InitTemplate(TargetingTemplate _template)
     {
         templates[templateIndex++] = _template;
+    }
+
+    public void UnlockTemplate()
+    {
+        transform.SetParent(GridCursor.instance.transform);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        templateUnlocked = true;
+    }
+
+    public void LockTemplate()
+    {
+        transform.SetParent(unit.transform);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        templateUnlocked = false;
     }
 
     private void FixedUpdate()
@@ -42,6 +61,12 @@ public class RotateTemplates : MonoBehaviour
                 transform.Rotate(Vector3.up, -90);
                 ReloadTemplates();
             }
+        }
+
+        if(templateUnlocked && transform.position != lastPos)
+        {
+            lastPos = transform.position;
+            ReloadTemplates();
         }
     }
 

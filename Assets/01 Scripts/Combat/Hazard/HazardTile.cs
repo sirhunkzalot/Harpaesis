@@ -20,12 +20,7 @@ public class HazardTile : MonoBehaviour
 
         node = grid.NodeFromWorldPoint(transform.position);
         node.ApplyHazard(this);
-
-
-        Init();
     }
-
-    protected virtual void Init() { }
 
     public virtual void OnRoundEnd() { }
 

@@ -245,6 +245,7 @@ public class FriendlyUnit : Unit
                 break;
             case TargetingStyle.Projectile:
                 currentState = FriendlyState.Targeting_Projectile;
+                templateParent.UnlockTemplate();
                 break;
         }
     }
@@ -377,41 +378,41 @@ public class FriendlyUnit : Unit
             switch (activeTemplateIndex)
             {
                 case 0:
-                    if (basicAttackTargetingTemplate.allWithTargets.Count > 0)
+                    if (basicAttackTargetingTemplate.allActiveNodes.Count > 0)
                     {
-                        UseSkill(activeTemplateIndex, basicAttackTargetingTemplate.allWithTargets);
+                        UseProjectileSkill(activeTemplateIndex, basicAttackTargetingTemplate.allActiveNodes);
                         turnData.hasAttacked = true;
                     }
                     break;
 
                 case 1:
-                    if (primarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    if (primarySkillTargetingTemplate.allActiveNodes.Count > 0)
                     {
-                        UseSkill(activeTemplateIndex, primarySkillTargetingTemplate.allWithTargets);
+                        UseProjectileSkill(activeTemplateIndex, primarySkillTargetingTemplate.allActiveNodes);
                         turnData.hasAttacked = true;
                     }
                     break;
 
                 case 2:
-                    if (secondarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    if (secondarySkillTargetingTemplate.allActiveNodes.Count > 0)
                     {
-                        UseSkill(activeTemplateIndex, secondarySkillTargetingTemplate.allWithTargets);
+                        UseProjectileSkill(activeTemplateIndex, secondarySkillTargetingTemplate.allActiveNodes);
                         turnData.hasAttacked = true;
                     }
                     break;
 
                 case 3:
-                    if (tertiarySkillTargetingTemplate.allWithTargets.Count > 0)
+                    if (tertiarySkillTargetingTemplate.allActiveNodes.Count > 0)
                     {
-                        UseSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.allWithTargets);
+                        UseProjectileSkill(activeTemplateIndex, tertiarySkillTargetingTemplate.allActiveNodes);
                         turnData.hasAttacked = true;
                     }
                     break;
 
                 case 4:
-                    if (signatureSkillTargetingTemplate.allWithTargets.Count > 0)
+                    if (signatureSkillTargetingTemplate.allActiveNodes.Count > 0)
                     {
-                        UseSkill(activeTemplateIndex, signatureSkillTargetingTemplate.allWithTargets);
+                        UseProjectileSkill(activeTemplateIndex, signatureSkillTargetingTemplate.allActiveNodes);
                         turnData.hasAttacked = true;
                     }
                     break;
@@ -438,6 +439,8 @@ public class FriendlyUnit : Unit
         secondarySkillTargetingTemplate.Disable();
         tertiarySkillTargetingTemplate.Disable();
         signatureSkillTargetingTemplate.Disable();
+
+        templateParent.LockTemplate();
     }
 
     public void UseSkill(int _skillIndex, List<TargetingTemplateNode> _nodesWithTargets)
@@ -479,6 +482,45 @@ public class FriendlyUnit : Unit
             case 4:
                 BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.signatureSkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 friendlyUnitData.signatureSkill.UseSkill(this, _target);
+                break;
+            default:
+                throw new System.Exception("Error: invalid skill index given.");
+        }
+    }
+
+    // Temp
+    public void UseProjectileSkill(int _skillIndex, List<TargetingTemplateNode> _allNodes)
+    {
+        List<Vector3> _positions = new List<Vector3>();
+
+        for (int i = 0; i < _allNodes.Count; i++)
+        {
+            _positions.Add(_allNodes[i].transform.position);
+        }
+
+        switch (_skillIndex)
+        {
+            case 0:
+                if (!alternativeWeapon)
+                {
+                    friendlyUnitData.basicAttack.UseProjectileSkill(this, _positions);
+                }
+                else
+                {
+                    friendlyUnitData.alternativeAttack.UseProjectileSkill(this, _positions);
+                }
+                break;
+            case 1:
+                friendlyUnitData.primarySkill.UseProjectileSkill(this, _positions);
+                break;
+            case 2:
+                friendlyUnitData.secondarySkill.UseProjectileSkill(this, _positions);
+                break;
+            case 3:
+                friendlyUnitData.tertiarySkill.UseProjectileSkill(this, _positions);
+                break;
+            case 4:
+                friendlyUnitData.signatureSkill.UseProjectileSkill(this, _positions);
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");

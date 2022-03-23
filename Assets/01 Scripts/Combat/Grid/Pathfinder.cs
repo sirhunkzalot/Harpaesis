@@ -109,15 +109,15 @@ namespace Harpaesis.GridAndPathfinding
                     Node _node1 = grid.RetrieveNode((int)_currentGridPosition.x + (int)_direction.x, (int)_currentGridPosition.y);
                     Node _node2 = grid.RetrieveNode((int)_currentGridPosition.x, (int)_currentGridPosition.y + (int)_direction.y);
 
-                    if (_node1.walkable && !_node1.hasUnit && (!_node2.walkable || _node2.hasUnit))
+                    if (_node1.walkable && !_node1.hasUnit && _node1.hazard == null && (!_node2.walkable || _node2.hasUnit || _node2.hazard != null))
                     {
                         _waypoints.Add(new Waypoint(_node1.worldPosition, 0));
                     }
-                    else if (_node2.walkable && !_node2.hasUnit && (!_node1.walkable || _node1.hasUnit))
+                    else if (_node2.walkable && !_node2.hasUnit && _node2.hazard == null && (!_node1.walkable || _node1.hasUnit || _node1.hazard != null))
                     {
                         _waypoints.Add(new Waypoint(_node2.worldPosition, 0));
                     }
-                    else if ((!_node1.walkable || _node1.hasUnit) && (!_node2.walkable || _node2.hasUnit))
+                    else if ((!_node1.walkable || _node1.hasUnit || _node1.hazard != null) && (!_node2.walkable || _node2.hasUnit || _node2.hazard != null))
                     {
                         //throw new Exception("Node Error: Neither diagonal node is walkable. Either it was" +
                         //  " incorrectly determined to be a diagonal movement, or another error was created.");

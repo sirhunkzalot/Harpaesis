@@ -7,18 +7,65 @@ using UnityEngine;
 public class FireTile : HazardTile
 {
     public int stageIndex = 3;
+    public int count;
 
-    GameObject stage3, stage2, stage1;
+    public LayerMask layerMask;
+
+    public GameObject stage3, stage2, stage1;
 
     bool startDepleting = false;
 
-    protected override void Init()
+    private void Awake()
     {
-        stage3 = transform.GetChild(0).gameObject;
-        stage2 = transform.GetChild(1).gameObject;
-        stage1 = transform.GetChild(2).gameObject;
+        UpdateNearbyFire();
+        UpdateFire();
+    }
+
+    public void UpdateFire()
+    {
+        Collider[] _otherHazards = Physics.OverlapSphere(transform.position, 1.5f, layerMask, QueryTriggerInteraction.Collide);
+
+        /*int _count = 0;
+
+        foreach (Collider[] _tile in _otherHazards)
+        {
+
+        }*/
+
+        count = _otherHazards.Length;
+        switch (count)
+        {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                stageIndex = 1;
+                break;
+            case 5:
+            case 6:
+                stageIndex = 2;
+                break;
+            default:
+                stageIndex = 3;
+                break;
+        }
 
         SwapPrefabs();
+    }
+
+    public void UpdateNearbyFire()
+    {
+        Collider[] _otherFireTiles = Physics.OverlapSphere(transform.position, 1.5f, layerMask, QueryTriggerInteraction.Collide);
+
+
+        if (_otherFireTiles.Length > 0)
+        {
+            foreach (Collider _col in _otherFireTiles)
+            {
+                _col.GetComponent<FireTile>()?.UpdateFire();
+            }
+        }
     }
 
     public override void OnRoundEnd()

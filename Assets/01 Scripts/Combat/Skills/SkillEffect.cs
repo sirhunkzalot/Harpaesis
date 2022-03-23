@@ -108,6 +108,9 @@ namespace Harpaesis.Combat
                 case SkillEffectType.ChangeAllegiance:
                     param1.stringValue = EditorGUI.TextField(secondRect, "Duration in Turns:", param1.stringValue);
                     break;
+                case SkillEffectType.SpawnPrefab:
+                    param1.stringValue = EditorGUI.TextField(secondRect, "File Path:", param1.stringValue);
+                    break;
                 default:
                     break;
             }
@@ -147,6 +150,7 @@ namespace Harpaesis.Combat
         DebuffDEF,
         DebuffAP,
 
-        ChangeAllegiance
+        ChangeAllegiance,
+        SpawnPrefab
     }
 }

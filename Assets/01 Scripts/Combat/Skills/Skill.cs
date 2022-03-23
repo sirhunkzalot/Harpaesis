@@ -58,6 +58,12 @@ namespace Harpaesis.Combat
             }
         } // end UseSkill
 
+        // Temp
+        public void UseProjectileSkill(Unit _user, List<Vector3> _positions)
+        {
+            SkillEffectLibrary.SkillEffect_SpawnPrefab(_user, _user, effects[0].param1, _positions);
+        }
+
         #region Set Dirty
         private void OnValidate()
         {

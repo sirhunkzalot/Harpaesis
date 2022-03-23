@@ -13,6 +13,7 @@ namespace Harpaesis.Combat
 
         [ReadOnly] public TargetingTemplateNode currentlySelected;
         [ReadOnly] public List<TargetingTemplateNode> allWithTargets;
+        [ReadOnly] public List<TargetingTemplateNode> allActiveNodes;
 
         [ReadOnly] public Skill skill;
 
@@ -42,9 +43,11 @@ namespace Harpaesis.Combat
             {
                 case TargetingStyle.AOE:
                     allWithTargets = new List<TargetingTemplateNode>();
+                    allActiveNodes = new List<TargetingTemplateNode>();
                     break;
                 case TargetingStyle.Projectile:
                     allWithTargets = new List<TargetingTemplateNode>();
+                    allActiveNodes = new List<TargetingTemplateNode>();
                     break;
                 default:
                     break;
@@ -56,6 +59,7 @@ namespace Harpaesis.Combat
                 {
                     node.gameObject.SetActive(true);
                     node.Enable();
+                    allActiveNodes.Add(node);
                 }
                 else
                 {
