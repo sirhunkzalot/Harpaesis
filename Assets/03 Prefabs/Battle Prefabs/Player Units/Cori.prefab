@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 3691675352998029870}
   - component: {fileID: 2399529733819394666}
   - component: {fileID: 8511463849801999705}
+  - component: {fileID: 6111698767842796908}
   m_Layer: 0
   m_Name: engineer_iso
   m_TagString: Untagged
@@ -157,6 +158,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 2.7
+--- !u!95 &6111698767842796908
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741255939551082940}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3027e341f3e686b458e159964364618e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4459818067530053474
 GameObject:
   m_ObjectHideFlags: 0
