@@ -180,9 +180,13 @@ MonoBehaviour:
   templateNodes: []
   currentlySelected: {fileID: 0}
   allWithTargets: []
+  allActiveNodes: []
   skill: {fileID: 0}
   isActive: 0
   canRotate: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2097152
 --- !u!1001 &29371218169234512
 PrefabInstance:
   m_ObjectHideFlags: 0

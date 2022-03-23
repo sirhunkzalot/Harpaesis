@@ -107,20 +107,31 @@ namespace Harpaesis.Combat
         {
             int _damageToDeal = _damageAmount + _user.currentAtkStat;
 
+            ColorCode _colorCode = ColorCode.Damage;
+
             switch (_damageType)
             {
                 case DamageType.Piercing:
                 case DamageType.Bludgeoning:
                 case DamageType.Slashing:
-                case DamageType.Silver:
                     _damageToDeal -= Mathf.FloorToInt(_target.currentDefStat * .75f);
+                    _colorCode = ColorCode.Damage;
                     break;
+                case DamageType.Silver:
                 case DamageType.Holy:
+                    _damageToDeal -= Mathf.FloorToInt(_target.currentWilStat * .75f);
+                    _colorCode = ColorCode.Damage;
+                    break;
                 case DamageType.Magic:
                     _damageToDeal -= Mathf.FloorToInt(_target.currentWilStat * .75f);
+                    _colorCode = ColorCode.Magic;
                     break;
                 case DamageType.Fire:
+                    _colorCode = ColorCode.Burn;
+                    break;
                 case DamageType.Bleed:
+                    _colorCode = ColorCode.Bleed;
+                    break;
                 default:
                     break;
             }
@@ -129,14 +140,7 @@ namespace Harpaesis.Combat
 
             _target.TakeDamage(_damageToDeal, _damageType, _user);
 
-            if ((string.Compare(_user.unitData.unitName, "Regina DeSade", true) == 0))
-            {
-                _target.paletteManager.CycleColor(ColorCode.Magic);
-            }
-            else
-            {
-                _target.paletteManager.CycleColor(ColorCode.Damage);
-            }
+            _target.paletteManager.CycleColor(_colorCode);
 
             _user.OnDealDamage(_damageToDeal, _target, _damageType);
         }

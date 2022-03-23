@@ -257,7 +257,7 @@ public abstract class Unit : MonoBehaviour
         else
         {
             canMove = !HasEffect(StatusEffectType.Root);
-            StartTurn();
+            Invoke(nameof(StartTurn), .05f);
         }
     }
 

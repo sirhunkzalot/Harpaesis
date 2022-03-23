@@ -17,6 +17,26 @@ public class FireTile : HazardTile
 
     private void Awake()
     {
+        Collider[] _colls = Physics.OverlapSphere(transform.position, .25f, layerMask, QueryTriggerInteraction.Collide);
+        
+        if(_colls.Length > 0)
+        {
+            foreach (Collider _coll in _colls)
+            {
+                FireTile _tile;
+
+                if (_coll.TryGetComponent(out _tile))
+                {
+                    if(_tile != this)
+                    {
+                        _tile.UpdateFire();
+                        Destroy(gameObject);
+                        return;
+                    }
+                }
+            }
+        }
+
         UpdateNearbyFire();
         UpdateFire();
     }

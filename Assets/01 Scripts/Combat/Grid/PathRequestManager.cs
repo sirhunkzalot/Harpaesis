@@ -38,7 +38,10 @@ namespace Harpaesis.GridAndPathfinding
                     for (int i = 0; i < _itemsInQueue; i++)
                     {
                         PathResult _result = results.Dequeue();
-                        _result.callback(_result);
+                        if(_result.unit != null)
+                        {
+                            _result.callback(_result);
+                        }
                     }
                 }
             }

@@ -21,6 +21,8 @@ namespace Harpaesis.Combat
 
         public bool canRotate = false;
 
+        public LayerMask layerMask;
+
         public void Init(Skill _skill)
         {
             grid = GridManager.instance;
@@ -105,7 +107,7 @@ namespace Harpaesis.Combat
             Vector3 _origin = transform.position + Vector3.up;
             Vector3 _targetPosition = _worldPosition + Vector3.up;
 
-            return Physics.Linecast(_origin, _targetPosition);
+            return Physics.Linecast(_origin, _targetPosition, layerMask);
         }
     }
 }
