@@ -35,7 +35,7 @@ namespace Harpaesis.UI
         public void EnterStore()
         {
             goldCanvas.SetActive(true);
-            goldText.text = $"Gold:\n{PartyInventory.partyGold}";
+            goldText.text = $"Grots:\n{PartyInventory.partyGold}";
             inventoryPanel.SetActive(true);
         }
 
@@ -65,7 +65,7 @@ namespace Harpaesis.UI
                 PartyInventory.RemoveGold(currentItem.item.itemPrice);
                 currentItem.OnBuy();
                 UIManager_PartyInventory.instance.UpdateInventoryDisplay();
-                goldText.text = $"Gold:\n{PartyInventory.partyGold}";
+                goldText.text = $"Grots:\n{PartyInventory.partyGold}";
                 itemPanel.SetActive(false);
             }
         }
