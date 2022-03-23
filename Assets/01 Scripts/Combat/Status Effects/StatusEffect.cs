@@ -110,6 +110,7 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has been burned!", BattleLogType.Combat);
             effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.Burn);
+            ApplyDamage();
         }
 
         public override void OnTurnStart()

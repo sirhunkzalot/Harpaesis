@@ -152,22 +152,15 @@ public class ElderGodPassive : EnemyUnitPassive
 
     public override void OnTakeDamage(float _damageAmount, Unit _damagingUnit, DamageType _damageType)
     {
-        // 
 
-        if (!unit.currentResistances.Contains(_damageType))
+        if (unit.currentResistances.Count >= 1)
         {
-            if (unit.currentResistances.Count >= 3)
-            {
-                unit.currentResistances.RemoveAt(0);
-            }
-            unit.currentResistances.Add(_damageType);
+            unit.currentResistances.RemoveAt(0);
         }
+        unit.currentResistances.Add(_damageType);
+
     
-        if (unit.currentWeaknesses.Contains(_damageType))
-        {
-            unit.currentWeaknesses.Remove(_damageType);
-        }
-        else if (unit.currentWeaknesses.Count >= 3)
+        if (unit.currentWeaknesses.Count >= 1)
         {
             unit.currentWeaknesses.RemoveAt(0);
         }
@@ -214,7 +207,8 @@ public class ElderGodPassive : EnemyUnitPassive
             }
             yield return new WaitForEndOfFrame();
 
-            _typeIsNotValid = (_typeToReturn == _damageType) || (unit.currentResistances.Contains(_typeToReturn)) || (unit.currentWeaknesses.Contains(_typeToReturn));
+            _typeIsNotValid = (_typeToReturn == _damageType) || (unit.currentResistances.Contains(_typeToReturn));
+            _index = Random.Range(0, 8);
 
         } while (_typeIsNotValid);
 

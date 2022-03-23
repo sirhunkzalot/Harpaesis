@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
-  m_Name: Vampire Lord Dummy
+  m_Name: Ancient Thing Dummy
   m_EditorClassIdentifier: 
-  unitName: Vampire Lord
-  unitIcon: {fileID: 21300000, guid: 1179fa54f66b8b2438047db7052a269a, type: 3}
+  unitName: Ancient Thing
+  unitIcon: {fileID: 21300000, guid: 82d04a3c8a463af4287cb938ab5582b5, type: 3}
   healthStat: 100
   inititiveStat: 0
-  attackStat: 14
-  defenseStat: 12
-  willpowerStat: 12
+  attackStat: 12
+  defenseStat: 5
+  willpowerStat: 5
   apStat: 0
-  weaknesses: 0a00000000000000
-  resistances: 150000000b00000001000000
-  unitPassive: 10
+  weaknesses: 
+  resistances: 000000000100000002000000
+  unitPassive: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: 7981663dc47b8134b8c094103bc9bebd, type: 2}
     rangeEstimate: 100

@@ -268,11 +268,11 @@ namespace Harpaesis.Combat
         Silver = 3,
 
         // Magical
-        Holy = 10,
-        Magic = 11,
+        Holy = 4,
+        Magic = 5,
 
         // Special
-        Fire = 20,
-        Bleed = 21,
+        Fire = 6,
+        Bleed = 7,
     }
 }

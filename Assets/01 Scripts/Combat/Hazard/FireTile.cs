@@ -98,6 +98,8 @@ public class FireTile : HazardTile
                 stageIndex--;
                 SwapPrefabs();
             }
+
+            ApplyHazardEffect();
         }
         else
         {
@@ -132,6 +134,11 @@ public class FireTile : HazardTile
 
     protected override void ApplyHazardEffect()
     {
+        if(unit == null)
+        {
+            return;
+        }
+
         if (unit.HasEffect(StatusEffectType.Burn))
         {
             int _effectIndex = unit.GetEffectIndex(StatusEffectType.Burn);

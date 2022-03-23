@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
-  m_Name: Ancient Thing Dummy
+  m_Name: Werewolf Pup Dummy
   m_EditorClassIdentifier: 
-  unitName: Ancient Thing
-  unitIcon: {fileID: 21300000, guid: 82d04a3c8a463af4287cb938ab5582b5, type: 3}
+  unitName: Werewolf Pup
+  unitIcon: {fileID: 21300000, guid: aa7996df6039855409e155feb1c9f1a4, type: 3}
   healthStat: 100
   inititiveStat: 0
-  attackStat: 12
-  defenseStat: 10
-  willpowerStat: 10
+  attackStat: 10
+  defenseStat: 5
+  willpowerStat: 5
   apStat: 0
-  weaknesses: 
-  resistances: 000000000100000002000000
-  unitPassive: 0
+  weaknesses: 030000000600000001000000
+  resistances: 0200000000000000
+  unitPassive: 11
   enemySkills:
   - skill: {fileID: 11400000, guid: 7981663dc47b8134b8c094103bc9bebd, type: 2}
     rangeEstimate: 100

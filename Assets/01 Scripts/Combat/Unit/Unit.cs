@@ -94,22 +94,43 @@ public abstract class Unit : MonoBehaviour
     {
         if (!isAlive || _damageAmount <= 0) return;
 
+        int _adjustedDamage = _damageAmount;
 
-
-        if (unitData.weaknesses.Contains(_damageType))
+        if (currentWeaknesses.Contains(_damageType))
         {
-            _damageAmount = Mathf.FloorToInt(_damageAmount * 1.5f);
+            _adjustedDamage = Mathf.FloorToInt(_adjustedDamage * 1.5f);
+            print($"Weak! Original Damage ({_damageAmount}) was amplified to {_adjustedDamage}");
         }
-        else if (unitData.resistances.Contains(_damageType))
+        if (currentResistances.Contains(_damageType))
         {
-            _damageAmount = Mathf.FloorToInt(_damageAmount * .5f);
+            _adjustedDamage = Mathf.FloorToInt(_adjustedDamage * .5f);
+            print($"Resisted! Original Damage ({_damageAmount}) was reduced to {_adjustedDamage}");
         }
 
-        unit_ui.DisplayDamageText(-_damageAmount);
+        /*
+        foreach (DamageType _type in currentWeaknesses)
+        {
+        print($"{_damageType} == {_type} --> {_damageType == _type}");
+        if ((int)_damageType == (int)_type)
+        {
+        _adjustedDamage = Mathf.FloorToInt(_adjustedDamage * 1.5f);
+        print($"Weak! Original Damage ({_damageAmount}) was amplified to {_adjustedDamage}");
+        }
+        }
+        foreach (DamageType _type in currentResistances)
+        {
+        print($"{_damageType} == {_type} --> {_damageType == _type}");
+        if ((int)_damageType == (int)_type)
+        {
+        _adjustedDamage = Mathf.FloorToInt(_adjustedDamage * .5f);
+        print($"Resisted! Original Damage ({_damageAmount}) was reduced to {_adjustedDamage}");
+        }
+        }*/
+        unit_ui.DisplayDamageText(-_adjustedDamage);
 
-        OnTakeDamage(_damageAmount, _attacker, _damageType);
+        OnTakeDamage(_adjustedDamage, _attacker, _damageType);
 
-        currentHP = Mathf.Clamp(currentHP - _damageAmount, 0, unitData.healthStat);
+        currentHP = Mathf.Clamp(currentHP - _adjustedDamage, 0, unitData.healthStat);
 
         isAlive = (currentHP == 0) ? false : isAlive;
 
