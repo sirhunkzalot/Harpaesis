@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionSpeed: 2.7
 --- !u!1 &5205872326945359666
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +124,7 @@ GameObject:
   - component: {fileID: 5205872326945359677}
   - component: {fileID: 5205872326945359678}
   - component: {fileID: 5205872326945359676}
+  - component: {fileID: 4600734799053291535}
   m_Layer: 25
   m_Name: Eldrich Unit
   m_TagString: Untagged
@@ -181,13 +183,17 @@ MonoBehaviour:
   canAct: 1
   currentAtkStat: 0
   currentDefStat: 0
+  currentWilStat: 0
   currentApStat: 0
+  currentWeaknesses: 
+  currentResistances: 
   currentEffects: []
   turnData:
     unit: {fileID: 0}
     unitData: {fileID: 0}
     hasAttacked: 0
     ap: 0
+  paletteManager: {fileID: 0}
   unit_ui: {fileID: 0}
   enemyUnitData: {fileID: 0}
   currentTarget: {fileID: 0}
@@ -210,6 +216,22 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
+--- !u!111 &4600734799053291535
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5205872326945359666}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 2b72fb0c10af6e5419d585de2881a31b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 2b72fb0c10af6e5419d585de2881a31b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &7553309330615910349
 PrefabInstance:
   m_ObjectHideFlags: 0

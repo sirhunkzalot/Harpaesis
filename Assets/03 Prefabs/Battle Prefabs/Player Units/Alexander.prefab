@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionSpeed: 2.7
 --- !u!1 &8205144851656784349
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +213,7 @@ GameObject:
   - component: {fileID: 8205144851656784338}
   - component: {fileID: 8205144851656784348}
   - component: {fileID: 8205144851656784337}
+  - component: {fileID: 2238265169183613612}
   m_Layer: 25
   m_Name: Alexander
   m_TagString: Untagged
@@ -272,13 +274,17 @@ MonoBehaviour:
   canAct: 1
   currentAtkStat: 0
   currentDefStat: 0
+  currentWilStat: 0
   currentApStat: 0
+  currentWeaknesses: 
+  currentResistances: 
   currentEffects: []
   turnData:
     unit: {fileID: 0}
     unitData: {fileID: 0}
     hasAttacked: 0
     ap: 0
+  paletteManager: {fileID: 0}
   unit_ui: {fileID: 0}
   friendlyUnitData: {fileID: 0}
   alternativeWeapon: 0
@@ -300,6 +306,22 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
+--- !u!111 &2238265169183613612
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205144851656784349}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 6068c1deaf0d8754fbc370bd9313cf92, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 6068c1deaf0d8754fbc370bd9313cf92, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &3169289690862833276
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionSpeed: 2.7
 --- !u!1 &4752951056988849657
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +124,7 @@ GameObject:
   - component: {fileID: 4752951056988849662}
   - component: {fileID: 4752951056988849663}
   - component: {fileID: 4752951056988849656}
+  - component: {fileID: -6924879534013753796}
   m_Layer: 25
   m_Name: Void Spider
   m_TagString: Untagged
@@ -197,19 +199,38 @@ MonoBehaviour:
   canAct: 1
   currentAtkStat: 0
   currentDefStat: 0
+  currentWilStat: 0
   currentApStat: 0
+  currentWeaknesses: 
+  currentResistances: 
   currentEffects: []
   turnData:
     unit: {fileID: 0}
     unitData: {fileID: 0}
     hasAttacked: 0
     ap: 0
+  paletteManager: {fileID: 0}
   unit_ui: {fileID: 0}
   enemyUnitData: {fileID: 0}
   currentTarget: {fileID: 0}
   viewObstructionMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!111 &-6924879534013753796
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4752951056988849657}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d03c459d7978e0440b1f1fe0ff3c7556, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &4955464808642172746
 PrefabInstance:
   m_ObjectHideFlags: 0

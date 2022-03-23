@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1084939517035647652}
   - component: {fileID: 1084939517035647658}
   - component: {fileID: 1084939517035647655}
+  - component: {fileID: 3856340206932695896}
   m_Layer: 25
   m_Name: Doran
   m_TagString: Untagged
@@ -72,13 +73,17 @@ MonoBehaviour:
   canAct: 1
   currentAtkStat: 0
   currentDefStat: 0
+  currentWilStat: 0
   currentApStat: 0
+  currentWeaknesses: 
+  currentResistances: 
   currentEffects: []
   turnData:
     unit: {fileID: 0}
     unitData: {fileID: 0}
     hasAttacked: 0
     ap: 0
+  paletteManager: {fileID: 0}
   unit_ui: {fileID: 0}
   friendlyUnitData: {fileID: 0}
   alternativeWeapon: 0
@@ -100,6 +105,22 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
+--- !u!111 &3856340206932695896
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084939517035647659}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 48ed12aec02bd304ba9ddcd2e3b2ba90, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 48ed12aec02bd304ba9ddcd2e3b2ba90, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1991445856463036919
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2f3e9ad5a3f504fabfca5b2ff8c65f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionSpeed: 2.7
 --- !u!1 &4559564904218819432
 GameObject:
   m_ObjectHideFlags: 0
