@@ -5,6 +5,7 @@ using Harpaesis.Combat;
 using Harpaesis.Overworld;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Harpaesis.UI
 {
@@ -154,6 +155,11 @@ namespace Harpaesis.UI
                 Time.timeScale = 1f;
                 speedUpIcon.SetActive(false);
             }
+        }
+
+        public void QuitOverworld()
+        {
+            SceneManager.LoadScene(8);
         }
     }
 }
