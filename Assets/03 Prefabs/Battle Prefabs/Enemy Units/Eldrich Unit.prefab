@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 980452362}
   - component: {fileID: 980452363}
   - component: {fileID: 3160655569582204417}
+  - component: {fileID: 5214182434252970163}
   m_Layer: 25
   m_Name: Sprite
   m_TagString: Untagged
@@ -112,6 +113,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionSpeed: 2.7
+--- !u!95 &5214182434252970163
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980452360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5349d1c280504234f934de844702b054, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5205872326945359666
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +145,6 @@ GameObject:
   - component: {fileID: 5205872326945359677}
   - component: {fileID: 5205872326945359678}
   - component: {fileID: 5205872326945359676}
-  - component: {fileID: 4600734799053291535}
   m_Layer: 25
   m_Name: Eldrich Unit
   m_TagString: Untagged
@@ -216,22 +236,6 @@ MonoBehaviour:
   targetIndex: 0
   isMoving: 0
   path: []
---- !u!111 &4600734799053291535
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205872326945359666}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 2b72fb0c10af6e5419d585de2881a31b, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 2b72fb0c10af6e5419d585de2881a31b, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &7553309330615910349
 PrefabInstance:
   m_ObjectHideFlags: 0
