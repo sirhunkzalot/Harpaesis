@@ -159,7 +159,7 @@ namespace Harpaesis.UI
 
         public void QuitOverworld()
         {
-            SceneManager.LoadScene(8);
+            SceneManager.LoadScene(2);
         }
     }
 }

@@ -1150,6 +1150,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5762054264356744421, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: soundEffectsAudio.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762054264356744421, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: soundEffectsAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 1704213018}
+    - target: {fileID: 5762054264356744421, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: soundEffectsAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 311591532}
+    - target: {fileID: 5762054264356744421, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: backgroundMusicAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 1454246022}
     - target: {fileID: 6361311933755006709, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1259,6 +1275,11 @@ PrefabInstance:
 --- !u!224 &311591531 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8699812010795843194, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+  m_PrefabInstance: {fileID: 311591530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &311591532 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2379866450665765825, guid: 07cd9889c447e804c920cc7485848491, type: 3}
   m_PrefabInstance: {fileID: 311591530}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &355148360
@@ -8196,7 +8217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Build: 0.4.0
+  m_text: 'Build: 0.4.2
 
 '
   m_isRightToLeft: 0
@@ -8226,7 +8247,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.5
+  m_fontSize: 56.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
