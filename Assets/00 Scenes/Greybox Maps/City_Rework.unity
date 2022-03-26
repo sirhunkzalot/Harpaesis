@@ -8379,6 +8379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &134216544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 134216543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &139047328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9030,6 +9035,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &140957874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 140957873}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &143394680
 Mesh:
   m_ObjectHideFlags: 0
@@ -9332,6 +9342,7 @@ GameObject:
   - component: {fileID: 180516666}
   - component: {fileID: 180516665}
   - component: {fileID: 180516664}
+  - component: {fileID: 180516670}
   m_Layer: 21
   m_Name: AlleyBuilding3
   m_TagString: Obstacle
@@ -9662,6 +9673,25 @@ Transform:
   m_Father: {fileID: 392652373}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &180516670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180516663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &207187466
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10352,6 +10382,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2585826360576581518, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
   m_PrefabInstance: {fileID: 140957873}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &223965902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140957874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!4 &226658077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5205872326945359679, guid: 411a0cd20fe0f97478107258f4cfa4ce, type: 3}
@@ -11172,7 +11221,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65098
+  m_Name: pb_Mesh117380
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11508,6 +11557,7 @@ GameObject:
   - component: {fileID: 319154342}
   - component: {fileID: 319154341}
   - component: {fileID: 319154340}
+  - component: {fileID: 319154346}
   m_Layer: 21
   m_Name: Alleybuilding4
   m_TagString: Obstacle
@@ -11838,6 +11888,25 @@ Transform:
   m_Father: {fileID: 392652373}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &319154346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319154339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &332837156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12519,7 +12588,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65118
+  m_Name: pb_Mesh117400
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -13076,6 +13145,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &575993570 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 575993569}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &577304096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15030,6 +15104,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2585826360576581518, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
   m_PrefabInstance: {fileID: 134216543}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &711915316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134216544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &742020787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15362,7 +15455,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65224
+  m_Name: pb_Mesh117506
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15596,6 +15689,7 @@ GameObject:
   - component: {fileID: 826974511}
   - component: {fileID: 826974510}
   - component: {fileID: 826974515}
+  - component: {fileID: 826974516}
   m_Layer: 21
   m_Name: AlleyBuilding8
   m_TagString: Obstacle
@@ -16166,6 +16260,25 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 304333583}
+--- !u!114 &826974516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826974508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &841110548
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16223,6 +16336,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &841110549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 841110548}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &841110550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841110549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &845525098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16831,6 +16968,7 @@ GameObject:
   - component: {fileID: 848648108}
   - component: {fileID: 848648107}
   - component: {fileID: 848648106}
+  - component: {fileID: 848648112}
   m_Layer: 21
   m_Name: AlleyBuilding7
   m_TagString: Obstacle
@@ -17161,6 +17299,25 @@ Transform:
   m_Father: {fileID: 392652373}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &848648112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848648105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &852907305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17956,6 +18113,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &931867524 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 931867523}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &931867525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931867524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &932030204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19385,6 +19566,7 @@ GameObject:
   - component: {fileID: 1123095049}
   - component: {fileID: 1123095048}
   - component: {fileID: 1123095047}
+  - component: {fileID: 1123095053}
   m_Layer: 21
   m_Name: AlleyBuilding2
   m_TagString: Obstacle
@@ -19715,6 +19897,25 @@ Transform:
   m_Father: {fileID: 392652373}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123095053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123095046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &1145851760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19778,7 +19979,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65204
+  m_Name: pb_Mesh117486
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20059,6 +20260,7 @@ GameObject:
   - component: {fileID: 1266077430}
   - component: {fileID: 1266077429}
   - component: {fileID: 1266077428}
+  - component: {fileID: 1266077434}
   m_Layer: 21
   m_Name: AlleyBuilding5
   m_TagString: Obstacle
@@ -20389,6 +20591,25 @@ Transform:
   m_Father: {fileID: 392652373}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1266077434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266077427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &1275293567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20493,7 +20714,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65320
+  m_Name: pb_Mesh117620
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21307,6 +21528,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &1333627377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 1333627376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1333627378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333627377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &1336249004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21780,6 +22025,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3149889007141897707, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
+      propertyPath: soundEffectsAudio.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149889007141897707, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
+      propertyPath: soundEffectsAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 1342659575}
+    - target: {fileID: 3149889007141897707, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
+      propertyPath: soundEffectsAudio.Array.data[1]
+      value: 
+      objectReference: {fileID: 1342659576}
+    - target: {fileID: 3149889007141897707, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
+      propertyPath: backgroundMusicAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 1890044232}
     - target: {fileID: 4541663177956111134, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -21953,6 +22214,16 @@ PrefabInstance:
 --- !u!1 &1342659574 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4065655137079552570, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
+  m_PrefabInstance: {fileID: 1342659573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1342659575 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2072003593169994838, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
+  m_PrefabInstance: {fileID: 1342659573}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1342659576 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4991872273059582671, guid: 39224bd2e354314479e8d5df4aa93520, type: 3}
   m_PrefabInstance: {fileID: 1342659573}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1350581491
@@ -22332,7 +22603,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65470
+  m_Name: pb_Mesh117770
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -32860,6 +33131,7 @@ GameObject:
   - component: {fileID: 1566113095}
   - component: {fileID: 1566113094}
   - component: {fileID: 1566113093}
+  - component: {fileID: 1566113099}
   m_Layer: 21
   m_Name: Alleybuilding1
   m_TagString: Obstacle
@@ -33190,6 +33462,25 @@ Transform:
   m_Father: {fileID: 392652373}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1566113099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566113092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1 &1651122307
 GameObject:
   m_ObjectHideFlags: 0
@@ -33428,6 +33719,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &1665929928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 1665929927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665929929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665929928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &1687354480
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33495,6 +33810,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2585826360576581518, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
   m_PrefabInstance: {fileID: 575993569}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1692007379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575993570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!1001 &1736990468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35809,6 +36143,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+--- !u!1 &1968451282 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2929982929850484020, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+  m_PrefabInstance: {fileID: 1968451281}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1968451283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968451282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!43 &1978615644
 Mesh:
   m_ObjectHideFlags: 0
@@ -36161,7 +36519,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh64932
+  m_Name: pb_Mesh117214
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36502,7 +36860,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh64898
+  m_Name: pb_Mesh117180
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36674,6 +37032,7 @@ GameObject:
   - component: {fileID: 2143859097}
   - component: {fileID: 2143859096}
   - component: {fileID: 2143859095}
+  - component: {fileID: 2143859101}
   m_Layer: 21
   m_Name: AlleyBuilding6
   m_TagString: Obstacle
@@ -37004,6 +37363,25 @@ Transform:
   m_Father: {fileID: 392652373}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2143859101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143859094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be9c83603550968419bcc0ece334e303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontViewHiddenObjects: []
+  rightViewHiddenObjects: []
+  backViewHiddenObjects: []
+  leftViewHiddenObjects: []
+  minimumHeight: 0.25
+  maximumHeight: 50
+  dissolveSpeed: 5
 --- !u!4 &8200123265252010756
 Transform:
   m_ObjectHideFlags: 0

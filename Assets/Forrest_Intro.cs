@@ -21,21 +21,5 @@ public class Forrest_Intro : MonoBehaviour
         }
     }
 
-    public void SkipLines()
-    {
-        if(paragraphOne.activeSelf)
-        {
-            paragraphOne.SetActive(false);
-        }
-        if (paragraphTwo.activeSelf)
-        {
-            paragraphTwo.SetActive(false);
-        }
-        if (paragraphThree.activeSelf)
-        {
-            paragraphThree.SetActive(false);
-        }
 
-        SceneManager.LoadScene(2);
-    }
 }

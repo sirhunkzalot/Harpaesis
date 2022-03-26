@@ -4778,6 +4778,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.2387085
       objectReference: {fileID: 0}
+    - target: {fileID: 5762054264356744421, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: soundEffectsAudio.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5762054264356744421, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: soundEffectsAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 1431219117}
+    - target: {fileID: 5762054264356744421, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: backgroundMusicAudio.Array.data[0]
+      value: 
+      objectReference: {fileID: 1053219120}
     - target: {fileID: 6610707330114730418, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 13.915512
@@ -4916,6 +4928,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+--- !u!82 &1431219117 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2379866450665765825, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+  m_PrefabInstance: {fileID: 1431219116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1431219118 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8699812010795843194, guid: 07cd9889c447e804c920cc7485848491, type: 3}
