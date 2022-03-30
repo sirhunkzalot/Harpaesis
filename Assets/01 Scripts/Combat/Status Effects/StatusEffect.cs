@@ -454,6 +454,11 @@ namespace Harpaesis.Combat
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has flipped sides!", BattleLogType.Combat);
             BattleLog.Log($"Change Allegiance is not yet implemented", BattleLogType.System);
+
+            EnemyUnit _enemyUnit = (EnemyUnit)effectedUnit;
+
+            _enemyUnit.allegianceChanged = true;
+
             effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.ChangeAllegience);
         }
 
@@ -474,6 +479,10 @@ namespace Harpaesis.Combat
         protected override void OnEffectRemoved()
         {
             effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.ChangeAllegience);
+
+            EnemyUnit _enemyUnit = (EnemyUnit)effectedUnit;
+
+            _enemyUnit.allegianceChanged = false;
         }
     }
     public class StatusEffect_Defend : StatusEffect
