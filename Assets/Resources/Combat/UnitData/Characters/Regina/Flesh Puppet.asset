@@ -17,16 +17,13 @@ MonoBehaviour:
   validTargets: 4
   targetingStyle: 0
   projectileRange: -1
-  skillDescription: 'Enthralls a single enemy, causing them to fight by your side
+  skillDescription: Enthralls a single enemy, causing them to fight by your side
     temporarily
-
-
-    (Coming Soon)'
   targetingTemplate: {fileID: 168528501438769920, guid: 5dcf8a71c7edb53428822ced7ff1c854, type: 3}
-  implemented: 0
+  implemented: 1
   skillSprite: {fileID: 21300000, guid: 993972d06fe2e5d4ab83c2ffd72a98f0, type: 3}
   effects:
   - effectType: 18
-    param1: 1d3
+    param1: 2d2
     param2: 
     damageType: 0

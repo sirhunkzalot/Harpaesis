@@ -21,11 +21,15 @@ public class EnemyUnit : Unit
 
     [ReadOnly] public EnemyUnitPassive passive;
 
+    List<Unit> units = new List<Unit>();
+
     List<FriendlyUnit> friendlyUnits = new List<FriendlyUnit>();
     List<FriendlyUnit> ignoreFriendlyUnits = new List<FriendlyUnit>();
 
     List<EnemyUnit> enemyUnits = new List<EnemyUnit>();
     List<EnemyUnit> ignoreEnemyUnits = new List<EnemyUnit>();
+
+    public bool allegianceChanged;
 
 
     protected override void Init()
@@ -41,6 +45,8 @@ public class EnemyUnit : Unit
     {
         uiCombat.ShowPlayerUI(false);
         gridCam.followUnit = this;
+
+        units = turnManager.units;
 
         friendlyUnits = turnManager.friendlyUnits;
         ignoreFriendlyUnits = new List<FriendlyUnit>();
@@ -59,39 +65,60 @@ public class EnemyUnit : Unit
 
     void PlanTurn()
     {
-        for (int i = 0; i < friendlyUnits.Count; i++)
+        for (int i = 0; i < units.Count; i++)
         {
             if (canMove)
             {
                 //print("Generate moves Involving Movement");
                 Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
-                Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[i].transform.position, true);
+                Vector3 _targetPos = grid.NodePositionFromWorldPoint(units[i].transform.position, true);
 
-                PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMoves, friendlyUnits[i]));
+                PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMovesWithPath, units[i]));
             }
 
             //print("Generate moves without Movement");
-            CreateEnemyMoves(friendlyUnits[i], transform.position, enemyUnitData.apStat);
+            CreateEnemyMoves(units[i], transform.position, enemyUnitData.apStat);
         }
 
         Invoke(nameof(ChooseMove), 1f);
     }
 
-    void CreateEnemyMoves(FriendlyUnit _unit, Vector3 _position, int _apAtPosition, PathResult _results = null, int _pathPositionIndex = 0)
+    void CreateEnemyMoves(Unit _unit, Vector3 _position, int _apAtPosition, PathResult _results = null, int _pathPositionIndex = 0)
     {
         if (!Physics.Linecast(_position + Vector3.up, _unit.transform.position + Vector3.up, viewObstructionMask))
         {
             foreach (EnemySkill _skill in enemyUnitData.enemySkills)
             {
-                if (_skill.skill.apCost <= _apAtPosition && _skill.rangeEstimate >= Mathf.RoundToInt(Vector3.Distance(_unit.transform.position, transform.position)))
+                if (_unit != this)
                 {
-                    validMoves.Add(new EnemyMove(_position, _pathPositionIndex, _skill, _unit, _results));
+                    bool _isFriendly = _unit.GetType() == typeof(FriendlyUnit);
+
+
+                    bool _skillTargetMatch =
+                        (_isFriendly && _skill.skill.validTargets == TargetMask.Enemy && !allegianceChanged) ||
+                        (!_isFriendly && _skill.skill.validTargets == TargetMask.Ally && !allegianceChanged) ||
+                        (_isFriendly && _skill.skill.validTargets == TargetMask.Ally && allegianceChanged) ||
+                        (!_isFriendly && _skill.skill.validTargets == TargetMask.Enemy && allegianceChanged);
+
+
+
+                    if (_skillTargetMatch && _skill.skill.apCost <= _apAtPosition && _skill.rangeEstimate >= Mathf.RoundToInt(Vector3.Distance(_unit.transform.position, transform.position)))
+                    {
+                        validMoves.Add(new EnemyMove(_position, _pathPositionIndex, _skill, _unit, _results));
+                    }
+                }
+                else
+                {
+                    if(_skill.skill.validTargets == TargetMask.Self)
+                    {
+                        validMoves.Add(new EnemyMove(_position, _pathPositionIndex, _skill, _unit, _results));
+                    }
                 }
             }
         }
     }
 
-    void CreateEnemyMoves(PathResult _result)
+    void CreateEnemyMovesWithPath(PathResult _result)
     {
         if (_result.success == false)
         {
@@ -99,13 +126,11 @@ public class EnemyUnit : Unit
             return;
         }
 
-        FriendlyUnit _unit = (FriendlyUnit)_result.unit;
-
         for (int i = 0; i < _result.pathLength; i++)
         {
             //print("Created move with path");
             int _apAtPosition = enemyUnitData.apStat - i;
-            CreateEnemyMoves(_unit, _result.path[i].position, _apAtPosition, _result, i);
+            CreateEnemyMoves(_result.unit, _result.path[i].position, _apAtPosition, _result, i);
         }
     }
 
@@ -121,7 +146,6 @@ public class EnemyUnit : Unit
         Dictionary<EnemyMove, Vector2> _moveWeights = new Dictionary<EnemyMove, Vector2>();
 
         int _maxWeight = 0;
-
         int _shortRange = 3;
         int _mediumRange = 5;
 
@@ -359,10 +383,10 @@ public struct EnemyMove
     public Vector3 movePosition;
     public int pathPositionIndex;
     public EnemySkill skillToUse;
-    public FriendlyUnit target;
+    public Unit target;
     public PathResult result;
 
-    public EnemyMove(Vector3 _movePosition, int _pathPositionIndex, EnemySkill _skillToUse, FriendlyUnit _target, PathResult _result)
+    public EnemyMove(Vector3 _movePosition, int _pathPositionIndex, EnemySkill _skillToUse, Unit _target, PathResult _result)
     {
         movePosition = _movePosition;
         pathPositionIndex = _pathPositionIndex;
