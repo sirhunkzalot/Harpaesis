@@ -45,13 +45,6 @@ public class FireTile : HazardTile
     {
         Collider[] _otherHazards = Physics.OverlapSphere(transform.position, 1.5f, layerMask, QueryTriggerInteraction.Collide);
 
-        /*int _count = 0;
-
-        foreach (Collider[] _tile in _otherHazards)
-        {
-
-        }*/
-
         count = _otherHazards.Length;
         switch (count)
         {

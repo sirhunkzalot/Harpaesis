@@ -409,11 +409,45 @@ namespace Harpaesis.Combat
             effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.DEF_Down);
         }
     }
+    public class StatusEffect_DebuffWIL : StatusEffect
+    {
+        public StatusEffect_DebuffWIL(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        {
+            effectType = StatusEffectType.WIL_Down;
+        }
+
+        protected override void OnEffectApplied()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has been temporarily lowered by {amount}.", BattleLogType.Combat);
+            effectedUnit.currentWilStat -= amount;
+            effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.WIL_Down);
+        }
+
+        public override void OnTurnEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            BattleLog.Log($"{effectedUnit.unitData.unitName} DEF stat has returned to normal.", BattleLogType.Combat);
+            RemoveEffect();
+        }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.currentDefStat += amount;
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.WIL_Down);
+        }
+    }
     public class StatusEffect_DebuffAP : StatusEffect
     {
         public StatusEffect_DebuffAP(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
         {
-            effectType = StatusEffectType.DEF_Down;
+            effectType = StatusEffectType.AP_Down;
         }
 
         protected override void OnEffectApplied()
@@ -539,6 +573,8 @@ namespace Harpaesis.Combat
         ChangeAllegience,
         Holy,
         Silver,
-        Defend
+        Defend,
+        WIL_Up,
+        WIL_Down
     }
 }

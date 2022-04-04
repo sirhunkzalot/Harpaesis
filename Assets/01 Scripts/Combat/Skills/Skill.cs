@@ -61,7 +61,7 @@ namespace Harpaesis.Combat
         // Temp
         public void UseProjectileSkill(Unit _user, List<Vector3> _positions)
         {
-            SkillEffectLibrary.SkillEffect_SpawnPrefab(_user, _user, effects[0].param1, _positions);
+            SkillEffectLibrary.SkillEffect_SpawnHazardTile(_user, _user, effects[0].param1, _positions);
         }
 
         #region Set Dirty

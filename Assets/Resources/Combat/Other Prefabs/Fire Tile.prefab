@@ -31,9 +31,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8837273913039169979}
-  - {fileID: 8837273913297249204}
   - {fileID: 8837273913809572682}
+  - {fileID: 8837273913297249204}
+  - {fileID: 8837273913039169979}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54,9 +54,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4194304
-  stage3: {fileID: 2518634189213907347}
+  stage3: {fileID: 2518634188719719266}
   stage2: {fileID: 2518634188929872796}
-  stage1: {fileID: 2518634188719719266}
+  stage1: {fileID: 2518634189213907347}
 --- !u!54 &2848476285877406949
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -96,11 +96,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 392990075857131669, guid: 4ce5101ba45a3b140b5c34fa55c8e024, type: 3}
       propertyPath: m_Name
-      value: Fire Effect stage 1
+      value: Fire Effect stage 3
       objectReference: {fileID: 0}
     - target: {fileID: 6711383630394869949, guid: 4ce5101ba45a3b140b5c34fa55c8e024, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6711383630394869949, guid: 4ce5101ba45a3b140b5c34fa55c8e024, type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,11 +230,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 392990075857131669, guid: 83d2466650fc0f448bc128afdaacf8ee, type: 3}
       propertyPath: m_Name
-      value: Fire Effect stage 3
+      value: Fire Effect stage 1
       objectReference: {fileID: 0}
     - target: {fileID: 6711383630394869949, guid: 83d2466650fc0f448bc128afdaacf8ee, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6711383630394869949, guid: 83d2466650fc0f448bc128afdaacf8ee, type: 3}
       propertyPath: m_LocalPosition.x

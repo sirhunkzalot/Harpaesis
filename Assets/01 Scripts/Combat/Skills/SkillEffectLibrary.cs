@@ -252,13 +252,17 @@ namespace Harpaesis.Combat
             _target.ApplyEffect(new StatusEffect_ChangeAllegiance(_user, _target, 0, _duration));
         }
 
-        public static void SkillEffect_SpawnPrefab(Unit _user, Unit _target, string _path, List<Vector3> _positions)
+        public static void SkillEffect_SpawnHazardTile(Unit _user, Unit _target, string _path, List<Vector3> _positions)
         {
             GameObject _prefab = Resources.Load(_path) as GameObject;
 
             foreach (Vector3 _position in _positions)
             {
                 GameObject _g = GameObject.Instantiate(_prefab, _position, Quaternion.identity);
+
+                HazardTile _hazard = _g.GetComponent<HazardTile>();
+
+                _hazard.Init();
             }
         }
     }
