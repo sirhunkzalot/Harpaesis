@@ -11,7 +11,7 @@ public class HazardTile : MonoBehaviour
     protected TurnManager turnManager;
     protected Node node;
 
-    private void Start()
+    public void Init()
     {
         grid = GridManager.instance;
         turnManager = TurnManager.instance;
