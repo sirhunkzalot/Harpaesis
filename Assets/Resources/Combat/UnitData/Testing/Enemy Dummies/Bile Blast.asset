@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Crossbow
+  m_Name: Bile Blast
   m_EditorClassIdentifier: 
-  skillName: Crossbow
-  apCost: 1
+  skillName: Bile Blast
+  apCost: 0
   validTargets: 4
-  targetingStyle: 0
-  projectileRange: -1
-  aoeRadius: -1
-  skillDescription: Fires a crossbow bolt that deals damage to a single enemy within
-    range.
-  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
+  targetingStyle: 2
+  projectileRange: 164
+  aoeRadius: 2
+  skillDescription: 
+  targetingTemplate: {fileID: 0}
   implemented: 1
-  skillSprite: {fileID: 21300000, guid: 299c68b3455824b4fb52291ac3d76d39, type: 3}
+  skillSprite: {fileID: 0}
   effects:
-  - effectType: 2
-    param1: 2d2
+  - effectType: 19
+    param1: Combat/Other Prefabs/Bile Tile
     param2: 
     damageType: 0

@@ -26,7 +26,7 @@ namespace Harpaesis.Combat
             parent = _parent;
             skill = parent.skill;
             targetMask = parent.skill.validTargets;
-            isAOE = (skill.targetingStyle == TargetingStyle.AOE || skill.targetingStyle == TargetingStyle.Projectile);
+            isAOE = (skill.targetingStyle == TargetingStyle.AOE || skill.targetingStyle == TargetingStyle.ProjectileAOE);
         }
 
 

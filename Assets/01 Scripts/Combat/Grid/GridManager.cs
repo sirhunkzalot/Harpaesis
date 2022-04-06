@@ -28,7 +28,7 @@ namespace Harpaesis.GridAndPathfinding
         public bool diagonalMovement;
 
         [HideInInspector] public float nodeRadius;
-        int gridSizeX, gridSizeY;
+        [HideInInspector] public int gridSizeX, gridSizeY;
         public int MaxSize { get { return gridSizeX * gridSizeY; } }
 
         public static GridManager instance;
@@ -252,6 +252,14 @@ namespace Harpaesis.GridAndPathfinding
                     Gizmos.DrawCube(node.worldPosition, _gizmoSize);
                 }
             }
+        }
+
+        public bool LinecastToWorldPoint(Vector3 _startPosition, Vector3 _worldPosition)
+        {
+            Vector3 _origin = _startPosition + Vector3.up;
+            Vector3 _targetPosition = _worldPosition + Vector3.up;
+
+            return Physics.Linecast(_origin, _targetPosition, unwalkableMask);
         }
     }
 

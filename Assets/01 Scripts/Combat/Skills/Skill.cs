@@ -14,6 +14,7 @@ namespace Harpaesis.Combat
         [EnumFlags] public TargetMask validTargets;
         public TargetingStyle targetingStyle;
         public int projectileRange = -1;
+        public int aoeRadius = -1;
         [TextArea(3, 5)] public string skillDescription;
         public GameObject targetingTemplate;
         public bool implemented = true;
@@ -78,7 +79,7 @@ namespace Harpaesis.Combat
     {
         SingleTarget,
         AOE,
-        Projectile
+        ProjectileAOE
     }
 
     [Flags]

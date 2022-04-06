@@ -47,7 +47,7 @@ namespace Harpaesis.Combat
                     allWithTargets = new List<TargetingTemplateNode>();
                     allActiveNodes = new List<TargetingTemplateNode>();
                     break;
-                case TargetingStyle.Projectile:
+                case TargetingStyle.ProjectileAOE:
                     allWithTargets = new List<TargetingTemplateNode>();
                     allActiveNodes = new List<TargetingTemplateNode>();
                     break;
@@ -57,7 +57,7 @@ namespace Harpaesis.Combat
 
             foreach (TargetingTemplateNode node in templateNodes)
             {
-                if (grid.WorldPointIsWalkable(node.transform.position) && !LinecastToWorldPosition(node.transform.position))
+                if (grid.WorldPointIsWalkable(node.transform.position) && !grid.LinecastToWorldPoint(transform.position, node.transform.position))
                 {
                     node.gameObject.SetActive(true);
                     node.Enable();
@@ -100,14 +100,6 @@ namespace Harpaesis.Combat
                 node.Disable();
             }
             isActive = false;
-        }
-
-        private bool LinecastToWorldPosition(Vector3 _worldPosition)
-        {
-            Vector3 _origin = transform.position + Vector3.up;
-            Vector3 _targetPosition = _worldPosition + Vector3.up;
-
-            return Physics.Linecast(_origin, _targetPosition, layerMask);
         }
     }
 }

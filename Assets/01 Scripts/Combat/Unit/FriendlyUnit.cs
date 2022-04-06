@@ -243,7 +243,7 @@ public class FriendlyUnit : Unit
             case TargetingStyle.AOE:
                 currentState = FriendlyState.Targeting_AOE;
                 break;
-            case TargetingStyle.Projectile:
+            case TargetingStyle.ProjectileAOE:
                 currentState = FriendlyState.Targeting_Projectile;
                 templateParent.UnlockTemplate();
                 break;

@@ -52,17 +52,17 @@ public class BileTile : HazardTile
         if (unit.HasEffect(StatusEffectType.AP_Down))
         {
             int _effectIndex = unit.GetEffectIndex(StatusEffectType.AP_Down);
-            unit.RemoveEffect(unit.currentEffects[_effectIndex]);
+            unit.currentEffects[_effectIndex].RemoveEffect();
         }
         if (unit.HasEffect(StatusEffectType.DEF_Down))
         {
             int _effectIndex = unit.GetEffectIndex(StatusEffectType.DEF_Down);
-            unit.RemoveEffect(unit.currentEffects[_effectIndex]);
+            unit.currentEffects[_effectIndex].RemoveEffect();
         }
         if (unit.HasEffect(StatusEffectType.WIL_Down))
         {
             int _effectIndex = unit.GetEffectIndex(StatusEffectType.WIL_Down);
-            unit.RemoveEffect(unit.currentEffects[_effectIndex]);
+            unit.currentEffects[_effectIndex].RemoveEffect();
         }
 
         unit.ApplyEffect(new StatusEffect_DebuffAP(unit, unit, Mathf.CeilToInt(unit.currentApStat / 2), 3));
@@ -78,5 +78,7 @@ public class BileTile : HazardTile
 
             UpdateBile();
         }
+
+        startDepleting = true;
     }
 }

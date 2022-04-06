@@ -23,7 +23,7 @@ namespace Harpaesis.Combat
             OnEffectApplied();
         }
 
-        protected void RemoveEffect()
+        public void RemoveEffect()
         {
             OnEffectRemoved();
             effectedUnit.RemoveEffect(this);
@@ -439,7 +439,7 @@ namespace Harpaesis.Combat
 
         protected override void OnEffectRemoved()
         {
-            effectedUnit.currentDefStat += amount;
+            effectedUnit.currentWilStat += amount;
             effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.WIL_Down);
         }
     }
