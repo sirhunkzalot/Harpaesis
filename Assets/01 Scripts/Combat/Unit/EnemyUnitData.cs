@@ -17,12 +17,15 @@ namespace Harpaesis.Combat
         public int rangeEstimate;
 
         [Space]
-        [Range(1, 100)] public int shortRangeWeight;
-        [Range(1, 100)] public int mediumRangeWeight;
-        [Range(1, 100)] public int longRangeWeight;
+        [Range(1, 100)] public int shortRangeWeight = 1;
+        [Range(1, 100)] public int mediumRangeWeight = 1;
+        [Range(1, 100)] public int longRangeWeight = 1;
 
         [Space]
-        [Range(1, 100)] public int highHPTargetWeight;
-        [Range(1, 100)] public int lowHPTargetWeight;
+        [Range(1, 100)] public int highHPTargetWeight = 1;
+        [Range(1, 100)] public int lowHPTargetWeight = 1;
+
+        [Space]
+        [Range(1, 100)] public int aoeTargetWeight = 1;
     }
 }

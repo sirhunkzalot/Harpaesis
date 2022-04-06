@@ -15,14 +15,15 @@ MonoBehaviour:
   skillName: Projectile Vomit
   apCost: 3
   validTargets: 4
-  targetingStyle: 0
-  projectileRange: -1
+  targetingStyle: 2
+  projectileRange: 5
+  aoeRadius: 2
   skillDescription: 
   targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
   implemented: 1
   skillSprite: {fileID: 0}
   effects:
-  - effectType: 4
-    param1: 2d3
-    param2: 1d4
+  - effectType: 19
+    param1: Combat/Other Prefabs/Bile Tile
+    param2: 
     damageType: 0

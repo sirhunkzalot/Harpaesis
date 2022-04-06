@@ -67,5 +67,7 @@ public class CaltropsTile : HazardTile
 
             UpdateCaltrops();
         }
+
+        startDepleting = true;
     }
 }

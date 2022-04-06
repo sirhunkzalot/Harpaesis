@@ -29,12 +29,22 @@ MonoBehaviour:
     shortRangeWeight: 100
     mediumRangeWeight: 75
     longRangeWeight: 50
-    highHPTargetWeight: 0
-    lowHPTargetWeight: 0
+    highHPTargetWeight: 1
+    lowHPTargetWeight: 1
+    aoeTargetWeight: 1
   - skill: {fileID: 11400000, guid: 221e191003922ff47accb6e7da577bcf, type: 2}
-    rangeEstimate: 5
+    rangeEstimate: 7
     shortRangeWeight: 1
     mediumRangeWeight: 25
     longRangeWeight: 50
-    highHPTargetWeight: 0
-    lowHPTargetWeight: 0
+    highHPTargetWeight: 1
+    lowHPTargetWeight: 1
+    aoeTargetWeight: 1
+  - skill: {fileID: 11400000, guid: 4aaca4e8e54047a4d89f41bd9bb8d69a, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 1
+    mediumRangeWeight: 50
+    longRangeWeight: 50
+    highHPTargetWeight: 50
+    lowHPTargetWeight: 50
+    aoeTargetWeight: 50

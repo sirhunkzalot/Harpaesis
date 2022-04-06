@@ -22,12 +22,13 @@ MonoBehaviour:
   apStat: 0
   weaknesses: 
   resistances: 
-  unitPassive: 99
+  unitPassive: 0
   enemySkills:
   - skill: {fileID: 11400000, guid: 86d75878af4ed6243bd70de06e765ab8, type: 2}
-    rangeEstimate: 1
-    shortRangeWeight: 100
-    mediumRangeWeight: 100
-    longRangeWeight: 100
-    highHPTargetWeight: 100
-    lowHPTargetWeight: 100
+    rangeEstimate: 5
+    shortRangeWeight: 25
+    mediumRangeWeight: 25
+    longRangeWeight: 25
+    highHPTargetWeight: 25
+    lowHPTargetWeight: 25
+    aoeTargetWeight: 100

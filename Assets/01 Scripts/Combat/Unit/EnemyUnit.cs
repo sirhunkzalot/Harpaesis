@@ -164,6 +164,47 @@ public class EnemyUnit : Unit
             _weight += Mathf.RoundToInt((validMoves[i].skillToUse.highHPTargetWeight * .01f) * validMoves[i].target.currentHP);
             _weight += Mathf.RoundToInt((validMoves[i].skillToUse.lowHPTargetWeight / 2) / validMoves[i].target.currentHP);
 
+            EnemySkill _eSkill = validMoves[i].skillToUse;
+
+            if (_eSkill.skill.targetingStyle == TargetingStyle.ProjectileAOE)
+            {
+                Collider[] _colls = Physics.OverlapSphere(validMoves[i].target.transform.position, _eSkill.skill.aoeRadius + .25f);
+
+                if(_colls.Length > 0)
+                {
+                    int _favorableAOETargetCount = 0;
+                    for (int c = 0; c < _colls.Length; c++)
+                    {
+                        if (_colls[c].GetComponent<FriendlyUnit>() != null)
+                        {
+                            if (allegianceChanged)
+                            {
+                                _favorableAOETargetCount--;
+                            }
+                            else
+                            {
+                                _favorableAOETargetCount++;
+                            }
+                        }
+                        else if (_colls[c].GetComponent<EnemyUnit>() != null)
+                        {
+                            if (allegianceChanged)
+                            {
+                                _favorableAOETargetCount++;
+                            }
+                            else
+                            {
+                                _favorableAOETargetCount--;
+                            }
+                        }
+                    }
+
+                    _weight += (_favorableAOETargetCount * _favorableAOETargetCount * _favorableAOETargetCount) * _eSkill.aoeTargetWeight;
+
+                    print(_weight);
+                }
+            }
+            _weight = Mathf.Clamp(_weight, 0, int.MaxValue);
             _maxWeight += _weight;
 
             if (i == 0)

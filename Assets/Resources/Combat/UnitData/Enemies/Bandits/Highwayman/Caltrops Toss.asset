@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
+  m_Name: Caltrops Toss
+  m_EditorClassIdentifier: 
+  skillName: Caltrops Toss
+  apCost: 5
+  validTargets: 4
+  targetingStyle: 2
+  projectileRange: 5
+  aoeRadius: 2
+  skillDescription: 
+  targetingTemplate: {fileID: 168528501438769920, guid: f6793d2b16a89ec448fa9b782d6c789d, type: 3}
+  implemented: 1
+  skillSprite: {fileID: 0}
+  effects:
+  - effectType: 19
+    param1: Combat/Other Prefabs/Caltrops Tile
+    param2: 
+    damageType: 0
