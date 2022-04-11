@@ -88,6 +88,9 @@ namespace Harpaesis.Combat
                 case SkillEffectType.ChangeAllegiance:
                     SkillEffect_ChangeAllegiance(_user, _target, _params1);
                     break;
+                case SkillEffectType.BoilBlood:
+                    SkillEffect_BoilBlood(_user, _target, _params1, _params2);
+                    break;
                 default:
                     break;
             }
@@ -263,6 +266,33 @@ namespace Harpaesis.Combat
                 HazardTile _hazard = _g.GetComponent<HazardTile>();
 
                 _hazard.Init();
+            }
+        }
+
+        public static void SkillEffect_BoilBlood(Unit _user, Unit _target, int _damageAmount, int _range)
+        {
+            if(_target == null || _target.currentHP <= 0)
+            {
+                const string PATH = "Combat/Other Prefabs/Boil Blood";
+
+                GameObject _prefab = Resources.Load(PATH) as GameObject;
+
+                GameObject.Instantiate(_prefab, _target.transform.position, Quaternion.identity);
+
+                Collider[] _colliders = Physics.OverlapSphere(_target.transform.position, _range, ~LayerMask.NameToLayer("Unit"));
+
+                if(_colliders.Length > 0)
+                {
+                    EnemyUnit _unit;
+
+                    foreach (Collider _col in _colliders)
+                    {
+                        if(_col.TryGetComponent(out _unit) && _unit != _target)
+                        {
+                            _unit.TakeDamage(_damageAmount, DamageType.Magic, _user);
+                        }
+                    }
+                }
             }
         }
     }

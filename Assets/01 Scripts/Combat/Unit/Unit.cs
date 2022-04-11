@@ -107,25 +107,6 @@ public abstract class Unit : MonoBehaviour
             print($"Resisted! Original Damage ({_damageAmount}) was reduced to {_adjustedDamage}");
         }
 
-        /*
-        foreach (DamageType _type in currentWeaknesses)
-        {
-        print($"{_damageType} == {_type} --> {_damageType == _type}");
-        if ((int)_damageType == (int)_type)
-        {
-        _adjustedDamage = Mathf.FloorToInt(_adjustedDamage * 1.5f);
-        print($"Weak! Original Damage ({_damageAmount}) was amplified to {_adjustedDamage}");
-        }
-        }
-        foreach (DamageType _type in currentResistances)
-        {
-        print($"{_damageType} == {_type} --> {_damageType == _type}");
-        if ((int)_damageType == (int)_type)
-        {
-        _adjustedDamage = Mathf.FloorToInt(_adjustedDamage * .5f);
-        print($"Resisted! Original Damage ({_damageAmount}) was reduced to {_adjustedDamage}");
-        }
-        }*/
         unit_ui.DisplayDamageText(-_adjustedDamage);
 
         OnTakeDamage(_adjustedDamage, _attacker, _damageType);
@@ -136,7 +117,7 @@ public abstract class Unit : MonoBehaviour
 
         if (!isAlive)
         {
-            HandleUnitDeath();
+            Invoke(nameof(HandleUnitDeath), .05f);
         }
     }
 

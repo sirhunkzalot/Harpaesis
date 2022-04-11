@@ -111,6 +111,10 @@ namespace Harpaesis.Combat
                 case SkillEffectType.SpawnPrefab:
                     param1.stringValue = EditorGUI.TextField(secondRect, "File Path:", param1.stringValue);
                     break;
+                case SkillEffectType.BoilBlood:
+                    param1.stringValue = EditorGUI.TextField(secondRect, "Damage:", param1.stringValue);
+                    param2.stringValue = EditorGUI.TextField(thirdRect, "Range:", param2.stringValue);
+                    break;
                 default:
                     break;
             }
@@ -151,6 +155,7 @@ namespace Harpaesis.Combat
         DebuffAP,
 
         ChangeAllegiance,
-        SpawnPrefab
+        SpawnPrefab,
+        BoilBlood
     }
 }

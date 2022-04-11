@@ -575,6 +575,6 @@ namespace Harpaesis.Combat
         Silver,
         Defend,
         WIL_Up,
-        WIL_Down
+        WIL_Down,
     }
 }
