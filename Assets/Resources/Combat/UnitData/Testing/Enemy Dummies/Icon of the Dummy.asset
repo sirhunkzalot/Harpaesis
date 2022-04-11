@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Ancient Thing
   unitIcon: {fileID: 21300000, guid: 82d04a3c8a463af4287cb938ab5582b5, type: 3}
-  healthStat: 100
+  healthStat: 10
   inititiveStat: 0
   attackStat: 12
   defenseStat: 5
@@ -24,11 +24,11 @@ MonoBehaviour:
   resistances: 
   unitPassive: 0
   enemySkills:
-  - skill: {fileID: 11400000, guid: 86d75878af4ed6243bd70de06e765ab8, type: 2}
-    rangeEstimate: 5
-    shortRangeWeight: 25
-    mediumRangeWeight: 25
-    longRangeWeight: 25
-    highHPTargetWeight: 25
-    lowHPTargetWeight: 25
+  - skill: {fileID: 11400000, guid: 7981663dc47b8134b8c094103bc9bebd, type: 2}
+    rangeEstimate: 1000
+    shortRangeWeight: 100
+    mediumRangeWeight: 100
+    longRangeWeight: 100
+    highHPTargetWeight: 100
+    lowHPTargetWeight: 100
     aoeTargetWeight: 100

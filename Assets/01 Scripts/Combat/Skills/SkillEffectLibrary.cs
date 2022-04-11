@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Harpaesis.GridAndPathfinding;
 using UnityEngine;
 
 namespace Harpaesis.Combat
@@ -287,9 +288,12 @@ namespace Harpaesis.Combat
 
                     foreach (Collider _col in _colliders)
                     {
-                        if(_col.TryGetComponent(out _unit) && _unit != _target)
+                        if(_col.TryGetComponent(out _unit) && _unit != _target && _unit.currentHP >= 0)
                         {
-                            _unit.TakeDamage(_damageAmount, DamageType.Magic, _user);
+                            if(!GridManager.instance.LinecastToWorldPoint(_target.transform.position + Vector3.up, _unit.transform.position + Vector3.up))
+                            {
+                                _unit.TakeDamage(_damageAmount, DamageType.Magic, _user);
+                            }
                         }
                     }
                 }
