@@ -263,7 +263,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -438,7 +438,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: cd7912dea4475a045ab37ab6ef6490fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -700,6 +700,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90b3c1a99e8305c47aadb11df7a8ea87, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8da3727fa6fb38245b9fb911d3831425, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!1001 &140957873
@@ -757,6 +765,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90b3c1a99e8305c47aadb11df7a8ea87, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8da3727fa6fb38245b9fb911d3831425, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!4 &223965901 stripped
@@ -1276,7 +1292,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1512,7 +1528,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh68036
+  m_Name: pb_Mesh158210
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1997,6 +2013,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90b3c1a99e8305c47aadb11df7a8ea87, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8da3727fa6fb38245b9fb911d3831425, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!1 &586861636
@@ -2061,7 +2085,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11404,7 +11428,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 8da3727fa6fb38245b9fb911d3831425, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11713,7 +11737,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: cd7912dea4475a045ab37ab6ef6490fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11749,7 +11773,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh68128
+  m_Name: pb_Mesh158298
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12006,6 +12030,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 129bc110d2a4c8044940990be8599034, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cd7912dea4475a045ab37ab6ef6490fe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!1 &848648105
@@ -12614,7 +12646,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12678,6 +12710,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90b3c1a99e8305c47aadb11df7a8ea87, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8da3727fa6fb38245b9fb911d3831425, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!1001 &937311676
@@ -12788,7 +12828,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -13824,6 +13864,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90b3c1a99e8305c47aadb11df7a8ea87, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8da3727fa6fb38245b9fb911d3831425, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!1 &1336346370
@@ -13888,7 +13936,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -14027,7 +14075,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh68344
+  m_Name: pb_Mesh158500
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14530,7 +14578,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -14592,7 +14640,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: cd7912dea4475a045ab37ab6ef6490fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14775,6 +14823,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 129bc110d2a4c8044940990be8599034, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cd7912dea4475a045ab37ab6ef6490fe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!1 &1690025969
@@ -15190,7 +15246,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -15548,7 +15604,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: cd7912dea4475a045ab37ab6ef6490fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15863,6 +15919,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseObstacle (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3722681953147544801, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90b3c1a99e8305c47aadb11df7a8ea87, type: 2}
+    - target: {fileID: 5732167000837150070, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8da3727fa6fb38245b9fb911d3831425, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df24fc011360dd42b47188f8fbaf797, type: 3}
 --- !u!1 &1999751538
@@ -15986,7 +16050,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh67896
+  m_Name: pb_Mesh158076
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
