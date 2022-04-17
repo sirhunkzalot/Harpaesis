@@ -132,6 +132,10 @@ public class TurnManager : MonoBehaviour
         {
             activeTurn.unit.OnTurnEnd();
         }
+        foreach (Unit _unit in units)
+        {
+            _unit.OnAnyTurnEnd();
+        }
 
         GridCamera.instance.followUnit = null;
 
@@ -153,6 +157,10 @@ public class TurnManager : MonoBehaviour
         for (int i = 0; i < activeHazards.Count; i++)
         {
             activeHazards[i].OnRoundEnd();
+        }
+        foreach (Unit _unit in units)
+        {
+            _unit.OnRoundEnd();
         }
         turnCounter = 0;
         BuildTurnOrder();

@@ -53,7 +53,7 @@ namespace Harpaesis.UI
             if (IsFriendlyTurn)
             {
                 moveButton.interactable = turnManager.activeTurn.unit.turnData.ap > 0 && turnManager.activeTurn.unit.canMove;
-                apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.currentApStat}";
+                apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.unitData.apStat}";
             }
         }
 

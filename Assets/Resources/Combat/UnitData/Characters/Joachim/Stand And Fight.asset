@@ -18,12 +18,16 @@ MonoBehaviour:
   targetingStyle: 1
   projectileRange: -1
   aoeRadius: -1
-  skillDescription: 'Protects all allies within range from negative mental effects
-
-
-    (Coming
-    Soon)'
+  skillDescription: Protects all allies within range from negative mental effects
   targetingTemplate: {fileID: 168528501438769920, guid: 5dcf8a71c7edb53428822ced7ff1c854, type: 3}
-  implemented: 0
+  implemented: 1
   skillSprite: {fileID: 21300000, guid: 5c1303297c608194784e1b8f784850d4, type: 3}
-  effects: []
+  effects:
+  - effectType: 23
+    param1: 
+    param2: 
+    damageType: 0
+  - effectType: 24
+    param1: 1
+    param2: 
+    damageType: 0

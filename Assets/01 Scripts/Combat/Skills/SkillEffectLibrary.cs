@@ -92,6 +92,18 @@ namespace Harpaesis.Combat
                 case SkillEffectType.BoilBlood:
                     SkillEffect_BoilBlood(_user, _target, _params1, _params2);
                     break;
+                case SkillEffectType.Taunt:
+                    SkillEffect_Taunt(_user, _target, _params1);
+                    break;
+                case SkillEffectType.Bulwark:
+                    SkillEffect_Bulwark(_user, _target, _params1);
+                    break;
+                case SkillEffectType.CleanseNegativeEffects:
+                    SkillEffect_CleanseNegativeEffects(_user, _target);
+                    break;
+                case SkillEffectType.ResistNegativeEffects:
+                    SkillEffect_ResistNegativeEffects(_user, _target, _params1);
+                    break;
                 default:
                     break;
             }
@@ -298,6 +310,24 @@ namespace Harpaesis.Combat
                     }
                 }
             }
+        }
+
+        public static void SkillEffect_Taunt(Unit _user, Unit _target, int _duration)
+        {
+            _target.ApplyEffect(new StatusEffect_Taunt(_user, _target, 0, _duration));
+        }
+
+        public static void SkillEffect_Bulwark(Unit _user, Unit _target, int _duration)
+        {
+            _target.ApplyEffect(new StatusEffect_Bulwark(_user, _target, 0, _duration));
+        }
+        public static void SkillEffect_CleanseNegativeEffects(Unit _user, Unit _target)
+        {
+            _target.CleanseNegativeEffects();
+        }
+        public static void SkillEffect_ResistNegativeEffects(Unit _user, Unit _target, int _duration)
+        {
+            _target.ApplyEffect(new StatusEffect_ResistNegativeEffects(_user, _target, 0, _duration));
         }
     }
 

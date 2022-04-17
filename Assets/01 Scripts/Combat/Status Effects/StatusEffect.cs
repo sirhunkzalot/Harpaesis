@@ -10,15 +10,26 @@ namespace Harpaesis.Combat
         [ReadOnly] public Unit effectedUnit;
         [ReadOnly] public int amount;
         [ReadOnly] public int duration;
+        [ReadOnly] public bool isNegativeEffect;
 
         public StatusEffectType effectType;
 
-        public StatusEffect(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration)
+        public StatusEffect(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration, bool _isNegativeEffect = false)
         {
             inflictingUnit = _inflictingUnit;
             effectedUnit = _effectedUnit;
             amount = _amount;
             duration = _duration;
+            isNegativeEffect = _isNegativeEffect;
+
+            foreach (StatusEffect _effect in _effectedUnit.currentEffects)
+            {
+                if (!(_effect.CanEffectBeApplied(this)))
+                {
+                    RemoveEffect();
+                    return;
+                }
+            }
 
             OnEffectApplied();
         }
@@ -30,13 +41,14 @@ namespace Harpaesis.Combat
         }
 
         protected virtual void OnEffectApplied() { }
-
+        protected virtual bool CanEffectBeApplied(StatusEffect _effect) { return true; }
         protected virtual void OnEffectRemoved() { }
         public virtual void OnRoundStart() { }
         public virtual void OnRoundEnd() { }
         public virtual int OnTargeted(int _damageAmount) { return _damageAmount;  }
         public virtual void OnTurnStart() { }
         public virtual void OnTurnEnd() { }
+        public virtual void OnAnyTurnEnd() { }
         public virtual void OnDealDamage(int _damageAmount, Unit _damagedUnit) { }
         public virtual void OnTakeDamage(int _damageAmount, Unit _damagingUnit) { }
         public virtual void OnTakeStep() { }
@@ -52,7 +64,7 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_DamageOverTime : StatusEffect
     {
-        public StatusEffect_DamageOverTime(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) { }
+        public StatusEffect_DamageOverTime(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration, true) { }
 
 
         public override void OnTurnStart()
@@ -137,9 +149,10 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_Fear : StatusEffect
     {
-        public StatusEffect_Fear(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        public StatusEffect_Fear(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
         {
             effectType = StatusEffectType.Fear;
+            
         }
 
         protected override void OnEffectApplied()
@@ -168,9 +181,10 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_Sleep : StatusEffect
     {
-        public StatusEffect_Sleep(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        public StatusEffect_Sleep(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
         {
             effectType = StatusEffectType.Sleep;
+            
         }
 
         protected override void OnEffectApplied()
@@ -209,9 +223,10 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_Root : StatusEffect
     {
-        public StatusEffect_Root(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        public StatusEffect_Root(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
         {
             effectType = StatusEffectType.Root;
+            
         }
 
         protected override void OnEffectApplied()
@@ -343,9 +358,11 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_DebuffATK : StatusEffect
     {
-        public StatusEffect_DebuffATK(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        public StatusEffect_DebuffATK(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) 
+            : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
         {
             effectType = StatusEffectType.ATK_Down;
+            
         }
 
         protected override void OnEffectApplied()
@@ -377,9 +394,11 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_DebuffDEF : StatusEffect
     {
-        public StatusEffect_DebuffDEF(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        public StatusEffect_DebuffDEF(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) 
+            : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
         {
             effectType = StatusEffectType.DEF_Down;
+            
         }
 
         protected override void OnEffectApplied()
@@ -411,9 +430,11 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_DebuffWIL : StatusEffect
     {
-        public StatusEffect_DebuffWIL(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        public StatusEffect_DebuffWIL(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) 
+            : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
         {
             effectType = StatusEffectType.WIL_Down;
+            
         }
 
         protected override void OnEffectApplied()
@@ -445,9 +466,11 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_DebuffAP : StatusEffect
     {
-        public StatusEffect_DebuffAP(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        public StatusEffect_DebuffAP(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) 
+            : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
         {
             effectType = StatusEffectType.AP_Down;
+            
         }
 
         protected override void OnEffectApplied()
@@ -479,9 +502,11 @@ namespace Harpaesis.Combat
     }
     public class StatusEffect_ChangeAllegiance : StatusEffect
     {
-        public StatusEffect_ChangeAllegiance(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration) 
+        public StatusEffect_ChangeAllegiance(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) 
+            : base(_inflictingUnit, _effectedUnit, _amount, _duration, true) 
         {
             effectType = StatusEffectType.ChangeAllegience;
+            
         }
 
         protected override void OnEffectApplied()
@@ -556,6 +581,123 @@ namespace Harpaesis.Combat
             effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.Defend);
         }
     }
+    public class StatusEffect_Taunt : StatusEffect
+    {
+        EnemyUnit eUnit;
+
+        public StatusEffect_Taunt(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) 
+            : base(_inflictingUnit, _effectedUnit, _amount, _duration, true)
+        {
+            effectType = StatusEffectType.Taunt;
+            
+        }
+
+        protected override void OnEffectApplied()
+        {
+            effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.Taunt);
+            eUnit = (EnemyUnit)effectedUnit;
+            eUnit.currentTarget = (FriendlyUnit)inflictingUnit;
+        }
+
+        public override void OnTurnStart()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        public override void OnAnyTurnEnd()
+        {
+            if (eUnit.currentTarget != null && !inflictingUnit.isAlive)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            eUnit.currentTarget = null;
+
+            RemoveEffect();
+        }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.Taunt);
+        }
+    }
+    public class StatusEffect_Bulwark : StatusEffect
+    {
+        public StatusEffect_Bulwark(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        {
+            effectType = StatusEffectType.Bulwark;
+        }
+
+        public override int OnTargeted(int _damageAmount)
+        {
+            int _reducedDamageAmount = Mathf.RoundToInt(Mathf.Clamp01(_damageAmount));
+
+            return Mathf.CeilToInt(_reducedDamageAmount);
+        }
+
+        public override void OnTurnStart()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            RemoveEffect();
+        }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.Bulwark);
+        }
+    }
+    public class StatusEffect_ResistNegativeEffects : StatusEffect
+    {
+        public StatusEffect_ResistNegativeEffects(Unit _inflictingUnit, Unit _effectedUnit, int _amount, int _duration) : base(_inflictingUnit, _effectedUnit, _amount, _duration)
+        {
+            effectType = StatusEffectType.ResistNegativeEffects;
+        }
+
+        protected override void OnEffectApplied()
+        {
+            effectedUnit.unit_ui.effectsManager.ActivateEffect(StatusEffectType.ResistNegativeEffects);
+            duration++;
+        }
+
+        protected override bool CanEffectBeApplied(StatusEffect _effectToApply)
+        {
+            if (_effectToApply.isNegativeEffect)
+                return false;
+            else
+                return true;
+        }
+
+        public override void OnRoundEnd()
+        {
+            if (--duration <= 0)
+            {
+                EndEffect();
+            }
+        }
+
+        void EndEffect()
+        {
+            RemoveEffect();
+        }
+
+        protected override void OnEffectRemoved()
+        {
+            effectedUnit.unit_ui.effectsManager.DeactivateEffect(StatusEffectType.ResistNegativeEffects);
+        }
+    }
 
     public enum StatusEffectType
     {
@@ -576,5 +718,8 @@ namespace Harpaesis.Combat
         Defend,
         WIL_Up,
         WIL_Down,
+        Taunt,
+        Bulwark,
+        ResistNegativeEffects
     }
 }

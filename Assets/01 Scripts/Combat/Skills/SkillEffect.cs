@@ -115,6 +115,17 @@ namespace Harpaesis.Combat
                     param1.stringValue = EditorGUI.TextField(secondRect, "Damage:", param1.stringValue);
                     param2.stringValue = EditorGUI.TextField(thirdRect, "Range:", param2.stringValue);
                     break;
+                case SkillEffectType.Taunt:
+                    param1.stringValue = EditorGUI.TextField(secondRect, "Duration in Turns:", param1.stringValue);
+                    break;
+                case SkillEffectType.Bulwark:
+                    param1.stringValue = EditorGUI.TextField(secondRect, "Duration in Turns:", param1.stringValue);
+                    break;
+                case SkillEffectType.CleanseNegativeEffects:
+                    break;
+                case SkillEffectType.ResistNegativeEffects:
+                    param1.stringValue = EditorGUI.TextField(secondRect, "Duration in Turns:", param1.stringValue);
+                    break;
                 default:
                     break;
             }
@@ -156,6 +167,10 @@ namespace Harpaesis.Combat
 
         ChangeAllegiance,
         SpawnPrefab,
-        BoilBlood
+        BoilBlood,
+        Taunt,
+        Bulwark,
+        CleanseNegativeEffects,
+        ResistNegativeEffects,
     }
 }

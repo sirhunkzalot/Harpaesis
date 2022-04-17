@@ -8,8 +8,6 @@ namespace Harpaesis.Chungus
 {
     public class Dialogue : MonoBehaviour
     {
-        bool skipLine;
-
         [Header("Before Dialog")]
         public UnityEvent OnStartDialog;
 
@@ -41,11 +39,5 @@ namespace Harpaesis.Chungus
             OnFinishDialog.Invoke();
             gameObject.SetActive(false);
         }
-
-        public void SkipLine()
-        {
-            skipLine = true;
-        }
     }
-
 }

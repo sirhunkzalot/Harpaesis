@@ -11,7 +11,7 @@ public class EnemyUnit : Unit
 {
     [HideInInspector] public EnemyUnitData enemyUnitData;
 
-    [SerializeField, ReadOnly] FriendlyUnit currentTarget;
+    [ReadOnly] public FriendlyUnit currentTarget;
 
     List<EnemyMove> validMoves = new List<EnemyMove>();
 
@@ -53,6 +53,9 @@ public class EnemyUnit : Unit
         enemyUnits = turnManager.enemyUnits;
         ignoreEnemyUnits = new List<EnemyUnit>();
 
+        // If Current Target is Dead, remove it as current target
+        currentTarget = (currentTarget == null) ? null : (currentTarget.isAlive) ? currentTarget : null;
+
         validMoves = new List<EnemyMove>();
 
         //print("Start Turn");
@@ -61,8 +64,37 @@ public class EnemyUnit : Unit
 
         PlanTurn();
     }
+    public override void StartFearTurn()
+    {
+        int _index = GetEffectIndex(StatusEffectType.Fear);
+        Vector3 _fromPosition = currentEffects[_index].inflictingUnit.transform.position;
+
+        Vector3 _dir = (transform.position - _fromPosition).normalized;
+        Vector3 _targetPosition = transform.position + (_dir * 1000);
+
+        PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, CreateFearMove, currentEffects[_index].inflictingUnit));
+    }
+
+    void CreateFearMove(PathResult _result)
+    {
+        if (_result.success)
+        {
+            StartCoroutine(MoveOnlyTurn(_result.path));
+        }
+        else
+        {
+            print("hmmm");
+        }
+    }
+
     void PlanTurn()
     {
+        if(currentTarget != null)
+        {
+            PlanTauntedTurn();
+            return;
+        }
+
         for (int i = 0; i < units.Count; i++)
         {
             if (canMove)
@@ -77,6 +109,20 @@ public class EnemyUnit : Unit
             //print("Generate moves without Movement");
             CreateEnemyMoves(units[i], transform.position, enemyUnitData.apStat);
         }
+
+        Invoke(nameof(ChooseMove), 1f);
+    }
+    void PlanTauntedTurn()
+    {
+        if (canMove)
+        {
+            Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
+            Vector3 _targetPos = grid.NodePositionFromWorldPoint(currentTarget.transform.position, true);
+
+            PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, CreateEnemyMovesWithPath, currentTarget));
+        }
+
+        CreateEnemyMoves(currentTarget, transform.position, enemyUnitData.apStat);
 
         Invoke(nameof(ChooseMove), 1f);
     }
@@ -132,7 +178,8 @@ public class EnemyUnit : Unit
         if (validMoves.Count == 0)
         {
             //print("No Valid Moves were created");
-            CreateMoveOnlyTurn();
+
+            CreateMoveOnlyTurn(currentTarget);
             return;
         }
 
@@ -200,8 +247,6 @@ public class EnemyUnit : Unit
                     }
 
                     _weight += (_favorableAOETargetCount * _favorableAOETargetCount * _favorableAOETargetCount) * _eSkill.aoeTargetWeight;
-
-                    print(_weight);
                 }
             }
             _weight = Mathf.Clamp(_weight, 0, int.MaxValue);
@@ -238,7 +283,7 @@ public class EnemyUnit : Unit
         Debug.LogError($"Error: No move was selected for {enemyUnitData.unitName}. Moving Unit instead.");
         CreateMoveOnlyTurn();
     }
-    void CreateMoveOnlyTurn()
+    void CreateMoveOnlyTurn(Unit _currentTarget = null)
     {
         //print("Making a move only turn.");
 
@@ -248,37 +293,49 @@ public class EnemyUnit : Unit
             Invoke(nameof(EndTurn), .5f);
         }
 
-        float _closestDis = float.MaxValue;
-        int _closestUnitIndex = -1;
-
-        for (int i = 0; i < friendlyUnits.Count; i++)
+        if(_currentTarget == null)
         {
-            if (ignoreFriendlyUnits.Count != 0 && ignoreFriendlyUnits.Contains(friendlyUnits[i]))
+            float _closestDis = float.MaxValue;
+            int _closestUnitIndex = -1;
+
+            for (int i = 0; i < friendlyUnits.Count; i++)
             {
-                continue;
+                if (ignoreFriendlyUnits.Count != 0 && ignoreFriendlyUnits.Contains(friendlyUnits[i]))
+                {
+                    continue;
+                }
+
+                float _unitDis = Vector3.Distance(transform.position, friendlyUnits[i].transform.position);
+
+                if (_unitDis < _closestDis)
+                {
+                    _closestUnitIndex = i;
+                    _closestDis = _unitDis;
+                }
             }
 
-            float _unitDis = Vector3.Distance(transform.position, friendlyUnits[i].transform.position);
-
-            if (_unitDis < _closestDis)
+            if (_closestUnitIndex == -1)
             {
-                _closestUnitIndex = i;
-                _closestDis = _unitDis;
+                Debug.Log("No Accessible Friendly Unit");
+                Invoke(nameof(EndTurn), .5f);
+                return;
             }
-        }
 
-        if(_closestUnitIndex == -1)
+            Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
+            Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[_closestUnitIndex].transform.position, true);
+
+            //print("Requesting path to closest Friendly unit");
+            PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, MoveOnlyPathResult, friendlyUnits[_closestUnitIndex]));
+        }
+        else
         {
-            Debug.Log("No Accessible Friendly Unit");
-            Invoke(nameof(EndTurn), .5f);
-            return;
+            Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
+            Vector3 _targetPos = grid.NodePositionFromWorldPoint(_currentTarget.transform.position, true);
+
+            //print("Requesting path to closest Friendly unit");
+            PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, MoveOnlyPathResult, _currentTarget));
         }
 
-        Vector3 _myPos = grid.NodePositionFromWorldPoint(transform.position, false);
-        Vector3 _targetPos = grid.NodePositionFromWorldPoint(friendlyUnits[_closestUnitIndex].transform.position, true);
-
-        //print("Requesting path to closest Friendly unit");
-        PathRequestManager.RequestPath(new PathRequest(_myPos, _targetPos, MoveOnlyPathResult, friendlyUnits[_closestUnitIndex]));
     }
     void MoveOnlyPathResult(PathResult _result)
     {

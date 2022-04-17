@@ -86,14 +86,6 @@ public class UnitMotor : MonoBehaviour
 
     }
 
-    public void RunAway(Vector3 _fromPosition)
-    {
-        Vector3 _dir = (transform.position - _fromPosition).normalized;
-        Vector3 _targetPosition = transform.position + (_dir * 1000);
-
-        PathRequestManager.RequestPath(new PathRequest(transform.position, _targetPosition, Run, unit));
-    }
-
     public void Knockback(int _distance, Vector3 _fromPosition)
     {
         Vector3 _dir = (transform.position - _fromPosition).normalized;
@@ -121,11 +113,6 @@ public class UnitMotor : MonoBehaviour
 
 
         StartCoroutine(ForceMovement(_targetNodePosition, _desiredNode));
-    }
-
-    void Run(PathResult _result)
-    {
-        Move(_result.path);
     }
 
 void ClearPath()

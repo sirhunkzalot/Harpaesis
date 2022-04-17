@@ -231,9 +231,8 @@ public abstract class Unit : MonoBehaviour
         }
         else if (HasEffect(StatusEffectType.Fear))
         {
-            int _index = GetEffectIndex(StatusEffectType.Fear);
-            motor.RunAway(currentEffects[_index].inflictingUnit.transform.position);
-            Invoke(nameof(ForceEndTurn), 1f);
+
+            Invoke(nameof(StartFearTurn), 1f);
         }
         else
         {
@@ -243,6 +242,7 @@ public abstract class Unit : MonoBehaviour
     }
 
     public abstract void StartTurn();
+    public virtual void StartFearTurn() { }
 
     public void ForceEndTurn()
     {
@@ -258,7 +258,6 @@ public abstract class Unit : MonoBehaviour
         grid.NodeFromWorldPoint(transform.position).hasUnit = false;
         Destroy(gameObject);
     }
-
     private void OnTurnStart()
     {
         for (int i = 0; i < currentEffects.Count; i++)
@@ -268,7 +267,6 @@ public abstract class Unit : MonoBehaviour
 
         unitPassive.OnTurnStart();
     }
-
     public void OnTurnEnd()
     {
         for (int i = 0; i < currentEffects.Count; i++)
@@ -278,7 +276,13 @@ public abstract class Unit : MonoBehaviour
 
         unitPassive.OnTurnEnd();
     }
-
+    public void OnAnyTurnEnd()
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            currentEffects[i].OnAnyTurnEnd();
+        }
+    }
     public void OnTakeStep()
     {
         for (int i = 0; i < currentEffects.Count; i++)
@@ -286,9 +290,14 @@ public abstract class Unit : MonoBehaviour
             currentEffects[i].OnTakeStep();
         }
     }
-
     public void OnRoundStart() { }
-    public void OnRoundEnd() { }
+    public void OnRoundEnd()
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            currentEffects[i].OnRoundEnd();
+        }
+    }
     public void OnDealDamage(int _damageAmount, Unit _damagedUnit, DamageType _damageType)
     {
         for (int i = 0; i < currentEffects.Count; i++)
@@ -317,5 +326,17 @@ public abstract class Unit : MonoBehaviour
         }
 
         unitPassive.OnTakeDamage(_damageAmount, _damagingUnit, _damageType);
+    }
+    public void CleanseNegativeEffects()
+    {
+        for (int i = 0; i < currentEffects.Count; i++)
+        {
+            if (currentEffects[i].isNegativeEffect)
+            {
+                currentEffects[i].RemoveEffect();
+                CleanseNegativeEffects();
+                return;
+            }
+        }
     }
 }
