@@ -1106,7 +1106,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1122,7 +1122,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220164238}
-  m_LocalRotation: {x: 1e-45, y: 0.9302721, z: -0.3668704, w: 1e-45}
+  m_LocalRotation: {x: -1e-45, y: 0.9302721, z: -0.3668704, w: -3e-45}
   m_LocalPosition: {x: -0.14899373, y: 4.1617994, z: 3.8543673}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1871,7 +1871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &525941472
 Transform:
   m_ObjectHideFlags: 0
@@ -2241,7 +2241,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3134,7 +3134,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
-  m_LocalRotation: {x: 1e-45, y: 0.9302721, z: -0.3668704, w: 1e-45}
+  m_LocalRotation: {x: -1e-45, y: 0.9302721, z: -0.3668704, w: -3e-45}
   m_LocalPosition: {x: -3.3300004, y: 5, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4749,6 +4749,18 @@ PrefabInstance:
     - target: {fileID: 2221438907522834583, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Overworld_Testing_scenes, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381605217452629517, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1350616976}
+    - target: {fileID: 2381605217452629517, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381605217452629517, guid: 07cd9889c447e804c920cc7485848491, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2427198176433824717, guid: 07cd9889c447e804c920cc7485848491, type: 3}
       propertyPath: m_AnchoredPosition.x
