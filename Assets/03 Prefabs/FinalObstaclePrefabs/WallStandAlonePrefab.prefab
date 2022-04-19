@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5944049423535773310}
   - component: {fileID: 7337026663059298779}
   - component: {fileID: 4771191799243402513}
-  - component: {fileID: 6194481419718485993}
   m_Layer: 21
   m_Name: WallStandAlonePrefab
   m_TagString: Obstacle
@@ -84,17 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6194481419718485993
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428415513445485764}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3568415863473090713, guid: 865eb9c7795690245934e83f59297064, type: 3}
