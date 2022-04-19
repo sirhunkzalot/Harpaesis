@@ -41,43 +41,48 @@ namespace Harpaesis.Combat
         {
             foreach (GameObject _go in allHideableObjects)
             {
-                Renderer _ren = _go.GetComponent<Renderer>();
+                Renderer[] renderers = _go.GetComponentsInChildren<Renderer>();
 
-                if (_ren == null) { continue; }
-
-                Material[] _mats = _ren.materials;
-
-                List<GameObject> _objectsToHide = new List<GameObject>();
-
-                switch (_view)
+                for (int i = 0; i < renderers.Length; i++)
                 {
-                    case CameraView.Front:
-                        _objectsToHide = frontViewHiddenObjects;
-                        break;
-                    case CameraView.Right:
-                        _objectsToHide = rightViewHiddenObjects;
-                        break;
-                    case CameraView.Back:
-                        _objectsToHide = backViewHiddenObjects;
-                        break;
-                    case CameraView.Left:
-                        _objectsToHide = leftViewHiddenObjects;
-                        break;
-                    default:
-                        throw new System.Exception("Invalid Camera View Given");
-                }
+                    Renderer _ren = renderers[i];
 
-                float _targetHeight = (_objectsToHide.Count > 0 && _objectsToHide.Contains(_go)) ? minimumHeight : maximumHeight;
+                    if (_ren == null) { continue; }
 
+                    Material[] _mats = _ren.materials;
 
-                for (int i = 0; i < _mats.Length; i++)
-                {
-                    if (_mats[i].HasFloat("MaxHeight"))
+                    List<GameObject> _objectsToHide = new List<GameObject>();
+
+                    switch (_view)
                     {
-                        float _height = Mathf.Lerp(_mats[i].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
-                        _mats[i].SetFloat("MaxHeight", _height);
+                        case CameraView.Front:
+                            _objectsToHide = frontViewHiddenObjects;
+                            break;
+                        case CameraView.Right:
+                            _objectsToHide = rightViewHiddenObjects;
+                            break;
+                        case CameraView.Back:
+                            _objectsToHide = backViewHiddenObjects;
+                            break;
+                        case CameraView.Left:
+                            _objectsToHide = leftViewHiddenObjects;
+                            break;
+                        default:
+                            throw new System.Exception("Invalid Camera View Given");
+                    }
+
+                    float _targetHeight = (_objectsToHide.Count > 0 && _objectsToHide.Contains(_go)) ? minimumHeight : maximumHeight;
+
+                    for (int i = 0; i < _mats.Length; i++)
+                    {
+                        if (_mats[i].HasFloat("MaxHeight"))
+                        {
+                            float _height = Mathf.Lerp(_mats[i].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
+                            _mats[i].SetFloat("MaxHeight", _height);
+                        }
                     }
                 }
+            }
             }
         }
     }
