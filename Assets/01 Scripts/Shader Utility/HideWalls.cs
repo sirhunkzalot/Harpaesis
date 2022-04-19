@@ -73,16 +73,15 @@ namespace Harpaesis.Combat
 
                     float _targetHeight = (_objectsToHide.Count > 0 && _objectsToHide.Contains(_go)) ? minimumHeight : maximumHeight;
 
-                    for (int i = 0; i < _mats.Length; i++)
+                    for (int j = 0; j < _mats.Length; j++)
                     {
-                        if (_mats[i].HasFloat("MaxHeight"))
+                        if (_mats[j].HasFloat("MaxHeight"))
                         {
-                            float _height = Mathf.Lerp(_mats[i].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
-                            _mats[i].SetFloat("MaxHeight", _height);
+                            float _height = Mathf.Lerp(_mats[j].GetFloat("MaxHeight"), _targetHeight, Time.fixedDeltaTime * dissolveSpeed);
+                            _mats[j].SetFloat("MaxHeight", _height);
                         }
                     }
                 }
-            }
             }
         }
     }
