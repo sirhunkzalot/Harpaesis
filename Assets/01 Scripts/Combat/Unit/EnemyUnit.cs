@@ -444,6 +444,7 @@ public class EnemyUnit : Unit
             else
             {
                 _move.skillToUse.skill.UseSkill(this, _move.target);
+                turnData.ap -= _move.skillToUse.skill.apCost;
             }
         }
 

@@ -24,13 +24,8 @@ namespace Harpaesis.Combat
         public List<SkillEffect> effects = new List<SkillEffect>();
 
         // Applies effects and costs of the skill
-        public void UseSkill(Unit _user, Unit _target, bool _useAP = true)
+        public void UseSkill(Unit _user, Unit _target)
         {
-            if (_useAP)
-            {
-                _user.turnData.ap -= apCost;
-            }
-
             BattleLog.Log($"{_user} uses {skillName} on {_target}!", BattleLogType.Combat);
             if (effects.Count > 0)
             {
@@ -46,11 +41,9 @@ namespace Harpaesis.Combat
         {
             if (_targets.Length > 0)
             {
-                bool _useAP = true;
                 for (int i = 0; i < _targets.Length; i++)
                 {
-                    UseSkill(_user, _targets[i], _useAP);
-                    _useAP = false;
+                    UseSkill(_user, _targets[i]);
                 }
             }
             else

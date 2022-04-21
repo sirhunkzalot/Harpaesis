@@ -445,13 +445,15 @@ public class FriendlyUnit : Unit
 
     public void UseSkill(int _skillIndex, List<TargetingTemplateNode> _nodesWithTargets)
     {
+        bool _useAP = true;
         foreach (TargetingTemplateNode node in _nodesWithTargets)
         {
-            UseSkill(_skillIndex, node.unit);
+            UseSkill(_skillIndex, node.unit, _useAP);
+            _useAP = false;
         }
     }
 
-    public void UseSkill(int _skillIndex, Unit _target)
+    public void UseSkill(int _skillIndex, Unit _target, bool _useAp = true)
     {
         switch (_skillIndex)
         {
@@ -460,28 +462,52 @@ public class FriendlyUnit : Unit
                 {
                     BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.basicAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                     friendlyUnitData.basicAttack.UseSkill(this, _target);
+                    if (_useAp)
+                    {
+                        turnData.ap -= friendlyUnitData.basicAttack.apCost;
+                    }
                 }
                 else
                 {
                     BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.alternativeAttack.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                     friendlyUnitData.alternativeAttack.UseSkill(this, _target);
+                    if (_useAp)
+                    {
+                        turnData.ap -= friendlyUnitData.alternativeAttack.apCost;
+                    }
                 }
                 break;
             case 1:
                 BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.primarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 friendlyUnitData.primarySkill.UseSkill(this, _target);
+                if (_useAp)
+                {
+                    turnData.ap -= friendlyUnitData.primarySkill.apCost;
+                }
                 break;
             case 2:
                 BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.secondarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 friendlyUnitData.secondarySkill.UseSkill(this, _target);
+                if (_useAp)
+                {
+                    turnData.ap -= friendlyUnitData.secondarySkill.apCost;
+                }
                 break;
             case 3:
                 BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.tertiarySkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 friendlyUnitData.tertiarySkill.UseSkill(this, _target);
+                if (_useAp)
+                {
+                    turnData.ap -= friendlyUnitData.tertiarySkill.apCost;
+                }
                 break;
             case 4:
                 BattleLog.Log($"{friendlyUnitData.unitName} uses {friendlyUnitData.signatureSkill.skillName} on {_target.unitData.unitName}", BattleLogType.Combat);
                 friendlyUnitData.signatureSkill.UseSkill(this, _target);
+                if (_useAp)
+                {
+                    turnData.ap -= friendlyUnitData.signatureSkill.apCost;
+                }
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");
@@ -504,23 +530,29 @@ public class FriendlyUnit : Unit
                 if (!alternativeWeapon)
                 {
                     friendlyUnitData.basicAttack.UseProjectileSkill(this, _positions);
+                    turnData.ap -= friendlyUnitData.basicAttack.apCost;
                 }
                 else
                 {
                     friendlyUnitData.alternativeAttack.UseProjectileSkill(this, _positions);
+                    turnData.ap -= friendlyUnitData.alternativeAttack.apCost;
                 }
                 break;
             case 1:
                 friendlyUnitData.primarySkill.UseProjectileSkill(this, _positions);
+                turnData.ap -= friendlyUnitData.primarySkill.apCost;
                 break;
             case 2:
                 friendlyUnitData.secondarySkill.UseProjectileSkill(this, _positions);
+                turnData.ap -= friendlyUnitData.secondarySkill.apCost;
                 break;
             case 3:
                 friendlyUnitData.tertiarySkill.UseProjectileSkill(this, _positions);
+                turnData.ap -= friendlyUnitData.tertiarySkill.apCost;
                 break;
             case 4:
                 friendlyUnitData.signatureSkill.UseProjectileSkill(this, _positions);
+                turnData.ap -= friendlyUnitData.signatureSkill.apCost;
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");
