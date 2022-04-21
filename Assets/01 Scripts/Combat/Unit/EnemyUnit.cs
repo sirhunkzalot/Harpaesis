@@ -83,7 +83,7 @@ public class EnemyUnit : Unit
         }
         else
         {
-            print("hmmm");
+            EndTurn();
         }
     }
 
