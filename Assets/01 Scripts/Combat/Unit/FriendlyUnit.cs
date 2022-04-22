@@ -119,6 +119,8 @@ public class FriendlyUnit : Unit
         activeUnitIcon.SetChildActive(true);
 
         currentState = FriendlyState.Active;
+
+        EndTargeting();
     }
 
     public void MoveAction()
@@ -561,6 +563,8 @@ public class FriendlyUnit : Unit
 
     public void EndTurn()
     {
+        EndTargeting();
+        currentState = FriendlyState.Inactive;
         activeUnitIcon.SetChildActive(false);
     }
 }
