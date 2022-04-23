@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class TempSceneSwap : MonoBehaviour
 {
-    public string sceneName;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +19,6 @@ public class TempSceneSwap : MonoBehaviour
 
     public void SceneSwitch()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("City_Rework");
     }
 }
