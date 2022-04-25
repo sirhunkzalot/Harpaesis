@@ -778,6 +778,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Preamble",
+            "id": "2613add1-c8b8-4db7-b020-986a741d65cf",
+            "actions": [
+                {
+                    "name": "Skip intro",
+                    "type": "Button",
+                    "id": "dd7f4f0e-43ae-4ab1-925a-0d5b70395126",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d1af7821-380f-4c34-9fe8-ed75ed913924",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skip intro",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
