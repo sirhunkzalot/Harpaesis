@@ -32,6 +32,8 @@ namespace Harpaesis.UI
 
         public AudioSource sfx;
 
+        public string postCombatLevelToLoad;
+
         bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
         #region Singleton
@@ -121,7 +123,7 @@ namespace Harpaesis.UI
         public void Button_Continue()
         {
             OverworldData.CompleteCurrentPoint();
-            LevelLoadManager.LoadOverworld();
+            LevelLoadManager.LoadLevel(postCombatLevelToLoad);
         }
 
         public void Button_ReplayLevel()
