@@ -53,6 +53,21 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                UIManager_EndCombatScreen.instance.OpenVictoryScreen();
+            }
+            else if (Input.GetKeyDown(KeyCode.B))
+            {
+                UIManager_EndCombatScreen.instance.OpenLoseScreen();
+            }
+        }
+    }
+
     public void BeginCombat()
     {
         foreach (Unit _unit in units)

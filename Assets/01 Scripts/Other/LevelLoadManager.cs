@@ -8,9 +8,14 @@ public static class LevelLoadManager
         SceneManager.LoadSceneAsync(_levelIndex);
     }
 
+    public static void LoadLevel(string _levelName)
+    {
+        SceneManager.LoadSceneAsync(_levelName);
+    }
+
     public static void LoadMainMenu()
     {
-        LoadLevel(1);
+        LoadLevel("Main menu idea");
     }
 
     public static void ReloadLevel()
@@ -21,6 +26,6 @@ public static class LevelLoadManager
 
     public static void LoadOverworld()
     {
-        SceneManager.LoadSceneAsync(2);
+        LoadLevel("OverworldTesting");
     }
 }

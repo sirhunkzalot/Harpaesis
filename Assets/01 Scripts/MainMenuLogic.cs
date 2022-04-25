@@ -14,9 +14,9 @@ public class MainMenuLogic : MonoBehaviour
     {
         SceneManager.LoadScene(_buildIndex);
     }
-    public void ForrestIntro()
+    public void ForestIntro()
     {
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene("Forest Intro");
     }
     public void QuitGame()
     {
