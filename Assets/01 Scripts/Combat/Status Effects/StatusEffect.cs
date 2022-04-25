@@ -512,7 +512,6 @@ namespace Harpaesis.Combat
         protected override void OnEffectApplied()
         {
             BattleLog.Log($"{effectedUnit.unitData.unitName} has flipped sides!", BattleLogType.Combat);
-            BattleLog.Log($"Change Allegiance is not yet implemented", BattleLogType.System);
 
             EnemyUnit _enemyUnit = (EnemyUnit)effectedUnit;
 

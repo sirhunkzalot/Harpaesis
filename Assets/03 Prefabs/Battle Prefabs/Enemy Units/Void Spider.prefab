@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cb574be410db4b2489a2ac35cf11aeb1, type: 3}
+  m_Sprite: {fileID: 808766425, guid: 4624bbaa460b0c04fa9cd6b21a39a96a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 4752951056988849662}
   - component: {fileID: 4752951056988849663}
   - component: {fileID: 4752951056988849656}
-  - component: {fileID: -6924879534013753796}
   m_Layer: 25
   m_Name: Void Spider
   m_TagString: Untagged
@@ -237,23 +236,8 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   viewObstructionMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2097152
   allegianceChanged: 0
---- !u!111 &-6924879534013753796
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4752951056988849657}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: d03c459d7978e0440b1f1fe0ff3c7556, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &4955464808642172746
 PrefabInstance:
   m_ObjectHideFlags: 0
