@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class Preamble_Logic : MonoBehaviour
 {
@@ -15,5 +16,10 @@ public class Preamble_Logic : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
+    }
+
+    public void I_Skip(InputAction.CallbackContext _ctx)
+    {
+        SceneManager.LoadScene(1);
     }
 }
