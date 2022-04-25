@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Forrest_Intro : MonoBehaviour
+public class Forest_Intro : MonoBehaviour
 {
     public float waitTime = 70f;
 
@@ -17,7 +17,7 @@ public class Forrest_Intro : MonoBehaviour
 
         if(waitTime <= 0)
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene("OverworldTesting");
         }
     }
 

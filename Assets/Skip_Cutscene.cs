@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Skip_Custscene : MonoBehaviour
+public class Skip_Cutscene : MonoBehaviour
 {
-    public int LoadLevelIndex;
+    public string LoadLevelIndex;
 
     public void SkipCustscene()
     {
