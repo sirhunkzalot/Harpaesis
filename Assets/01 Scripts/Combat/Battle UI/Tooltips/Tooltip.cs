@@ -9,6 +9,7 @@ namespace Harpaesis.UI.Tooltips
     {
         public TextMeshProUGUI headerText;
         public TextMeshProUGUI bodyText;
+        public TextMeshProUGUI footerText;
 
         LayoutElement layoutElement;
 
@@ -28,7 +29,7 @@ namespace Harpaesis.UI.Tooltips
             input = PlayerInput_Combat.instance;
         }
 
-        public void SetText(string _body, string _header)
+        public void SetText(string _body, string _header, string _footerText)
         {
             if (string.IsNullOrEmpty(_header))
             {
@@ -50,11 +51,22 @@ namespace Harpaesis.UI.Tooltips
                 bodyText.text = _body;
             }
 
+            if (string.IsNullOrEmpty(_footerText))
+            {
+                footerText.gameObject.SetActive(false);
+            }
+            else
+            {
+                footerText.gameObject.SetActive(true);
+                footerText.text = _footerText;
+            }
+
 
             int _headerLength = headerText.text.Length;
             int _bodyLength = bodyText.text.Length;
+            int _footerLength = footerText.text.Length;
 
-            layoutElement.enabled = (_headerLength > characterWrapLimit || _bodyLength > characterWrapLimit);
+            layoutElement.enabled = (_headerLength > characterWrapLimit || _bodyLength > characterWrapLimit || _footerLength > characterWrapLimit);
         }
 
         private void Update()

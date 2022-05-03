@@ -7,7 +7,7 @@ public class Tooltip_PreviewMove : MonoBehaviour
 {
     public void Preview(int _apCost)
     {
-        TooltipSystem.Show("", $"AP: {_apCost}");
+        TooltipSystem.Show("", $"AP: {_apCost}", "");
     }
 
     public void EndPreview()

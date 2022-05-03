@@ -45,7 +45,16 @@ namespace Harpaesis.UI.Tooltips
 
             header = _skill.skillName;
             body = _skill.skillDescription;
+            footer = "";
 
+            int _numSpaces = Mathf.Min(80, _skill.skillDescription.Length);
+
+            for (int i = 0; i < _numSpaces; i++)
+            {
+                footer += " ";
+            }
+
+            footer += $"AP: {_skill.apCost} ";
         }
     }
 }

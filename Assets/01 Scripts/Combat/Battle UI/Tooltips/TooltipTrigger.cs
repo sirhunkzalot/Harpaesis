@@ -8,6 +8,8 @@ namespace Harpaesis.UI.Tooltips
     {
         protected string header;
         protected string body;
+        protected string footer;
+
 
         bool mouseIsHover;
         [Header("Tooltip Settings")]
@@ -34,7 +36,7 @@ namespace Harpaesis.UI.Tooltips
             yield return new WaitForSeconds(tooltipDelay);
             if (mouseIsHover)
             {
-                TooltipSystem.Show(body, header);
+                TooltipSystem.Show(body, header, footer);
             }
         }
     }

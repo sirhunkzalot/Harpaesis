@@ -18,9 +18,9 @@ namespace Harpaesis.UI.Tooltips
             Hide();
         }
 
-        public static void Show(string _body, string _header)
+        public static void Show(string _body, string _header, string _footer)
         {
-            instance.tooltip.SetText(_body, _header);
+            instance.tooltip.SetText(_body, _header, _footer);
             instance.tooltip.gameObject.SetActive(true);
         }
 
