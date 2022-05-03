@@ -105,44 +105,50 @@ public class TurnManager : MonoBehaviour
 
     public void RemoveUnit(Unit _unit)
     {
-        for (int i = 0; i < units.Count; i++)
+        units.Remove(_unit);
+
+        if (_unit.GetType() == typeof(FriendlyUnit))
         {
-            if(units[i] == _unit)
+            friendlyUnits.Remove((FriendlyUnit)_unit);
+
+            if (friendlyUnits.Count == 0)
             {
-                units.RemoveAt(i);
-
-                if (_unit.GetType() == typeof(FriendlyUnit))
-                {
-                    friendlyUnits.Remove((FriendlyUnit)_unit);
-                    if (friendlyUnits.Count == 0)
-                    {
-                        UIManager_EndCombatScreen.instance.OpenLoseScreen();
-                    }
-                }
-                else
-                {
-                    enemyUnits.Remove((EnemyUnit)_unit);
-                    if(enemyUnits.Count == 0)
-                    {
-                        UIManager_EndCombatScreen.instance.OpenVictoryScreen();
-                    }
-
-                    _unit.DestroyModel();
-                }
+                UIManager_EndCombatScreen.instance.OpenLoseScreen();
             }
         }
+        else if (_unit.GetType() == typeof(EnemyUnit))
+        {
+            enemyUnits.Remove((EnemyUnit)_unit);
+
+            if (enemyUnits.Count == 0)
+            {
+                UIManager_EndCombatScreen.instance.OpenVictoryScreen();
+            }
+        }
+
+
         for (int i = 0; i < turnOrder.Count; i++)
         {
             if (turnOrder[i].unit == _unit)
             {
                 turnOrder.RemoveAt(i);
-                return;
+                print($"{turnOrder[i].unit}'s turn at index {i} has been removed");
             }
         }
+
+        if (activeTurn.unit == _unit)
+        {
+            NextTurn(false);
+            print($"{activeTurn.unit}'s turn has been skipped as they have perished");
+        }
+
+        _unit.DestroyModel();
     }
 
-    public void NextTurn()
+    public void NextTurn(bool _increaseTurnCounter = true)
     {
+        print($"{activeTurn.unit}'s turn has ended");
+
         if(activeTurn.unit != null)
         {
             activeTurn.unit.OnTurnEnd();
@@ -154,8 +160,14 @@ public class TurnManager : MonoBehaviour
 
         GridCamera.instance.followUnit = null;
 
-        if (++turnCounter >= turnOrder.Count)
+        if (_increaseTurnCounter)
         {
+            turnCounter++;
+        }
+
+        if (turnCounter >= turnOrder.Count)
+        {
+            turnCounter = 0;
             OnRoundEnd();
         }
 

@@ -30,7 +30,7 @@ public class FireTile : HazardTile
                     if(_tile != this)
                     {
                         _tile.UpdateFire();
-                        Destroy(gameObject);
+                        Invoke(nameof(RemoveHazard), .05f);
                         return;
                     }
                 }
@@ -96,7 +96,7 @@ public class FireTile : HazardTile
                     GameObject _hazardObject = _neighbor.hazard.gameObject;
                     FireTile _fireTile;
 
-                    if(_hazardObject.TryGetComponent(out _fireTile))
+                    if(_hazardObject != null && _hazardObject.TryGetComponent(out _fireTile))
                     {
                         if(_fireTile.stageIndex >= stageIndex - 1)
                         {

@@ -136,7 +136,6 @@ public abstract class Unit : MonoBehaviour
         TurnManager.instance.RemoveUnit(this);
         canMove = false;
         canAct = false;
-        BattleLog.Log($"{unitData.unitName} has died!", BattleLogType.Combat);
     }
 
     public void ApplyEffect(StatusEffect _effect)

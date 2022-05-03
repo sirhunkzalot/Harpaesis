@@ -160,7 +160,7 @@ public class EnemyUnit : Unit
     }
     void CreateEnemyMovesWithPath(PathResult _result)
     {
-        if (_result.success == false)
+        if (_result.success == false || this == null || _result.unit == null || !_result.unit.isAlive )
         {
             //print("Path was not sucessful");
             return;

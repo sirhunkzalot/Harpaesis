@@ -55,6 +55,11 @@ public class FriendlyUnit : Unit
         switch (currentState)
         {
             case FriendlyState.Active:
+                if(turnData.ap <= 0)
+                {
+                    EndTurn();
+                    TurnManager.instance.NextTurn();
+                }
                 break;
             case FriendlyState.PreviewMove:
                 PreviewMove();
