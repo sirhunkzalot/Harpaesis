@@ -132,14 +132,12 @@ public class TurnManager : MonoBehaviour
             if (turnOrder[i].unit == _unit)
             {
                 turnOrder.RemoveAt(i);
-                print($"{turnOrder[i].unit}'s turn at index {i} has been removed");
             }
         }
 
         if (activeTurn.unit == _unit)
         {
             NextTurn(false);
-            print($"{activeTurn.unit}'s turn has been skipped as they have perished");
         }
 
         _unit.DestroyModel();
@@ -147,9 +145,9 @@ public class TurnManager : MonoBehaviour
 
     public void NextTurn(bool _increaseTurnCounter = true)
     {
-        print($"{activeTurn.unit}'s turn has ended");
+        Harpaesis.UI.Tooltips.TooltipSystem.Hide();
 
-        if(activeTurn.unit != null)
+        if (activeTurn.unit != null)
         {
             activeTurn.unit.OnTurnEnd();
         }

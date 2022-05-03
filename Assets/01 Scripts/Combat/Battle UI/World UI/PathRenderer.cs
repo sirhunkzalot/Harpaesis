@@ -18,10 +18,17 @@ public class PathRenderer : MonoBehaviour
 
     public bool renderActualPath;
 
+    Tooltip_PreviewMove tooltipPreviewMove;
+
     public static PathRenderer instance;
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        tooltipPreviewMove = GetComponent<Tooltip_PreviewMove>();
         DeactivateAllPaths();
     }
 
@@ -92,6 +99,8 @@ public class PathRenderer : MonoBehaviour
             reachablePath.gameObject.SetActive(false);
         }
 
+        tooltipPreviewMove.Preview(_usedAP);
+
         // Sets the positions for all of the unreachableSpaces in the path
         
         if(i < path.Length)
@@ -137,6 +146,8 @@ public class PathRenderer : MonoBehaviour
 
         reachablePath.gameObject.SetActive(false);
         unreachablePath.gameObject.SetActive(false);
+
+        tooltipPreviewMove.EndPreview();
     }
 
     void DeactivateAllPaths()
@@ -146,5 +157,7 @@ public class PathRenderer : MonoBehaviour
         actualPath.gameObject.SetActive(false);
 
         renderActualPath = false;
+
+        tooltipPreviewMove.EndPreview();
     }
 }
