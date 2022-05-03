@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Harpaesis.UI.Tooltips
 {
-    public class TooltipTrigger_SkillSlots : TooltipTrigger
+    public class TooltipTrigger_SkillSlot : TooltipTrigger
     {
         [Header("Party Dock")]
         public int slotIndex;

@@ -32,6 +32,8 @@ namespace Harpaesis.UI
 
         public AudioSource sfx;
 
+        SkillSlot[] skillSlots;
+
         public string postCombatLevelToLoad;
 
         bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
@@ -48,6 +50,7 @@ namespace Harpaesis.UI
         private void Start()
         {
             turnManager = TurnManager.instance;
+            skillSlots = GetComponentsInChildren<SkillSlot>();
         }
 
         private void FixedUpdate()
@@ -64,6 +67,14 @@ namespace Harpaesis.UI
             foreach (GameObject button in playerTurnObjects)
             {
                 button.SetActive(_showUI);
+            }
+
+            if (_showUI)
+            {
+                foreach (SkillSlot _slot in skillSlots)
+                {
+                    _slot.UpdateSkillSlot();
+                }
             }
         }
 
