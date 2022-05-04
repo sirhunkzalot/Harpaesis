@@ -20,6 +20,9 @@ namespace Harpaesis.UI
         public Button moveButton;
         public TextMeshProUGUI apText;
 
+        public GameObject movementItemButtons;
+        public TextMeshProUGUI rightClickText;
+
         public GameObject speedUpIcon;
 
         [Header("Pause")]
@@ -36,6 +39,8 @@ namespace Harpaesis.UI
 
         public string postCombatLevelToLoad;
 
+        public bool buttonPressedThisFrame;
+
         bool IsFriendlyTurn { get { return turnManager.activeTurn.unit.GetType() == typeof(FriendlyUnit); } }
 
         #region Singleton
@@ -51,6 +56,7 @@ namespace Harpaesis.UI
         {
             turnManager = TurnManager.instance;
             skillSlots = GetComponentsInChildren<SkillSlot>();
+            ActivateCancelPopup(false);
         }
 
         private void FixedUpdate()
@@ -59,6 +65,21 @@ namespace Harpaesis.UI
             {
                 moveButton.interactable = turnManager.activeTurn.unit.turnData.ap > 0 && turnManager.activeTurn.unit.canMove;
                 apText.text = $"Remaining AP: {turnManager.activeTurn.unit.turnData.ap}/{turnManager.activeTurn.unit.unitData.apStat}";
+                buttonPressedThisFrame = false;
+            }
+        }
+
+        public void ActivateCancelPopup(bool _cancelPopup)
+        {
+            if (_cancelPopup)
+            {
+                movementItemButtons.SetActive(false);
+                rightClickText.gameObject.SetActive(true);
+            }
+            else
+            {
+                movementItemButtons.SetActive(true);
+                rightClickText.gameObject.SetActive(false);
             }
         }
 
@@ -84,12 +105,13 @@ namespace Harpaesis.UI
             {
                 FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
                 _unit.MoveAction();
+                buttonPressedThisFrame = true;
             }
         }
 
         public void Button_Items()
         {
-            //print("UseItem");
+            buttonPressedThisFrame = true;
         }
 
         public void Button_Defend()
@@ -98,6 +120,7 @@ namespace Harpaesis.UI
             {
                 FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
                 _unit.DefendAction();
+                buttonPressedThisFrame = true;
             }
         }
 
@@ -107,6 +130,7 @@ namespace Harpaesis.UI
             {
                 FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
                 _unit.SwapWeapon();
+                buttonPressedThisFrame = true;
             }
         }
 
@@ -116,14 +140,19 @@ namespace Harpaesis.UI
             {
                 ((FriendlyUnit)turnManager.activeTurn.unit).EndTurn();
                 turnManager.NextTurn();
+                buttonPressedThisFrame = true;
             }
         }
 
         public void Button_UseSkill(int _index)
         {
             FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
+            buttonPressedThisFrame = true;
+            if (_unit.currentState == FriendlyUnit.FriendlyState.Active)
+            {
+                _unit.BeginTargeting(_index);
+            }
 
-            _unit.BeginTargeting(_index);
         }
 
         public void Button_Menu()

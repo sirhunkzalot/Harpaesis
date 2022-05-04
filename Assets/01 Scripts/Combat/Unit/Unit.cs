@@ -46,6 +46,7 @@ public abstract class Unit : MonoBehaviour
     protected UIManager_Combat uiCombat;
     [HideInInspector] public ColorPaletteManager paletteManager;
     [HideInInspector] public Unit_UI unit_ui;
+    
 
     bool inited = false;
     public void EarlyInit()
