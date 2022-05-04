@@ -206,6 +206,8 @@ public class FriendlyUnit : Unit
 
     public void BeginTargeting(int _index)
     {
+        uiCombat.ActivateCancelPopup(true);
+
         TargetingStyle targetingStyle = TargetingStyle.SingleTarget;
 
         switch (_index)
@@ -455,6 +457,8 @@ public class FriendlyUnit : Unit
         secondarySkillTargetingTemplate.Disable();
         tertiarySkillTargetingTemplate.Disable();
         signatureSkillTargetingTemplate.Disable();
+
+        uiCombat.ActivateCancelPopup(false);
 
         templateParent.LockTemplate();
     }
