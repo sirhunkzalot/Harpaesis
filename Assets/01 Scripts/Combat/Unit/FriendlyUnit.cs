@@ -131,6 +131,7 @@ public class FriendlyUnit : Unit
     public void MoveAction()
     {
         currentState = FriendlyState.PreviewMove;
+        uiCombat.ActivateCancelPopup(true);
     }
 
     public void DefendAction()
@@ -153,13 +154,20 @@ public class FriendlyUnit : Unit
 
     public void PreviewMove()
     {
+        if (input.mouseDownRight)
+        {
+            currentState = FriendlyState.Active;
+            PathRenderer.instance.DeactivateAllPaths();
+            uiCombat.ActivateCancelPopup(false);
+            return;
+        }
         if (gridCursor.transform.position != lastSelectorPosition)
         {
             PathRequestManager.RequestPath(new PathRequest(transform.position, gridCursor.transform.position, DisplayPathPreview, this));
             lastSelectorPosition = gridCursor.transform.position;
         }
 
-        if (input.mouseDownLeft && previewPath != null && !hasPath && turnData.ap > 0)
+        if (input.mouseDownLeft  && !uiCombat.buttonPressedThisFrame && previewPath != null && !hasPath && turnData.ap > 0)
         {
             StartMove();
         }
@@ -179,6 +187,7 @@ public class FriendlyUnit : Unit
         currentState = FriendlyState.Moving;
         hasPath = true;
         motor.Move(previewPath);
+        uiCombat.ActivateCancelPopup(false);
         uiCombat.ShowPlayerUI(false);
         gridCam.followUnit = this;
         PathRenderer.instance.SwapToActualPath();
@@ -259,7 +268,7 @@ public class FriendlyUnit : Unit
 
     public void TargetingSingleTarget()
     {
-        if (input.mouseDownLeft)
+        if (input.mouseDownLeft && !uiCombat.buttonPressedThisFrame)
         {
             switch (activeTemplateIndex)
             {
@@ -322,7 +331,7 @@ public class FriendlyUnit : Unit
 
     public void TargetingAOE()
     {
-        if (input.mouseDownLeft)
+        if (input.mouseDownLeft && !uiCombat.buttonPressedThisFrame)
         {
             switch (activeTemplateIndex)
             {
@@ -380,7 +389,7 @@ public class FriendlyUnit : Unit
 
     public void TargetingProjectile()
     {
-        if (input.mouseDownLeft)
+        if (input.mouseDownLeft && !uiCombat.buttonPressedThisFrame)
         {
             switch (activeTemplateIndex)
             {

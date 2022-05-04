@@ -150,7 +150,7 @@ public class PathRenderer : MonoBehaviour
         tooltipPreviewMove.EndPreview();
     }
 
-    void DeactivateAllPaths()
+    public void DeactivateAllPaths()
     {
         reachablePath.gameObject.SetActive(false);
         unreachablePath.gameObject.SetActive(false);
