@@ -54,7 +54,20 @@ namespace Harpaesis.UI.Tooltips
                 footer += " ";
             }
 
-            footer += $"AP: {_skill.apCost} ";
+            if (_skill.IsOnCooldown)
+            {
+                body += $"\nOn cooldown for {_skill.cooldownTimer} turn";
+                body += (_skill.cooldownTimer > 1) ? "s": "";
+            }
+
+            if(myUnit.turnData.ap < _skill.apCost)
+            {
+                footer += $"<color=\"red\">AP: {_skill.apCost} </color=\"red\">";
+            }
+            else
+            {
+                footer += $"AP: {_skill.apCost} ";
+            }
         }
     }
 }
