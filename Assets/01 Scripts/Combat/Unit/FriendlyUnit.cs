@@ -503,6 +503,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.primarySkill.apCost;
+                    friendlyUnitData.primarySkill.PutOnCooldown();
                 }
                 break;
             case 2:
@@ -511,6 +512,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.secondarySkill.apCost;
+                    friendlyUnitData.secondarySkill.PutOnCooldown();
                 }
                 break;
             case 3:
@@ -519,6 +521,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.tertiarySkill.apCost;
+                    friendlyUnitData.tertiarySkill.PutOnCooldown();
                 }
                 break;
             case 4:
@@ -527,6 +530,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.signatureSkill.apCost;
+                    friendlyUnitData.signatureSkill.PutOnCooldown();
                 }
                 break;
             default:
