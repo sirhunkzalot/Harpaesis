@@ -96,13 +96,16 @@ namespace Harpaesis.Combat
                     SkillEffect_Taunt(_user, _target, _params1);
                     break;
                 case SkillEffectType.Bulwark:
-                    SkillEffect_Bulwark(_user, _target, _params1);
+                    SkillEffect_Bulwark(_user, _user, _params1);
                     break;
                 case SkillEffectType.CleanseNegativeEffects:
                     SkillEffect_CleanseNegativeEffects(_user, _target);
                     break;
                 case SkillEffectType.ResistNegativeEffects:
                     SkillEffect_ResistNegativeEffects(_user, _target, _params1);
+                    break;
+                case SkillEffectType.DivineIntervention:
+                    SkillEffect_DivineIntervention(_user, _target, _params1);
                     break;
                 default:
                     break;
@@ -328,6 +331,14 @@ namespace Harpaesis.Combat
         public static void SkillEffect_ResistNegativeEffects(Unit _user, Unit _target, int _duration)
         {
             _target.ApplyEffect(new StatusEffect_ResistNegativeEffects(_user, _target, 0, _duration));
+        }
+
+        public static void SkillEffect_DivineIntervention(Unit _user, Unit _target, int _amount)
+        {
+            foreach (FriendlyUnit unit in TurnManager.instance.friendlyUnits)
+            {
+                SkillEffect_Heal(_user, unit, _amount);
+            }
         }
     }
 

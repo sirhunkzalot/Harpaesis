@@ -446,6 +446,11 @@ public class EnemyUnit : Unit
                 _move.skillToUse.skill.UseSkill(this, _move.target);
                 turnData.ap -= _move.skillToUse.skill.apCost;
             }
+
+            if (anim != null && anim.HasState(0, Animator.StringToHash("Attack")))
+            {
+                anim.Play("Attack");
+            }
         }
 
         //print("Ending Turn!");

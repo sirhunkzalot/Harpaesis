@@ -46,6 +46,7 @@ public abstract class Unit : MonoBehaviour
     protected UIManager_Combat uiCombat;
     [HideInInspector] public ColorPaletteManager paletteManager;
     [HideInInspector] public Unit_UI unit_ui;
+    protected Animator anim;
     
 
     bool inited = false;
@@ -58,6 +59,8 @@ public abstract class Unit : MonoBehaviour
         unit_ui = GetComponentInChildren<Unit_UI>();
         motor = GetComponent<UnitMotor>();
         motor.Init(this);
+
+        anim = GetComponentInChildren<Animator>();
 
         currentHP = unitData.healthStat;
         currentAtkStat = unitData.attackStat;
@@ -94,6 +97,12 @@ public abstract class Unit : MonoBehaviour
     public void TakeDamage(int _damageAmount, DamageType _damageType, Unit _attacker = null)
     {
         if (!isAlive || _damageAmount <= 0) return;
+
+        if(anim != null && anim.HasState(0, Animator.StringToHash("Injured")))
+        {
+            anim.Play("Injured");
+        }
+
 
         int _adjustedDamage = _damageAmount;
 

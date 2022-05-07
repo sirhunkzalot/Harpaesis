@@ -12,6 +12,8 @@ public class SkillSlot : MonoBehaviour
 
     public void UpdateSkillSlot()
     {
+        if (TurnManager.instance.activeTurn.unit.GetType() != typeof(FriendlyUnit)) return;
+
         myUnit = (FriendlyUnit)TurnManager.instance.activeTurn.unit;
 
         Skill _skill = null;

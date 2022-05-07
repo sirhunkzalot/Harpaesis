@@ -130,6 +130,10 @@ namespace Harpaesis.UI
             {
                 FriendlyUnit _unit = (FriendlyUnit)turnManager.activeTurn.unit;
                 _unit.SwapWeapon();
+                foreach (SkillSlot _slot in skillSlots)
+                {
+                    _slot.UpdateSkillSlot();
+                }
                 buttonPressedThisFrame = true;
             }
         }

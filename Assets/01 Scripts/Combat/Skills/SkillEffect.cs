@@ -126,6 +126,9 @@ namespace Harpaesis.Combat
                 case SkillEffectType.ResistNegativeEffects:
                     param1.stringValue = EditorGUI.TextField(secondRect, "Duration in Turns:", param1.stringValue);
                     break;
+                case SkillEffectType.DivineIntervention:
+                    param1.stringValue = EditorGUI.TextField(secondRect, "Heal Amount:", param1.stringValue);
+                    break;
                 default:
                     break;
             }
@@ -172,5 +175,6 @@ namespace Harpaesis.Combat
         Bulwark,
         CleanseNegativeEffects,
         ResistNegativeEffects,
+        DivineIntervention
     }
 }

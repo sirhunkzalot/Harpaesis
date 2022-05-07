@@ -21,21 +21,20 @@ public class UIManager_AttackButtons : MonoBehaviour
         {
             FriendlyUnit _friendlyUnit = (FriendlyUnit)turnManager.activeTurn.unit;
 
-            basicAttack.interactable = _friendlyUnit.turnData.hasAttacked == false && 
-                _friendlyUnit.turnData.ap >= _friendlyUnit.friendlyUnitData.basicAttack.apCost &&
-                !_friendlyUnit.friendlyUnitData.basicAttack.IsOnCooldown;
+            basicAttack.interactable = _friendlyUnit.turnData.hasAttacked == false &&
+                _friendlyUnit.turnData.ap >= _friendlyUnit.friendlyUnitData.basicAttack.apCost;
             primaryAttack.interactable = _friendlyUnit.turnData.hasAttacked == false &&
                 _friendlyUnit.turnData.ap >= _friendlyUnit.friendlyUnitData.primarySkill.apCost &&
-                !_friendlyUnit.friendlyUnitData.primarySkill.IsOnCooldown;
+                !_friendlyUnit.PrimarySkillOnCooldown;
             secondaryAttack.interactable = _friendlyUnit.turnData.hasAttacked == false &&
                 _friendlyUnit.turnData.ap >= _friendlyUnit.friendlyUnitData.secondarySkill.apCost &&
-                !_friendlyUnit.friendlyUnitData.secondarySkill.IsOnCooldown;
+                !_friendlyUnit.SecondarySkillOnCooldown;
             tertiaryAttack.interactable = _friendlyUnit.turnData.hasAttacked == false &&
                 _friendlyUnit.turnData.ap >= _friendlyUnit.friendlyUnitData.tertiarySkill.apCost &&
-                !_friendlyUnit.friendlyUnitData.tertiarySkill.IsOnCooldown;
+                !_friendlyUnit.TertiarySkillOnCooldown;
             signatureAttack.interactable = _friendlyUnit.turnData.hasAttacked == false &&
                 _friendlyUnit.turnData.ap >= _friendlyUnit.friendlyUnitData.signatureSkill.apCost &&
-                !_friendlyUnit.friendlyUnitData.signatureSkill.IsOnCooldown;
+                !_friendlyUnit.SignatureSkillOnCooldown;
         }
     }
 }

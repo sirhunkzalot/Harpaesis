@@ -12,8 +12,6 @@ namespace Harpaesis.Combat
         public string skillName;
         public int apCost = 1;
         public int skillCooldown = 0;
-        [ReadOnly] public int cooldownTimer;
-        public bool IsOnCooldown { get { return cooldownTimer > 0; } }
 
         [EnumFlags] public TargetMask validTargets;
         public TargetingStyle targetingStyle;
@@ -60,11 +58,6 @@ namespace Harpaesis.Combat
         public void UseProjectileSkill(Unit _user, List<Vector3> _positions)
         {
             SkillEffectLibrary.SkillEffect_SpawnHazardTile(_user, _user, effects[0].param1, _positions);
-        }
-
-        public void PutOnCooldown()
-        {
-            cooldownTimer = skillCooldown;
         }
 
         #region Set Dirty

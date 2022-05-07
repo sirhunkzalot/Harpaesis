@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a2ec474fb2806e488e85a21b09eeb0b, type: 3}
-  m_Name: Terrifying Presence
+  m_Name: Bleeding Thrust
   m_EditorClassIdentifier: 
-  skillName: Terrifying Presence
-  apCost: 3
-  skillCooldown: 2
-  validTargets: 4
-  targetingStyle: 1
+  skillName: Bleeding Thrust
+  apCost: 1
+  skillCooldown: 0
+  validTargets: 0
+  targetingStyle: 0
   projectileRange: -1
   aoeRadius: -1
-  skillDescription: Afflicts all enemies within range with FEAR
-  targetingTemplate: {fileID: 168528501438769920, guid: 5dcf8a71c7edb53428822ced7ff1c854, type: 3}
+  skillDescription: 
+  targetingTemplate: {fileID: 0}
   implemented: 1
-  skillSprite: {fileID: 21300000, guid: 6a33ff322b9b60f418e6dcbc7e361a8f, type: 3}
+  skillSprite: {fileID: 0}
   effects:
-  - effectType: 7
-    param1: 1d2
+  - effectType: 5
+    param1: 2d4
     param2: 
     damageType: 0

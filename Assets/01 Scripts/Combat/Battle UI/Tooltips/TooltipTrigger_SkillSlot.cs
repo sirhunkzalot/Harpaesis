@@ -15,7 +15,10 @@ namespace Harpaesis.UI.Tooltips
         {
             myUnit = (FriendlyUnit)TurnManager.instance.activeTurn.unit;
 
+
             Skill _skill = null;
+            bool _isOnCooldown = false;
+            int _cooldownDuration = 0;
 
             switch (slotIndex)
             {
@@ -31,15 +34,23 @@ namespace Harpaesis.UI.Tooltips
                     break;
                 case 1:
                     _skill = myUnit.friendlyUnitData.primarySkill;
+                    _isOnCooldown = myUnit.PrimarySkillOnCooldown;
+                    _cooldownDuration = myUnit.primarySkillCooldown;
                     break;
                 case 2:
                     _skill = myUnit.friendlyUnitData.secondarySkill;
+                    _isOnCooldown = myUnit.SecondarySkillOnCooldown;
+                    _cooldownDuration = myUnit.secondarySkillCooldown;
                     break;
                 case 3:
                     _skill = myUnit.friendlyUnitData.tertiarySkill;
+                    _isOnCooldown = myUnit.TertiarySkillOnCooldown;
+                    _cooldownDuration = myUnit.tertiarySkillCooldown;
                     break;
                 case 4:
                     _skill = myUnit.friendlyUnitData.signatureSkill;
+                    _isOnCooldown = myUnit.SignatureSkillOnCooldown;
+                    _cooldownDuration = myUnit.signatureSkillCooldown;
                     break;
             }
 
@@ -54,10 +65,10 @@ namespace Harpaesis.UI.Tooltips
                 footer += " ";
             }
 
-            if (_skill.IsOnCooldown)
+            if (_isOnCooldown)
             {
-                body += $"\nOn cooldown for {_skill.cooldownTimer} turn";
-                body += (_skill.cooldownTimer > 1) ? "s": "";
+                body += $"\n\n<color=\"yellow\">On cooldown for {_cooldownDuration} turn";
+                body += (_cooldownDuration > 1) ? "s": "";
             }
 
             if(myUnit.turnData.ap < _skill.apCost)

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7748431fdd78a314dbc936b2c23a634f, type: 3}
+  m_Name: Icon of the Elder God
+  m_EditorClassIdentifier: 
+  unitName: Icon of the Elder God
+  unitIcon: {fileID: 21300000, guid: 50d1d090909c83a44b53b36b76302b31, type: 3}
+  healthStat: 35
+  inititiveStat: 10
+  attackStat: 10
+  defenseStat: 10
+  willpowerStat: 10
+  apStat: 10
+  weaknesses: 
+  resistances: 
+  unitPassive: 99
+  enemySkills:
+  - skill: {fileID: 11400000, guid: 8fc0e0eca2fd1274a8b04255abebd249, type: 2}
+    rangeEstimate: 2
+    shortRangeWeight: 100
+    mediumRangeWeight: 1
+    longRangeWeight: 1
+    highHPTargetWeight: 1
+    lowHPTargetWeight: 1
+    aoeTargetWeight: 1
+  - skill: {fileID: 11400000, guid: 7c2beff37bdb3a14db13ac21fe763071, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 1
+    mediumRangeWeight: 33
+    longRangeWeight: 1
+    highHPTargetWeight: 1
+    lowHPTargetWeight: 1
+    aoeTargetWeight: 1
+  - skill: {fileID: 11400000, guid: be309abd39fcbf849869e56c389f8fa7, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 1
+    mediumRangeWeight: 33
+    longRangeWeight: 1
+    highHPTargetWeight: 1
+    lowHPTargetWeight: 1
+    aoeTargetWeight: 1
+  - skill: {fileID: 11400000, guid: 7c8deb40e11f4574789627a2e0c192b1, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 1
+    mediumRangeWeight: 33
+    longRangeWeight: 1
+    highHPTargetWeight: 1
+    lowHPTargetWeight: 1
+    aoeTargetWeight: 1
+  - skill: {fileID: 11400000, guid: 0e4d04b4c3b5c364b97e73e2e1e61259, type: 2}
+    rangeEstimate: 5
+    shortRangeWeight: 1
+    mediumRangeWeight: 1
+    longRangeWeight: 100
+    highHPTargetWeight: 1
+    lowHPTargetWeight: 1
+    aoeTargetWeight: 1

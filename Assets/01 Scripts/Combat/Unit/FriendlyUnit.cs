@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Harpaesis.Combat;
 using Harpaesis.GridAndPathfinding;
+using Harpaesis.UI.Tooltips;
 using UnityEngine;
 
 /**
@@ -24,6 +25,13 @@ public class FriendlyUnit : Unit
     [ReadOnly] public bool alternativeWeapon;
     [ReadOnly] public FriendlyUnitPassive passive;
     [ReadOnly] public bool canRotateTemplates;
+
+    [HideInInspector] public int primarySkillCooldown, secondarySkillCooldown, tertiarySkillCooldown, signatureSkillCooldown;
+    public bool PrimarySkillOnCooldown { get { return primarySkillCooldown > 0; } }
+    public bool SecondarySkillOnCooldown { get { return secondarySkillCooldown > 0;} }
+    public bool TertiarySkillOnCooldown { get { return tertiarySkillCooldown > 0;} }
+    public bool SignatureSkillOnCooldown { get { return signatureSkillCooldown > 0;} }
+
 
     RotateTemplates templateParent;
     ActiveUnitIcon activeUnitIcon;
@@ -125,6 +133,11 @@ public class FriendlyUnit : Unit
 
         currentState = FriendlyState.Active;
 
+        primarySkillCooldown--;
+        secondarySkillCooldown--;
+        tertiarySkillCooldown--;
+        signatureSkillCooldown--;
+
         EndTargeting();
     }
 
@@ -207,6 +220,7 @@ public class FriendlyUnit : Unit
     public void BeginTargeting(int _index)
     {
         uiCombat.ActivateCancelPopup(true);
+        TooltipSystem.Hide();
 
         TargetingStyle targetingStyle = TargetingStyle.SingleTarget;
 
@@ -323,6 +337,11 @@ public class FriendlyUnit : Unit
                     throw new System.Exception("Error: invalid skill index given.");
             }
 
+            if (anim != null && anim.HasState(0, Animator.StringToHash("Attack")))
+            {
+                anim.Play("Attack");
+            }
+
             EndTargeting();
         }
         else if (input.mouseDownRight)
@@ -381,6 +400,11 @@ public class FriendlyUnit : Unit
                     throw new System.Exception("Error: invalid skill index given.");
             }
 
+            if (anim != null && anim.HasState(0, Animator.StringToHash("Attack")))
+            {
+                anim.Play("Attack");
+            }
+
             EndTargeting();
         }
         else if (input.mouseDownRight)
@@ -437,6 +461,11 @@ public class FriendlyUnit : Unit
 
                 default:
                     throw new System.Exception("Error: invalid skill index given.");
+            }
+
+            if (anim != null && anim.HasState(0, Animator.StringToHash("Attack")))
+            {
+                anim.Play("Attack");
             }
 
             EndTargeting();
@@ -503,7 +532,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.primarySkill.apCost;
-                    friendlyUnitData.primarySkill.PutOnCooldown();
+                    primarySkillCooldown = friendlyUnitData.primarySkill.skillCooldown;
                 }
                 break;
             case 2:
@@ -512,7 +541,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.secondarySkill.apCost;
-                    friendlyUnitData.secondarySkill.PutOnCooldown();
+                    secondarySkillCooldown = friendlyUnitData.secondarySkill.skillCooldown;
                 }
                 break;
             case 3:
@@ -521,7 +550,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.tertiarySkill.apCost;
-                    friendlyUnitData.tertiarySkill.PutOnCooldown();
+                    tertiarySkillCooldown = friendlyUnitData.tertiarySkill.skillCooldown;
                 }
                 break;
             case 4:
@@ -530,7 +559,7 @@ public class FriendlyUnit : Unit
                 if (_useAp)
                 {
                     turnData.ap -= friendlyUnitData.signatureSkill.apCost;
-                    friendlyUnitData.signatureSkill.PutOnCooldown();
+                    signatureSkillCooldown = friendlyUnitData.signatureSkill.skillCooldown;
                 }
                 break;
             default:
@@ -565,18 +594,22 @@ public class FriendlyUnit : Unit
             case 1:
                 friendlyUnitData.primarySkill.UseProjectileSkill(this, _positions);
                 turnData.ap -= friendlyUnitData.primarySkill.apCost;
+                primarySkillCooldown = friendlyUnitData.primarySkill.skillCooldown;
                 break;
             case 2:
                 friendlyUnitData.secondarySkill.UseProjectileSkill(this, _positions);
                 turnData.ap -= friendlyUnitData.secondarySkill.apCost;
+                secondarySkillCooldown = friendlyUnitData.secondarySkill.skillCooldown;
                 break;
             case 3:
                 friendlyUnitData.tertiarySkill.UseProjectileSkill(this, _positions);
                 turnData.ap -= friendlyUnitData.tertiarySkill.apCost;
+                tertiarySkillCooldown = friendlyUnitData.tertiarySkill.skillCooldown;
                 break;
             case 4:
                 friendlyUnitData.signatureSkill.UseProjectileSkill(this, _positions);
                 turnData.ap -= friendlyUnitData.signatureSkill.apCost;
+                signatureSkillCooldown = friendlyUnitData.signatureSkill.skillCooldown;
                 break;
             default:
                 throw new System.Exception("Error: invalid skill index given.");
